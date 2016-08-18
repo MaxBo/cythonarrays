@@ -18,7 +18,6 @@ setup(
     description="helper functions for cythonarrays",
 
     packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['cythonarrays'],
 
     package_dir={'': 'src'},
     package_data={'': ['*.pxd']},
