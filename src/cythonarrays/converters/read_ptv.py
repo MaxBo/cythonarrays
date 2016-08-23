@@ -43,17 +43,9 @@ class ReadPTVMatrix(xr.Dataset):
         elif Z.strip(bytes([3, 0])).startswith(b"$B"):
             self.readPTVMatrixB()
 
-        # hier kommen noch mehr Matrix-Formate
-        #
-        #
         else:
             self.readPTVMatrixB(openFile, fileName, header)
-        #self = super(ReadPTVMatrix, cls).__new__(cls, data=array)
-        #for attr in ['ZeitVon', 'ZeitBis', 'Faktor', 'VMAktKennung', 'Unbek1',
-                     #'Unbek2', 'AnzBezeichnerlisten', 'u2', 'u3']:
-            #if hasattr(array, attr):
-                #setattr(self, attr, getattr(array, attr))
-        #self.zones = zones
+
 
     def readPTVMatrixO(self):
         with self.open(self.filename) as f:

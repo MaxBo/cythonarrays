@@ -9,6 +9,7 @@ import pytest
 import os
 import numpy as np
 from cythonarrays.converters.read_ptv import ReadPTVMatrix
+from cythonarrays.converters.save_ptv import SavePTV
 
 
 @pytest.fixture(scope='class')
@@ -19,6 +20,12 @@ def matrix_fn():
     return fn
 
 @pytest.fixture(scope='class')
+def matrix_fn_out():
+    fn = os.path.join(os.path.dirname(__file__),
+                      'example_dataset.h5')
+    fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\IV_out.mtx'
+    return fn
+@pytest.fixture(scope='class')
 def matrix_fn_bk():
     fn = os.path.join(os.path.dirname(__file__),
                       'example_dataset.h5')
@@ -28,11 +35,20 @@ def matrix_fn_bk():
 class TestReadPTV:
     """Test reading PTV matrices"""
     def test_01_read_v_format(self, matrix_fn):
+        """Test reading v-Format"""
         ds = ReadPTVMatrix(filename=matrix_fn)
         print(ds)
 
     def test_02_read_bk_format(self, matrix_fn_bk):
+        """Test reading bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
         print(ds)
         print('Histogram of number of transfers')
         print(np.histogram(ds.matrix.data, bins = range(8)))
+
+    def test_03_save_v_format(self, matrix_fn_bk, matrix_fn_out):
+        """Test writing v-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_out,
+                        Ftype='VN', )
