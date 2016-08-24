@@ -145,10 +145,10 @@ class ReadPTVMatrix(xr.Dataset):
             dims=('origin', 'destination'),
             name='matrix',)
 
-    def create_zones(self, n_zones):
-        self['zone_no'] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
-                                       name='zone_no',
-                                       dims=('zones',),)
+    def create_zones(self, n_zones, name='zone_no'):
+        self[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
+                                  name=name,
+                                  dims=('zones',),)
 
     def read_names(self, f, arr):
         """Read the zone names"""
@@ -211,52 +211,48 @@ class ReadPTVMatrix(xr.Dataset):
         deren Sinn unklar ist (ggf. eine Prüfsumme?)
         Diese werden ignoriert.
         """
-        with self.openfile(mode="rb") as file:
-            f = file.read()
-        header = np.fromstring(f[5:7], dtype="i2")[0] + 23
-        n_zones = np.fromstring(f[header:header + 4], dtype="i4")[0]
-        self.create_zones(n_zones)
+        with self.openfile(mode="rb") as f:
+            f.seek(5, 0)
+            header = np.fromstring(f.read(2), dtype="i2")[0]
+            f.seek(header, 0)
+            f.seek(23 - 16, 1)
+            self.attrs['VMAktKennung'] = np.fromstring(f.read(2),
+                                                       dtype="i2")[0]
+            f.seek(14, 1)
+            n_zones = np.fromstring(f.read(4), dtype="i4")[0]
+            self.create_zones(n_zones)
 
-        data_type = np.fromstring(f[header + 4:header + 6], dtype="i2")[0]
-        if data_type == 4:
-            data_length = 4
-            dtype = '<f4'
-        elif data_type == 5:
-            data_length = 8
-            dtype = '<f8'
-        self.create_matrix(n_zones, dtype=dtype)
+            data_type = np.fromstring(f.read(2), dtype="i2")[0]
+            f.seek(1, 1)
+            if data_type == 4:
+                data_length = 4
+                dtype = '<f4'
+            elif data_type == 5:
+                data_length = 8
+                dtype = '<f8'
+            self.create_matrix(n_zones, dtype=dtype)
 
-        self.attrs['VMAktKennung'] = np.fromstring(f[header - 16:header - 14],
-                                                   dtype="i2")[0]
-        self.attrs['Unbek1'] = f[header + 6]
-        AnzZellen2 = np.fromstring(f[header + 7:header + 11], dtype="i4")[0]
-        idx = header + 11 + n_zones * 4
-        self.zone_no.data[:] = np.fromstring(f[header + 11:idx], dtype="i4")
-        ZellenList2 = np.fromstring(f[idx:header + 11 + n_zones * 4 * 2],
-                                       dtype="i4")
-        startpos = header + 11 + n_zones * 4 * 2
-        self.create_zone_names(n_zones)
-        for i in range(n_zones):
-            Zeichen = np.fromstring(f[startpos:startpos + 4], dtype="i4")[0]
-            endpos = startpos + 4 + Zeichen * 2
-            self.zone_names.data[i] = f[startpos + 4:endpos].decode('utf16')
-            startpos += (4 + Zeichen * 2)
-        self.create_zone_names(n_zones, name='zone_names2')
-        for i in range(AnzZellen2):
-            Zeichen = np.fromstring(f[startpos:startpos + 4], dtype="i4")[0]
-            endpos = startpos + 4 + Zeichen * 2
-            self.zone_names2.data[i] =f[startpos + 4:endpos].decode('utf16')
-            startpos += (4 + Zeichen * 2)
-        startpos += 1
-        self.attrs['Unbek1'] = np.fromstring(f[startpos:startpos + 8],
-                                             dtype="f8")[0]
-        startpos += 8
-        for i in range(n_zones):
-            lenChunk = np.fromstring(f[startpos:startpos + 4], dtype="i4")[0]
-            startpos += 4
-            unpacked = zlib.decompress(f[startpos:startpos + lenChunk])
-            self.matrix[i] = np.fromstring(unpacked, dtype=dtype)
-            startpos += lenChunk + 16
+            n_zones2 = np.fromstring(f.read(4), dtype="i4")[0]
+            idx = header + 11 + n_zones * 4
+            self.zone_no.data[:] = np.fromstring(f.read(n_zones * 4), dtype="i4")
+            self.create_zones(n_zones2, name='zone_no2')
+            self.zone_no2.data[:] = np.fromstring(f.read(n_zones * 4), dtype="i4")
+            self.create_zone_names(n_zones)
+            for i in range(n_zones):
+                Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
+                self.zone_names.data[i] = f.read(Zeichen * 2).decode('utf16')
+
+            self.create_zone_names(n_zones, name='zone_names2')
+            for i in range(n_zones2):
+                Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
+                self.zone_names2.data[i] =f.read(Zeichen * 2).decode('utf16')
+            f.seek(1, 1)
+            self.attrs['Unbek1'] = np.fromstring(f.read(8), dtype="f8")[0]
+            for i in range(n_zones):
+                lenChunk = np.fromstring(f.read(4), dtype="i4")[0]
+                unpacked = zlib.decompress(f.read(lenChunk))
+                self.matrix[i] = np.fromstring(unpacked, dtype=dtype)
+                f.seek(16, 1)
 
     def readPTVMatrixBI(self):
         """
