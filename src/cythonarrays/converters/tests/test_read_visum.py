@@ -25,6 +25,14 @@ def matrix_fn_out():
                       'example_dataset.h5')
     fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\IV_out.mtx'
     return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_bk_out():
+    fn = os.path.join(os.path.dirname(__file__),
+                      'example_dataset.h5')
+    fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\OV_out.NTR'
+    return fn
+
 @pytest.fixture(scope='class')
 def matrix_fn_bk():
     fn = os.path.join(os.path.dirname(__file__),
@@ -49,6 +57,23 @@ class TestReadPTV:
     def test_03_save_v_format(self, matrix_fn_bk, matrix_fn_out):
         """Test writing v-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        print(np.histogram(ds.matrix.data, bins = range(8)))
+        print(ds.matrix.data.sum())
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_out,
                         Ftype='VN', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_out)
+        print(np.histogram(ds2.matrix.data, bins = range(8)))
+        print(ds2.matrix.data.sum())
+
+    def test_04_save_bk_format(self, matrix_fn_bk, matrix_fn_bk_out):
+        """Test writing v-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        print(np.histogram(ds.matrix.data, bins = range(8)))
+        print(ds.matrix.data.sum())
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_bk_out,
+                        Ftype='BK', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_bk_out)
+        print(np.histogram(ds2.matrix.data, bins = range(8)))
+        print(ds2.matrix.data.sum())

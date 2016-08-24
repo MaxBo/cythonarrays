@@ -21,6 +21,12 @@ class ReadPTVMatrix(xr.Dataset):
     def __init__(self, filename, header=2048, zipped=False):
         super(ReadPTVMatrix, self).__init__()
         self.attrs['fn']= filename
+        self.attrs['ZeitVon']= 0
+        self.attrs['ZeitBis']= 0
+        self.attrs['Faktor']= 1
+        self.attrs['VMAktKennung']= 0
+        self.attrs['AnzBezeichnerlisten']= 1
+
         if filename.endswith(".gzip") or zipped:
             self.attrs['open'] = gzip.open
         else:
@@ -44,7 +50,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.readPTVMatrixB()
 
         else:
-            self.readPTVMatrixB(openFile, fileName, header)
+            self.readPTVMatrixB(header)
 
 
     def readPTVMatrixO(self):
@@ -268,87 +274,78 @@ class ReadPTVMatrix(xr.Dataset):
         deren Sinn unklar ist (ggf. eine Prüfsumme?)
         Diese werden ignoriert.
         """
-        f = openFile(fileName, "rb").read()
-        header = np.fromstring(f[5:7], dtype="i2")[0] + 23
-        n_zones = np.fromstring(f[header:header + 4], dtype="i4")[0]
-        data_type = np.fromstring(f[header + 4:header + 6], dtype="i2")[0]
-        if data_type == 4:
-            data_length = 4
-            dtype = '<f4'
-        elif data_type == 5:
-            data_length = 8
-            dtype = '<f8'
-        MatrixObj = XArray.zeros((AnzZellen, AnzZellen), dtype=dtype)
-        MatrixObj.VMAktKennung = np.fromstring(f[header - 16:header - 14],
-                                                  dtype="i2")[0]
-        MatrixObj.Unbek1 = np.fromstring(f[header + 6], dtype="i1")[0]
-        ZellenList = np.fromstring(f[header + 7:header + 7 + AnzZellen * 4],
-                                      dtype="i4")
-        startpos = header + 16 + AnzZellen * 4
-        MatrixObj.Unbek2 = np.fromstring(f[startpos - 8:startpos],
-                                            dtype="f8")[0]
-        for i in range(n_zones):
-            lenChunk = np.fromstring(f[startpos:startpos + 4], dtype="i4")[0]
-            startpos += 4
-            unpacked = zlib.decompress(f[startpos:startpos + lenChunk])
-            MatrixObj[i] = np.fromstring(unpacked, dtype=dtype)
-            startpos += lenChunk + 16
-        Zellen = Zones(ZellenList)
-        MatrixObj.zones = Zellen
-        return MatrixObj, Zellen
+        with self.openfile("rb") as f:
+            f.seek(5, 0)
+            header = np.fromstring(f.read(2), dtype="i2")[0]
+            f.seek(header, 0)
+            f.seek(23 - 16, 1)
+            self.attrs['VMAktKennung'] = np.fromstring(f.read(2), dtype="i2")[0]
+            f.seek(14, 1)
+            n_zones = np.fromstring(f.read(4), dtype="i4")[0]
+            data_type = np.fromstring(f.read(2), dtype="i2")[0]
+            if data_type == 4:
+                data_length = 4
+                dtype = '<f4'
+            elif data_type == 5:
+                data_length = 8
+                dtype = '<f8'
+            self.create_zones(n_zones)
+            self.create_matrix(n_zones, dtype=dtype)
+            f.seek(1, 1)
+            self.zone_no.data[:] = np.fromstring(f.read(4 * n_zones), dtype="i4")[0]
+            f.seek(9, 1)
+            m = self.matrix.data
+
+            for i in range(n_zones):
+                lenChunk = np.fromstring(f.read(4), dtype="i4")[0]
+                unpacked = zlib.decompress(f.read(lenChunk))
+                m[i] = np.fromstring(unpacked, dtype=dtype)
+                m.seek(16, 1)
 
     def readPTVMatrixB(self, header=2048):
-        f = openFile(fileName, "rb").read()
-        Dimensions = np.fromstring(f[header + 2:header + 4], dtype="i2")[0]
-        MatrixZeilen = np.fromstring(f[header + 4:header + 8], dtype="i4")[0]
-        MatrixSpalten = np.fromstring(f[header + 12:header + 16],
-                                         dtype="i4")[0]
-        if Dimensions == 3:
-            MatrixBlock = np.fromstring(f[header + 20:header + 24],
-                                           dtype="i4")[0]
-            header += 8
-            shape = (MatrixBlock, MatrixZeilen, MatrixSpalten)
-        elif Dimensions == 2:
-            MatrixBlock = 1
-            shape = (MatrixZeilen, MatrixSpalten)
-        else:
-            msg = 'only 2d or 3d dimensions allowed, found %s dimensions'
-            raise ValueError(msg % Dimensions)
-        data_type = np.fromstring(f[header + 20:header + 22], dtype="i2")
-        if data_type == 3:
-            data_length = 4
-            dtype = '<f4'
-        elif data_type == 4:
-            data_length = 8
-            dtype = '<f8'
-        AnzBezeichnerlisten = np.fromstring(f[header + 22:header + 24],
-                                               dtype="i2")
-        AnzFelder = MatrixZeilen * MatrixSpalten * MatrixBlock
-##        AnzZellen = MatrixSpalten
-        AnzZellen = max(MatrixZeilen, MatrixSpalten)
-        StartPosMatrix = header + AnzBezeichnerlisten * (AnzZellen * 4) + 40
-        EndPosMatrix = StartPosMatrix + AnzFelder * data_length
-        MatrixObj = XArray.fromstring(f[StartPosMatrix:EndPosMatrix],
-                                      dtype=dtype).reshape(shape)
-        if AnzBezeichnerlisten > 0:
-            StartPosZellenNr = StartPosMatrix - AnzZellen * 4
-            ZellenList = np.fromstring(f[StartPosZellenNr:StartPosMatrix],
-                                          dtype="i4")
-            Zellen = Zones(ZellenList)
-            MatrixObj.zones = Zellen
-        MatrixObj.Faktor = np.fromstring(f[StartPosZellenNr - 4:
-                                              StartPosZellenNr],
-                                            dtype="f4")[0]
-        MatrixObj.VMAktKennung = np.fromstring(f[StartPosZellenNr - 8:
-                                                    StartPosZellenNr - 4],
-                                                  dtype="i4")[0]
-        MatrixObj.ZeitVon = int(np.fromstring(f[StartPosZellenNr - 16:
-                                                   StartPosZellenNr - 12],
-                                                 dtype="f4"))
-        MatrixObj.ZeitBis = int(np.fromstring(f[StartPosZellenNr - 12:
-                                                   StartPosZellenNr - 8],
-                                                 dtype="f4"))
-        return MatrixObj, Zellen
+        with self.openfile(mode="rb") as f:
+            f.seek(header)
+            f.seek(2, 1)
+            Dimensions = np.fromstring(f.read(2), dtype="i2")[0]
+            MatrixZeilen = np.fromstring(f.read(4), dtype="i4")[0]
+            f.seek(4, 1)
+            MatrixSpalten = np.fromstring(f.read(4), dtype="i4")[0]
+            f.seek(4, 1)
+            if Dimensions == 3:
+                MatrixBlock = np.fromstring(f[header + 20:header + 24],
+                                               dtype="i4")[0]
+                f.seek(4, 1)
+                shape = (MatrixBlock, MatrixZeilen, MatrixSpalten)
+            elif Dimensions == 2:
+                MatrixBlock = 1
+                shape = (MatrixZeilen, MatrixSpalten)
+            else:
+                msg = 'only 2d or 3d dimensions allowed, found %s dimensions'
+                raise ValueError(msg % Dimensions)
+            data_type = np.fromstring(f.read(2), dtype="i2")
+            if data_type == 3:
+                data_length = 4
+                dtype = '<f4'
+            elif data_type == 4:
+                data_length = 8
+                dtype = '<f8'
+            AnzBezeichnerlisten = np.fromstring(f.read(2),
+                                                   dtype="i2")
+            AnzFelder = MatrixZeilen * MatrixSpalten * MatrixBlock
+
+            n_zones = max(MatrixZeilen, MatrixSpalten)
+            self.create_zones(n_zones)
+            self.attrs['ZeitVon'] = int(np.fromstring(f.read(4), dtype="f4"))
+            self.attrs['ZeitBis'] = int(np.fromstring(f.read(4), dtype="f4"))
+            self.attrs['VMAktKennung'] = int(np.fromstring(f.read(4), dtype="i4"))
+            self.attrs['Faktor'] = int(np.fromstring(f.read(4), dtype="f4"))
+            if AnzBezeichnerlisten > 0:
+                self.zone_no.data[:] = np.fromstring(f.read(4*n_zones),dtype='i4')
+            self.create_matrix(n_zones, dtype=dtype)
+            StartPosMatrix = header + AnzBezeichnerlisten * (n_zones * 4) + 40
+            EndPosMatrix = StartPosMatrix + AnzFelder * data_length
+            arr = np.fromstring(f.read(AnzFelder * data_length), dtype=dtype)
+            self.matrix.data[:] = arr.reshape(shape)
 
 
     def readWert(self, f):

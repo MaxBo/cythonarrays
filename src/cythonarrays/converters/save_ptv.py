@@ -17,7 +17,7 @@ import time
 import numpy as np
 
 def writeFormattedLine(f, text, length):
-    f.write(text.ljust(length) + "\r\n")
+    f.write(text.ljust(length) + b"\r\n")
 
 
 class SavePTV(object):
@@ -217,8 +217,8 @@ class SavePTV(object):
             OpenFile = open
             fn = file_name
 
-        if Ftype == "B":
-            self.write_format_b(OpenFile, fn, version, AnzBezeichnerlisten)
+        if Ftype.startswith("B"):
+            self.write_format_b(OpenFile, fn, version)
         elif Ftype.startswith("V"):
             self.write_format_v(OpenFile, fn, Ftype)
 
@@ -227,103 +227,104 @@ class SavePTV(object):
                   'int32': "Y3", 'int16': "Y2"}
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
                      'int32': "%d", 'int16': "%d"}
-        f = OpenFile(fn, "w")
-        dtype = self.ds.matrix.dtype
-        f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
-        if "M" in Ftype:
-            f.write("* Verkehrsmittelkennung:\n %d \n" % self.ds.attrs['VMAktKennung'])
-        if not "N" in Ftype:
-            f.write("* Zeitintervall:\n {v} {b} \n".format(
-                v=self.ds.attrs['ZeitVon'],
-                b=self.ds.attrs['ZeitBis']))
-            f.write("* Faktor:\n %d \n" % self.ds.attrs['Faktor'])
-        zone_no = self.ds.zone_no.data
-        n_zones = len(zone_no)
-        f.write("* Anzahl Bezirke:\n %d\n" % n_zones)
-        f.write("* Bezirksnummern\n")
-        for i in range(0, n_zones, 10):
-            f.write("\t".join(map(lambda x:
-                                  str(x),
-                                  zone_no[i: i + 10])) + "\n")
-        f.write("* Matrixwerte\n")
-        values = self.ds.matrix.data
-        fmt = outformat[str(dtype)]
-        for i in range(n_zones):
-            no = zone_no[i]
-            f.write("* %s \n" % no)
-            for j in range(0, n_zones, 10):
-                values[i, j: j + 10].tofile(f, sep=' ', format=fmt)
-                f.write('\n')
-
-        if 'zone_names' in self.ds:
-            zone_names = self.ds.zone_names.data
-            fmt = '{no} "{name}"\n'
+        with OpenFile(fn, "w") as f:
+            dtype = self.ds.matrix.dtype
+            f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
+            if "M" in Ftype:
+                f.write("* Verkehrsmittelkennung:\n %d \n" % self.ds.attrs['VMAktKennung'])
+            if not "N" in Ftype:
+                f.write("* Zeitintervall:\n {v} {b} \n".format(
+                    v=self.ds.attrs['ZeitVon'],
+                    b=self.ds.attrs['ZeitBis']))
+                f.write("* Faktor:\n %d \n" % self.ds.attrs['Faktor'])
+            zone_no = self.ds.zone_no.data
+            n_zones = len(zone_no)
+            f.write("* Anzahl Bezirke:\n %d\n" % n_zones)
+            f.write("* Bezirksnummern\n")
+            for i in range(0, n_zones, 10):
+                f.write("\t".join(map(lambda x:
+                                      str(x),
+                                      zone_no[i: i + 10])) + "\n")
+            f.write("* Matrixwerte\n")
+            values = self.ds.matrix.data
+            fmt = outformat[str(dtype)]
             for i in range(n_zones):
-                f.write(fmt.format(no=zone_no[i], name=zone_names[i]))
-        f.close()
+                no = zone_no[i]
+                f.write("* %s \n" % no)
+                for j in range(0, n_zones, 10):
+                    values[i, j: j + 10].tofile(f, sep=' ', format=fmt)
+                    f.write('\n')
 
-    def write_format_b(self, OpenFile, fn, version, AnzBezeichnerlisten, Faktor, zones):
-        f = OpenFile(fn, "wb")
-        writeFormattedLine(f, "PTVSYSTEM   MUULI       VMatrixComp1", 44)
-        writeFormattedLine(f, "VMatversionsnummer: %0.2f" % version, 28)
-        writeFormattedLine(f, "Anzahl Dimensionen: %d" % self.ndim, 28)
-        writeFormattedLine(f, "Seitenlaengen der Matrix:", 30)
-        text = ""
-        for n in range(self.ndim):
-            text += ("%d" % self.shape[n]).ljust(8)
-        writeFormattedLine(f, text, 48)
-        writeFormattedLine(f, "% -30s%d" % ("Anzahl Bezeichnerlisten:",
-                                            AnzBezeichnerlisten),
-                           38)
-        writeFormattedLine(f, "% -20s%02d:00   %02d:00" % ("Zeitbereich:",
-                                                           self.ZeitVon,
-                                                           self.ZeitBis),
-                           36)
-        writeFormattedLine(f, "% -20s%s" % ("RandomRound:", "Nein"), 28)
-        writeFormattedLine(f, "% -24s%0.2f" % ("Faktor:", Faktor), 28)
-        for i in range(20):
-            writeFormattedLine(f, " ", 80)
-        f.write(np.array(6682, dtype="i2").tostring())  # header
-        f.write(" " * 80)
-        f.write(np.array(11, dtype="i2").tostring())  # header
-        f.write(np.array(self.ndim, dtype="i2").tostring())  # Dimensions
-        # Zeilen je Dimension
-        f.write(np.array(self.shape[-2], dtype="i4").tostring())
-        f.write(np.array(2080, dtype="i4").tostring())  # header
-        # Spalten
-        f.write(np.array(self.shape[-1], dtype="i4").tostring())
-        f.write(np.array(2080, dtype="i4").tostring())  # ???
-        if self.ndim == 3:
-            # Bloecke
-            f.write(np.array(self.shape[0], dtype="i4").tostring())
+            if 'zone_names' in self.ds:
+                zone_names = self.ds.zone_names.data
+                fmt = '{no} "{name}"\n'
+                for i in range(n_zones):
+                    f.write(fmt.format(no=zone_no[i], name=zone_names[i]))
+
+    def write_format_b(self, OpenFile, fn, version):
+        m = self.ds.matrix.data
+        with OpenFile(fn, "wb") as f:
+            writeFormattedLine(f, b"PTVSYSTEM   MUULI       VMatrixComp1", 44)
+            writeFormattedLine(f, b"VMatversionsnummer: %0.2f" % version, 28)
+            writeFormattedLine(f, b"Anzahl Dimensionen: %d" % m.ndim, 28)
+            writeFormattedLine(f, b"Seitenlaengen der Matrix:", 30)
+            text = b""
+            for n in range(m.ndim):
+                text += (b"%d" % m.shape[n]).ljust(8)
+            writeFormattedLine(f, text, 48)
+            writeFormattedLine(f, b"% -30s%d" % (b"Anzahl Bezeichnerlisten:",
+                                                self.ds.attrs['AnzBezeichnerlisten']),
+                               38)
+            writeFormattedLine(f, b"% -20s%02d:00   %02d:00" % (
+                b"Zeitbereich:",
+                self.ds.attrs['ZeitVon'],
+                self.ds.attrs['ZeitBis'],
+                ),
+                               36)
+            writeFormattedLine(f, b"% -20s%s" % (b"RandomRound:", b"Nein"), 28)
+            writeFormattedLine(f, b"% -24s%0.2f" % (b"Faktor:",
+                                                    self.ds.attrs['Faktor']), 28)
+            for i in range(20):
+                writeFormattedLine(f, b" ", 80)
+            f.write(np.array(6682, dtype="i2").tostring())  # header
+            f.write(b" " * 80)
+            f.write(np.array(11, dtype="i2").tostring())  # header
+            f.write(np.array(m.ndim, dtype="i2").tostring())  # Dimensions
+            # Zeilen je Dimension
+            f.write(np.array(m.shape[-2], dtype="i4").tostring())
+            f.write(np.array(2080, dtype="i4").tostring())  # header
+            # Spalten
+            f.write(np.array(m.shape[-1], dtype="i4").tostring())
             f.write(np.array(2080, dtype="i4").tostring())  # ???
+            if m.ndim == 3:
+                # Bloecke
+                f.write(np.array(m.shape[0], dtype="i4").tostring())
+                f.write(np.array(2080, dtype="i4").tostring())  # ???
 
-        if self.dtype.char == 'f':
-            # 3 Datentyp float
-            f.write(np.array(3, dtype="i2").tostring())
-            typecode = '<f4'
-        elif self.dtype.char == 'd':
-            # 4 Datentyp double
-            f.write(np.array(4, dtype="i2").tostring())
-            typecode = '<f8'
-        else:
-            # z.B. integer oder unsigned integer:
-            # 3 Datentyp float
-            # ToDo: Prüfen!!!
-            f.write(np.array(3, dtype="i2").tostring())
-            typecode = '<f4'
-        # AnzBezeichnerlisten, was immer das auch ist ???
-        f.write(np.array(1, dtype="i2").tostring())
-        f.write(np.array(self.ZeitVon, dtype="f4").tostring())  # ZeitVon
-        f.write(np.array(self.ZeitBis, dtype="f4").tostring())  # ZeitBis
-        # VMAktKennung
-        f.write(np.array(self.VMAktKennung, dtype="i4").tostring())
-        # Unbekannt U als float
-        f.write(np.array(self.Faktor, dtype="<f4").tostring())
-        f.write(np.array(zones.values).astype("i4").tostring())  # zones
-        f.write(self.astype(typecode).flatten().tostring())  # Matrix
-
-        f.close()
+            if m.dtype.char == 'f':
+                # 3 Datentyp float
+                f.write(np.array(3, dtype="i2").tostring())
+                typecode = '<f4'
+            elif m.dtype.char == 'd':
+                # 4 Datentyp double
+                f.write(np.array(4, dtype="i2").tostring())
+                typecode = '<f8'
+            else:
+                # z.B. integer oder unsigned integer:
+                # 3 Datentyp float
+                # ToDo: Prüfen!!!
+                f.write(np.array(3, dtype="i2").tostring())
+                typecode = '<f4'
+            # AnzBezeichnerlisten, was immer das auch ist ???
+            f.write(np.array(self.ds.attrs['AnzBezeichnerlisten'], dtype="i2").tostring())
+            f.write(np.array(self.ds.attrs['ZeitVon'], dtype="f4").tostring())  # ZeitVon
+            f.write(np.array(self.ds.attrs['ZeitBis'], dtype="f4").tostring())  # ZeitBis
+            # VMAktKennung
+            f.write(np.array(self.ds.attrs['VMAktKennung'], dtype="i4").tostring())
+            # Unbekannt U als float
+            f.write(np.array(self.ds.attrs['Faktor'], dtype="<f4").tostring())
+            f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())  # zones
+            f.write(m.astype(typecode).flatten().tostring())  # Matrix
 
     def savePSVMatrix(self, fileName, type="CC", maxWidth=1000):
         """ exports array in PSV-Format
