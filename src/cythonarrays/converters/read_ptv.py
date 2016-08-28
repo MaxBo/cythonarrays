@@ -5,7 +5,7 @@ import numpy as np
 import xarray as xr
 import gzip
 import zlib
-
+from argparse import ArgumentParser
 
 
 class ReadPTVMatrix(xr.Dataset):
@@ -20,12 +20,12 @@ class ReadPTVMatrix(xr.Dataset):
     """
     def __init__(self, filename, header=2048, zipped=False):
         super(ReadPTVMatrix, self).__init__()
-        self.attrs['fn']= filename
-        self.attrs['ZeitVon']= 0
-        self.attrs['ZeitBis']= 0
-        self.attrs['Faktor']= 1
-        self.attrs['VMAktKennung']= 0
-        self.attrs['AnzBezeichnerlisten']= 1
+        self.attrs['fn'] = filename
+        self.attrs['ZeitVon'] = 0
+        self.attrs['ZeitBis'] = 0
+        self.attrs['Faktor'] = 1
+        self.attrs['VMAktKennung'] = 0
+        self.attrs['AnzBezeichnerlisten'] = 1
 
         if filename.endswith(".gzip") or zipped:
             self.attrs['open'] = gzip.open
@@ -52,6 +52,7 @@ class ReadPTVMatrix(xr.Dataset):
         else:
             self.readPTVMatrixB(header)
 
+        del self.attrs['open']
 
     def readPTVMatrixO(self):
         with self.open(self.filename) as f:
@@ -64,7 +65,7 @@ class ReadPTVMatrix(xr.Dataset):
             if "M" in MatrixTyp:
                 VMAktKennung = readWert(f)
 
-            if not "N" in MatrixTyp:
+            if "N" not in MatrixTyp:
                 ZeitVon, ZeitBis, Faktor = readWerte(f, 3)
 
             if "00" in MatrixTyp:
@@ -115,7 +116,7 @@ class ReadPTVMatrix(xr.Dataset):
             if "M" in MatrixTyp:
                 self.attrs['VMAktKennung'] = self.readWert(f)
 
-            if not "N" in MatrixTyp:
+            if "N" not in MatrixTyp:
                 ZeitVon, ZeitBis, Faktor = self.readWerte(f, 3)
                 self.attrs['ZeitVon'] = ZeitVon
                 self.attrs['ZeitBis'] = ZeitBis
@@ -176,7 +177,7 @@ class ReadPTVMatrix(xr.Dataset):
         if "M" in MatrixTyp:
             VMAktKennung = readWert(f)
 
-        if not "N" in MatrixTyp:
+        if "N" not in MatrixTyp:
             ZeitVon, ZeitBis, Faktor = readWerte(f, 3)
 
         MatrixObj, Zellen = readEWerte2DictE(f)
@@ -234,9 +235,11 @@ class ReadPTVMatrix(xr.Dataset):
 
             n_zones2 = np.fromstring(f.read(4), dtype="i4")[0]
             idx = header + 11 + n_zones * 4
-            self.zone_no.data[:] = np.fromstring(f.read(n_zones * 4), dtype="i4")
+            self.zone_no.data[:] = np.fromstring(
+                f.read(n_zones * 4), dtype="i4")
             self.create_zones(n_zones2, name='zone_no2')
-            self.zone_no2.data[:] = np.fromstring(f.read(n_zones * 4), dtype="i4")
+            self.zone_no2.data[:] = np.fromstring(
+                f.read(n_zones * 4), dtype="i4")
             self.create_zone_names(n_zones)
             for i in range(n_zones):
                 Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
@@ -245,7 +248,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_zone_names(n_zones, name='zone_names2')
             for i in range(n_zones2):
                 Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
-                self.zone_names2.data[i] =f.read(Zeichen * 2).decode('utf16')
+                self.zone_names2.data[i] = f.read(Zeichen * 2).decode('utf16')
             f.seek(1, 1)
             self.attrs['Unbek1'] = np.fromstring(f.read(8), dtype="f8")[0]
             for i in range(n_zones):
@@ -275,7 +278,8 @@ class ReadPTVMatrix(xr.Dataset):
             header = np.fromstring(f.read(2), dtype="i2")[0]
             f.seek(header, 0)
             f.seek(23 - 16, 1)
-            self.attrs['VMAktKennung'] = np.fromstring(f.read(2), dtype="i2")[0]
+            self.attrs['VMAktKennung'] = np.fromstring(
+                f.read(2), dtype="i2")[0]
             f.seek(14, 1)
             n_zones = np.fromstring(f.read(4), dtype="i4")[0]
             data_type = np.fromstring(f.read(2), dtype="i2")[0]
@@ -288,7 +292,8 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_zones(n_zones)
             self.create_matrix(n_zones, dtype=dtype)
             f.seek(1, 1)
-            self.zone_no.data[:] = np.fromstring(f.read(4 * n_zones), dtype="i4")[0]
+            self.zone_no.data[:] = np.fromstring(
+                f.read(4 * n_zones), dtype="i4")[0]
             f.seek(9, 1)
             m = self.matrix.data
 
@@ -309,7 +314,7 @@ class ReadPTVMatrix(xr.Dataset):
             f.seek(4, 1)
             if Dimensions == 3:
                 MatrixBlock = np.fromstring(f[header + 20:header + 24],
-                                               dtype="i4")[0]
+                                            dtype="i4")[0]
                 f.seek(4, 1)
                 shape = (MatrixBlock, MatrixZeilen, MatrixSpalten)
             elif Dimensions == 2:
@@ -326,23 +331,24 @@ class ReadPTVMatrix(xr.Dataset):
                 data_length = 8
                 dtype = '<f8'
             AnzBezeichnerlisten = np.fromstring(f.read(2),
-                                                   dtype="i2")
+                                                dtype="i2")
             AnzFelder = MatrixZeilen * MatrixSpalten * MatrixBlock
 
             n_zones = max(MatrixZeilen, MatrixSpalten)
             self.create_zones(n_zones)
             self.attrs['ZeitVon'] = int(np.fromstring(f.read(4), dtype="f4"))
             self.attrs['ZeitBis'] = int(np.fromstring(f.read(4), dtype="f4"))
-            self.attrs['VMAktKennung'] = int(np.fromstring(f.read(4), dtype="i4"))
+            self.attrs['VMAktKennung'] = int(
+                np.fromstring(f.read(4), dtype="i4"))
             self.attrs['Faktor'] = int(np.fromstring(f.read(4), dtype="f4"))
             if AnzBezeichnerlisten > 0:
-                self.zone_no.data[:] = np.fromstring(f.read(4*n_zones),dtype='i4')
+                self.zone_no.data[:] = np.fromstring(
+                    f.read(4 * n_zones), dtype='i4')
             self.create_matrix(n_zones, dtype=dtype)
             StartPosMatrix = header + AnzBezeichnerlisten * (n_zones * 4) + 40
             EndPosMatrix = StartPosMatrix + AnzFelder * data_length
             arr = np.fromstring(f.read(AnzFelder * data_length), dtype=dtype)
             self.matrix.data[:] = arr.reshape(shape)
-
 
     def readWert(self, f):
         Z = f.readline()
@@ -365,7 +371,6 @@ class ReadPTVMatrix(xr.Dataset):
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
 
-
     def readWerte(self, f, AnzWerte):
         Werte = []
         WerteGefunden = 0
@@ -376,7 +381,6 @@ class ReadPTVMatrix(xr.Dataset):
             Werte += map(lambda x: float(x), Z.strip().split())
             WerteGefunden = len(Werte)
         return Werte
-
 
     def readWerte2Matrix(self, f, AnzBezirke):
         Matrix = []
@@ -437,3 +441,10 @@ def readEWerte2DictE(f):
         MatrixObj[VonIndex, NachIndex] = Wert
     Zellen = Zones(ZellenNr)
     return MatrixObj, Zellen
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser()
+    parser.add_argument('-f', dest='fn')
+    options = parser.parse_args()
+    ds = ReadPTVMatrix(options.fn)
