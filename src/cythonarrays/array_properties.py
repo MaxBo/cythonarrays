@@ -101,6 +101,12 @@ class _ArrayProperties(object):
         arr = arr2
         setattr(self, intern_name, arr)
 
+    def reset_array(self, name):
+        """Reset array to default value"""
+        descr = self.dtypes[name]
+        default = descr.default
+        getattr(self, name).fill(default)
+
     def check_ndims(self, descr):
         if len(descr.shape) != descr.ndim:
             msg = '{ndim} Dimensions required, shape {s} has {n} dimensions'
