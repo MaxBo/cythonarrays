@@ -189,8 +189,8 @@ class SavePTV(object):
                 if not keepConnOpen:
                     conn.close()
 
-    def savePTVMatrix(self, file_name, Ftype, zones=None, version=0.11,
-                      Faktor=1, AnzBezeichnerlisten=1, zipped=False):
+    def savePTVMatrix(self, file_name, Ftype, version=0.11,
+                      AnzBezeichnerlisten=1, zipped=False):
         """
         save array im PTV-Format
 
@@ -228,15 +228,20 @@ class SavePTV(object):
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
                      'int32': "%d", 'int16': "%d"}
         with OpenFile(fn, "w") as f:
+            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
+            ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
+            ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
+            Faktor = getattr(self.ds.attrs, 'Faktor', 1)
+            VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
             dtype = self.ds.matrix.dtype
             f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
             if "M" in Ftype:
-                f.write("* Verkehrsmittelkennung:\n %d \n" % self.ds.attrs['VMAktKennung'])
+                f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
             if not "N" in Ftype:
                 f.write("* Zeitintervall:\n {v} {b} \n".format(
-                    v=self.ds.attrs['ZeitVon'],
-                    b=self.ds.attrs['ZeitBis']))
-                f.write("* Faktor:\n %d \n" % self.ds.attrs['Faktor'])
+                    v=ZeitVon,
+                    b=ZeitBis))
+                f.write("* Faktor:\n %d \n" % Faktor)
             zone_no = self.ds.zone_no.data
             n_zones = len(zone_no)
             f.write("* Anzahl Bezirke:\n %d\n" % n_zones)
@@ -264,6 +269,11 @@ class SavePTV(object):
     def write_format_b(self, OpenFile, fn, version):
         m = self.ds.matrix.data
         with OpenFile(fn, "wb") as f:
+            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
+            ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
+            ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
+            Faktor = getattr(self.ds.attrs, 'Faktor', 1)
+            VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
             writeFormattedLine(f, b"PTVSYSTEM   MUULI       VMatrixComp1", 44)
             writeFormattedLine(f, b"VMatversionsnummer: %0.2f" % version, 28)
             writeFormattedLine(f, b"Anzahl Dimensionen: %d" % m.ndim, 28)
@@ -273,17 +283,17 @@ class SavePTV(object):
                 text += (b"%d" % m.shape[n]).ljust(8)
             writeFormattedLine(f, text, 48)
             writeFormattedLine(f, b"% -30s%d" % (b"Anzahl Bezeichnerlisten:",
-                                                self.ds.attrs['AnzBezeichnerlisten']),
+                                                anz_bez_listen),
                                38)
             writeFormattedLine(f, b"% -20s%02d:00   %02d:00" % (
                 b"Zeitbereich:",
-                self.ds.attrs['ZeitVon'],
-                self.ds.attrs['ZeitBis'],
+                ZeitVon,
+                ZeitBis,
                 ),
                                36)
             writeFormattedLine(f, b"% -20s%s" % (b"RandomRound:", b"Nein"), 28)
             writeFormattedLine(f, b"% -24s%0.2f" % (b"Faktor:",
-                                                    self.ds.attrs['Faktor']), 28)
+                                                    Faktor), 28)
             for i in range(20):
                 writeFormattedLine(f, b" ", 80)
             f.write(np.array(6682, dtype="i2").tostring())  # header
@@ -316,13 +326,13 @@ class SavePTV(object):
                 f.write(np.array(3, dtype="i2").tostring())
                 typecode = '<f4'
             # AnzBezeichnerlisten, was immer das auch ist ???
-            f.write(np.array(self.ds.attrs['AnzBezeichnerlisten'], dtype="i2").tostring())
-            f.write(np.array(self.ds.attrs['ZeitVon'], dtype="f4").tostring())  # ZeitVon
-            f.write(np.array(self.ds.attrs['ZeitBis'], dtype="f4").tostring())  # ZeitBis
+            f.write(np.array(anz_bez_listen, dtype="i2").tostring())
+            f.write(np.array(ZeitVon, dtype="f4").tostring())  # ZeitVon
+            f.write(np.array(ZeitBis, dtype="f4").tostring())  # ZeitBis
             # VMAktKennung
-            f.write(np.array(self.ds.attrs['VMAktKennung'], dtype="i4").tostring())
+            f.write(np.array(VMAktKennung, dtype="i4").tostring())
             # Unbekannt U als float
-            f.write(np.array(self.ds.attrs['Faktor'], dtype="<f4").tostring())
+            f.write(np.array(Faktor, dtype="<f4").tostring())
             f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())  # zones
             f.write(m.astype(typecode).flatten().tostring())  # Matrix
 
