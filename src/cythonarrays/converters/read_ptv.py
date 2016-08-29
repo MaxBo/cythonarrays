@@ -130,25 +130,24 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_matrix(n_zones)
             self.read_values_to_array(f, self.matrix)
             self.create_zone_names(n_zones)
-            self.read_names(f, self.zone_names)
+            self.read_names(f, self.zone_name)
 
-    def create_zone_names(self, n_zones, name='zone_names'):
+    def create_zone_names(self, n_zones, name='zone_name'):
         self[name] = xr.DataArray(
             np.empty((n_zones, ), dtype='O'),
             coords=(self.zone_no.data, ),
-            dims=('zone',),
+            dims=('zone_no',),
             name=name,)
 
     def create_matrix(self, n_zones, dtype='f8'):
         self['matrix'] = xr.DataArray(
             np.empty((n_zones, n_zones), dtype=dtype),
             coords=(self.zone_no, self.zone_no),
-            dims=('origin', 'destination'),
+            dims=('origins', 'destinations'),
             name='matrix',)
 
     def create_zones(self, n_zones, name='zone_no'):
-        self[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
-                                  name=name,
+        self.coords[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
                                   dims=('zones',),)
 
     def read_names(self, f, arr):
@@ -243,7 +242,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_zone_names(n_zones)
             for i in range(n_zones):
                 Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
-                self.zone_names.data[i] = f.read(Zeichen * 2).decode('utf16')
+                self.zone_name.data[i] = f.read(Zeichen * 2).decode('utf16')
 
             self.create_zone_names(n_zones, name='zone_names2')
             for i in range(n_zones2):
