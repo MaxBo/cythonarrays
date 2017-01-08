@@ -13,67 +13,111 @@ from cythonarrays.converters.save_ptv import SavePTV
 
 
 @pytest.fixture(scope='class')
-def matrix_fn():
-    fn = os.path.join(os.path.dirname(__file__),
-                      'example_dataset.h5')
-    fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\2 TT0 (Pkw Pkw).mtx'
+def folder():
+    return os.path.dirname(__file__)
+
+@pytest.fixture(scope='class')
+def matrix_fn(folder):
+    fn = os.path.join(folder, 'matrix_v_format.mtx')
     return fn
 
 @pytest.fixture(scope='class')
-def matrix_fn_out():
-    fn = os.path.join(os.path.dirname(__file__),
-                      'example_dataset.h5')
-    fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\IV_out.mtx'
+def matrix_fn_out(folder):
+    fn = os.path.join(folder, 'matrix.out')
     return fn
 
 @pytest.fixture(scope='class')
-def matrix_fn_bk_out():
-    fn = os.path.join(os.path.dirname(__file__),
-                      'example_dataset.h5')
-    fn = r'E:\GGR\Kiel\60 Modell\610 Wirtschaftsverkehrsmodell\612 Beispieldaten\Matrizen\OV_out.NTR'
+def matrix_fn_bk_out(folder):
+    fn = os.path.join(folder, 'matrix_bk_format.out')
     return fn
 
 @pytest.fixture(scope='class')
-def matrix_fn_bk():
-    fn = os.path.join(os.path.dirname(__file__),
-                      'example_dataset.h5')
-    fn = r'E:\Modell\KS\Matrizen\130503_Kenngr_OV_Nullfall\19_24\OV.NTR'
+def matrix_fn_bk(folder):
+    fn = os.path.join(folder, 'matrix_bk_format.mtx')
     return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_o(folder):
+    fn = os.path.join(folder, 'matrix_o_format.mtx')
+    return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_e(folder):
+    fn = os.path.join(folder, 'matrix_e_format.mtx')
+    return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_s(folder):
+    fn = os.path.join(folder, 'matrix_s_format.mtx')
+    return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_or(folder):
+    fn = os.path.join(folder, 'matrix_or_format.mtx')
+    return fn
+
 
 class TestReadPTV:
     """Test reading PTV matrices"""
     def test_01_read_v_format(self, matrix_fn):
         """Test reading v-Format"""
         ds = ReadPTVMatrix(filename=matrix_fn)
-        print(ds)
+        self.print_matrix(ds)
 
     def test_02_read_bk_format(self, matrix_fn_bk):
         """Test reading bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        self.print_matrix(ds)
+
+    def test_02a_read_o_format(self, matrix_fn_o, matrix_fn_or):
+        """Test reading bk-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_o)
+        self.print_matrix(ds)
+
+        ds = ReadPTVMatrix(filename=matrix_fn_or)
+        self.print_matrix(ds)
+
+    def test_02b_read_e_s_format(self, matrix_fn_e, matrix_fn_s):
+        """Test reading bk-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_e)
+        self.print_matrix(ds)
+       
+        ds = ReadPTVMatrix(filename=matrix_fn_s)
+        self.print_matrix(ds)
+
+    def print_matrix(self, ds):
         print(ds)
-        print('Histogram of number of transfers')
-        print(np.histogram(ds.matrix.data, bins = range(8)))
+        print('Histogram of travel times')
+        print(np.histogram(ds.matrix.data, bins = range(0, 60, 10)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
 
     def test_03_save_v_format(self, matrix_fn_bk, matrix_fn_out):
         """Test writing v-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
-        print(np.histogram(ds.matrix.data, bins = range(8)))
-        print(ds.matrix.data.sum())
+        print(np.histogram(ds.matrix.data, bins = range(0, 60, 10)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_out,
                         Ftype='VN', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_out)
-        print(np.histogram(ds2.matrix.data, bins = range(8)))
-        print(ds2.matrix.data.sum())
+        print(np.histogram(ds2.matrix.data, bins = range(0, 60, 10)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
 
     def test_04_save_bk_format(self, matrix_fn_bk, matrix_fn_bk_out):
-        """Test writing v-format"""
+        """Test writing bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
         print(np.histogram(ds.matrix.data, bins = range(8)))
-        print(ds.matrix.data.sum())
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_bk_out,
                         Ftype='BK', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_bk_out)
         print(np.histogram(ds2.matrix.data, bins = range(8)))
-        print(ds2.matrix.data.sum())
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        assert sum_before == sum_after

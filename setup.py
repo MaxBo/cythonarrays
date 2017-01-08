@@ -14,11 +14,10 @@ ext_modnames = ['cythonarrays.array_shapes',
 
 setup(
     name="cythonarrays",
-    version="1.12",
+    version="1.13",
     description="helper functions for cythonarrays",
 
     packages=find_packages('src', exclude=['ez_setup']),
-
     package_dir={'': 'src'},
     package_data={'': ['*.pxd']},
     include_package_data=True,
@@ -34,6 +33,8 @@ setup(
         ],
         test=[]
     ),
+    setup_requires=['pytest-runner', ],
+    tests_require=['pytest', ],
 
     install_requires=[
         'cythoninstallhelpers'

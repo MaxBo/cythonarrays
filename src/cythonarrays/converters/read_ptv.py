@@ -6,6 +6,7 @@ import xarray as xr
 import gzip
 import zlib
 from argparse import ArgumentParser
+from collections import deque
 
 
 class ReadPTVMatrix(xr.Dataset):
@@ -42,6 +43,8 @@ class ReadPTVMatrix(xr.Dataset):
             self.readPTVMatrixO()
         elif Z.startswith(b"$E"):
             self.readPTVMatrixE()
+        elif Z.startswith(b"$S"):
+            self.readPTVMatrixE()
         elif Z.strip(bytes([3, 0])).startswith(b"$BI"):
             self.readPTVMatrixBI()
         elif Z.strip(bytes([3, 0])).startswith(b"$BK"):
@@ -55,56 +58,49 @@ class ReadPTVMatrix(xr.Dataset):
         del self.attrs['open']
 
     def readPTVMatrixO(self):
-        with self.open(self.filename) as f:
-            Z = f.readline()
-            MatrixTyp = Z.split("$")[-1].split(";")[0]
-            if not MatrixTyp.startswith("O"):
-                print("Keine Matrix im O-Format!")
-                raise TypeError
+        with self.openfile(mode="r") as f:
+            rows = self.read_header(f)
+        loc = self.matrix.loc
+        for row in rows:
+            r = row.split()
+            fr = int(r[0])
+            to = int(r[1])
+            value = float(r[2])                
+            loc[fr, to] = value
 
-            if "M" in MatrixTyp:
-                VMAktKennung = readWert(f)
+    def readPTVMatrixE(self):
+        with self.openfile(mode="r") as f:
+            rows = self.read_header(f)
+        loc = self.matrix.loc
+        for row in rows:
+            cols = row.lstrip('-').split()
+            fr = int(cols[0])
+            for i in range(1, len(cols), 2):
+                to = int(cols[i])
+                value = float(cols[i + 1])
+                loc[fr, to] = value
 
-            if "N" not in MatrixTyp:
-                ZeitVon, ZeitBis, Faktor = readWerte(f, 3)
+    def read_header(self, f):
+        Z = f.readline()
+        MatrixTyp = Z.split("$")[-1].split(";")[0]
+        #if not MatrixTyp.startswith("O"):
+            #print("Keine Matrix im O-Format!")
+            #raise TypeError
+        if "M" in MatrixTyp:
+            self.attrs['VMAktKennung'] = self.readWert(f)
 
-            if "00" in MatrixTyp:
-                AnzBezirke = readWert(f)
-                MatrixObj = readWerte2Matrix(f, AnzBezirke)
-                ZellenNr = []
-                Zellen = Zones(range(AnzBezirke))
+        if "N" not in MatrixTyp:
+            ZeitVon, ZeitBis, Faktor = self.readWerte(f, 3)
+            self.attrs['ZeitVon'] = ZeitVon
+            self.attrs['ZeitBis'] = ZeitBis
+            self.attrs['Faktor'] = Faktor
 
-            else:
-                MatrixObj, Zellen = readWerte2Dict(f)
-            try:
-                MatrixObj.VMAktKennung = VMAktKennung
-            except:
-                pass
-            try:
-                (MatrixObj.ZeitVon,
-                 MatrixObj.ZeitBis,
-                 MatrixObj.Faktor) = ZeitVon, ZeitBis, Faktor
-            except:
-                pass
-        return MatrixObj, Zellen
+        rows , Z = self.read_values_in_o_format_to_list(f)
+        self.read_names_o_format(f, Z)
+        return rows
 
     def openfile(self, mode='r'):
         return self.attrs['open'](self.attrs['fn'], mode=mode)
-
-    def readPTVMatrixM(self):
-        with self.open(self.filename) as f:
-            Z = f.readline()
-            if not Z.strip().startswith("$M"):
-                print("Keine Matrix im M-Format!")
-                raise TypeError
-            VMAktKennung = readWert(f)
-            AnzBezirke = readWert(f)
-            ZellenNr = readWerte(f, AnzBezirke)
-            MatrixObj = readWerte2Matrix(f, AnzBezirke)
-            Zellen = Zones(ZellenNr)
-            MatrixObj.zones = Zellen
-            MatrixObj.VMAktKennung = VMAktKennung
-        return MatrixObj, Zellen
 
     def readPTVMatrixV(self):
         with self.openfile() as f:
@@ -166,35 +162,30 @@ class ReadPTVMatrix(xr.Dataset):
                     arr.loc[zone_no] = name
                     line = f.readline().strip()
 
-    def readPTVMatrixE(self):
-        f = openFile(fileName)
-        Z = f.readline()
-        MatrixTyp = Z.split("$")[-1].split(";")[0]
-        if not MatrixTyp.startswith("E"):
-            print("Keine Matrix im E-Format!")
-            raise TypeError
-        if "M" in MatrixTyp:
-            VMAktKennung = readWert(f)
+    def read_names_o_format(self, f, Z):
+        """Read the zone names"""
+        names = deque()
+        while Z.startswith("*") or Z == "\n":
+            Z = f.readline()
+        if Z:
+            if Z.upper().startswith('$NAMES'):
 
-        if "N" not in MatrixTyp:
-            ZeitVon, ZeitBis, Faktor = readWerte(f, 3)
-
-        MatrixObj, Zellen = readEWerte2DictE(f)
-        try:
-            MatrixObj.VMAktKennung = VMAktKennung
-        except:
-            pass
-        try:
-            (MatrixObj.ZeitVon,
-             MatrixObj.ZeitBis,
-             MatrixObj.Faktor) = ZeitVon, ZeitBis, Faktor
-        except:
-            (MatrixObj.ZeitVon,
-             MatrixObj.ZeitBis,
-             MatrixObj.Faktor) = 0., 0., 1.
-        MatrixObj.Unbek1 = 0.
-        return MatrixObj, Zellen
-
+                line = f.readline().strip()
+                while line:
+                    l = line.split(' "')
+                    zone_no = int(l[0])
+                    name = l[1].strip('"')
+                    names.append((zone_no, name))
+                    line = f.readline().strip()
+        n_zones = len(names)
+        self.create_zones(n_zones)
+        for i, (zone_no, name) in enumerate(names):
+            self.zone_no.data[i] = zone_no
+        self.create_zone_names(n_zones)        
+        for i, (zone_no, name) in enumerate(names):
+            self.zone_name.loc[zone_no] = name
+        self.create_matrix(n_zones)        
+    
     def readPTVMatrixBK(self):
         """
         Die Länge des Headers stehen in Byte 5/6
@@ -370,6 +361,20 @@ class ReadPTVMatrix(xr.Dataset):
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
 
+    def read_values_in_o_format_to_list(self, f):
+        """read values to a numpy array at pos x"""
+        rows = deque()
+        for Z in f:
+            if Z.startswith("*") or Z == '\n':
+                continue
+            if Z.startswith('$'):
+                return rows, Z
+            row = Z.strip()
+            rows.append(row)
+        return rows, Z
+    
+            
+            
     def readWerte(self, f, AnzWerte):
         Werte = []
         WerteGefunden = 0
@@ -380,67 +385,6 @@ class ReadPTVMatrix(xr.Dataset):
             Werte += map(lambda x: float(x), Z.strip().split())
             WerteGefunden = len(Werte)
         return Werte
-
-    def readWerte2Matrix(self, f, AnzBezirke):
-        Matrix = []
-        ZellwerteGefunden = 0
-        AnzFelder = AnzBezirke ** 2
-        while ZellwerteGefunden < AnzFelder:
-            Z = f.readline()
-            while Z.startswith("*"):
-                Z = f.readline()
-            Matrix += map(lambda x: float(x), Z.strip().split())
-            ZellwerteGefunden = len(Matrix)
-        MatrixObj = XArray(Matrix).reshape(AnzBezirke, -1)
-        return MatrixObj
-
-
-def readWerte2Dict(f):
-    Werte = {}
-    ZellenNr = []
-    Z = f.readline()
-    while Z != "":
-        while Z.startswith("*"):
-            Z = f.readline()
-        VonNachWert = Z.strip().split()
-        Von = int(VonNachWert[0])
-        Nach = int(VonNachWert[1])
-        Wert = float(VonNachWert[2])
-        Werte[(Von, Nach)] = Wert
-        Z = f.readline()
-    ZellenNr = np.unique(np.array(Werte.keys()))
-    AnzBezirke = len(ZellenNr)
-    MatrixObj = XArray(np.zeros((AnzBezirke, AnzBezirke)))
-    for VonNach, Wert in Werte.items():
-        VonIndex, NachIndex = ZellenNr.searchsorted(VonNach)
-        MatrixObj[VonIndex, NachIndex] = Wert
-    Zellen = Zones(ZellenNr)
-    return MatrixObj, Zellen
-
-
-def readEWerte2DictE(f):
-    Werte = {}
-    ZellenNr = []
-    Z = f.readline()
-    while Z != "":
-        while Z.startswith("*"):
-            Z = f.readline()
-        VonNachWerte = Z.strip().split()
-        Von = -int(VonNachWerte[0])
-        for i in range(1, len(VonNachWerte), 2):
-            Nach = int(VonNachWerte[i])
-            Wert = float(VonNachWerte[i + 1])
-            Werte[(Von, Nach)] = Wert
-        Z = f.readline()
-    ZellenNr = np.unique(np.array(Werte.keys()))
-    AnzBezirke = len(ZellenNr)
-    MatrixObj = XArray.zeros((AnzBezirke, AnzBezirke))
-    for VonNach, Wert in Werte.items():
-        VonIndex, NachIndex = ZellenNr.searchsorted(VonNach)
-        MatrixObj[VonIndex, NachIndex] = Wert
-    Zellen = Zones(ZellenNr)
-    return MatrixObj, Zellen
-
 
 if __name__ == '__main__':
     parser = ArgumentParser()

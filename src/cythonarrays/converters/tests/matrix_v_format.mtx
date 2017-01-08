@@ -1,0 +1,28 @@
+$V
+* Von  Bis
+0.00 0.00
+* Faktor
+1.00
+*  
+* Gertz Gutsche Rümenapp Stadtentwicklung und Mobilität GbR Hamburg
+* 07.01.17
+* Anzahl Netzobjekte
+4
+* Netzobjekt-Nummern
+       100        200        300        400 
+*
+* Obj 100 Summe = 69
+     0     28     26     15 
+* Obj 200 Summe = 56
+    25      0      7     24 
+* Obj 300 Summe = 63
+    25      7      0     31 
+* Obj 400 Summe = 69
+    21     18     30      0 
+* Netzobjektnamen
+$NAMES
+100 "A-Village"
+200 "X-City"
+300 "ShoppingCity"
+400 "ShoppingEdge"
+ 
