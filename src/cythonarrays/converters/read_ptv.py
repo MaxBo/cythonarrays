@@ -65,7 +65,7 @@ class ReadPTVMatrix(xr.Dataset):
             r = row.split()
             fr = int(r[0])
             to = int(r[1])
-            value = float(r[2])                
+            value = float(r[2])
             loc[fr, to] = value
 
     def readPTVMatrixE(self):
@@ -83,9 +83,6 @@ class ReadPTVMatrix(xr.Dataset):
     def read_header(self, f):
         Z = f.readline()
         MatrixTyp = Z.split("$")[-1].split(";")[0]
-        #if not MatrixTyp.startswith("O"):
-            #print("Keine Matrix im O-Format!")
-            #raise TypeError
         if "M" in MatrixTyp:
             self.attrs['VMAktKennung'] = self.readWert(f)
 
@@ -95,7 +92,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.attrs['ZeitBis'] = ZeitBis
             self.attrs['Faktor'] = Faktor
 
-        rows , Z = self.read_values_in_o_format_to_list(f)
+        rows, Z = self.read_values_in_o_format_to_list(f)
         self.read_names_o_format(f, Z)
         return rows
 
@@ -144,7 +141,7 @@ class ReadPTVMatrix(xr.Dataset):
 
     def create_zones(self, n_zones, name='zone_no'):
         self.coords[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
-                                  dims=('zones',),)
+                                         dims=('zones',),)
 
     def read_names(self, f, arr):
         """Read the zone names"""
@@ -181,11 +178,11 @@ class ReadPTVMatrix(xr.Dataset):
         self.create_zones(n_zones)
         for i, (zone_no, name) in enumerate(names):
             self.zone_no.data[i] = zone_no
-        self.create_zone_names(n_zones)        
+        self.create_zone_names(n_zones)
         for i, (zone_no, name) in enumerate(names):
             self.zone_name.loc[zone_no] = name
-        self.create_matrix(n_zones)        
-    
+        self.create_matrix(n_zones)
+
     def readPTVMatrixBK(self):
         """
         Die Länge des Headers stehen in Byte 5/6
@@ -372,9 +369,7 @@ class ReadPTVMatrix(xr.Dataset):
             row = Z.strip()
             rows.append(row)
         return rows, Z
-    
-            
-            
+
     def readWerte(self, f, AnzWerte):
         Werte = []
         WerteGefunden = 0

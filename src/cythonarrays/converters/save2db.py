@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#------------------------------------------------------------------------------
+
 # Name:        saveArray
 # Purpose:
 #
@@ -7,18 +7,16 @@
 #
 # Created:     21/09/2011
 # Copyright:   (c) Max Bohnet 2011
-#------------------------------------------------------------------------------
-
-__version__ = 1.0
 
 import os
 import gzip
 import cPickle
 import time
-import numpy
+import numpy as np
 import psycopg2
 from simcommon.matrixio.zones import Zones
 from simcommon.matrixio.helpers.database import fileConfig, get_connection_pool
+
 
 def writeFormattedLine(f, text, length):
     f.write(text.ljust(length) + "\r\n")
@@ -40,7 +38,7 @@ class XArraySave(object):
             raise IOError
 
     def save2db(self, tableName, connection='hlocalhost',
-                overwrite=True, missings=[99999, numpy.inf, -numpy.inf],
+                overwrite=True, missings=[99999, np.inf, -np.inf],
                 saveFlattened=False, debug=False):
         """
         saves 2D-array into postgresql database table
@@ -66,8 +64,8 @@ class XArraySave(object):
             print debug messages if true
         """
 
-        #ToDo:
-        #- save several arrays of the same shape
+        # ToDo:
+        # save several arrays of the same shape
         # into same dbtable with one value column per array
 
         t0 = time.time()
@@ -77,7 +75,7 @@ class XArraySave(object):
         else:
             array = self
 
-        if isinstance(self, numpy.ndarray):
+        if isinstance(self, np.ndarray):
             from StringIO import StringIO
             if isinstance(connection, psycopg2._psycopg.connection):
                 conn = connection
@@ -267,44 +265,44 @@ class XArraySave(object):
             writeFormattedLine(f, "% -24s%0.2f" % ("Faktor:", Faktor), 28)
             for i in range(20):
                 writeFormattedLine(f, " ", 80)
-            f.write(numpy.array(6682, dtype="i2").tostring())  # header
+            f.write(np.array(6682, dtype="i2").tostring())  # header
             f.write(" " * 80)
-            f.write(numpy.array(11, dtype="i2").tostring())  # header
-            f.write(numpy.array(self.ndim, dtype="i2").tostring())  # Dimensions
+            f.write(np.array(11, dtype="i2").tostring())  # header
+            f.write(np.array(self.ndim, dtype="i2").tostring())  # Dimensions
             # Zeilen je Dimension
-            f.write(numpy.array(self.shape[-2], dtype="i4").tostring())
-            f.write(numpy.array(2080, dtype="i4").tostring())  # header
+            f.write(np.array(self.shape[-2], dtype="i4").tostring())
+            f.write(np.array(2080, dtype="i4").tostring())  # header
             # Spalten
-            f.write(numpy.array(self.shape[-1], dtype="i4").tostring())
-            f.write(numpy.array(2080, dtype="i4").tostring())  # ???
+            f.write(np.array(self.shape[-1], dtype="i4").tostring())
+            f.write(np.array(2080, dtype="i4").tostring())  # ???
             if self.ndim == 3:
                 # Bloecke
-                f.write(numpy.array(self.shape[0], dtype="i4").tostring())
-                f.write(numpy.array(2080, dtype="i4").tostring())  # ???
+                f.write(np.array(self.shape[0], dtype="i4").tostring())
+                f.write(np.array(2080, dtype="i4").tostring())  # ???
 
             if self.dtype.char == 'f':
                 # 3 Datentyp float
-                f.write(numpy.array(3, dtype="i2").tostring())
+                f.write(np.array(3, dtype="i2").tostring())
                 typecode = '<f4'
             elif self.dtype.char == 'd':
                 # 4 Datentyp double
-                f.write(numpy.array(4, dtype="i2").tostring())
+                f.write(np.array(4, dtype="i2").tostring())
                 typecode = '<f8'
             else:
                 # z.B. integer oder unsigned integer:
                 # 3 Datentyp float
                 # ToDo: Prüfen!!!
-                f.write(numpy.array(3, dtype="i2").tostring())
+                f.write(np.array(3, dtype="i2").tostring())
                 typecode = '<f4'
             # AnzBezeichnerlisten, was immer das auch ist ???
-            f.write(numpy.array(1, dtype="i2").tostring())
-            f.write(numpy.array(self.ZeitVon, dtype="f4").tostring())  # ZeitVon
-            f.write(numpy.array(self.ZeitBis, dtype="f4").tostring())  # ZeitBis
+            f.write(np.array(1, dtype="i2").tostring())
+            f.write(np.array(self.ZeitVon, dtype="f4").tostring())  # ZeitVon
+            f.write(np.array(self.ZeitBis, dtype="f4").tostring())  # ZeitBis
             # VMAktKennung
-            f.write(numpy.array(self.VMAktKennung, dtype="i4").tostring())
+            f.write(np.array(self.VMAktKennung, dtype="i4").tostring())
             # Unbekannt U als float
-            f.write(numpy.array(self.Faktor, dtype="<f4").tostring())
-            f.write(numpy.array(zones.values).astype("i4").tostring())  # zones
+            f.write(np.array(self.Faktor, dtype="<f4").tostring())
+            f.write(np.array(zones.values).astype("i4").tostring())  # zones
             f.write(self.astype(typecode).flatten().tostring())  # Matrix
 
             f.close()
@@ -317,7 +315,7 @@ class XArraySave(object):
             f.write("$%s, %s\n" % (Ftype, dtypes[str(self.dtype)]))
             if "M" in Ftype:
                 f.write("* Verkehrsmittelkennung:\n %d \n" % self.VMAktKennung)
-            if not "N" in Ftype:
+            if "N" not in Ftype:
                 f.write("* Zeitintervall:\n %s %s \n" % (self.ZeitVon,
                                                          self.ZeitBis))
                 f.write("* Faktor:\n %d \n" % Faktor)
@@ -362,7 +360,7 @@ class XArraySave(object):
                                 row += "\n"
                                 f.write(row)
                                 row = str(self.zones[i])
-                            if self[i, j] <> 0:
+                            if self[i, j] != 0:
                                 row += " %s %s " % (self.zones[j], self[i, j])
                         row += "\n"
                         f.write(row)
@@ -381,9 +379,6 @@ class XArraySave(object):
                         row += "\n"
                         f.write(row)
             else:
-                raise TypeError, "Kann Typ %s nicht schreiben" % type
+                raise TypeError("Kann Typ %s nicht schreiben" % type)
         finally:
             f.close()
-
-
-

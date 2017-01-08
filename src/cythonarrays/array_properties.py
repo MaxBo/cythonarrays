@@ -21,13 +21,17 @@ class _ArrayProperties(object):
         the internal attribute _name
         """
         intern_name = '_%s' % descr.name
+
         def fget(self):
             arr = getattr(self, intern_name)
             return np.array(arr, copy=False).view(dtype=descr.dtype_numpy)
+
         def fset(self, value):
             self.set_array(descr.name, value)
+
         def fdel(self):
             self.set_array(descr.name, np.empty(tuple([0]*descr.ndim)))
+
         fdoc = str(descr)
         prop = property(fget, fset, fdel, fdoc)
         return prop

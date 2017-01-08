@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#------------------------------------------------------------------------------
 # Name:        saveArray
 # Purpose:
 #
@@ -7,14 +6,12 @@
 #
 # Created:     21/09/2011
 # Copyright:   (c) Max Bohnet 2011
-#------------------------------------------------------------------------------
-
-__version__ = 1.0
 
 import os
 import gzip
 import time
 import numpy as np
+
 
 def writeFormattedLine(f, text, length):
     f.write(text.ljust(length) + b"\r\n")
@@ -25,7 +22,6 @@ class SavePTV(object):
     def __init__(self, ds):
         """"""
         self.ds = ds
-
 
     def save2db(self, tableName, connection='hlocalhost',
                 overwrite=True, missings=[99999, np.inf, -np.inf],
@@ -54,8 +50,8 @@ class SavePTV(object):
             print debug messages if true
         """
 
-        #ToDo:
-        #- save several arrays of the same shape
+        # ToDo:
+        #  save several arrays of the same shape
         # into same dbtable with one value column per array
 
         t0 = time.time()
@@ -237,7 +233,7 @@ class SavePTV(object):
             f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
             if "M" in Ftype:
                 f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
-            if not "N" in Ftype:
+            if "N" not in Ftype:
                 f.write("* Zeitintervall:\n {v} {b} \n".format(
                     v=ZeitVon,
                     b=ZeitBis))
@@ -283,7 +279,7 @@ class SavePTV(object):
                 text += (b"%d" % m.shape[n]).ljust(8)
             writeFormattedLine(f, text, 48)
             writeFormattedLine(f, b"% -30s%d" % (b"Anzahl Bezeichnerlisten:",
-                                                anz_bez_listen),
+                                                 anz_bez_listen),
                                38)
             writeFormattedLine(f, b"% -20s%02d:00   %02d:00" % (
                 b"Zeitbereich:",
@@ -333,7 +329,8 @@ class SavePTV(object):
             f.write(np.array(VMAktKennung, dtype="i4").tostring())
             # Unbekannt U als float
             f.write(np.array(Faktor, dtype="<f4").tostring())
-            f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())  # zones
+            # zones
+            f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())
             f.write(m.astype(typecode).flatten().tostring())  # Matrix
 
     def savePSVMatrix(self, fileName, type="CC", maxWidth=1000):
@@ -380,6 +377,3 @@ class SavePTV(object):
                 raise(TypeError, "Kann Typ %s nicht schreiben" % type)
         finally:
             f.close()
-
-
-

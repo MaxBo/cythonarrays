@@ -35,7 +35,7 @@ class ArrayDescriptor(object):
     def __repr__(self):
         txt = 'array {0.name} of dtype {0.dtype}, ndim {0.ndim}'
         if self.shape is not None:
-            txt +=' and shape {0.shape}'
+            txt += ' and shape {0.shape}'
         return txt.format(self)
 
     @staticmethod

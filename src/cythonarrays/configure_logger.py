@@ -9,6 +9,7 @@ class SimLogger(object):
     Singleton Class for the logging
     """
     _instance = None
+
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             cls._instance = super(SimLogger, cls).__new__(
@@ -27,7 +28,7 @@ class SimLogger(object):
 
     def add_package(self, package):
         """add single package to the list of logged packages"""
-        if not package in self.packages:
+        if package not in self.packages:
             self.packages.add(package)
             self.create_logger_for_package(package)
 
@@ -37,9 +38,9 @@ class SimLogger(object):
             self.add_package(package)
 
     def configure(self,
-                 LOG_FOLDER,
-                 scenario,
-                 mode='a'):
+                  LOG_FOLDER,
+                  scenario,
+                  mode='a'):
         """
         configures the file handlers for the logger
 
@@ -111,15 +112,15 @@ class SimLogger(object):
             logger.addHandler(self.fh)
             logger.addHandler(self.fh_debug)
 
-
     @staticmethod
     def get_caller_name(skip=2):
-        """Get a name of a caller in the format module.class.method
+        """
+        Get a name of a caller in the format module.class.method
 
-           `skip` specifies how many levels of stack to skip while getting caller
-           name. skip=1 means "who calls me", skip=2 "who calls my caller" etc.
+        `skip` specifies how many levels of stack to skip while getting caller
+        name. skip=1 means "who calls me", skip=2 "who calls my caller" etc.
 
-           An empty string is returned if skipped levels exceed stack height
+        An empty string is returned if skipped levels exceed stack height
         """
         stack = inspect.stack()
         start = 0 + skip
@@ -136,12 +137,13 @@ class SimLogger(object):
         # detect classname
         if 'self' in parentframe.f_locals:
             # I don't know any way to detect call from the object method
-            # XXX: there seems to be no way to detect static method call - it will
-            #      be just a function call
+            # XXX: there seems to be no way to detect static method call
+            #   - it will be just a function call
             name.append(parentframe.f_locals['self'].__class__.__name__)
         codename = parentframe.f_code.co_name
-        if codename != '<module>' and codename != '__init__':  # top level usually
-            name.append( codename ) # function or a method
+        # top level usually
+        if codename != '<module>' and codename != '__init__':
+            name.append(codename)  # function or a method
         del parentframe
         return ".".join(name)
 
@@ -172,6 +174,7 @@ class SimLogger(object):
         logger.addHandler(logging.NullHandler())
         return logger
 
+
 def get_module_logger(module_name):
     # create Module logger named after the module
     module_logger = logging.getLogger(module_name)
@@ -179,6 +182,7 @@ def get_module_logger(module_name):
     # Application
     module_logger.addHandler(logging.NullHandler())
     return module_logger
+
 
 def get_logger(instance):
     sim_logger = SimLogger()
