@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+import xarray as xr
 
 
-def xr2netcdf(dataset,
-              filepath,
-              mode='w',
-              engine='h5netcdf',
-              compressed=True,
-              complevel=2, ):
+def xr2netcdf(dataset: xr.Dataset,
+              filepath: str,
+              mode: str='w',
+              engine: str='netcdf4',
+              compressed:bool=True,
+              complevel:int=2, ):
     """
     save dataset as netcdf-file to filepath using the given compression level
 
@@ -16,7 +17,7 @@ def xr2netcdf(dataset,
         the xarray-dataset to store
     filepath : str
         the path where the netcdf-file shold be stored
-    engine : str (optional, default=h5netcdf)
+    engine : str (optional, default=netcdf4)
         the engine to use
     compressed : boolen (optional, default=True)
         if False, the data-variables are not compressed
