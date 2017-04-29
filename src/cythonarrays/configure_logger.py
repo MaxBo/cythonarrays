@@ -171,7 +171,8 @@ class SimLogger(object):
             instead of from {package} import xyz)'''.format(package=package))
 
         logger = logging.getLogger(caller_name)
-        logger.addHandler(logging.NullHandler())
+        if not logger.handlers:
+            logger.addHandler(logging.NullHandler())
         return logger
 
 
