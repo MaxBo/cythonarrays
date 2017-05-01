@@ -14,7 +14,7 @@ ext_modnames = ['cythonarrays.array_shapes',
 
 setup(
     name="cythonarrays",
-    version="1.16",
+    version="1.17",
     description="helper functions for cythonarrays",
 
     packages=find_packages('src', exclude=['ez_setup']),
