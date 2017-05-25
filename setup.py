@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import os
 
+version_dict = dict()
+exec(open(os.path.join(os.path.dirname(__file__),
+                       'src',
+                       "cythoninstallhelpers",
+                       '_version.py')).read(),
+     version_dict)
 
 setup(
     name="cythoninstallhelpers",
-    version="1.0",
+    version=version_dict['__version__'],
     description="helper for cython installation",
     classifiers=[
       "Programming Language :: Python",
