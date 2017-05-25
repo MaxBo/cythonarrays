@@ -14,18 +14,28 @@ setup(
     name="cythoninstallhelpers",
     version=version_dict['__version__'],
     description="helper for cython installation",
+    url='https://maxbo.github.io/cythonarrays/',
+    author='Max Bohnet',
+    author_email='bohnet@ggr-planung.de',
     classifiers=[
-      "Programming Language :: Python",
-      "Environment :: Plugins",
-      "Intended Audience :: System Administrators",
-      "License :: Other/Proprietary License",
-      "Natural Language :: English",
-      "Operating System :: OS Independent",
-      "Programming Language :: Python",
-                ],
-    keywords='cython',
-    download_url='',
-    license='other',
+        # How mature is this project? Common values are
+        'Development Status :: 5 - Production/Stable',
+
+        # Indicate who your project is intended for
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+
+        # Pick your license as you wish (should match "license" above)
+         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+
+        # Specify the Python versions you support here. In particular, ensure
+        # that you indicate whether you support Python 2, Python 3 or both.
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Cython',
+
+    ],
+    keywords='cython setuptools',
+
     packages=find_packages('src', exclude=['ez_setup']),
 
     package_dir={'': 'src'},

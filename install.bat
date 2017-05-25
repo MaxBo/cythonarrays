@@ -6,6 +6,7 @@ call conda create -y -n %CONDAENV% python=3.5
 call activate %CONDAENV%
 call conda install -y numpy pandas cython xarray netCDF4 bottleneck
 call conda install -y pytest
+call conda install -y sphinx numpydoc
 
 call cd cythoninstallhelpers
 call python setup.py bdist_wheel
