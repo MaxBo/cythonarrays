@@ -1,0 +1,40 @@
+*.py[co]
+*.pyd
+*.pyxbldc
+*.swp
+*.so
+
+# Packages
+*.egg
+*.egg-info
+*.whl
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+.git
+# Installer logs
+pip-log.txt
+# Unit test / coverage reports
+.coverage
+.tox
+#Translations
+*.mo
+# compiled cython scripts
+*.c
+*.html
+
+#WingIDE Stuff
+*.wpr
+*.wpu
+
+.cache
+.spyder*
+
+# doctrees in documentation
+/docs/_build/doctrees
