@@ -1,0 +1,3 @@
+from cythoninstallhelpers.build_config import (extra_compile_args,
+                                    extra_link_args,
+                                    make_ext,)

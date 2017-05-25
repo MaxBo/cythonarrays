@@ -1,0 +1,27 @@
+$O;D5
+* Von  Bis
+0.00 0.00
+* Faktor
+1.00
+*  
+* Gertz Gutsche Rümenapp Stadtentwicklung und Mobilität GbR Hamburg
+* 08.01.17
+       100        200 28.21510 
+       100        300 25.99090 
+       100        400 14.93333 
+       200        100 25.06854 
+       200        300 7.14193 
+       200        400 23.81557 
+       300        100 25.43824 
+       300        200 6.91070 
+       300        400 30.72626 
+       400        100 20.77479 
+       400        200 18.21108 
+       400        300 29.78619 
+* Netzobjektnamen
+$NAMES
+100 "A-Village"
+200 "X-City"
+300 "ShoppingCity"
+400 "ShoppingEdge"
+ 
