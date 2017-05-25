@@ -1,24 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import numpy as np
-import xarray as xr
-import pandas as pd
 from argparse import ArgumentParser
+import numpy as np
+import pandas as pd
+import xarray as xr
 
 
 class ReadOFormat(xr.Dataset):
     """reads Matrix from a file
     """
-    _target_cols_zones=['zone_no', 'zone_name']
-    _target_cols_matrix=['origins', 'destinations', 'values']
+    _target_cols_zones = ['zone_no', 'zone_name']
+    _target_cols_matrix = ['origins', 'destinations', 'values']
 
     def __init__(self,
                  zonefile,
                  matrixfile,
                  cols_zones=None,
                  cols_matrix=None,
-                 ):
+                ):
         super(ReadOFormat, self).__init__()
         self.read_zones_csv(zonefile, cols_zones)
         self.read_matrix_csv(matrixfile, cols_matrix)
@@ -27,9 +27,7 @@ class ReadOFormat(xr.Dataset):
         """
         """
         target_cols = self._target_cols_matrix
-        dims_matrix = target_cols[:2]
         data_cols = cols_matrix
-        len_pkey = 1
         pkey = target_cols[:2]
 
         da = self.read_file_to_da(data_cols, filename, target_cols, pkey)
@@ -41,15 +39,11 @@ class ReadOFormat(xr.Dataset):
         """
         """
         target_cols = self._target_cols_zones
-        dims_matrix = self._target_cols_matrix[:2]
         data_cols = cols_zones
-        len_pkey = 1
         pkey = target_cols[0]
         col_name = target_cols[1]
 
         da = self.read_file_to_da(data_cols, filename, target_cols, pkey)
-        zone_no = da[pkey]
-        zone_name = da[col_name]
         dims = self._target_cols_zones[:1] + self._target_cols_matrix[:2]
         # set as origins and destinations
         for dim in dims:

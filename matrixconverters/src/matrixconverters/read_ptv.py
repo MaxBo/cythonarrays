@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import numpy as np
-import xarray as xr
 import gzip
 import zlib
 from argparse import ArgumentParser
 from collections import deque
+import numpy as np
+import xarray as xr
 
 
 class ReadPTVMatrix(xr.Dataset):
@@ -33,23 +33,23 @@ class ReadPTVMatrix(xr.Dataset):
         else:
             self.attrs['open'] = open
         with self.openfile(mode='rb') as f:
-            Z = f.readline().strip()
+            line = f.readline().strip()
 
-        if Z.startswith(b"$M"):
+        if line.startswith(b"$M"):
             self.readPTVMatrixM()
-        elif Z.startswith(b"$V"):
+        elif line.startswith(b"$V"):
             self.readPTVMatrixV()
-        elif Z.startswith(b"$O"):
+        elif line.startswith(b"$O"):
             self.readPTVMatrixO()
-        elif Z.startswith(b"$E"):
+        elif line.startswith(b"$E"):
             self.readPTVMatrixE()
-        elif Z.startswith(b"$S"):
+        elif line.startswith(b"$S"):
             self.readPTVMatrixE()
-        elif Z.strip(bytes([3, 0])).startswith(b"$BI"):
+        elif line.strip(bytes([3, 0])).startswith(b"$BI"):
             self.readPTVMatrixBI()
-        elif Z.strip(bytes([3, 0])).startswith(b"$BK"):
+        elif line.strip(bytes([3, 0])).startswith(b"$BK"):
             self.readPTVMatrixBK()
-        elif Z.strip(bytes([3, 0])).startswith(b"$B"):
+        elif line.strip(bytes([3, 0])).startswith(b"$B"):
             self.readPTVMatrixB()
 
         else:
@@ -81,8 +81,8 @@ class ReadPTVMatrix(xr.Dataset):
                 loc[fr, to] = value
 
     def read_header(self, f):
-        Z = f.readline()
-        MatrixTyp = Z.split("$")[-1].split(";")[0]
+        line = f.readline()
+        MatrixTyp = line.split("$")[-1].split(";")[0]
         if "M" in MatrixTyp:
             self.attrs['VMAktKennung'] = self.readWert(f)
 
@@ -92,8 +92,8 @@ class ReadPTVMatrix(xr.Dataset):
             self.attrs['ZeitBis'] = ZeitBis
             self.attrs['Faktor'] = Faktor
 
-        rows, Z = self.read_values_in_o_format_to_list(f)
-        self.read_names_o_format(f, Z)
+        rows, line = self.read_values_in_o_format_to_list(f)
+        self.read_names_o_format(f, line)
         return rows
 
     def openfile(self, mode='r'):
@@ -101,8 +101,8 @@ class ReadPTVMatrix(xr.Dataset):
 
     def readPTVMatrixV(self):
         with self.openfile() as f:
-            Z = f.readline()
-            MatrixTyp = Z.split("$")[-1].split(";")[0]
+            line = f.readline()
+            MatrixTyp = line.split("$")[-1].split(";")[0]
             if not MatrixTyp.startswith("V"):
                 print("Keine Matrix im V-Format!")
                 raise TypeError
@@ -117,7 +117,6 @@ class ReadPTVMatrix(xr.Dataset):
 
             n_zones = self.readWert(f)
             self.create_zones(n_zones)
-            pos = 0
             self.read_values_to_array(f, self.zone_no)
 
             self.create_matrix(n_zones)
@@ -145,11 +144,11 @@ class ReadPTVMatrix(xr.Dataset):
 
     def read_names(self, f, arr):
         """Read the zone names"""
-        Z = f.readline()
-        while Z.startswith("*") or Z == "\n":
-            Z = f.readline()
-        if Z:
-            if Z.upper().startswith('$NAMES'):
+        line = f.readline()
+        while line.startswith("*") or line == "\n":
+            line = f.readline()
+        if line:
+            if line.upper().startswith('$NAMES'):
 
                 line = f.readline().strip()
                 while line:
@@ -159,13 +158,13 @@ class ReadPTVMatrix(xr.Dataset):
                     arr.loc[zone_no] = name
                     line = f.readline().strip()
 
-    def read_names_o_format(self, f, Z):
+    def read_names_o_format(self, f, line):
         """Read the zone names"""
         names = deque()
-        while Z.startswith("*") or Z == "\n":
-            Z = f.readline()
-        if Z:
-            if Z.upper().startswith('$NAMES'):
+        while line.startswith("*") or line == "\n":
+            line = f.readline()
+        if line:
+            if line.upper().startswith('$NAMES'):
 
                 line = f.readline().strip()
                 while line:
@@ -213,15 +212,12 @@ class ReadPTVMatrix(xr.Dataset):
             data_type = np.fromstring(f.read(2), dtype="i2")[0]
             f.seek(1, 1)
             if data_type == 4:
-                data_length = 4
                 dtype = '<f4'
             elif data_type == 5:
-                data_length = 8
                 dtype = '<f8'
             self.create_matrix(n_zones, dtype=dtype)
 
             n_zones2 = np.fromstring(f.read(4), dtype="i4")[0]
-            idx = header + 11 + n_zones * 4
             self.zone_no.data[:] = np.fromstring(
                 f.read(n_zones * 4), dtype="i4")
             self.create_zones(n_zones2, name='zone_no2')
@@ -271,10 +267,8 @@ class ReadPTVMatrix(xr.Dataset):
             n_zones = np.fromstring(f.read(4), dtype="i4")[0]
             data_type = np.fromstring(f.read(2), dtype="i2")[0]
             if data_type == 4:
-                data_length = 4
                 dtype = '<f4'
             elif data_type == 5:
-                data_length = 8
                 dtype = '<f8'
             self.create_zones(n_zones)
             self.create_matrix(n_zones, dtype=dtype)
@@ -332,16 +326,14 @@ class ReadPTVMatrix(xr.Dataset):
                 self.zone_no.data[:] = np.fromstring(
                     f.read(4 * n_zones), dtype='i4')
             self.create_matrix(n_zones, dtype=dtype)
-            StartPosMatrix = header + AnzBezeichnerlisten * (n_zones * 4) + 40
-            EndPosMatrix = StartPosMatrix + AnzFelder * data_length
             arr = np.fromstring(f.read(AnzFelder * data_length), dtype=dtype)
             self.matrix.data[:] = arr.reshape(shape)
 
     def readWert(self, f):
-        Z = f.readline()
-        while Z.startswith("*") or Z == "\n":
-            Z = f.readline()
-        Wert = int(Z.strip())
+        line = f.readline()
+        while line.startswith("*") or line == "\n":
+            line = f.readline()
+        Wert = int(line.strip())
         return Wert
 
     def read_values_to_array(self, f, arr, sep=' '):
@@ -350,10 +342,10 @@ class ReadPTVMatrix(xr.Dataset):
         n_total = len(flat_arr)
         pos_from = 0
         while pos_from < n_total:
-            Z = f.readline()
-            while Z.startswith("*"):
-                Z = f.readline()
-            row = np.fromstring(Z, sep=sep, dtype=arr.dtype)
+            line = f.readline()
+            while line.startswith("*"):
+                line = f.readline()
+            row = np.fromstring(line, sep=sep, dtype=arr.dtype)
             pos_to = pos_from + len(row)
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
@@ -361,23 +353,23 @@ class ReadPTVMatrix(xr.Dataset):
     def read_values_in_o_format_to_list(self, f):
         """read values to a numpy array at pos x"""
         rows = deque()
-        for Z in f:
-            if Z.startswith("*") or Z == '\n':
+        for line in f:
+            if line.startswith("*") or line == '\n':
                 continue
-            if Z.startswith('$'):
-                return rows, Z
-            row = Z.strip()
+            if line.startswith('$'):
+                return rows, line
+            row = line.strip()
             rows.append(row)
-        return rows, Z
+        return rows, line
 
     def readWerte(self, f, AnzWerte):
         Werte = []
         WerteGefunden = 0
         while WerteGefunden < AnzWerte:
-            Z = f.readline()
-            while Z.startswith("*"):
-                Z = f.readline()
-            Werte += map(lambda x: float(x), Z.strip().split())
+            line = f.readline()
+            while line.startswith("*"):
+                line = f.readline()
+            Werte += map(lambda x: float(x), line.strip().split())
             WerteGefunden = len(Werte)
         return Werte
 

@@ -10,16 +10,15 @@ from cythoninstallhelpers.get_version import get_version
 from cythoninstallhelpers.make_cython_extensions import make_extensions
 
 
-ext_modnames = ['cythonarrays.array_shapes',
-                ]
+ext_modnames = []
 
-package_name = "cythonarrays"
+package_name = "matrixconverters"
 version = get_version(package_name, __file__)
 
 setup(
     name=package_name,
     version=version,
-    description="helper functions for cythonarrays",
+    description="functions to read and write PTV Matrix Formats",
 
     packages=find_packages('src', exclude=['ez_setup']),
     package_dir={'': 'src'},
@@ -41,9 +40,9 @@ setup(
     tests_require=['pytest', ],
 
     install_requires=[
-        'cythoninstallhelpers>=1.1',
-        'cython',
-        'numpy',
+        'numpy>1.12',
+        'pandas',
+        'xarray',
     ],
     ext_modules=make_extensions(ext_modnames),
 )
