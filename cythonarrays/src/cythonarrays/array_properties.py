@@ -85,7 +85,7 @@ class _ArrayProperties(object):
 
         Examples
         --------
-          >>> arr = XArray([5, 7, 5, 8], dtype='u1')
+          >>> arr = np.array([5, 7, 5, 8], dtype='u1')
           >>> shape = ('n_agents', )
           >>> model.n_agents
           4
@@ -101,8 +101,7 @@ class _ArrayProperties(object):
         if shape is not None:
             descr.shape = shape
             self.check_ndims(descr)
-        arr2 = descr.validate_array(value, self)
-        arr = arr2
+        arr = descr.validate_array(value, self)
         setattr(self, intern_name, arr)
 
     def reset_array(self, name):

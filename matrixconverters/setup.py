@@ -40,7 +40,7 @@ setup(
     tests_require=['pytest', ],
 
     install_requires=[
-        'numpy>1.12',
+        'numpy',
         'pandas',
         'xarray',
     ],
