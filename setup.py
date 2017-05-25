@@ -6,15 +6,19 @@ Created on Fri Jun 10 20:33:08 2016
 """
 
 from setuptools import setup, find_packages
+from cythoninstallhelpers.get_version import get_version
 from cythoninstallhelpers.make_cython_extensions import make_extensions
 
 
 ext_modnames = ['cythonarrays.array_shapes',
                 ]
 
+package_name = "cythonarrays"
+version = get_version(package_name, __file__)
+
 setup(
-    name="cythonarrays",
-    version="1.17",
+    name=package_name,
+    version=version,
     description="helper functions for cythonarrays",
 
     packages=find_packages('src', exclude=['ez_setup']),
@@ -37,7 +41,7 @@ setup(
     tests_require=['pytest', ],
 
     install_requires=[
-        'cythoninstallhelpers'
+        'cythoninstallhelpers>=1.1'
     ],
     ext_modules=make_extensions(ext_modnames),
 )
