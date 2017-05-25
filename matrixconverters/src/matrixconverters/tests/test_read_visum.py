@@ -8,8 +8,8 @@ Created on Fri Jun 10 21:00:21 2016
 import pytest
 import os
 import numpy as np
-from cythonarrays.converters.read_ptv import ReadPTVMatrix
-from cythonarrays.converters.save_ptv import SavePTV
+from matrixconverters.read_ptv import ReadPTVMatrix
+from matrixconverters.save_ptv import SavePTV
 
 
 @pytest.fixture(scope='class')
