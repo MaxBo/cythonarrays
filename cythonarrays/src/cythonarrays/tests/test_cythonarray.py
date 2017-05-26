@@ -5,6 +5,7 @@ Created on Fri Jun 10 21:00:21 2016
 @author: MaxBohnet
 """
 
+import tempfile
 import numpy as np
 import pytest
 
@@ -54,59 +55,63 @@ def example(km_ij, jobs, params_groups, persons_gi):
     """
     different values for home zone
     """
-    n_groups, n_zones = persons_gi.shape
-    example = Example(n_groups, n_zones)
+    groups, zones = persons_gi.shape
+    example = Example(groups, zones)
     example.set_array('km_ij', km_ij)
     example.set_array('jobs_j', jobs)
     example.set_array('param_g', params_groups)
     example.set_array('persons_gi', persons_gi)
     return example
 
+@pytest.fixture()
+def tempfile_h5():
+    return tempfile.mktemp(suffix='h5')
+
 
 class Test01_ExampleCDefClass:
     """Test the Example CDefClass"""
     def test_01_test_init_array(self, persons_gi):
         """Test the Example CDefClass creation"""
-        n_groups, n_zones = persons_gi.shape
-        example = Example(n_groups, n_zones)
+        groups, zones = persons_gi.shape
+        example = Example(groups, zones)
 
         # set correct shape
-        values = np.arange(n_zones)
-        example.set_array('jobs_j', np.arange((n_zones)))
+        values = np.arange(zones)
+        example.set_array('jobs_j', np.arange((zones)))
         np.testing.assert_array_equal(example.jobs_j, values)
         np.testing.assert_array_equal(example._jobs_j, values)
 
         # init the array with a default value
         example.init_array('jobs_j', default=0)
-        np.testing.assert_array_equal(example.jobs_j, np.zeros(n_zones))
+        np.testing.assert_array_equal(example.jobs_j, np.zeros(zones))
 
         # init the array with the other default value
         example.init_array('jobs_j', default=2)
-        np.testing.assert_array_equal(example.jobs_j, np.full(n_zones, 2))
+        np.testing.assert_array_equal(example.jobs_j, np.full(zones, 2))
 
         # new default value will be stored
         example.reset_array('jobs_j')
-        np.testing.assert_array_equal(example.jobs_j, np.full(n_zones, 2))
+        np.testing.assert_array_equal(example.jobs_j, np.full(zones, 2))
 
         # set new shape, keep old default value
-        example.init_array('jobs_j', shape='n_groups')
-        np.testing.assert_array_equal(example.jobs_j, np.full(n_groups, 2))
+        example.init_array('jobs_j', shape='groups')
+        np.testing.assert_array_equal(example.jobs_j, np.full(groups, 2))
 
     def test_02_test_shape(self, persons_gi):
         """
         Test if the shapes of array are controlled correctly
         """
-        n_groups, n_zones = persons_gi.shape
-        example = Example(n_groups, n_zones)
+        groups, zones = persons_gi.shape
+        example = Example(groups, zones)
 
-        # jobs_j should have the shape (n_zones)
+        # jobs_j should have the shape (zones)
 
         # correct shape
-        arr = np.ones((n_zones))
+        arr = np.ones((zones))
         example.jobs_j = arr
 
         # try to set values with the wrong shape
-        arr = np.ones((n_groups))
+        arr = np.ones((groups))
         message = """
 Arrays are not equal
 jobs_j: shape soll: [3], ist: (2,)
@@ -118,20 +123,20 @@ jobs_j: shape soll: [3], ist: (2,)
                            message=message):
             example.jobs_j = arr
 
-        # change n_zones and try again
-        example.n_zones = n_groups
+        # change zones and try again
+        example.destinations = groups
         # now the array fits to the shape defined
         example.jobs_j = arr
 
     def test_03_test_dimensions(self, persons_gi):
         """Test the dimensions"""
-        n_groups, n_zones = persons_gi.shape
-        example = Example(n_groups, n_zones)
+        groups, zones = persons_gi.shape
+        example = Example(groups, zones)
 
         # try to set shape with the wrong number of dimensions
         with pytest.raises(ValueError,
-                           message="builtins.ValueError: 1 Dimensions required, shape ['n_groups', 'n_zones'] has 2 dimensions"):
-            example.init_array('jobs_j', shape='n_groups, n_zones')
+                           message="builtins.ValueError: 1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"):
+            example.init_array('jobs_j', shape='groups, zones')
 
         # access a non-initialized array
         target = np.empty((0, 0))
@@ -191,8 +196,8 @@ jobs_j: shape soll: [3], ist: (2,)
 
     def test_04_test_dtype(self, persons_gi):
         """Test the dimensions"""
-        n_groups, n_zones = persons_gi.shape
-        example = Example(n_groups, n_zones)
+        groups, zones = persons_gi.shape
+        example = Example(groups, zones)
 
         # dtype of jobs_j: f8
         # dtype of not_initialized_ij: i4
@@ -236,6 +241,37 @@ jobs_j: shape soll: [3], ist: (2,)
         total_trips_actual = example.trips_ij.sum()
         np.testing.assert_almost_equal(total_trips_target, total_trips_actual)
 
+    def test_11_dataset(self, example):
+        """Test the creation of an xarrays Dataset linked to the Cythonclass"""
+        example.zonenumbers_i = np.array([100, 200, 300])
+        example.groupnames_g = np.array(['Female', 'Male'], dtype='O')
+        example.create_ds()
+        print(example.ds)
+
+    def test_20_save_and_read_ds(self, example, tempfile_h5):
+        """Test that saving and re-reading the data works"""
+        example.zonenumbers_i = np.array([100, 200, 300])
+        example.groupnames_g = np.array(['Female', 'Male'], dtype='O')
+        example.create_ds()
+        example.save_dataset_to_netcdf(tempfile_h5)
+
+        # read the data into new class
+        new_example = Example.from_netcdf(tempfile_h5)
+        # assert that the data match
+        np.testing.assert_array_equal(example.jobs_j, new_example.jobs_j)
+        np.testing.assert_array_equal(example.groupnames_g,
+                                      new_example.groupnames_g)
+
+        # assert, that the array are correctly linked to the Dataset
+        new_example.calc_model()
+        old_value = new_example.ds.trips_ij.sum()
+        # calculate the model with 77 persons more
+        new_example.persons_gi[1, 0] += 77
+        new_example.calc_model()
+        new_value = new_example.ds.trips_ij.sum()
+        np.testing.assert_allclose(old_value + 77, new_value)
+
+        print(new_example.ds)
 
 if __name__ == '__main__':
     pytest.main()

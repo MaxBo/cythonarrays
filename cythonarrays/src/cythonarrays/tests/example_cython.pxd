@@ -9,11 +9,14 @@ from cythonarrays.array_shapes import ArrayShapes
 cdef class _Example(ArrayShapes):
     """
     Cython CDefClass for Example model
-    with n_groups and n_zones
+    with coordinates groups and zones
     """
-    cdef public long32 n_groups
-    cdef public long32 n_zones
+    cdef public long32 groups
+    cdef public long32 origins
+    cdef public long32 destinations
     cdef public char n_threads
+
+    cdef public ARRAY_1D_i4 _zonenumbers_i
 
     # parameter of groups
     cdef public ARRAY_1D_d _param_g

@@ -4,6 +4,8 @@
 #cython: cdivision=True
 #cython: embedsignature=True
 
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import numpy as np
 cimport numpy as np
 oldsettings = np.seterr(divide='ignore')
@@ -146,6 +148,19 @@ cdef class ArrayShapes(object):
         """
         according to the error message received the number of dimensions
         is changed and a new array returned
+        Parameters
+        ----------
+        msg : str
+            the message raised by the Exeption
+        shape : tuple
+            the shape of the array to create
+        np_dtype : str
+            the numpy-dtype of the array to create
+
+        Returns
+        -------
+        arr : np.array
+            the data with the changed datatype
         """
         cndim = int(msg.split("expected ")[1].split(", got")[0])
         shape = tuple([0] * cndim)
@@ -156,6 +171,22 @@ cdef class ArrayShapes(object):
         """
         according to the error message received the dtype is changed
         and a new array returned
+
+        Parameters
+        ----------
+        msg : str
+            the message raised by the Exeption
+        shape : tuple
+            the shape of the array to create
+        default : number
+            the default value to fill the array
+
+        Returns
+        -------
+        arr : np.array
+            the data with the changed datatype
+        np_dtype : str
+            the numpy datatype
         """
         cdtype = msg.split("expected '")[1].split("' but got")[0]
         np_dtype = typedict[cdtype]

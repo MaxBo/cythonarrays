@@ -19,7 +19,7 @@ from libc.math cimport exp, log
 cdef class _Example(ArrayShapes):
     """
     Cython CDefClass for Example model
-    with n_groups and n_zones
+    with coordinates groups and zones
     """
 
     def __cinit__(self, *args, **kwargs):
@@ -39,7 +39,7 @@ cdef class _Example(ArrayShapes):
         with nogil, parallel(num_threads=self.n_threads):
             t = threadid()
             # loop over calibration groups
-            for g in prange(self.n_groups, schedule='guided'):
+            for g in prange(self.groups, schedule='guided'):
                 with gil:
                     self.logger.info('calculate group {}'.format(g))
                 # loop over home zones
@@ -52,7 +52,6 @@ cdef class _Example(ArrayShapes):
         cdef double weight = exp(param * minutes) * jobs
         return weight
 
-
     @cython.initializedcheck(False)
     cdef ARRAY_1D_d _calc_p_destination(self,
                                         long32 g) nogil:
@@ -61,19 +60,19 @@ cdef class _Example(ArrayShapes):
         cdef long32 i, j
         cdef ARRAY_1D_d weights_j
         with gil:
-            weights_j = np.empty((self.n_zones), 'd')
+            weights_j = np.empty((self.destinations), 'd')
         param = self._param_g[g]
-        for i in range(self.n_zones):
+        for i in range(self.origins):
             persons = self._persons_gi[g, i]
             total_weight = 0
-            for j in range(self.n_zones):
+            for j in range(self.destinations):
                 jobs = self._jobs_j[j]
                 minutes = self._km_ij[i, j]
                 weight = self._calc_weight_destination(param, minutes, jobs)
                 weights_j[j] = weight
                 total_weight += weight
             factor = persons / total_weight
-            for j in range(self.n_zones):
+            for j in range(self.destinations):
                 self._trips_ij[i, j] += factor * weights_j[j]
         return weights_j
 
