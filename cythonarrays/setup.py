@@ -65,6 +65,7 @@ setup(
         'cythoninstallhelpers>=1.1',
         'cython',
         'numpy',
+        'xarray',
     ],
     ext_modules=make_extensions(ext_modnames),
 )

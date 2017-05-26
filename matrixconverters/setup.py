@@ -64,6 +64,7 @@ setup(
         'numpy',
         'pandas',
         'xarray',
+        'netCDF4',
     ],
     ext_modules=make_extensions(ext_modnames),
 )

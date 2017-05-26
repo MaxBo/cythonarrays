@@ -45,8 +45,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Elan'
-copyright = u'2013, Max Bohnet'
+project = u'Cythonarrays'
+copyright = u'2017, Gertz Gutsche Rümenapp'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -69,17 +69,18 @@ release = '1.0.0'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', r'**\tests',
+exclude_patterns = ['_build',
+                    #r'**\tests',
                     '**/config.py']
 
 autodoc_member_order = 'groupwise'
 #autoclass_content = 'both'
-#autodoc_default_flags = ['members', 'undoc-members', 'special-members', 'inherited-members', 'show-inheritance']
 autodoc_default_flags = ['members',
                          'undoc-members',
                          'show-inheritance',
-                         #'private-members',
-                         'inherited-members',
+                         'private-members',
+                         #'special-members',
+                         #'inherited-members',
                          ]
 
 autodoc_docstring_signature = True
