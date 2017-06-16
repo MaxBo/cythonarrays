@@ -1,5 +1,5 @@
-matrixconverters\.save\_ptv module
-==================================
+matrixconverters.save_ptv module
+================================
 
 .. automodule:: matrixconverters.save_ptv
     :members:

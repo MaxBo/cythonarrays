@@ -1,5 +1,5 @@
-matrixconverters\.read\_csv module
-==================================
+matrixconverters.read_csv module
+================================
 
 .. automodule:: matrixconverters.read_csv
     :members:

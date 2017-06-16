@@ -1,5 +1,5 @@
-cythonarrays\.numpy\_types module
-=================================
+cythonarrays.numpy_types module
+===============================
 
 .. automodule:: cythonarrays.numpy_types
     :members:

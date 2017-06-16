@@ -1,5 +1,37 @@
-How to work with Cython CDef-Classes
-====================================
+Purpose of Cythonarrays
+=======================
+
+Cython is a great tool to write Code at C-Speed.
+
+Numpy is a great tool to work with arrays.
+
+xarray is a great package to work with a set of arrays with named dimensions.
+
+The purpose of the cythonarrays package is to make writing cdef-Classes in cython easyer, safer and more convenient by linking to numpy and xarray.
+
+It consists of the following components:
+
+cythoninstallhelpers
+--------------------
+
+this package provides some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
+It includes:
+
+* build_config.py : ensure that numpy and openmp is correctly linked in the cython file by using a .pyxbld-file 
+												 
+* make_cython_extensions.py : use make_extensions(list_of_extention_module_names) in the setup.py to define ext_modules
+
+* get_version.py : import the version number from a _version.py file with
+
+cythonarrays
+------------
+this package provides base classes for cdef-Cython-Classes.
+
+**ToDo**
+
+
+How to work with Cythonarrays CDef-Classes
+==========================================
 
 
 link numpy and openmp sources
@@ -73,15 +105,16 @@ A comfortable way to work with numpy arrays in cdef classes is the following:
 
 To facilitate this, the Cython module array_shapes.pyx and the Python moduls array_types have been written.
 
-Let your Cython class inherit from _ArrayShapes.
-
+Let your Cython class inherit from ArrayShapes.
+     from cythonarrays.array_shapes cimport ArrayShapes
+     from cythonarrays.array_shapes import ArrayShapes
 import the numpy array types::
 
-     from simcommon.matrixio.numpy_types cimport *
+     from cythonarrays.numpy_types cimport *
 
 specify all arrays that you need in the mymodule_cython.pxd-file with a leading underscore::
 
-  cdef class _MyCythonClass(_ArrayShapes):
+  cdef class _Example(ArrayShapes):
       cdef public ARRAY_2D_f _myfloatarr
       cdef public ARRAY_3D_i4 _myintarr
       cdef public ARRAY_1D_d _mydoublevector
@@ -91,7 +124,7 @@ specify all arrays that you need in the mymodule_cython.pxd-file with a leading 
 
 In the mymodule_cython.pyx-file, add a __cinit__ method::
 
-  cdef class _MyCythonClass(_ArrayShapes):
+  cdef class _MyCythonClass(ArrayShapes):
     def __cinit__(self, *args, **kwargs):
         """init the file"""
         for cls in self.__class__.__mro__:
@@ -105,7 +138,7 @@ Create a wrapper Python class in a python module mymodule.py, that inherits from
   import pyximport
   pyximport.install()
   from mymodule_cython import _MyCythonClass
-  from simcommon.array_descriptors import _ArrayProperties
+  from cythonarrays.array_properties import _ArrayProperties
   
   class MyClass(_MyCythonClass, _ArrayProperties):
       def __init__(self, n_rows, n_cols, n_blocks, *args, **kwargs):
@@ -141,7 +174,7 @@ The Data is accessible form Python via::
   >>> intarr.shape
   (6, 4, 5)
   >>> intarr[2, 2:4, 1]
-  xarray([-1, -1])
+  array([-1, -1])
   >>> intarr[0] *= 2
   
 and from within a cython function::
@@ -159,10 +192,10 @@ and from within a cython function::
            
   >>> myinstance.sum_mult_by_block()
   >>> myinstance._mydoublevector
-  xarray([-40., -20., -20., -20., -20., -20.])
+  array([-40., -20., -20., -20., -20., -20.])
   
 
-You could define an Array within a cdef function::
+You can define an Array within a cdef function::
 
   cdef class _MyCythonClass(_ArrayShapes):
     cpdef sum_mult_by_block(self):
@@ -176,28 +209,46 @@ You could define an Array within a cdef function::
                    res += self._myintarr[block, row, col] * self._myfloatarr[row, col]
            vec[block] = res
            
-but don't do that in a subfunction, that is called many times, because this a costly operation.
+but don't do that in a subfunction, that is called many times, because assigning memory to the variable *vec* a costly operation.
 
 
-Subclassing of Cython cdef classes
-----------------------------------
-Don't use::
+Link Cythonarrays-Class to xarray-Dataset
+=================================
 
-  from extern import XXX
+You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_ which infers the dimensions, coordinates, and data variables from the cdef-class.
+
+  >>> example = Example()
+  >>> example.create_ds()
+  >>> print(example.ds)
+  <xarray.Dataset>
+  Dimensions:             (destinations: 3, dim_0: 0, dim_1: 0, groups: 2, origins: 3)
+  Coordinates:
+    * destinations        (destinations) int32 100 200 300
+    * groups              (groups) object 'Female' 'Male'
+    * origins             (origins) int32 100 200 300
+  Dimensions without coordinates: dim_0, dim_1
+  Data variables:
+      param_g             (groups) float64 -0.2 -0.1
+      trips_ij            (origins, destinations) float64 29.02 31.86 39.12 ...
+      groupnames_g        (groups) object 'Female' 'Male'
+      not_initialized_ij  (dim_0, dim_1) int32 
+      persons_gi          (groups, origins) float64 100.0 0.0 200.0 0.0 250.0 50.0
+      zonenumbers_i       (origins) int32 100 200 300
+      jobs_j              (destinations) float64 100.0 200.0 300.0
+      km_ij               (origins, destinations) float64 1.0 4.0 5.0 2.0 1.0 ...
+
+xarray-Dataset is linked to cython class
+----------------------------------------
+
+The Data variables of the xarray-Dataset share the same memory with the attributes of the cdef-Cython-Class.
+So when a cdef function modifies a value  in example._trips_ij
+
+  >>> self._trips_ij[1, 2] = 99
   
-But rather::
+then the value is changed directly in the xarray-Dataset
 
-  from libc.math cimport exp, log
- 
-
-  from mymodule_cython cimport _MyCythonClass
-  cdef class _MyCythonSubClass(_MyCythonClass):
-  def __cinit__(self, *args, **kwargs):
-      """init the file"""
-      for cls in self.__class__.__mro__:
-          self.search_memview(cls)
- 
-
+  >>> print(self.ds.trips_ij.values[1, 2])
+  99.0
 
 
 

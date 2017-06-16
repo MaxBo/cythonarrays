@@ -63,6 +63,7 @@ def example(km_ij, jobs, params_groups, persons_gi):
     example.set_array('persons_gi', persons_gi)
     return example
 
+
 @pytest.fixture()
 def tempfile_h5():
     return tempfile.mktemp(suffix='h5')
@@ -134,8 +135,9 @@ jobs_j: shape soll: [3], ist: (2,)
         example = Example(groups, zones)
 
         # try to set shape with the wrong number of dimensions
+        msg = "builtins.ValueError: 1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"
         with pytest.raises(ValueError,
-                           message="builtins.ValueError: 1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"):
+                           message=msg):
             example.init_array('jobs_j', shape='groups, zones')
 
         # access a non-initialized array
@@ -159,7 +161,6 @@ jobs_j: shape soll: [3], ist: (2,)
         np.testing.assert_array_equal(example.not_initialized_ij, target)
         # as this is a view on the input-data, it will be changed there, too
         np.testing.assert_array_equal(a[1], 99)
-
 
         # the right number of dimensions should be fine
         c = np.array([[0, 1],
@@ -231,7 +232,6 @@ jobs_j: shape soll: [3], ist: (2,)
         arr_i4[1, 2] = -1
         # the data in not_initialized_ij changes
         assert example.not_initialized_ij[1, 2] == -1
-
 
     def test_10_test_model(self, example):
         """Test the Example CDefClass model"""

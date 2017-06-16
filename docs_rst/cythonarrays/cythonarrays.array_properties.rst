@@ -1,5 +1,5 @@
-cythonarrays\.array\_properties module
-======================================
+cythonarrays.array_properties module
+====================================
 
 .. automodule:: cythonarrays.array_properties
     :members:

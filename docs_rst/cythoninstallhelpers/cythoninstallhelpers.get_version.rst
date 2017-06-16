@@ -1,5 +1,5 @@
-cythoninstallhelpers\.get\_version module
-=========================================
+cythoninstallhelpers.get_version module
+=======================================
 
 .. automodule:: cythoninstallhelpers.get_version
     :members:

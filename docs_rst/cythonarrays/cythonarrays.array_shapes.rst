@@ -1,5 +1,5 @@
-cythonarrays\.array\_shapes module
-==================================
+cythonarrays.array_shapes module
+================================
 
 .. automodule:: cythonarrays.array_shapes
     :members:

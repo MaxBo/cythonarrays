@@ -1,5 +1,5 @@
-cythonarrays\.array\_descriptors module
-=======================================
+cythonarrays.array_descriptors module
+=====================================
 
 .. automodule:: cythonarrays.array_descriptors
     :members:

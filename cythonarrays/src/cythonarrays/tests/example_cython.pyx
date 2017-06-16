@@ -55,7 +55,7 @@ cdef class _Example(ArrayShapes):
     @cython.initializedcheck(False)
     cdef ARRAY_1D_d _calc_p_destination(self,
                                         long32 g) nogil:
-        """abc"""
+        """Calc the destination choice probability for group g"""
         cdef double param, minutes, persons, jobs, weight, total_weight
         cdef long32 i, j
         cdef ARRAY_1D_d weights_j
@@ -77,5 +77,18 @@ cdef class _Example(ArrayShapes):
         return weights_j
 
     def calc_p_destination(self, g):
+        """
+        Calc the destination choice probability for group g
+
+        Parameters
+        ----------
+        g : int
+            the group number
+
+        Returns
+        -------
+        weights : np.array
+            array with the weights for each zone
+        """
         return self._calc_p_destination(g)
 
