@@ -36,7 +36,7 @@ cdef class ArrayShapes(object):
             raise NotImplementedError(msg)
 
 
-        # super class has to be called even if the super clas of ArrayShapes
+        # super class has to be called even if the super class of ArrayShapes
         # is only `object'`
         super(ArrayShapes, self).__init__(*args, **kwargs)
         # set NAN-Values
