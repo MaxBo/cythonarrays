@@ -177,7 +177,7 @@ class SimLogger(object):
 
 
 def get_module_logger(module_name):
-    # create Module logger named after the module
+    """create Module logger named after the module"""
     module_logger = logging.getLogger(module_name)
     # Add a NullHandler for the case if no logging is configured by the
     # Application
@@ -186,6 +186,20 @@ def get_module_logger(module_name):
 
 
 def get_logger(instance):
+    """
+    for the instance, get the package,
+    add the package to the list of loggers,
+    and return the logger for the instance
+
+    Parameter
+    ---------
+    instance : object
+
+    Returns
+    -------
+    logger : logger-instace
+
+    """
     sim_logger = SimLogger()
     if hasattr(instance, '__module__'):
         sim_logger.add_package(instance.__module__.split('.')[0])

@@ -12,6 +12,7 @@ Description
    :maxdepth: 3
 
 	Description <description/cython_models>
+	Validation <description/validation>
 
 =================================
 
