@@ -76,7 +76,7 @@ class ArrayDescriptor(object):
         """
         msg = '%s: got no np.ndarray , but %s' % (self.name, arr.__class__)
         assert isinstance(arr, np.ndarray), msg
-        msg = '%s: ndim soll: %s, ist: %s' % (self.name, self.ndim, arr.ndim)
+        msg = '%s: ndim target: %s, actual: %s' % (self.name, self.ndim, arr.ndim)
         # if ndim does not match
         try:
             assert self.ndim == arr.ndim, msg
@@ -88,7 +88,7 @@ class ArrayDescriptor(object):
                 raise err
         if self.shape is not None:
             shape = self.get_shape(instance)
-            msg = '%s: shape soll: %s, ist: %s' % (self.name, shape, arr.shape)
+            msg = '%s: shape target: %s, actual: %s' % (self.name, shape, arr.shape)
             assert_array_equal(arr.shape, shape, msg)
 
         # convert bool array to i1 with view instead of astype

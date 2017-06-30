@@ -88,15 +88,18 @@ class Test01_ExampleCDefClass:
 
         # init the array with the other default value
         example.init_array('jobs_j', default=2)
-        np.testing.assert_array_equal(example.jobs_j, np.full(zones, 2))
+        np.testing.assert_array_equal(example.jobs_j,
+                                      np.full(zones, 2, dtype='d'))
 
         # new default value will be stored
         example.reset_array('jobs_j')
-        np.testing.assert_array_equal(example.jobs_j, np.full(zones, 2))
+        np.testing.assert_array_equal(example.jobs_j,
+                                      np.full(zones, 2, dtype='d'))
 
         # set new shape, keep old default value
         example.init_array('jobs_j', shape='groups')
-        np.testing.assert_array_equal(example.jobs_j, np.full(groups, 2))
+        np.testing.assert_array_equal(example.jobs_j,
+                                      np.full(groups, 2, dtype='d'))
 
     def test_02_test_shape(self, persons_gi):
         """
@@ -115,7 +118,7 @@ class Test01_ExampleCDefClass:
         arr = np.ones((groups))
         message = """
 Arrays are not equal
-jobs_j: shape soll: [3], ist: (2,)
+jobs_j: shape target: [3], actual: (2,)
 (mismatch 100.0%)
  x: array([2])
  y: array([3])
@@ -175,7 +178,7 @@ jobs_j: shape soll: [3], ist: (2,)
                       [[4, 5],
                        [6, 7]]])
         with pytest.raises(AssertionError,
-                           message="not_initialized_ij: ndim soll: 2, ist: 3"):
+                           message="not_initialized_ij: ndim target: 2, actual: 3"):
             example.not_initialized_ij = e
 
         # when the dimensions can be reduced to the target dimensions,
@@ -223,7 +226,7 @@ jobs_j: shape soll: [3], ist: (2,)
         # the data in jobs_j stays untouched
         assert example.jobs_j[1] == 3
 
-        # test if not_initialized_ij is really an array of double precision
+        # test if not_initialized_ij is really an array of 32bit integer
         arr_i4 = np.array([[2, 3, 4], [5, 6, 7]], dtype='i4')
         example.not_initialized_ij = arr_i4
         assert example.not_initialized_ij.dtype == np.dtype('i4')
