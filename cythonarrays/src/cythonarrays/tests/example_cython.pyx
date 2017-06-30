@@ -5,15 +5,12 @@
 #cython: embedsignature=True
 
 cimport cython
-cimport numpy as np
 import numpy as np
 
 from cython.parallel import prange, threadid, parallel
 from cythonarrays.numpy_types cimport *
-
 from cythonarrays.array_shapes cimport ArrayShapes
-from cythonarrays.array_shapes import ArrayShapes
-from libc.math cimport exp, log
+from libc.math cimport exp
 
 
 cdef class _Example(ArrayShapes):
@@ -22,27 +19,21 @@ cdef class _Example(ArrayShapes):
     with coordinates groups and zones
     """
 
-    def __cinit__(self, *args, **kwargs):
-        """init the file"""
-        for cls in self.__class__.__mro__:
-            self._search_memview(cls)
-
     @cython.initializedcheck(False)
     cpdef char calc_model(self) except -1:
         """
         Calc the daily trips for all groups and zones
         """
-        cdef char t, r
-        cdef long32 g, h
-        cdef double tours, linking_trips
+        cdef char t
+        cdef long32 g
         self.reset_array('trips_ij')
         with nogil, parallel(num_threads=self.n_threads):
             t = threadid()
-            # loop over calibration groups
+            # loop over groups
             for g in prange(self.groups, schedule='guided'):
                 with gil:
                     self.logger.info('calculate group {}'.format(g))
-                # loop over home zones
+                # calc destination choice model for group g
                 self._calc_p_destination(g)
 
     @cython.initializedcheck(False)
@@ -53,8 +44,7 @@ cdef class _Example(ArrayShapes):
         return weight
 
     @cython.initializedcheck(False)
-    cdef ARRAY_1D_d _calc_p_destination(self,
-                                        long32 g) nogil:
+    cdef ARRAY_1D_d _calc_p_destination(self, long32 g) nogil:
         """Calc the destination choice probability for group g"""
         cdef double param, minutes, persons, jobs, weight, total_weight
         cdef long32 i, j
