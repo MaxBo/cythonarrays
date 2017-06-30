@@ -4,13 +4,13 @@
 #cython: cdivision=True
 #cython: embedsignature=True
 
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
+
 import numpy as np
 cimport numpy as np
 oldsettings = np.seterr(divide='ignore')
 
 from .numpy_types import typedict
+from .numpy_types cimport np_floating
 from .array_descriptors import ArrayDescriptor
 
 from .configure_logger import get_logger
@@ -19,12 +19,18 @@ cimport cython
 cdef extern from "numpy/npy_math.h":
     bint npy_isnan(double x) nogil
 
+
 cdef class ArrayShapes(object):
     """
     Base Class for a Cython cdef class which helps to handle
     memoryviews better
     """
     dtypes = {}
+
+    def __cinit__(self, *args, **kwargs):
+        """init the file"""
+        for cls in self.__class__.__mro__:
+            self._search_memview(cls)
 
     def __init__(self, *args, **kwargs):
         """
@@ -51,11 +57,7 @@ cdef class ArrayShapes(object):
         # create Class logger
         self.logger = get_logger(self)
 
-    cdef public char isnan_f(self, float x) nogil:
-        """check for nan"""
-        return npy_isnan(x)
-
-    cdef public char isnan_d(self, double x) nogil:
+    cdef public char isnan(self, np_floating x) nogil:
         """check for nan"""
         return npy_isnan(x)
 

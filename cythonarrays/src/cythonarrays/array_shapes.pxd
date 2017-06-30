@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 cimport numpy as np
+from .numpy_types cimport np_floating
+
 cdef class ArrayShapes(object):
     cdef public float NAN_f
     cdef public float INF_f
@@ -9,7 +11,6 @@ cdef class ArrayShapes(object):
     cdef public double INF_d
     cdef public double NINF_d
 
-    cdef public char isnan_f(self, float) nogil
-    cdef public char isnan_d(self, double) nogil
+    cdef public char isnan(self, np_floating) nogil
 
     cpdef _search_memview(self, cls)
