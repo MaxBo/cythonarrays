@@ -56,7 +56,7 @@ install:
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     - cmd: conda info
-    - cmd: conda create -n test-environment python=%PYTHON_VERSION%
+    - cmd: conda create -y -n test-environment python=%PYTHON_VERSION%
     - cmd: activate test-environment
 
 before_build:
@@ -70,11 +70,11 @@ build_script:
   # Build the compiled extension
   - cmd: cd cythoninstallhelpers
   - cmd: conda build conda.recipe
-  - cmd: conda install --use-local cythoninstallhelpers
+  - cmd: conda install -y --use-local cythoninstallhelpers
   - cmd: cd ..
   - cmd: cd cythonarrays
   - cmd: conda build conda.recipe
-  - cmd: conda install --use-local cythonarrays
+  - cmd: conda install -y --use-local cythonarrays
   - cmd: cd ..
 
 #test_script:
