@@ -14,11 +14,13 @@ environment:
     - TARGET_ARCH: x64
       CONDA_NPY: 111
       CONDA_PY: 35
+      PYTHON_VERSION: 3.5
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
 
     - TARGET_ARCH: x64
       CONDA_NPY: 111
       CONDA_PY: 36
+      PYTHON_VERSION: 3.6
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -54,7 +56,7 @@ install:
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     - cmd: conda info
-    - cmd: conda create -n test-environment python=%CONDA_PY%
+    - cmd: conda create -n test-environment python=%PYTHON_VERSION%
     - cmd: activate test-environment
 
 before_build:
