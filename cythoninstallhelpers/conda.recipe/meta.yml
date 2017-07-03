@@ -1,0 +1,28 @@
+{% set version = "dev" %}
+
+package:
+  name: cythoninstallhelpers
+  version: {{ version }}
+
+source:
+  path: ../
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - cython
+    - numpy x.x
+    
+  run:
+    - python
+    - setuptools
+
+
+about:
+  home: https://maxbo.github.io/cythonarrays
+  license: GPL2
+summary: 'helper for cython installation..'
