@@ -1,10 +1,11 @@
+{% set version = "dev" %}
 
 package:
   name: cythonarrays
-  version: 2
+  version: {{ version }}
 
 source:
-  path: ../src/cythonarrays
+  path: ../
 
 build:
   number: 0

@@ -52,8 +52,8 @@ install:
 
 before_build:
   - cmd: ECHO build cythonarrays
-  
-  
+
+
 # Skip .NET project specific build phase.
 build: off
 
@@ -61,6 +61,8 @@ build_script:
   # Build the compiled extension
   - cmd: cd cythoninstallhelpers
   - cmd: conda build conda.recipe
+  - cmd: cythoninstallhelpersout=$(conda build --output cythoninstallhelpersout)
+  - cmd: conda install $cythoninstallhelpersout
   - cmd: cd ..
   - cmd: cd cythonarrays
   - cmd: conda build conda.recipe
@@ -82,7 +84,7 @@ build_script:
 #  - cmd: cd cythonarrays
 #  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
 #  - cmd: cd ..
- 
+
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   - path: cythoninstallhelpers\dist\*
