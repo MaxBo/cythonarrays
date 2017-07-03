@@ -57,13 +57,24 @@ before_build:
 # Skip .NET project specific build phase.
 build: off
 
-test_script:
+build_script:
+  # Build the compiled extension
   - cmd: cd cythoninstallhelpers
-  - "%CMD_IN_ENV% python setup.py test"
+  - cmd: conda build conda.recipe
+  - "%CMD_IN_ENV% python setup.py build"
   - cmd: cd ..
   - cmd: cd cythonarrays
-  - "%CMD_IN_ENV% python setup.py test"
+  - "%CMD_IN_ENV% python setup.py build"
   - cmd: cd ..
+
+#test_script:
+#  - cmd: cd cythoninstallhelpers
+#  - cmd: conda build conda.recipe
+#  - "%CMD_IN_ENV% python setup.py test"
+#  - cmd: cd ..
+#  - cmd: cd cythonarrays
+#  - "%CMD_IN_ENV% python setup.py test"
+#  - cmd: cd ..
 
 after_test:
   - cmd: cd cythoninstallhelpers
