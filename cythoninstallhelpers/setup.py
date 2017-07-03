@@ -44,7 +44,7 @@ setup(
     zip_safe=False,
     data_files=[],
     install_requires=[
-        'setuptools',
+        #'setuptools',
         ],
 )
 
