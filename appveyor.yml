@@ -61,10 +61,9 @@ build_script:
   # Build the compiled extension
   - cmd: cd cythoninstallhelpers
   - cmd: conda build conda.recipe
-  - "%CMD_IN_ENV% python setup.py build"
   - cmd: cd ..
   - cmd: cd cythonarrays
-  - "%CMD_IN_ENV% python setup.py build"
+  - cmd: conda build conda.recipe
   - cmd: cd ..
 
 #test_script:
@@ -76,13 +75,13 @@ build_script:
 #  - "%CMD_IN_ENV% python setup.py test"
 #  - cmd: cd ..
 
-after_test:
-  - cmd: cd cythoninstallhelpers
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-  - cmd: cd ..
-  - cmd: cd cythonarrays
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-  - cmd: cd ..
+#after_test:
+#  - cmd: cd cythoninstallhelpers
+#  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+#  - cmd: cd ..
+#  - cmd: cd cythonarrays
+#  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+#  - cmd: cd ..
  
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
