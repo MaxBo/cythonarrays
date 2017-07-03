@@ -50,8 +50,14 @@ install:
     - cmd: obvci_install_conda_build_tools.py
     - cmd: conda info
 
+before_build:
+  - cmd: ECHO build cythonarrays
+  
+  
 # Skip .NET project specific build phase.
 build: off
 
 test_script:
-- "%CMD_IN_ENV% conda build conda.recipe --quiet"
+- cmd: cd cythoninstallhelpers
+- "%CMD_IN_ENV% conda build cythoninstallhelpers/conda.recipe --verbose"
+- "%CMD_IN_ENV% conda build cythonarrays/conda.recipe --verbose"
