@@ -1,0 +1,36 @@
+
+package:
+  name: cythonarrays
+  version: 2
+
+source:
+  path: ../src/cythonarrays
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - cython
+#    - cythoninstallhelpers>=1.1
+    - numpy
+    - xarray
+
+  run:
+    - python
+    - setuptools
+    - numpy
+    - xarray
+
+test:
+  requires:
+    - pytest
+  commands:
+    - py.test
+
+about:
+  home: https://maxbo.github.io/cythonarrays
+  license: GPL2
+summary: 'cython cdef-class to facilitate numpy-arrays as attributes..'
