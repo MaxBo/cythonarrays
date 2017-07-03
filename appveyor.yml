@@ -61,11 +61,13 @@ build_script:
   # Build the compiled extension
   - cmd: cd cythoninstallhelpers
   - cmd: conda build conda.recipe
-  - cmd: cythoninstallhelpersout=$(conda build --output cythoninstallhelpersout)
-  - cmd: conda install $cythoninstallhelpersout
+  - cmd: outfile=$(conda build --output conda.recipe)
+  - cmd: conda install $outfile
   - cmd: cd ..
   - cmd: cd cythonarrays
   - cmd: conda build conda.recipe
+  - cmd: outfile=$(conda build --output conda.recipe)
+  - cmd: conda install $outfile
   - cmd: cd ..
 
 #test_script:
