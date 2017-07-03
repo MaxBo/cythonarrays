@@ -1,0 +1,38 @@
+ 29 lines (21 sloc) 370 Bytes
+{% set version = "dev" %}
+
+package:
+  name: cythoninstallhelpers
+  version: {{ version }}
+
+source:
+  path: ../
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - cython
+    - cythoninstallhelpers>=1.1
+    - numpy x.x
+    - xarray
+    
+  run:
+    - python
+    - setuptools
+    - numpy x.x
+    - xarray
+
+test:
+  requires:
+    - pytest
+  commands:
+    - py.test
+
+about:
+  home: https://maxbo.github.io/cythonarrays
+  license: GPL2
+summary: 'cython cdef-class to facilitate numpy-arrays as attributes..'
