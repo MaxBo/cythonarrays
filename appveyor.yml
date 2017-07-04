@@ -7,7 +7,7 @@ environment:
 
   ANACONDA_TOKEN:
     secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
-    
+
   matrix:
 #    - TARGET_ARCH: x64
 #      CONDA_NPY: 111
@@ -93,6 +93,7 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
+  - path: '*.tar.bz2'
 
 on_success:
-  - cmd: anaconda -t %ANACONDA_TOKEN% upload --force *.tar.bz2
+  - cmd: python continuous-integration\anacoda-push.py
