@@ -29,6 +29,7 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-runner
   commands:
     - py.test
 
