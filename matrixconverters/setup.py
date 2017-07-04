@@ -43,7 +43,7 @@ setup(
 
     packages=find_packages('src', exclude=['ez_setup']),
     package_dir={'': 'src'},
-    package_data={'': ['*.pxd']},
+    package_data={'': ['*.pxd', '*.mtx']},
     include_package_data=True,
     zip_safe=False,
     data_files=[
@@ -65,6 +65,7 @@ setup(
         'pandas',
         'xarray',
         'netCDF4',
+        'cythoninstallhelpers',
     ],
     ext_modules=make_extensions(ext_modnames),
 )

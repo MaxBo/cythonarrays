@@ -149,7 +149,7 @@ jobs_j: shape target: [3], actual: (2,)
         np.testing.assert_array_equal(actual, target)
 
         # set arbitrary values to non-initialized 2D-Array
-        a = np.array([2, 3, 4])
+        a = np.array([2, 3, 4], dtype='i4')
         # with less dimensions than required ...
         example.not_initialized_ij = a
         b = example.not_initialized_ij

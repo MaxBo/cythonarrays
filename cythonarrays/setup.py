@@ -63,10 +63,10 @@ setup(
     tests_require=['pytest', ],
 
     install_requires=[
-        #'cythoninstallhelpers>=1.1',
-        #'cython',
-        #'numpy',
-        #'xarray',
+        'cythoninstallhelpers',
+        'cython',
+        'numpy',
+        'xarray',
     ],
     ext_modules=make_extensions(ext_modnames),
 )

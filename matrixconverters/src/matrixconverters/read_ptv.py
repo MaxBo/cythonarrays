@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
 import gzip
 import zlib
+import io
 from argparse import ArgumentParser
 from collections import deque
 import numpy as np
@@ -28,10 +30,7 @@ class ReadPTVMatrix(xr.Dataset):
         self.attrs['VMAktKennung'] = 0
         self.attrs['AnzBezeichnerlisten'] = 1
 
-        if filename.endswith(".gzip") or zipped:
-            self.attrs['open'] = gzip.open
-        else:
-            self.attrs['open'] = open
+        self.set_open_method(filename, zipped):
         with self.openfile(mode='rb') as f:
             line = f.readline().strip()
 
@@ -96,8 +95,18 @@ class ReadPTVMatrix(xr.Dataset):
         self.read_names_o_format(f, line)
         return rows
 
-    def openfile(self, mode='r'):
-        return self.attrs['open'](self.attrs['fn'], mode=mode)
+    def set_open_method(self, filename, zipped):
+        """set the open-method"""
+        if filename.endswith(".gzip") or zipped:
+            self.attrs['open'] = gzip.open
+        elif sys.version_info[0] > 2:
+            open_method = open
+        else:
+            open_method = io.open
+
+    def openfile(self, mode='r', encoding='latin1'):
+        open_method = self.attrs['open']
+        return open_method(self.attrs['fn'], mode=mode, encoding=encoding)
 
     def readPTVMatrixV(self):
         with self.openfile() as f:
