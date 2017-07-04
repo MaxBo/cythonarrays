@@ -78,22 +78,14 @@ test_script:
   - cmd: conda install -y --use-local cythonarrays
   - cmd: cd ..
 
-#test_script:
-#  - cmd: cd cythoninstallhelpers
-#  - cmd: conda build conda.recipe
-#  - "%CMD_IN_ENV% python setup.py test"
-#  - cmd: cd ..
-#  - cmd: cd cythonarrays
-#  - "%CMD_IN_ENV% python setup.py test"
-#  - cmd: cd ..
 
-#after_test:
-#  - cmd: cd cythoninstallhelpers
-#  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-#  - cmd: cd ..
-#  - cmd: cd cythonarrays
-#  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-#  - cmd: cd ..
+after_test:
+  - cmd: cd cythoninstallhelpers
+  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: cd ..
+  - cmd: cd cythonarrays
+  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: cd ..
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
