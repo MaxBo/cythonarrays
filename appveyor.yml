@@ -93,7 +93,7 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
-  - path: '*.tar.bz2'
+  - path: **\*.tar.bz2
 
 on_success:
-  - cmd: python continuous-integration\anacoda-push.py
+  - cmd: python continous-integration\anacoda-push.py
