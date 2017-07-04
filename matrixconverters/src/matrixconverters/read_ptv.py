@@ -30,7 +30,7 @@ class ReadPTVMatrix(xr.Dataset):
         self.attrs['VMAktKennung'] = 0
         self.attrs['AnzBezeichnerlisten'] = 1
 
-        self.set_open_method(filename, zipped):
+        self.set_open_method(filename, zipped)
         with self.openfile(mode='rb') as f:
             line = f.readline().strip()
 
@@ -100,12 +100,14 @@ class ReadPTVMatrix(xr.Dataset):
         if filename.endswith(".gzip") or zipped:
             self.attrs['open'] = gzip.open
         elif sys.version_info[0] > 2:
-            open_method = open
+            self.attrs['open'] = open
         else:
-            open_method = io.open
+            self.attrs['open'] = io.open
 
     def openfile(self, mode='r', encoding='latin1'):
         open_method = self.attrs['open']
+        if mode.endswith('b'):
+            encoding = None
         return open_method(self.attrs['fn'], mode=mode, encoding=encoding)
 
     def readPTVMatrixV(self):
