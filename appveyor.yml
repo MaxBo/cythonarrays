@@ -69,14 +69,14 @@ build: off
 
 test_script:
   # Build the compiled extension
-  - cmd: cd cythoninstallhelpers
-  - cmd: conda build conda.recipe
-  - cmd: conda install -y --use-local cythoninstallhelpers
-  - cmd: cd ..
-  - cmd: cd cythonarrays
-  - cmd: conda build conda.recipe
-  - cmd: conda install -y --use-local cythonarrays
-  - cmd: cd ..
+  #- cmd: cd cythoninstallhelpers
+  - cmd: conda cythoninstallhelpers/build conda.recipe
+  #- cmd: conda install -y --use-local cythoninstallhelpers
+  #- cmd: cd ..
+  #- cmd: cd cythonarrays
+  #- cmd: conda build cythonarrays/conda.recipe
+  #- cmd: conda install -y --use-local cythonarrays
+  #- cmd: cd ..
 
 
 after_test:
