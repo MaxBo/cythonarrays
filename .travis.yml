@@ -1,9 +1,11 @@
 language: python
-python:
-  # We don't actually use the Travis Python, but this keeps it organized.
 
-  - "3.5"
-  - "3.6"
+matrix:
+    include:
+        - python: 3.5
+          env: TRAVIS_PYTHON_VERSION=3.5
+        - python: 3.6
+          env: TRAVIS_PYTHON_VERSION=3.6
 
 env:
   global:
