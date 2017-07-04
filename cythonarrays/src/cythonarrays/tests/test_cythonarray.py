@@ -159,7 +159,7 @@ jobs_j: shape target: [3], actual: (2,)
 
         # change value in cython-memoryview
         example._not_initialized_ij[0, 1] = 99
-        target = np.array([[2, 99, 4]])
+        target = np.array([[2, 99, 4]], dtype='i4')
         # the value will be changed in the numpy-view of the array
         np.testing.assert_array_equal(example.not_initialized_ij, target)
         # as this is a view on the input-data, it will be changed there, too
@@ -167,7 +167,7 @@ jobs_j: shape target: [3], actual: (2,)
 
         # the right number of dimensions should be fine
         c = np.array([[0, 1],
-                      [2, 3]])
+                      [2, 3]], dtype='i4'))
         example.not_initialized_ij = c
         d = example.not_initialized_ij
         np.testing.assert_array_equal(c, d)
@@ -176,7 +176,7 @@ jobs_j: shape target: [3], actual: (2,)
         e = np.array([[[0, 1],
                        [2, 3]],
                       [[4, 5],
-                       [6, 7]]])
+                       [6, 7]]], dtype='i4'))
         with pytest.raises(AssertionError,
                            message="not_initialized_ij: ndim target: 2, actual: 3"):
             example.not_initialized_ij = e
@@ -184,7 +184,7 @@ jobs_j: shape target: [3], actual: (2,)
         # when the dimensions can be reduced to the target dimensions,
         # it should be fine
         f = np.array([[[0, 1],
-                       [2, 3]]])
+                       [2, 3]]], dtype='i4'))
         example.not_initialized_ij = f
         g = example.not_initialized_ij
         np.testing.assert_array_equal(g, f[0])
@@ -192,7 +192,7 @@ jobs_j: shape target: [3], actual: (2,)
         # change value in cython-memoryview
         example._not_initialized_ij[1, 1] = 88
         target = np.array([[0, 1],
-                           [2, 88]])
+                           [2, 88]], dtype='i4'))
         # the value will be changed in the numpy-view of the array
         np.testing.assert_array_equal(example.not_initialized_ij, target)
         # as this is a view on the input-data, it will be changed there, too
