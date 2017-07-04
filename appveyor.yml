@@ -3,7 +3,7 @@ environment:
   # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
   # /E:ON and /V:ON options are not enabled in the batch script interpreter
   # See: http://stackoverflow.com/a/13751649/163740
-  CMD_IN_ENV: "cmd /E:ON /V:ON /C obvci_appveyor_python_build_env.cmd"
+  CMD_IN_ENV: "cmd /E:ON /V:ON /C \\continuous-integration\\appveyor\\run_with_env.cmd"
 
   ANACONDA_TOKEN:
     secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
@@ -93,9 +93,7 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
-  - path: cythoninstallhelpers\*.tar.bz2
-  - path: cythonarrays\*.tar.bz2
-  - path: matrixconverters\*.tar.bz2
+  - path: '*.tar.bz2'
 
 on_success:
-  - cmd: python continous-integration\anacoda-push.py
+  - cmd: python continuous-integration\anaconda-push.py
