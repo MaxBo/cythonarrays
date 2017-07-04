@@ -34,7 +34,7 @@ test:
     - pytest
     - pytest-runner
   commands:
-    - py.test
+    - py.test --pyargs cythonarrays
 
 about:
   home: https://maxbo.github.io/cythonarrays
