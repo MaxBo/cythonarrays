@@ -1,0 +1,42 @@
+{% set version = "dev" %}
+
+package:
+  name: matrixconverters
+  version: {{ version }}
+
+source:
+  path: ../
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - cython
+    - numpy
+    - xarray
+    - cythoninstallhelpers
+    - netcdf4
+    - pytest
+    - pytest-runner
+  run:
+    - python
+    - setuptools
+    - numpy
+    - xarray
+    - netcdf4
+    - cythoninstallhelpers
+
+test:
+  requires:
+    - pytest
+    - pytest-runner
+  commands:
+    - py.test --pyargs matrixconverters
+
+about:
+  home: https://maxbo.github.io/cythonarrays
+  license: GPL2
+summary: 'cython cdef-class to facilitate numpy-arrays as attributes..'

@@ -69,15 +69,10 @@ build: off
 
 test_script:
   # Build the compiled extension
-  #- cmd: cd cythoninstallhelpers
   - cmd: conda build cythoninstallhelpers/conda.recipe
   - cmd: conda install -y --use-local cythoninstallhelpers
-  #- cmd: cd ..
-  #- cmd: cd cythonarrays
   - cmd: conda build cythonarrays/conda.recipe
-  #- cmd: conda install -y --use-local cythonarrays
-  #- cmd: cd ..
-
+  - cmd: conda build matrixconverters/conda.recipe
 
 after_test:
   - cmd: cd cythoninstallhelpers
@@ -86,8 +81,12 @@ after_test:
   - cmd: cd cythonarrays
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: cd ..
+  - cmd: cd matrixconverters
+  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: cd ..
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
+  - path: matrixconverters\dist\*
