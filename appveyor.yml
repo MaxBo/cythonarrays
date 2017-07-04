@@ -3,7 +3,7 @@ environment:
   # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
   # /E:ON and /V:ON options are not enabled in the batch script interpreter
   # See: http://stackoverflow.com/a/13751649/163740
-  CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\continuous-integration\\appveyor\\run_with_env.cmd"
+  CMD_IN_ENV: "cmd /E:ON /V:ON /C obvci_appveyor_python_build_env.cmd"
 
   ANACONDA_TOKEN:
     secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
@@ -72,10 +72,10 @@ build: off
 
 test_script:
   # Build the compiled extension
-  - cmd: conda build cythoninstallhelpers/conda.recipe
+  - cmd: conda build cythoninstallhelpers/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
   - cmd: conda install -y --use-local cythoninstallhelpers
-  - cmd: conda build cythonarrays/conda.recipe
-  - cmd: conda build matrixconverters/conda.recipe
+  - cmd: conda build cythonarrays/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
+  - cmd: conda build matrixconverters/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
 
 after_test:
   - cmd: cd cythoninstallhelpers
@@ -93,7 +93,4 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
-  - path: '*.tar.bz2'
 
-on_success:
-  - cmd: python continuous-integration\anaconda-push.py
