@@ -18,14 +18,17 @@ requirements:
     - numpy
     - xarray
     - cythoninstallhelpers
-
+    - pytest
+    - pytest-runner
   run:
     - python
     - setuptools
     - numpy
     - xarray
     - cythoninstallhelpers
-
+    - pytest
+    - pytest-runner
+    
 test:
   requires:
     - pytest
