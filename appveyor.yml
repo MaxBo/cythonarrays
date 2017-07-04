@@ -51,6 +51,7 @@ install:
     - cmd: conda config --remove channels defaults
     - cmd: conda config --add channels defaults
     - cmd: conda config --add channels conda-forge
+    - cmd: conda config --add channels MaxBo
 
     # Conda build tools.
     - cmd: conda install -n root --quiet --yes obvious-ci

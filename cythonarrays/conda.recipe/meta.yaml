@@ -17,14 +17,14 @@ requirements:
     - cython
     - numpy
     - xarray
-    - pip:
-      - cythoninstallhelpers
+    - cythoninstallhelpers
 
   run:
     - python
     - setuptools
     - numpy
     - xarray
+    - cythoninstallhelpers
 
 test:
   requires:
