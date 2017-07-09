@@ -44,6 +44,7 @@ install:
 
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
+  - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
 
 script:
   # Your test script goes here
