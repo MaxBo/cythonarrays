@@ -80,13 +80,13 @@ test_script:
 after_test:
 
   - ps: $package1 = "cythonarrays"
-  - ps: $finalXml = [xml]Get-Content (Resolve-Path $env:TMPDIR\junit_$package1.xml)
+  - ps: [xml]$finalXml = Get-Content (Resolve-Path $env:TMPDIR\junit_$package1.xml)
   - ps: $other_packages = "matrixconverters"
 
   - ps: >-
       foreach ($package in $other_packages) {
 
-        $File2 = [xml]Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
+        [xml]$File2 = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
 
         foreach ($Node in $File2.DocumentElement.ChildNodes) {
 
