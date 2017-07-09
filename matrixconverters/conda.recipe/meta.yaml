@@ -1,8 +1,8 @@
-{% set version = "dev" %}
+{% set data = load_setup_py_data() %}
 
 package:
   name: matrixconverters
-  version: {{ version }}
+  version: {{ data.get('version') }}
 
 source:
   path: ../
