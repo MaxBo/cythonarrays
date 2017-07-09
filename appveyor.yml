@@ -79,17 +79,23 @@ test_script:
 
 after_test:
 
-  - ps: $packages = "cythonarrays", "matrixconverters"
-  - ps: $finalXml = "<root>"
+  - ps: $package1 = "cythonarrays"
+  - ps: $finalXml = [xml]Get-Content (Resolve-Path $env:TMPDIR\junit_$package1.xml)
+  - ps: $other_packages = "matrixconverters"
+
   - ps: >-
-      foreach ($package in $packages) {
+      foreach ($package in $other_packages) {
 
-        [xml]$xml = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
+        $File2 = [xml]Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
 
-        $finalXml += $xml.InnerXml
+        foreach ($Node in $File2.DocumentElement.ChildNodes) {
+
+          $finalXml.DocumentElement.AppendChild($finalXml.ImportNode($Node, $true))
+
+        }
 
       }
-  - ps: $finalXml += "</root>"
+
   - ps: ([xml]$finalXml).Save("$env:TMPDIR\junit_final.xml")
   - ps: $wc = New-Object 'System.Net.WebClient'
   - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
