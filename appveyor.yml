@@ -79,16 +79,17 @@ test_script:
 
 after_test:
 
-  - ps: $packages = "cythonarrays", "matrixconverters"
-  - ps: $finalXml = "<root>"
-  - ps: foreach ($package in $packages) {
-          [xml]$xml = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
-          $finalXml += $xml.InnerXml
-        }
-  - ps: $finalXml += "</root>"
-  - ps: ([xml]$finalXml).Save(Resolve-Path $env:TMPDIR\junit_$final.xml)
-  - ps: $wc = New-Object 'System.Net.WebClient'
-  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
+  - ps: >-
+      $packages = "cythonarrays", "matrixconverters"
+      $finalXml = "<root>"
+      foreach ($package in $packages) {
+        [xml]$xml = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
+        $finalXml += $xml.InnerXml
+      }
+      $finalXml += "</root>"
+      ([xml]$finalXml).Save("$env:TMPDIR\junit_final.xml")
+      $wc = New-Object 'System.Net.WebClient'
+      $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
 
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
