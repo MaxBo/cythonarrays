@@ -63,8 +63,8 @@ install:
     - cmd: conda create -y -n test-environment python=%PYTHON_VERSION%
     - cmd: activate test-environment
 
-before_build:
-  - cmd: ECHO build cythonarrays
+    - cmd: set TMPDIR=%TMP%
+    - ps: $env:TMPDIR=$env:TMP
 
 
 # Skip .NET project specific build phase.
@@ -78,6 +78,18 @@ test_script:
   - cmd: conda build matrixconverters/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
 
 after_test:
+
+  - ps: $packages = "cythonarrays", "matrixconverters"
+  - ps: $finalXml = "<root>"
+  - ps: foreach ($package in $packages) {
+          [xml]$xml = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
+          $finalXml += $xml.InnerXml
+        }
+  - ps: $finalXml += "</root>"
+  - ps: ([xml]$finalXml).Save(Resolve-Path $env:TMPDIR\junit_$final.xml)
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
+
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: cd ..

@@ -9,6 +9,8 @@ source:
 
 build:
   number: 0
+  script_env:
+   - TMPDIR
 
 requirements:
   build:
@@ -28,13 +30,13 @@ requirements:
     - cythoninstallhelpers
     - pytest
     - pytest-runner
-    
+
 test:
   requires:
     - pytest
     - pytest-runner
   commands:
-    - py.test --pyargs cythonarrays
+    - py.test --junitxml={{ environ["TMPDIR"] }}\junit_cythonarrays.xml --pyargs cythonarrays
 
 about:
   home: https://maxbo.github.io/cythonarrays

@@ -9,6 +9,8 @@ source:
 
 build:
   number: 0
+  script_env:
+   - TMPDIR
 
 requirements:
   build:
