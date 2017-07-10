@@ -129,3 +129,19 @@ class TestReadPTV:
         sum_after = ds2.matrix.data.sum()
         print(sum_after)
         assert sum_before == sum_after
+
+    def test_05_save_o_format(self, matrix_fn_bk, matrix_fn_out):
+        """Test writing v-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        print(np.histogram(ds.matrix.data, bins=range(0, 60, 10)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_out,
+                        Ftype='O', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_out)
+        print(np.histogram(ds2.matrix.data, bins=range(0, 60, 10)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
+

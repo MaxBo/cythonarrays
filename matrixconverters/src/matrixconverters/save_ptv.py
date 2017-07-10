@@ -34,7 +34,8 @@ class SavePTV(object):
         FType : {'B', 'V'}
             Type of PTV-File Format
             either als binary file ("B")
-            or as V-Format ("V").
+            or as V-Format ("V")
+            or as O-Format ("O")
         version : srting
             version number
         zipped : bool
@@ -52,6 +53,8 @@ class SavePTV(object):
             self.write_format_b(OpenFile, fn, version)
         elif Ftype.startswith("V"):
             self.write_format_v(OpenFile, fn, Ftype)
+        elif Ftype.startswith("O"):
+            self.write_format_o(OpenFile, fn, Ftype)
 
     def write_format_v(self, OpenFile, fn, Ftype):
         dtypes = {'float32': "Y4", 'float64': "Y5",
@@ -91,11 +94,48 @@ class SavePTV(object):
                     values[i, j: j + 10].tofile(f, sep=' ', format=fmt)
                     f.write('\n')
 
-            if 'zone_names' in self.ds:
-                zone_names = self.ds.zone_names.data
+            if 'zone_name' in self.ds:
+                zone_name = self.ds.zone_name.data
                 fmt = '{no} "{name}"\n'
                 for i in range(n_zones):
-                    f.write(fmt.format(no=zone_no[i], name=zone_names[i]))
+                    f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
+
+    def write_format_o(self, OpenFile, fn, Ftype):
+        dtypes = {'float32': "Y4", 'float64': "Y5",
+                  'int32': "Y3", 'int16': "Y2"}
+        outformat = {'float32': "%0.3f", 'float64': "%0.6f",
+                     'int32': "%d", 'int16': "%d"}
+        with OpenFile(fn, "w") as f:
+            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
+            ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
+            ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
+            Faktor = getattr(self.ds.attrs, 'Faktor', 1)
+            VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
+            dtype = self.ds.matrix.dtype
+            f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
+            if "M" in Ftype:
+                f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
+            if "N" not in Ftype:
+                f.write("* Zeitintervall:\n {v} {b} \n".format(
+                    v=ZeitVon,
+                    b=ZeitBis))
+                f.write("* Faktor:\n %d \n" % Faktor)
+            df = self.ds.matrix.to_dataframe().ix[:, 0]
+            df_larger_0 =  df[df > 0]
+            f.write("* Matrixwerte\n")
+            df_larger_0.to_csv(f, sep=' ', header=False)
+
+
+            zone_no = self.ds.zone_no.data
+            n_zones = self.ds.dims['zone_no']
+
+            if 'zone_name' in self.ds:
+                f.write('* Netzobjektnamen\n')
+                f.write('$NAMES\n')
+                zone_name = self.ds.zone_name.data
+                fmt = '{no} "{name}"\n'
+                for i in range(n_zones):
+                    f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
     def write_format_b(self, OpenFile, fn, version):
         m = self.ds.matrix.data
