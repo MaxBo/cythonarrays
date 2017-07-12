@@ -58,7 +58,7 @@ script:
   - conda build matrixconverters/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
 
   # build documentation
-  - if "${CREATE_DOCS}" = "1"; then
+  - if [ "${CREATE_DOCS}" = "1" ]; then
       conda install -y --use-local cythonarrays matrixconverters;
       sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
       sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
@@ -67,4 +67,4 @@ script:
     fi
 
 after_success:
-  - if "${CREATE_DOCS}" = "1"; then travis-sphinx deploy; fi
+  - if [ "${CREATE_DOCS}" = "1" ]; then travis-sphinx deploy; fi
