@@ -12,6 +12,7 @@ matrix:
             - TRAVIS_PYTHON_VERSION=3.6
             - CONDA_PY=36
             - CONDA_NPY=111
+            - CREATE_DOCS=1
 
 env:
   global:
@@ -45,6 +46,8 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
   - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
+  - conda install -y sphinx numpydoc
+  - pip install --user travis-sphinx
 
 script:
   # Your test script goes here
@@ -53,3 +56,15 @@ script:
   - conda install -y --use-local cythoninstallhelpers
   - conda build cythonarrays/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
   - conda build matrixconverters/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
+
+  # build documentation
+  - if "${CREATE_DOCS}" = "1"; then
+      conda install -y --use-local cythonarrays matrixconverters;
+      sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
+      sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
+      sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters;
+      travis-sphinx --source docs_rst --nowarn build;
+    fi
+
+after_success:
+  - if "${CREATE_DOCS}" = "1"; then travis-sphinx deploy; fi
