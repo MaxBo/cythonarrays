@@ -66,7 +66,7 @@ install:
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     # latest conda-build
-    - cmd: conda update -n root conda-build
+    - cmd: conda update -n root conda-build=3
 
     - cmd: conda info
     - cmd: conda create -y -n test-environment python=%PYTHON_VERSION%
