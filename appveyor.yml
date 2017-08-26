@@ -81,6 +81,7 @@ test_script:
   - ps: |
      IF($env:ANACONDA_TOKEN) {
        echo "build master branch and upload to anaconda using the token"
+       conda build purge
        conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
        conda install -y --use-local cythoninstallhelpers
        conda build cythonarrays/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
@@ -88,6 +89,7 @@ test_script:
        }
      else {
        echo "build pull request, do not upload to anaconda"
+       conda build purge
        conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
        conda install -y --use-local cythoninstallhelpers
        conda build cythonarrays/conda.recipe --no-anaconda-upload
