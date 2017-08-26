@@ -9,6 +9,7 @@
 
 
 import gzip
+import zlib
 import numpy as np
 
 
@@ -22,7 +23,40 @@ class SavePTV(object):
         """"""
         self.ds = ds
 
-    def savePTVMatrix(self, file_name, Ftype, version=0.11,
+    @staticmethod
+    def write_u1(f, val):
+        """write 1-byte number to file"""
+        f.write(np.array(val, dtype="u1").tostring())
+
+    @staticmethod
+    def write_i2(f, val):
+        """write short number to file"""
+        f.write(np.array(val, dtype="i2").tostring())
+
+    @staticmethod
+    def write_i4(f, val):
+        """write int number to file"""
+        f.write(np.array(val, dtype="i4").tostring())
+
+    @staticmethod
+    def write_f4(f, val):
+        """write float to file"""
+        f.write(np.array(val, dtype="f4").tostring())
+
+    @staticmethod
+    def write_f8(f, val):
+        """write double to file"""
+        f.write(np.array(val, dtype="f8").tostring())
+
+    def write_utf16(self, f, val):
+        """write string as utf16 encoded string to file"""
+        unencoded_str = val.data.tolist()
+        self.write_i4(f, len(unencoded_str))
+        utf16_str = unencoded_str.encode('UTF-16LE')
+        f.write(utf16_str)
+
+
+    def savePTVMatrix(self, file_name, Ftype='BK', version=0.11,
                       zipped=False):
         """
         save array im PTV-Format
@@ -49,7 +83,9 @@ class SavePTV(object):
             OpenFile = open
             fn = file_name
 
-        if Ftype.startswith("B"):
+        if Ftype.startswith("BK"):
+            self.write_format_bk(OpenFile, fn, version)
+        elif Ftype.startswith("B"):
             self.write_format_b(OpenFile, fn, version)
         elif Ftype.startswith("V"):
             self.write_format_v(OpenFile, fn, Ftype)
@@ -195,7 +231,7 @@ class SavePTV(object):
                 # 3 Datentyp float
                 # ToDo: Prüfen!!!
                 f.write(np.array(3, dtype="i2").tostring())
-                typecode = '<f4'
+                typecode = '<f8'
             # AnzBezeichnerlisten, was immer das auch ist ???
             f.write(np.array(anz_bez_listen, dtype="i2").tostring())
             f.write(np.array(ZeitVon, dtype="f4").tostring())  # ZeitVon
@@ -207,6 +243,112 @@ class SavePTV(object):
             # zones
             f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())
             f.write(m.astype(typecode).flatten().tostring())  # Matrix
+
+    def write_format_bk(self, OpenFile, fn, version):
+        m = self.ds.matrix.data
+        with OpenFile(fn, "wb") as f:
+
+            n_zones = m.shape[0]
+            n_cols = m.shape[1]
+
+            idlength = 3
+            self.write_i2(f, idlength)
+            is_square = n_zones == n_cols
+            if is_square:
+                idvalue = b'$BK'
+            else:
+                idvalue = b'$BL'
+            compression_type = chr(idvalue[2])
+            f.write(idvalue)
+
+            vartype = 5
+
+            datatypes = {'f': 4, 'd': 5, 'l': 3, 'h': 2,}
+            typecodes = {'f': 'f4', 'd': 'f8', 'l': 'i4', 'h': 'i2',}
+            datatype = datatypes.get(m.dtype.char, 5)
+            typecode = typecodes.get(m.dtype.char, 'f8')
+
+            header_lines = ['']
+            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
+            ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
+            ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
+            Faktor = getattr(self.ds.attrs, 'Faktor', 1)
+            VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
+            roundproc = getattr(self.ds.attrs, 'roundproc', 0)
+
+            # write header
+            header_lines.append("Muuli matrix in packed binary format.")
+            header_lines.append("Zones: {}".format(n_zones))
+            header_lines.append("VarType: {}".format(vartype))
+            header_lines.append("Total sum: {}".format(m.sum()))
+
+            diagsum = np.diag(m).sum()
+            header_lines.append("Diagonal sume: {}".format(diagsum))
+            header_lines.append("Transport mode: {}".format(VMAktKennung))
+            header_lines.append("from: {}".format(ZeitVon))
+            header_lines.append("to: {}".format(ZeitBis))
+            header_lines.append("Factor: {}".format(Faktor))
+            header_lines.append("")
+
+            header = '\r\n'.join(header_lines).encode('utf8')
+            header_length = len(header)
+            self.write_i2(f, header_length)
+            f.write(header)
+
+            # write additional infos
+            self.write_i4(f, VMAktKennung)
+            self.write_f4(f, ZeitVon)
+            self.write_f4(f, ZeitBis)
+            self.write_f4(f, Faktor)
+            self.write_i4(f, n_zones)
+            self.write_i2(f, datatype)
+            self.write_u1(f, roundproc)
+
+            # columns
+            self.write_i4(f, n_cols)
+            # zone numbers for rows and columns
+            zone_no = self.ds.zone_no
+            f.write(np.array(zone_no.data).astype("i4").tostring())
+            zone_cols = getattr(self.ds, 'zone_no2', zone_no)
+            f.write(np.array(zone_cols.data).astype("i4").tostring())
+
+            # zone_names:
+            zone_names = getattr(self.ds, 'zone_name')
+            if zone_names is None:
+                zone_names = ('' for i in range(n_zones))
+            # for rows
+            for zone_name in zone_names:
+                self.write_utf16(f, zone_name)
+            # for columns
+            zone_names2 = getattr(self.ds, 'zone_names2')
+            if zone_names2 is None:
+                zone_names2 = ('' for i in range(n_cols))
+            for zone_name in zone_names2:
+                self.write_utf16(f, zone_name)
+
+            allnull = int(not np.any(m))
+            self.write_u1(f, allnull)
+            self.write_f8(f, diagsum)
+            if not allnull:
+                data = m.astype(typecode)
+                rowsums = data.sum(1).astype('f8')
+                colsums = data.sum(0).astype('f8')
+                for i in range(n_zones):
+                    row = data[i]
+                    #if compression_type == 'L':
+                        #f.write(row.tostring())
+                    #else:
+                    compressed = zlib.compress(row.tostring())
+                    self.write_i4(f, len(compressed))
+                    f.write(compressed)
+                    if compression_type != 'L':
+                        self.write_f8(f, rowsums[i])
+                        self.write_f8(f, colsums[i])
+                if not is_square:
+                    # for $BL-format, the row and colsums are written as vector
+                    f.write(rowsums.tostring())
+                    f.write(colsums.tostring())
+
 
     def savePSVMatrix(self, fileName, ftype="CC", maxWidth=1000):
         """ exports array in PSV-Format
