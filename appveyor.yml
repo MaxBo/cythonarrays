@@ -1,3 +1,7 @@
+branches:
+    only:
+    - master
+
 skip_branch_with_pr: true
 
 environment:
@@ -74,10 +78,21 @@ build: off
 
 test_script:
   # Build the compiled extension
-  - cmd: conda build cythoninstallhelpers/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
-  - cmd: conda install -y --use-local cythoninstallhelpers
-  - cmd: conda build cythonarrays/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
-  - cmd: conda build matrixconverters/conda.recipe --user MaxBo --token %ANACONDA_TOKEN%
+  - ps: |
+     IF($env:ANACONDA_TOKEN) {
+      echo "build master branch and upload to anaconda using the token"
+      conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
+      conda install -y --use-local cythoninstallhelpers
+      conda build cythonarrays/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
+      conda build matrixconverters/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
+      }
+    else {
+      echo "build pull request, do not upload to anaconda"
+      conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
+      conda install -y --use-local cythoninstallhelpers
+      conda build cythonarrays/conda.recipe --no-anaconda-upload
+      conda build matrixconverters/conda.recipe --no-anaconda-upload
+      }
 
 after_test:
 
