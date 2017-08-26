@@ -1,3 +1,9 @@
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+
 environment:
 
   # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
@@ -115,4 +121,3 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
-
