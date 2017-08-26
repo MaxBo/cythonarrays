@@ -45,9 +45,11 @@ class ReadPTVMatrix(xr.Dataset):
         elif line.startswith(b"$S"):
             self.readPTVMatrixE()
         elif line.strip(bytes([3, 0])).startswith(b"$BI"):
-            self.readPTVMatrixBI()
+            self.readPTVMatrixBKI()
         elif line.strip(bytes([3, 0])).startswith(b"$BK"):
-            self.readPTVMatrixBK()
+            self.readPTVMatrixBKI()
+        elif line.strip(bytes([3, 0])).startswith(b"$BL"):
+            self.readPTVMatrixBKI()
         elif line.strip(bytes([3, 0])).startswith(b"$B"):
             self.readPTVMatrixB()
 
@@ -135,23 +137,27 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_zone_names(n_zones)
             self.read_names(f, self.zone_name)
 
-    def create_zone_names(self, n_zones, name='zone_name'):
+    def create_zone_names(self, n_zones, name='zone_name', dim='zone_no'):
+        coord = getattr(self, dim).data
         self[name] = xr.DataArray(
             np.empty((n_zones, ), dtype='O'),
-            coords=(self.zone_no.data, ),
-            dims=('zone_no',),
+            coords=(coord, ),
+            dims=(dim,),
             name=name,)
 
-    def create_matrix(self, n_zones, dtype='f8'):
+    def create_matrix(self, n_zones, n_cols=None, dtype='f8'):
+        n_cols = n_cols or n_zones
+        origins = self.zone_no
+        destinations = getattr(self, 'zone_no2', origins)
         self['matrix'] = xr.DataArray(
-            np.empty((n_zones, n_zones), dtype=dtype),
-            coords=(self.zone_no, self.zone_no),
+            np.empty((n_zones, n_cols), dtype=dtype),
+            coords=(origins, destinations),
             dims=('origins', 'destinations'),
             name='matrix',)
 
-    def create_zones(self, n_zones, name='zone_no'):
+    def create_zones(self, n_zones, name='zone_no', dim = 'zones'):
         self.coords[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
-                                         dims=('zones',),)
+                                         dims=(dim,),)
 
     def read_names(self, f, arr):
         """Read the zone names"""
@@ -193,7 +199,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.zone_name.loc[zone_no] = name
         self.create_matrix(n_zones)
 
-    def readPTVMatrixBK(self):
+    def readPTVMatrixBKI(self):
         """
         Die Länge des Headers stehen in Byte 5/6
         Zuerst wird mit Hilfe dieses offsets die Anzahl der Zellen ausgelesen
@@ -210,90 +216,136 @@ class ReadPTVMatrix(xr.Dataset):
         Diese werden ignoriert.
         """
         with self.openfile(mode="rb") as f:
-            f.seek(5, 0)
-            header = np.fromstring(f.read(2), dtype="i2")[0]
-            f.seek(header, 0)
-            f.seek(23 - 16, 1)
-            self.attrs['VMAktKennung'] = np.fromstring(f.read(2),
-                                                       dtype="i2")[0]
-            f.seek(14, 1)
-            n_zones = np.fromstring(f.read(4), dtype="i4")[0]
+            f.seek(0, 0)
+            idlength = self.read_i2(f)
+            idvalue = f.read(idlength)
+            compression_type = chr(idvalue[2])
+            header = self.read_i2(f)
+            headervalue = f.read(header)
+            transportvalue = self.read_i4(f)
+            starttime = self.read_f4(f)
+            endtime = self.read_f4(f)
+            factor = self.read_f4(f)
+            n_zones = self.read_i4(f)
+            data_type = self.read_i2(f)
+            roundproc = self.read_u1(f)
+            if roundproc > 1:
+                raise IOError("Flag of round procedure doesn't exist.")
+
+            self.attrs['ZeitVon'] = starttime
+            self.attrs['ZeitBis'] = endtime
+            self.attrs['Faktor'] = factor
+            self.attrs['roundproc'] = roundproc
+            self.attrs['VMAktKennung'] = transportvalue
+            self.attrs['AnzBezeichnerlisten'] = 1
+
             self.create_zones(n_zones)
 
-            data_type = np.fromstring(f.read(2), dtype="i2")[0]
-            f.seek(1, 1)
-            if data_type == 4:
-                dtype = '<f4'
-            elif data_type == 5:
-                dtype = '<f8'
-            self.create_matrix(n_zones, dtype=dtype)
+            data_types = {2: 'i2', 3: 'i4', 4: 'f4', 5: 'f8',}
+            dtype = data_types.get(data_type, 'f8')
 
-            n_zones2 = np.fromstring(f.read(4), dtype="i4")[0]
-            self.zone_no.data[:] = np.fromstring(
-                f.read(n_zones * 4), dtype="i4")
-            self.create_zones(n_zones2, name='zone_no2')
-            self.zone_no2.data[:] = np.fromstring(
-                f.read(n_zones * 4), dtype="i4")
-            self.create_zone_names(n_zones)
-            for i in range(n_zones):
-                Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
-                self.zone_name.data[i] = f.read(Zeichen * 2).decode('utf16')
 
-            self.create_zone_names(n_zones, name='zone_names2')
-            for i in range(n_zones2):
-                Zeichen = np.fromstring(f.read(4), dtype="i4")[0]
-                self.zone_names2.data[i] = f.read(Zeichen * 2).decode('utf16')
-            f.seek(1, 1)
-            self.attrs['Unbek1'] = np.fromstring(f.read(8), dtype="f8")[0]
-            for i in range(n_zones):
-                lenChunk = np.fromstring(f.read(4), dtype="i4")[0]
-                unpacked = zlib.decompress(f.read(lenChunk))
-                self.matrix[i] = np.fromstring(unpacked, dtype=dtype)
-                f.seek(16, 1)
+            if compression_type == 'I':
+                self.create_matrix(n_zones, dtype=dtype)
 
-    def readPTVMatrixBI(self):
-        """
-        Die Länge des Headers stehen in Byte 5/6
-        Zuerst wird mit Hilfe dieses offsets die Anzahl der Zellen ausgelesen
-        und eine leere Matrix gebildet
-        dann werden Verkehrsmittelkennung gelesen.
-        Dann folgen die Zellennummern
-        Schlieslich wird für jede Zeile der Matrix
-        zuerst die Länge der gepakten Daten dieser Zeile (lenChunk) gelesen
-        und dann die Daten mit zlib.decompress entpackt
-        und mit np.fromstring in ein Zeilen-array verwandelt,
-        Damit wird die Matrix zeilenweise "gefüllt"
-        Zwischen den Zeilen befinden sich jeweils 16 byte,
-        deren Sinn unklar ist (ggf. eine Prüfsumme?)
-        Diese werden ignoriert.
-        """
-        with self.openfile("rb") as f:
-            f.seek(5, 0)
-            header = np.fromstring(f.read(2), dtype="i2")[0]
-            f.seek(header, 0)
-            f.seek(23 - 16, 1)
-            self.attrs['VMAktKennung'] = np.fromstring(
-                f.read(2), dtype="i2")[0]
-            f.seek(14, 1)
-            n_zones = np.fromstring(f.read(4), dtype="i4")[0]
-            data_type = np.fromstring(f.read(2), dtype="i2")[0]
-            if data_type == 4:
-                dtype = '<f4'
-            elif data_type == 5:
-                dtype = '<f8'
-            self.create_zones(n_zones)
-            self.create_matrix(n_zones, dtype=dtype)
-            f.seek(1, 1)
-            self.zone_no.data[:] = np.fromstring(
-                f.read(4 * n_zones), dtype="i4")[0]
-            f.seek(9, 1)
-            m = self.matrix.data
+                self.zone_no.data[:] = np.fromstring(
+                    f.read(n_zones * 4), dtype="i4")
+            else:
+                # BK or BL
+                n_cols = self.read_i4(f)
+                if compression_type == 'L':
+                    dim = 'destinations'
+                else:
+                    dim = 'zones'
+                self.create_zones(n_cols, name='zone_no2', dim=dim)
+                self.create_matrix(n_zones, n_cols=n_cols, dtype=dtype)
 
-            for i in range(n_zones):
-                lenChunk = np.fromstring(f.read(4), dtype="i4")[0]
-                unpacked = zlib.decompress(f.read(lenChunk))
-                m[i] = np.fromstring(unpacked, dtype=dtype)
-                m.seek(16, 1)
+                self.zone_no.data[:] = np.fromstring(
+                    f.read(n_zones * 4), dtype="i4")
+                self.zone_no2.data[:] = np.fromstring(
+                    f.read(n_cols * 4), dtype="i4")
+
+                # read zone names for rows
+                self.create_zone_names(n_zones)
+                for i in range(n_zones):
+                    self.zone_name.data[i] = self.read_utf16(f)
+
+                # read zone names for columns
+                self.create_zone_names(n_cols, name='zone_names2',
+                                       dim='zone_no2')
+                for i in range(n_cols):
+                    self.zone_names2.data[i] = self.read_utf16(f)
+
+            # all null values=
+            allnull = self.read_u1(f)
+            if allnull > 1:
+                raise IOError("Flag of allnull doesn't exist.")
+
+            # read the results
+            rowsums = np.empty((n_zones), dtype='f8')
+            colsums = np.empty((n_cols), dtype='f8')
+            if not allnull:
+                self.attrs['diagsum'] = self.read_f8(f)
+                for i in range(n_zones):
+                    len_chunk = self.read_i4(f)
+                    unpacked = zlib.decompress(f.read(len_chunk))
+                    self.matrix[i] = np.fromstring(unpacked, dtype=dtype)
+                    if compression_type < 'L':
+                        # for this format row and colsums are
+                        # written at each line
+                        rowsums[i] = self.read_f8(f)
+                        colsums[i] = self.read_f8(f)
+                    #else:
+                        #self.matrix[i] = np.fromstring(f.read(n_cols*8),
+                                                       #dtype='f8')
+                if compression_type >= 'L':
+                    # for this format the row and colsums are written
+                    # as a vector each
+                    rowsums[:] = np.fromstring(f.read(8*n_zones), dtype="f8")
+                    colsums[:] = np.fromstring(f.read(8*n_cols), dtype="f8")
+            # all null
+            else:
+                self.attrs['diagsum'] = 0
+                self.matrix[:] = 0
+                rowsums[:] = 0
+                colsums[:] = 0
+
+        # check row and colsums and diagonal
+        np.testing.assert_allclose(self.matrix.sum(axis=1), rowsums)
+        np.testing.assert_allclose(self.matrix.sum(axis=0), colsums)
+        np.testing.assert_allclose(np.diag(self.matrix).sum(),
+                                   self.attrs['diagsum'])
+
+
+    def read_utf16(self, f):
+        """read utf16( encoded string from file at current position"""
+        n_chars = self.read_i4(f)
+        return f.read(n_chars * 2).decode('utf16')
+
+    @staticmethod
+    def read_f4(f):
+        """read float from file at current position"""
+        return np.fromstring(f.read(4), dtype="f4")[0]
+
+    @staticmethod
+    def read_f8(f):
+        """read double from file at current position"""
+        return np.fromstring(f.read(8), dtype="f8")[0]
+
+    @staticmethod
+    def read_u1(f):
+        """read byte from file at current position"""
+        return np.fromstring(f.read(1), dtype="u1")[0]
+
+    @staticmethod
+    def read_i2(f):
+        """read short integer from file at current position"""
+        return np.fromstring(f.read(2), dtype="i2")[0]
+
+    @staticmethod
+    def read_i4(f):
+        """read integer from file at current position"""
+        return np.fromstring(f.read(4), dtype="i4")[0]
 
     def readPTVMatrixB(self, header=2048):
         with self.openfile(mode="rb") as f:
@@ -320,6 +372,9 @@ class ReadPTVMatrix(xr.Dataset):
                 data_length = 4
                 dtype = '<f4'
             elif data_type == 4:
+                data_length = 8
+                dtype = '<f8'
+            else:
                 data_length = 8
                 dtype = '<f8'
             AnzBezeichnerlisten = np.fromstring(f.read(2),

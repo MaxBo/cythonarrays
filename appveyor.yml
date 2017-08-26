@@ -115,4 +115,3 @@ artifacts:
   - path: cythoninstallhelpers\dist\*
   - path: cythonarrays\dist\*
   - path: matrixconverters\dist\*
-

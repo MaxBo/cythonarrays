@@ -30,6 +30,12 @@ def matrix_fn_out(folder):
 
 
 @pytest.fixture(scope='class')
+def matrix_fn_b_out(folder):
+    fn = os.path.join(folder, 'matrix_b_format.out')
+    return fn
+
+
+@pytest.fixture(scope='class')
 def matrix_fn_bk_out(folder):
     fn = os.path.join(folder, 'matrix_bk_format.out')
     return fn
@@ -40,6 +46,16 @@ def matrix_fn_bk(folder):
     fn = os.path.join(folder, 'matrix_bk_format.mtx')
     return fn
 
+
+@pytest.fixture(scope='class')
+def matrix_fn_bl_out(folder):
+    fn = os.path.join(folder, 'matrix_bl_format.out')
+    return fn
+
+@pytest.fixture(scope='class')
+def matrix_fn_bl(folder):
+    fn = os.path.join(folder, 'matrix_bl_format.mtx')
+    return fn
 
 @pytest.fixture(scope='class')
 def matrix_fn_o(folder):
@@ -115,7 +131,22 @@ class TestReadPTV:
         print(sum_after)
         np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
 
-    def test_04_save_bk_format(self, matrix_fn_bk, matrix_fn_bk_out):
+    def test_04_save_b_format(self, matrix_fn_bk, matrix_fn_b_out):
+        """Test writing uncompressed b-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        print(np.histogram(ds.matrix.data, bins=range(8)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_b_out,
+                        Ftype='B', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_b_out)
+        print(np.histogram(ds2.matrix.data, bins=range(8)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        assert sum_before == sum_after
+
+    def test_05_save_bk_format(self, matrix_fn_bk, matrix_fn_bk_out):
         """Test writing bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
         print(np.histogram(ds.matrix.data, bins=range(8)))
@@ -130,7 +161,7 @@ class TestReadPTV:
         print(sum_after)
         assert sum_before == sum_after
 
-    def test_05_save_o_format(self, matrix_fn_bk, matrix_fn_out):
+    def test_06_save_o_format(self, matrix_fn_bk, matrix_fn_out):
         """Test writing v-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
         print(np.histogram(ds.matrix.data, bins=range(0, 60, 10)))
@@ -144,4 +175,26 @@ class TestReadPTV:
         sum_after = ds2.matrix.data.sum()
         print(sum_after)
         np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
+
+    def test_07_save_bl_format(self, matrix_fn_bl, matrix_fn_bl_out):
+        """Test writing bk-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bl)
+        print(np.histogram(ds.matrix.data, bins=range(8)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
+        ds['zone_name'][:] = ['A', 'B', 'C', 'D', 'E']
+        ds['zone_names2'][:] = ['ÄÄ', 'ÜÜ', 'Öß€']
+        ds['zone_no2'] *= 100
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_bl_out,
+                        Ftype='BK', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_bl_out)
+        print(np.histogram(ds2.matrix.data, bins=range(8)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        assert sum_before == sum_after
+        np.testing.assert_array_equal(ds.zone_no, ds2.zone_no)
+        np.testing.assert_array_equal(ds.zone_no2, ds2.zone_no2)
+        np.testing.assert_array_equal(ds.zone_name, ds2.zone_name)
+        np.testing.assert_array_equal(ds.zone_names2, ds2.zone_names2)
 
