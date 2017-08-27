@@ -11,6 +11,7 @@
 import gzip
 import zlib
 import numpy as np
+import xarray as xr
 
 
 def writeFormattedLine(f, text, length):
@@ -315,14 +316,17 @@ class SavePTV(object):
             # zone_names:
             zone_names = getattr(self.ds, 'zone_name', None)
             if zone_names is None:
-                zone_names = ('' for i in range(n_zones))
+                zone_names = (xr.DataArray('') for i in range(n_zones))
             # for rows
             for zone_name in zone_names:
                 self.write_utf16(f, zone_name)
             # for columns
             zone_names2 = getattr(self.ds, 'zone_names2', None)
             if zone_names2 is None:
-                zone_names2 = ('' for i in range(n_cols))
+                if is_square:
+                    zone_names2 = zone_names
+                else:
+                    zone_names2 = (xr.DataArray('') for i in range(n_cols))
             for zone_name in zone_names2:
                 self.write_utf16(f, zone_name)
 
