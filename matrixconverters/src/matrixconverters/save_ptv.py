@@ -313,14 +313,14 @@ class SavePTV(object):
             f.write(np.array(zone_cols.data).astype("i4").tostring())
 
             # zone_names:
-            zone_names = getattr(self.ds, 'zone_name')
+            zone_names = getattr(self.ds, 'zone_name', None)
             if zone_names is None:
                 zone_names = ('' for i in range(n_zones))
             # for rows
             for zone_name in zone_names:
                 self.write_utf16(f, zone_name)
             # for columns
-            zone_names2 = getattr(self.ds, 'zone_names2')
+            zone_names2 = getattr(self.ds, 'zone_names2', None)
             if zone_names2 is None:
                 zone_names2 = ('' for i in range(n_cols))
             for zone_name in zone_names2:
