@@ -79,13 +79,13 @@ after_success:
       conda install -y twine;
       cd $TRAVIS_BUILD_DIR/cythoninstallhelpers;
       python setup.py sdist;
-      twine upload dist/*;
+      twine upload --skip-existing dist/*;
       conda install -y cythoninstallhelpers;
       cd $TRAVIS_BUILD_DIR/cythonarrays;
       python setup.py sdist;
-      twine upload dist/*;
+      twine upload --skip-existing dist/*;
       conda install -y cythonarrays;
       cd $TRAVIS_BUILD_DIR/matrixconverters;
       python setup.py sdist;
-      twine upload dist/*;
+      twine upload --skip-existing dist/*;
     fi

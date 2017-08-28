@@ -88,25 +88,7 @@ build: off
 test_script:
   # Build the compiled extension
     - cmd: conda info
-    - ps: |
-       IF($env:ANACONDA_TOKEN) {
-         echo "build master branch and upload to anaconda using the token"
-         conda build purge
-         conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
-         conda install -n root -y --use-local cythoninstallhelpers
-         conda install -y --use-local cythoninstallhelpers
-         conda build cythonarrays/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
-         conda build matrixconverters/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
-         }
-       else {
-         echo "build pull request, do not upload to anaconda"
-         conda build purge
-         conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
-         conda install -n root -y --use-local cythoninstallhelpers
-         conda install -y --use-local cythoninstallhelpers
-         conda build cythonarrays/conda.recipe --no-anaconda-upload
-         conda build matrixconverters/conda.recipe --no-anaconda-upload
-         }
+    - cmd: IF DEFINED ANACONDA_TOKEN (conda build cythoninstallhelpers/conda.recipe --user MaxBo --token %ANACONDA_TOKEN% && conda install -n root -y --use-local cythoninstallhelpers && conda install -y --use-local cythoninstallhelpers && conda build cythonarrays/conda.recipe --user MaxBo --token %ANACONDA_TOKEN% && conda build matrixconverters/conda.recipe --user MaxBo --token %ANACONDA_TOKEN% ) ELSE (conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload && conda install -n root -y --use-local cythoninstallhelpers && conda install -y --use-local cythoninstallhelpers && conda build cythonarrays/conda.recipe --no-anaconda-upload && conda build matrixconverters/conda.recipe --no-anaconda-upload)
 
 after_test:
 
@@ -140,17 +122,17 @@ after_test:
   - cmd: conda install -y twine
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
   - cmd: conda install -y cythoninstallhelpers
   - cmd: cd cythonarrays
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
   - cmd: conda install -y cythonarrays
   - cmd: cd matrixconverters
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
-  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
 
 artifacts:
