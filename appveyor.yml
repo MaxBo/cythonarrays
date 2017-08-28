@@ -14,6 +14,9 @@ environment:
   ANACONDA_TOKEN:
     secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
 
+  PYPIPASSWORD:
+    secure: R7Hpmou1Q3ysPCVbkhvdBg==
+
   matrix:
 #    - TARGET_ARCH: x64
 #      CONDA_NPY: 111
@@ -48,6 +51,9 @@ install:
          Where-Object pullRequestId -eq $env:APPVEYOR_PULL_REQUEST_NUMBER)[0].buildNumber) { `
            throw "There are newer queued builds for this pull request, failing early." }
 
+    # increase timeout values
+    - "echo remote_read_timeout_secs: 200.0 >> %USERPROFILE%\\.condarc"
+
     # Add path, activate `conda` and update conda.
     - cmd: set "PATH=%CONDA_INSTALL_LOCN%\\Scripts;%CONDA_INSTALL_LOCN%\\Library\\bin;%PATH%"
     - cmd: conda update --yes --quiet conda
@@ -66,7 +72,7 @@ install:
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     # latest conda-build
-#    - cmd: conda update -n root conda-build=3
+    - cmd: conda install -y -n root conda-build=3
 
     - cmd: conda info
     - cmd: conda create -y -n test-environment python=%PYTHON_VERSION%
@@ -123,14 +129,27 @@ after_test:
   - ps: $wc = New-Object 'System.Net.WebClient'
   - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
 
+  # set pypi credentials
+  - cmd: set HOME=%USERPROFILE%
+  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - "echo [pypi] > %USERPROFILE%\\.pypirc"
+  - ps: Add-Content -Value "username = MaxBo" -Path $env:USERPROFILE\.pypirc
+  - ps: Add-Content -Value "password = $env:PYPIPASSWORD" -Path $env:USERPROFILE\.pypirc
+
+  - cmd: conda install -y twine
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
   - cmd: cd ..
+  - cmd: conda install -y cythoninstallhelpers
   - cmd: cd cythonarrays
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
   - cmd: cd ..
+  - cmd: conda install -y cythonarrays
   - cmd: cd matrixconverters
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload dist\* )
   - cmd: cd ..
 
 artifacts:
