@@ -93,6 +93,7 @@ test_script:
          echo "build master branch and upload to anaconda using the token"
          conda build purge
          conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
+         conda install -n root -y --use-local cythoninstallhelpers
          conda install -y --use-local cythoninstallhelpers
          conda build cythonarrays/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
          conda build matrixconverters/conda.recipe --user MaxBo --token $env:ANACONDA_TOKEN
@@ -101,6 +102,7 @@ test_script:
          echo "build pull request, do not upload to anaconda"
          conda build purge
          conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
+         conda install -n root -y --use-local cythoninstallhelpers
          conda install -y --use-local cythoninstallhelpers
          conda build cythonarrays/conda.recipe --no-anaconda-upload
          conda build matrixconverters/conda.recipe --no-anaconda-upload
@@ -131,7 +133,6 @@ after_test:
 
   # set pypi credentials
   - cmd: set HOME=%USERPROFILE%
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - "echo [pypi] > %USERPROFILE%\\.pypirc"
   - ps: Add-Content -Value "username = MaxBo" -Path $env:USERPROFILE\.pypirc
   - ps: Add-Content -Value "password = $env:PYPIPASSWORD" -Path $env:USERPROFILE\.pypirc
