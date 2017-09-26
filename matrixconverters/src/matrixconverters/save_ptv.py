@@ -14,7 +14,7 @@ import numpy as np
 import xarray as xr
 
 
-def writeFormattedLine(f, text, length):
+def write_line(f, text, length):
     f.write(text.ljust(length) + b"\r\n")
 
 
@@ -57,8 +57,13 @@ class SavePTV(object):
         f.write(utf16_str)
 
 
-    def savePTVMatrix(self, file_name, Ftype='BK', version=0.11,
-                      zipped=False):
+    def savePTVMatrix(self,
+                      file_name,
+                      file_type='BK',
+                      version=0.11,
+                      zipped=False,
+                      Ftype=None,
+                      ):
         """
         save array im PTV-Format
 
@@ -66,49 +71,54 @@ class SavePTV(object):
         ----------
         file_name : string
             output file_name
-        FType : {'B', 'V'}
+        file_type : str
             Type of PTV-File Format
-            either als binary file ("B")
-            or as V-Format ("V")
-            or as O-Format ("O")
-        version : srting
+        version : str
             version number
-        zipped : bool
-            To save Disc Space and increase speed,
+        zipped : bool, optional(default=False)
             the file can be saved in a gzip-packed format (zipped = True)
+        Ftype : str, optional(depreciated)
+            please use file_type
         """
+        try:
+            if Ftype:
+                msg = 'file_type is depreciated, please use file_type'
+                raise DeprecationWarning(msg)
+        except DeprecationWarning as e:
+            print(e)
+            file_type = Ftype
         if zipped:
-            OpenFile = gzip.open
+            open_file = gzip.open
             fn = file_name + ".gzip"
         else:
-            OpenFile = open
+            open_file = open
             fn = file_name
 
-        if Ftype.startswith("BK"):
-            self.write_format_bk(OpenFile, fn, version)
-        elif Ftype.startswith("B"):
-            self.write_format_b(OpenFile, fn, version)
-        elif Ftype.startswith("V"):
-            self.write_format_v(OpenFile, fn, Ftype)
-        elif Ftype.startswith("O"):
-            self.write_format_o(OpenFile, fn, Ftype)
+        if file_type.startswith("BK"):
+            self._write_format_bk(open_file, fn)
+        elif file_type.startswith("B"):
+            self._write_format_b(open_file, fn, version)
+        elif file_type.startswith("V"):
+            self._write_format_v(open_file, fn, file_type)
+        elif file_type.startswith("O"):
+            self._write_format_o(open_file, fn, file_type)
 
-    def write_format_v(self, OpenFile, fn, Ftype):
+    def _write_format_v(self, open_file, fn, file_type):
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
                      'int32': "%d", 'int16': "%d"}
-        with OpenFile(fn, "w") as f:
+        with open_file(fn, "w") as f:
             anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
             ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
             ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
             Faktor = getattr(self.ds.attrs, 'Faktor', 1)
             VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
             dtype = self.ds.matrix.dtype
-            f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
-            if "M" in Ftype:
+            f.write("$%s, %s\n" % (file_type, dtypes[str(dtype)]))
+            if "M" in file_type:
                 f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
-            if "N" not in Ftype:
+            if "N" not in file_type:
                 f.write("* Zeitintervall:\n {v} {b} \n".format(
                     v=ZeitVon,
                     b=ZeitBis))
@@ -137,22 +147,22 @@ class SavePTV(object):
                 for i in range(n_zones):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
-    def write_format_o(self, OpenFile, fn, Ftype):
+    def _write_format_o(self, open_file, fn, file_type):
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
                      'int32': "%d", 'int16': "%d"}
-        with OpenFile(fn, "w") as f:
+        with open_file(fn, "w") as f:
             anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
             ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
             ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
             Faktor = getattr(self.ds.attrs, 'Faktor', 1)
             VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
             dtype = self.ds.matrix.dtype
-            f.write("$%s, %s\n" % (Ftype, dtypes[str(dtype)]))
-            if "M" in Ftype:
+            f.write("$%s, %s\n" % (file_type, dtypes[str(dtype)]))
+            if "M" in file_type:
                 f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
-            if "N" not in Ftype:
+            if "N" not in file_type:
                 f.write("* Zeitintervall:\n {v} {b} \n".format(
                     v=ZeitVon,
                     b=ZeitBis))
@@ -174,36 +184,36 @@ class SavePTV(object):
                 for i in range(n_zones):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
-    def write_format_b(self, OpenFile, fn, version):
+    def _write_format_b(self, open_file, fn, version):
         m = self.ds.matrix.data
-        with OpenFile(fn, "wb") as f:
+        with open_file(fn, "wb") as f:
             anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
             ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
             ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
             Faktor = getattr(self.ds.attrs, 'Faktor', 1)
             VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
-            writeFormattedLine(f, b"PTVSYSTEM   MUULI       VMatrixComp1", 44)
-            writeFormattedLine(f, b"VMatversionsnummer: %0.2f" % version, 28)
-            writeFormattedLine(f, b"Anzahl Dimensionen: %d" % m.ndim, 28)
-            writeFormattedLine(f, b"Seitenlaengen der Matrix:", 30)
+            write_line(f, b"PTVSYSTEM   MUULI       VMatrixComp1", 44)
+            write_line(f, b"VMatversionsnummer: %0.2f" % version, 28)
+            write_line(f, b"Anzahl Dimensionen: %d" % m.ndim, 28)
+            write_line(f, b"Seitenlaengen der Matrix:", 30)
             text = b""
             for n in range(m.ndim):
                 text += (b"%d" % m.shape[n]).ljust(8)
-            writeFormattedLine(f, text, 48)
-            writeFormattedLine(f, b"% -30s%d" % (b"Anzahl Bezeichnerlisten:",
+            write_line(f, text, 48)
+            write_line(f, b"% -30s%d" % (b"Anzahl Bezeichnerlisten:",
                                                  anz_bez_listen),
                                38)
-            writeFormattedLine(f, b"% -20s%02d:00   %02d:00" % (
+            write_line(f, b"% -20s%02d:00   %02d:00" % (
                 b"Zeitbereich:",
                 ZeitVon,
                 ZeitBis,
                 ),
                                36)
-            writeFormattedLine(f, b"% -20s%s" % (b"RandomRound:", b"Nein"), 28)
-            writeFormattedLine(f, b"% -24s%0.2f" % (b"Faktor:",
+            write_line(f, b"% -20s%s" % (b"RandomRound:", b"Nein"), 28)
+            write_line(f, b"% -24s%0.2f" % (b"Faktor:",
                                                     Faktor), 28)
             for i in range(20):
-                writeFormattedLine(f, b" ", 80)
+                write_line(f, b" ", 80)
             f.write(np.array(6682, dtype="i2").tostring())  # header
             f.write(b" " * 80)
             f.write(np.array(11, dtype="i2").tostring())  # header
@@ -245,9 +255,9 @@ class SavePTV(object):
             f.write(np.array(self.ds.zone_no.data).astype("i4").tostring())
             f.write(m.astype(typecode).flatten().tostring())  # Matrix
 
-    def write_format_bk(self, OpenFile, fn, version):
+    def _write_format_bk(self, open_file, fn):
         m = self.ds.matrix.data
-        with OpenFile(fn, "wb") as f:
+        with open_file(fn, "wb") as f:
 
             n_zones = m.shape[0]
             n_cols = m.shape[1]

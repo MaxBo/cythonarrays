@@ -124,7 +124,7 @@ class TestReadPTV:
         print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_out,
-                        Ftype='VN', )
+                        file_type='VN', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_out)
         print(np.histogram(ds2.matrix.data, bins=range(0, 60, 10)))
         sum_after = ds2.matrix.data.sum()
@@ -139,7 +139,7 @@ class TestReadPTV:
         print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_b_out,
-                        Ftype='B', )
+                        file_type='B', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_b_out)
         print(np.histogram(ds2.matrix.data, bins=range(8)))
         sum_after = ds2.matrix.data.sum()
@@ -154,7 +154,7 @@ class TestReadPTV:
         print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_bk_out,
-                        Ftype='BK', )
+                        file_type='BK', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_bk_out)
         print(np.histogram(ds2.matrix.data, bins=range(8)))
         sum_after = ds2.matrix.data.sum()
@@ -169,7 +169,7 @@ class TestReadPTV:
         print(sum_before)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_out,
-                        Ftype='O', )
+                        file_type='O', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_out)
         print(np.histogram(ds2.matrix.data, bins=range(0, 60, 10)))
         sum_after = ds2.matrix.data.sum()
@@ -187,7 +187,7 @@ class TestReadPTV:
         ds['zone_no2'] *= 100
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_bl_out,
-                        Ftype='BK', )
+                        file_type='BK', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_bl_out)
         print(np.histogram(ds2.matrix.data, bins=range(8)))
         sum_after = ds2.matrix.data.sum()

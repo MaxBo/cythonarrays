@@ -14,14 +14,21 @@ import xarray as xr
 class ReadPTVMatrix(xr.Dataset):
     """reads PTV-Matrix from file
     the matrix-type is determined by the header
-    reades $M, $V, $O, $E, and the binary types $BI and $B
-
-    Arguments:
-        FileName: path to file on disk
-        header: length ot the header
-        zipped: true, if file is zipped
+    reades $M, $V, $O, $E, and the binary types $BI, $BK and $B
     """
     def __init__(self, filename, header=2048, zipped=False):
+        """
+        read a PTV-Matrix and return it as an xarray-dataset
+
+        Parameters
+        ----------
+        FileName: str
+            path to file on disk
+        header: int, optional (default=2048)
+            length ot the header of a binary file
+        zipped: bool, optional (default=False)
+            true, if file is zipped
+        """
         super(ReadPTVMatrix, self).__init__()
         self.attrs['fn'] = filename
         self.attrs['ZeitVon'] = 0
@@ -34,27 +41,36 @@ class ReadPTVMatrix(xr.Dataset):
         with self.openfile(mode='rb') as f:
             line = f.readline().strip()
 
-        if line.startswith(b"$M"):
-            self.readPTVMatrixM()
-        elif line.startswith(b"$V"):
-            self.readPTVMatrixV()
-        elif line.startswith(b"$O"):
-            self.readPTVMatrixO()
-        elif line.startswith(b"$E"):
-            self.readPTVMatrixE()
-        elif line.startswith(b"$S"):
-            self.readPTVMatrixE()
-        elif line.strip(bytes([3, 0])).startswith(b"$BI"):
-            self.readPTVMatrixBKI()
-        elif line.strip(bytes([3, 0])).startswith(b"$BK"):
-            self.readPTVMatrixBKI()
-        elif line.strip(bytes([3, 0])).startswith(b"$BL"):
-            self.readPTVMatrixBKI()
-        elif line.strip(bytes([3, 0])).startswith(b"$B"):
-            self.readPTVMatrixB()
+            errmsg = 'Matrix type not recognised form Header {}'.format(line)
+
+        if line.startswith(bytes([3, 0])) and \
+           line.startswith(b'$B', 2) and len(line) >= 4:
+            # binary format
+            if chr(line[4]) in 'IKL':
+                self.readPTVMatrixBKI()
+            else:
+                self.readPTVMatrixB(header=header)
+        elif line.startswith(b'$') and len(line) > 1:
+            # text format
+            matrix_type = chr(line[1])
+            if line.startswith(b"$"):
+                read_methods = {
+                    #'M': self.readPTVMatrixM,
+                    'V': self.readPTVMatrixV,
+                    'O': self.readPTVMatrixO,
+                    'E': self.readPTVMatrixE,
+                    'S': self.readPTVMatrixE,
+                }
+                read = read_methods.get(matrix_type)
+                if not read:
+                    raise ValueError(errmsg)
+                read()
+            else:
+                raise ValueError(errmsg)
 
         else:
-            self.readPTVMatrixB(header)
+            # assume it is the binary format
+            self.readPTVMatrixB(header=header)
 
         del self.attrs['open']
 
@@ -88,7 +104,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.attrs['VMAktKennung'] = self.readWert(f)
 
         if "N" not in MatrixTyp:
-            ZeitVon, ZeitBis, Faktor = self.readWerte(f, 3)
+            ZeitVon, ZeitBis, Faktor = self.read_values(f, 3)
             self.attrs['ZeitVon'] = ZeitVon
             self.attrs['ZeitBis'] = ZeitBis
             self.attrs['Faktor'] = Faktor
@@ -123,7 +139,7 @@ class ReadPTVMatrix(xr.Dataset):
                 self.attrs['VMAktKennung'] = self.readWert(f)
 
             if "N" not in MatrixTyp:
-                ZeitVon, ZeitBis, Faktor = self.readWerte(f, 3)
+                ZeitVon, ZeitBis, Faktor = self.read_values(f, 3)
                 self.attrs['ZeitVon'] = ZeitVon
                 self.attrs['ZeitBis'] = ZeitBis
                 self.attrs['Faktor'] = Faktor
@@ -316,7 +332,6 @@ class ReadPTVMatrix(xr.Dataset):
         np.testing.assert_allclose(np.diag(self.matrix).sum(),
                                    self.attrs['diagsum'])
 
-
     def read_utf16(self, f):
         """read utf16( encoded string from file at current position"""
         n_chars = self.read_i4(f)
@@ -348,6 +363,7 @@ class ReadPTVMatrix(xr.Dataset):
         return np.fromstring(f.read(4), dtype="i4")[0]
 
     def readPTVMatrixB(self, header=2048):
+        """read non-compressed binary format"""
         with self.openfile(mode="rb") as f:
             f.seek(header)
             f.seek(2, 1)
@@ -396,10 +412,11 @@ class ReadPTVMatrix(xr.Dataset):
             self.matrix.data[:] = arr.reshape(shape)
 
     def readWert(self, f):
-        line = f.readline()
-        while line.startswith("*") or line == "\n":
+        """read a single value from the file"""
+        line = f.readline().strip()
+        while not line or line.startswith("*"):
             line = f.readline()
-        Wert = int(line.strip())
+        Wert = int(line)
         return Wert
 
     def read_values_to_array(self, f, arr, sep=' '):
@@ -420,24 +437,24 @@ class ReadPTVMatrix(xr.Dataset):
         """read values to a numpy array at pos x"""
         rows = deque()
         for line in f:
-            if line.startswith("*") or line == '\n':
-                continue
-            if line.startswith('$'):
-                return rows, line
             row = line.strip()
+            if not row or row.startswith("*"):
+                continue
+            if row.startswith('$'):
+                return rows, row
             rows.append(row)
-        return rows, line
+        return rows, row
 
-    def readWerte(self, f, AnzWerte):
-        Werte = []
-        WerteGefunden = 0
-        while WerteGefunden < AnzWerte:
+    def read_values(self, f, n_values):
+        values = []
+        found = 0
+        while found < n_values:
             line = f.readline()
             while line.startswith("*"):
                 line = f.readline()
-            Werte += map(lambda x: float(x), line.strip().split())
-            WerteGefunden = len(Werte)
-        return Werte
+            values += map(lambda x: float(x), line.strip().split())
+            found = len(values)
+        return values
 
 if __name__ == '__main__':
     parser = ArgumentParser()

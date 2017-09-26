@@ -63,7 +63,7 @@ class ReadOFormat(xr.Dataset):
         msg = 'wrong number of columns specified'
         assert len(data_cols) == len(target_cols), msg
         rename_cols = dict(zip(data_cols,
-                                target_cols))
+                               target_cols))
         df.rename(columns=rename_cols, inplace=True)
 
         da = df.set_index(pkey).sort_index().to_xarray()

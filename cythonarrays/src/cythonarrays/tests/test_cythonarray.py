@@ -8,6 +8,7 @@ Created on Fri Jun 10 21:00:21 2016
 import tempfile
 import numpy as np
 import pytest
+import xarray as xr
 
 from cythonarrays.tests.example_python import Example
 
@@ -249,6 +250,19 @@ jobs_j: shape target: [3], actual: (2,)
         example.zonenumbers_i = np.array([100, 200, 300])
         example.groupnames_g = np.array(['Female', 'Male'], dtype='O')
         example.create_ds()
+        assert isinstance(example.ds, xr.Dataset)
+        for attr, dtype in example.dtypes.items():
+            data_array = example.ds[attr]
+            # test if the shapes are correct
+            if dtype.shape:
+                np.testing.assert_array_equal(dtype.get_shape(example),
+                                              data_array.shape,
+                                              'shape not correct')
+            else:
+                # not initialized array
+                assert not np.any(data_array.shape), 'shape not initialized'
+            #test if the datatypes are correct
+            assert np.dtype(dtype.dtype) == data_array.dtype,  'dtype not correct'
         print(example.ds)
 
     def test_20_save_and_read_ds(self, example, tempfile_h5):
