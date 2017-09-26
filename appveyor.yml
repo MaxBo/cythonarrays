@@ -145,14 +145,14 @@ after_test:
 
   # code coverage: install packages editable
   - cmd: cd cythoninstallhelpers
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-  - cmd: pip install -e .
-  - cmd: cd ..\cythonarrays
-  - cmd: pip install -e .
-  - cmd: cd ..\matrixconverters
-  - cmd: pip install -e .
+  # otherwise, the easy-install.pth is not found somehow and the pip failes
+  - cmd: python setup.py develop
   - cmd: cd ..
+  - cmd: pip install -e cythoninstallhelpers
+  - cmd: pip install -e cythonarrays
+  - cmd: pip install -e matrixconverters
 
   - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov codecov )
   - cmd: IF %UPLOAD_COV%==true ( py.test --cov=cythonarrays\src --cov=matrixconverters\src --cov-report xml --pyargs cythonarrays matrixconverters )
