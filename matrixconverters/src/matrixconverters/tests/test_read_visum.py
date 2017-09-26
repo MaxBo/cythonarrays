@@ -131,6 +131,25 @@ class TestReadPTV:
         print(sum_after)
         np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
 
+    def test_03a_depreciated_args(self, matrix_fn_bk, matrix_fn_out):
+        """Test depreciated arguments"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_out,
+                        Ftype='VN', )
+
+
+    def test_03b_save_vm_format(self, matrix_fn_bk, matrix_fn_out):
+        """Test writing vm-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bk)
+        sum_before = ds.matrix.data.sum()
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_out,
+                        file_type='VM', )
+        ds2 = ReadPTVMatrix(filename=matrix_fn_out)
+        sum_after = ds2.matrix.data.sum()
+        np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
+
     def test_04_save_b_format(self, matrix_fn_bk, matrix_fn_b_out):
         """Test writing uncompressed b-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)

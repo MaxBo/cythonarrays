@@ -364,17 +364,19 @@ class SavePTV(object):
                     f.write(colsums.tostring())
 
 
-    def savePSVMatrix(self, fileName, ftype="CC", maxWidth=1000):
+    def savePSVMatrix(self, file_name, ftype="CC", max_width=1000):
         """ exports array in PSV-Format
         """
         m = self.ds.matrix.data
+        zones_da = self.ds.get('zones')
         if not m.ndim == 2:
             raise ValueError('matrix has to have 2 dimensions')
         rows, cols = m.shape
-        if not hasattr(self, 'zones'):
-            self.zones = range(1, rows + 1)
-        f = open(fileName, "w")
-        try:
+        if zones_da:
+            zones_da = zones.data
+        else:
+            zones = range(1, rows + 1)
+        with open(file_name, "w") as f:
             Za = max(rows, cols)
             Zi = min(rows, cols)
             f.write("%s; Za %s; Zi %s;\n" % (ftype, Za, Zi))
@@ -383,15 +385,15 @@ class SavePTV(object):
                     # teste, ob Zeile nicht nur aus Nullen besteht
                     if m[i].any():
                         # addiere 1, um Zellennummer 0 zu vermeiden
-                        row = str(m.zones[i])
+                        row = str(zones[i])
                         for j in range(cols):
-                            if len("%s %s %s" % (row, m.zones[j],
-                                                 m[i, j])) >= maxWidth:
+                            if len("%s %s %s" % (row, zones[j],
+                                                 m[i, j])) >= max_width:
                                 row += "\n"
                                 f.write(row)
                                 row = str(m.zones[i])
                             if m[i, j] != 0:
-                                row += " %s %s " % (m.zones[j], m[i, j])
+                                row += " %s %s " % (zones[j], m[i, j])
                         row += "\n"
                         f.write(row)
 
@@ -399,16 +401,14 @@ class SavePTV(object):
                 for i in range(rows):
                     # teste, ob Zeile nicht nur aus Nullen besteht
                     if m[i].any():
-                        row = str(m.zones[i])
+                        row = str(zones[i])
                         for j in range(cols):
-                            if len("%s %s" % (row, m[i, j])) >= maxWidth:
+                            if len("%s %s" % (row, m[i, j])) >= max_width:
                                 row += "\n"
                                 f.write(row)
-                                row = str(m.zones[i])
+                                row = str(zones[i])
                             row += " " + str(m[i, j])
                         row += "\n"
                         f.write(row)
             else:
                 raise TypeError("Kann Typ %s nicht schreiben" % ftype)
-        finally:
-            f.close()
