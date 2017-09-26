@@ -107,27 +107,27 @@ ctypedef cython.ushort[:, :, :] ARRAY_3D_u2
 ctypedef cython.uint[:, :, :] ARRAY_3D_u4
 ctypedef cython.ulonglong[:, :, :] ARRAY_3D_u8
 
-ctypedef fused np_signed_int
+ctypedef fused np_signed_int:
     cython.char
     cython.short
     cython.int
     cython.longlong
 
-ctypedef fused np_int_4_8
+ctypedef fused np_int_4_8:
     cython.int
     cython.longlong
 
-ctypedef fused np_uint
+ctypedef fused np_uint:
     cython.uchar
     cython.ushort
     cython.uint
     cython.ulonglong
 
-ctypedef fused np_floating
+ctypedef fused np_floating:
     cython.float
     cython.double
 
-ctypedef fused np_integer
+ctypedef fused np_integer:
     cython.char
     cython.short
     cython.int
@@ -137,7 +137,7 @@ ctypedef fused np_integer
     cython.uint
     cython.ulonglong
 
-ctypedef fused np_numeric
+ctypedef fused np_numeric:
     cython.char
     cython.short
     cython.int
