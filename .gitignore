@@ -39,3 +39,4 @@ pip-log.txt
 
 # doctrees in documentation
 /docs/_build/doctrees
+coverage.xml

@@ -17,6 +17,9 @@ environment:
   PYPIPASSWORD:
     secure: R7Hpmou1Q3ysPCVbkhvdBg==
 
+  CODECOV_TOKEN:
+    secure: mQ6pnaM1xr97Fvf8CKU5XMVftz08EheIwm7kdGnLN7pI/8NYD9VZRJyjDbqcWR44
+
   matrix:
 #    - TARGET_ARCH: x64
 #      CONDA_NPY: 111
@@ -28,12 +31,14 @@ environment:
       CONDA_PY: 35
       PYTHON_VERSION: 3.5
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 111
       CONDA_PY: 36
       PYTHON_VERSION: 3.6
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      UPLOAD_COV: true
 
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable.
@@ -137,6 +142,10 @@ after_test:
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
+
+  - cmd: conda install -y codecov
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - cmd: IF %UPLOAD_COV%==true ( codecov --file cythonarrays\conda.recipe\coverage.xml matrixconverters\conda.recipe\coverage.xml )
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory

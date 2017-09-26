@@ -22,6 +22,7 @@ requirements:
     - cythoninstallhelpers
     - pytest
     - pytest-runner
+    - pytest-cov
   run:
     - python
     - setuptools
@@ -30,14 +31,14 @@ requirements:
     - cythoninstallhelpers
     - pytest
     - pytest-runner
-
+    - pytest-cov
 test:
   requires:
     - pytest
     - pytest-runner
     - pytest-cov
   commands:
-    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythonarrays.xml --pyargs cythonarrays
+    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythonarrays.xml --cov=..\src --cov-report xml --pyargs cythonarrays
 
 about:
   home: https://maxbo.github.io/cythonarrays
