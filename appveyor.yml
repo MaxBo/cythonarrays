@@ -71,6 +71,7 @@ install:
     - cmd: conda config --add channels MaxBo
 
     # Conda build tools.
+    - cmd: conda install -n root --yes yaml
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     # latest conda-build
