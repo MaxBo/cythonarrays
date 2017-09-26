@@ -143,9 +143,19 @@ after_test:
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
 
-  - cmd: conda install -y codecov
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-  - cmd: IF %UPLOAD_COV%==true ( codecov --file cythonarrays\conda.recipe\coverage.xml matrixconverters\conda.recipe\coverage.xml )
+  # code coverage: install packages editable
+  - cmd: cd cythoninstallhelpers
+  - cmd: pip install -e .
+  - cmd: cd ..\cythonarrays
+  - cmd: pip install -e .
+  - cmd: cd ..\matrixconverters
+  - cmd: pip install -e .
+  - cmd: cd ..
+
+  - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov codecov )
+  - cmd: IF %UPLOAD_COV%==true ( py.test --cov=cythonarrays\src --cov=matrixconverters\src --cov-report xml --pyargs cythonarrays matrixconverters )
+  - cmd: IF %UPLOAD_COV%==true ( codecov )
+  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory

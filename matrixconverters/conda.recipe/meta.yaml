@@ -23,7 +23,6 @@ requirements:
     - netcdf4
     - pytest
     - pytest-runner
-    - pytest-cov
   run:
     - python
     - setuptools
@@ -36,9 +35,8 @@ test:
   requires:
     - pytest
     - pytest-runner
-    - pytest-cov
   commands:
-    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_matrixconverters.xml --cov=..\src --cov-report xml --pyargs matrixconverters
+    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_matrixconverters.xml --pyargs matrixconverters
 
 about:
   home: https://maxbo.github.io/cythonarrays
