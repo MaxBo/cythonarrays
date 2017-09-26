@@ -107,25 +107,47 @@ ctypedef cython.ushort[:, :, :] ARRAY_3D_u2
 ctypedef cython.uint[:, :, :] ARRAY_3D_u4
 ctypedef cython.ulonglong[:, :, :] ARRAY_3D_u8
 
-np_signed_int = cython.fused_type(cython.char, cython.short, cython.int,
-                           cython.longlong)
+ctypedef fused np_signed_int
+    cython.char
+    cython.short
+    cython.int
+    cython.longlong
 
-np_int_4_8 = cython.fused_type(cython.int, cython.longlong)
+ctypedef fused np_int_4_8
+    cython.int
+    cython.longlong
 
-np_uint = cython.fused_type(cython.uchar, cython.ushort, cython.uint,
-                            cython.ulonglong)
-np_floating = cython.fused_type(cython.float, cython.double)
+ctypedef fused np_uint
+    cython.uchar
+    cython.ushort
+    cython.uint
+    cython.ulonglong
 
-np_integer = cython.fused_type(cython.char, cython.short, cython.int,
-                               cython.longlong,
-                               cython.uchar, cython.ushort, cython.uint,
-                               cython.ulonglong)
+ctypedef fused np_floating
+    cython.float
+    cython.double
 
-np_numeric = cython.fused_type(cython.char, cython.short, cython.int,
-                               cython.longlong,
-                               cython.uchar, cython.ushort, cython.uint,
-                               cython.ulonglong,
-                               cython.float, cython.double)
+ctypedef fused np_integer
+    cython.char
+    cython.short
+    cython.int
+    cython.longlong
+    cython.uchar
+    cython.ushort
+    cython.uint
+    cython.ulonglong
+
+ctypedef fused np_numeric
+    cython.char
+    cython.short
+    cython.int
+    cython.longlong
+    cython.uchar
+    cython.ushort
+    cython.uint
+    cython.ulonglong
+    cython.float
+    cython.double
 
 
 ctypedef np_signed_int[:] ARRAY_1D_i
