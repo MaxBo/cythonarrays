@@ -54,6 +54,7 @@ install:
   - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
   - conda install -y sphinx numpydoc
   - pip install --user travis-sphinx
+  - conda install pytest-cov
 
 script:
   # Your test script goes here
@@ -89,3 +90,4 @@ after_success:
       python setup.py sdist;
       twine upload --skip-existing dist/*;
     fi
+

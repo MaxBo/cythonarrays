@@ -35,6 +35,7 @@ test:
   requires:
     - pytest
     - pytest-runner
+    - pytest-cov
   commands:
     - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythonarrays.xml --pyargs cythonarrays
 
