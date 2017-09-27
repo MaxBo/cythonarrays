@@ -32,7 +32,10 @@ class Test01_Logger:
 
     @classmethod
     def teardown_class(cls):
-        shutil.rmtree(cls.LOG_FOLDER)
+        try:
+            shutil.rmtree(cls.LOG_FOLDER)
+        except PermissionError:
+            pass
 
     def test_02_log_something(self):
         """log something to the logger"""
