@@ -372,7 +372,7 @@ class SavePTV(object):
         if not m.ndim == 2:
             raise ValueError('matrix has to have 2 dimensions')
         rows, cols = m.shape
-        if zones_da:
+        if zones_da is None:
             zones_da = zones.zone_no
         else:
             zones = range(1, rows + 1)
