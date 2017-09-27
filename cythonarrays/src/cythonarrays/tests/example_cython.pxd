@@ -35,6 +35,9 @@ cdef class _Example(ArrayShapes):
     # not initialized matrix
     cdef public ARRAY_2D_i4 _not_initialized_ij
 
+    # boolen array
+    cdef public ARRAY_1D_i1 _valid_g
+    cdef public ARRAY_1D_u1 _invalid_g
 
     cpdef char calc_model(self) except -1
     cdef double _calc_weight_destination(self, double param,

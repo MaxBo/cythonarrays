@@ -290,5 +290,18 @@ jobs_j: shape target: [3], actual: (2,)
 
         print(new_example.ds)
 
+    def test_21_assign_bool(self, example):
+        """Test boolean array"""
+        # the boolean arrays are initialized with 0 and 1
+        np.testing.assert_array_equal(example.valid_g.astype(bool),
+                                      ~example.invalid_g.astype(bool))
+        example.valid_g = np.zeros((example.groups), dtype=bool)
+        example.invalid_g = np.ones((example.groups), dtype=bool)
+        np.testing.assert_array_equal(example.valid_g.astype(bool),
+                                          ~example.invalid_g.astype(bool))
+        print(example.valid_g)
+        print(example.invalid_g)
+
+
 if __name__ == '__main__':
     pytest.main()

@@ -70,6 +70,9 @@ class Example(_Example, _ArrayProperties):
         self.init_array('zonenumbers_i', 'origins')
         self.init_object_array('groupnames_g', 'groups')
 
+        self.init_array('valid_g', 'groups', 1)
+        self.init_array('invalid_g', 'groups', 0)
+
         # the following array will not be initialized for testing purposes
         # self.init_array('not_initialized_ij', 'zones, groups')
 

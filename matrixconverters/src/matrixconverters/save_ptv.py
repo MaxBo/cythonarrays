@@ -368,12 +368,12 @@ class SavePTV(object):
         """ exports array in PSV-Format
         """
         m = self.ds.matrix.data
-        zones_da = self.ds.get('zones')
+        zones_da = self.ds.get('zone_no')
         if not m.ndim == 2:
             raise ValueError('matrix has to have 2 dimensions')
         rows, cols = m.shape
         if zones_da:
-            zones_da = zones.data
+            zones_da = zones.zone_no
         else:
             zones = range(1, rows + 1)
         with open(file_name, "w") as f:
@@ -391,7 +391,7 @@ class SavePTV(object):
                                                  m[i, j])) >= max_width:
                                 row += "\n"
                                 f.write(row)
-                                row = str(m.zones[i])
+                                row = str(zones[i])
                             if m[i, j] != 0:
                                 row += " %s %s " % (zones[j], m[i, j])
                         row += "\n"
