@@ -137,6 +137,10 @@ after_test:
   - cmd: cd cythonarrays
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
+
+  # recompile with linetrace if coverage of pyx files should be uploaded
+  - cmd: IF %UPLOAD_COV%==true ( python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL )
+
   - cmd: cd ..
   - cmd: conda install -y cythonarrays
   - cmd: cd matrixconverters

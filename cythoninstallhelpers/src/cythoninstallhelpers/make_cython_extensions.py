@@ -44,5 +44,8 @@ def make_extensions(ext_modnames, further_args={}):
         extension = make_ext(modname, sources, **further_arg)
         extensions.append(extension)
 
-    cython_extensions = cythonize(extensions, annotate=True)
+    cython_extensions = cythonize(extensions,
+                                  annotate=True,
+                                  compiler_directives={'linetrace': True,},
+                                  )
     return cython_extensions
