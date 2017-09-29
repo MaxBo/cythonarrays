@@ -23,7 +23,10 @@ develop-eggs
 pip-log.txt
 # Unit test / coverage reports
 .coverage
+coverage.xml
 .tox
+*/htmlcov
+*.log
 #Translations
 *.mo
 # compiled cython scripts
@@ -34,9 +37,11 @@ pip-log.txt
 *.wpr
 *.wpu
 
+wingdbstub.py
+
 .cache
 .spyder*
 
+
 # doctrees in documentation
 /docs/_build/doctrees
-coverage.xml
