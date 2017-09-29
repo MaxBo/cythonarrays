@@ -55,9 +55,7 @@ class ArrayDescriptor(object):
         """
 
         dim_diff = ndim - arr.ndim
-        if dim_diff == 0:
-            return arr
-        elif dim_diff > 0:
+        if dim_diff > 0:
             return arr.__getitem__([np.newaxis] * dim_diff)
         elif dim_diff < 0:
             dim_diff *= -1
@@ -68,6 +66,8 @@ class ArrayDescriptor(object):
                 msg = 'cannot reshape shape %s to %s dimensions' % (arr.shape,
                                                                     ndim)
                 raise ValueError(msg)
+        else:
+            return arr
 
     def validate_array(self, arr, instance=None):
         """
@@ -96,7 +96,7 @@ class ArrayDescriptor(object):
             new_type = np.dtype(self.dtype).type
             if issubclass(new_type, np.int8):
                 return arr.view(dtype='i1')
-            if issubclass(new_type, np.uint8):
+            elif issubclass(new_type, np.uint8):
                 return arr.view(dtype='u1')
 
         return arr.astype(self.dtype, copy=False)
@@ -118,9 +118,10 @@ class ArrayDescriptor(object):
         else:
             return self._dtype_numpy
 
-    @dtype_numpy.setter
-    def dtype_numpy(self, value):
-        self._dtype_numpy = value
+#     do not modify the dtype later
+#     @dtype_numpy.setter
+#     def dtype_numpy(self, value):
+#         self._dtype_numpy = value
 
     @property
     def shape(self):

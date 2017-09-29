@@ -10,7 +10,7 @@ cimport numpy as np
 oldsettings = np.seterr(divide='ignore')
 
 from .numpy_types import typedict
-from .numpy_types cimport np_floating
+from .numpy_types cimport np_floating, np_numeric
 from .array_descriptors import ArrayDescriptor
 
 from .configure_logger import get_logger
@@ -60,6 +60,10 @@ cdef class ArrayShapes(object):
     cdef public char isnan(self, np_floating x) nogil:
         """check for nan"""
         return npy_isnan(x)
+
+    def isnan_py(self, np_numeric x):
+        """python wrapper around isnan()"""
+        return bool(self.isnan(float(x)))
 
     @cython.initializedcheck(False)
     cpdef _search_memview(self, cls):
@@ -140,7 +144,7 @@ cdef class ArrayShapes(object):
                 try:
                     setattr(self, intern_name, arr)
                 except ValueError as err:
-                    print err
+                    print(err)
                     raise err
             else:
                 raise

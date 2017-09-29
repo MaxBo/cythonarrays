@@ -65,10 +65,11 @@ class Example(_Example, _ArrayProperties):
 
         self.init_array('persons_gi', 'groups, origins')
         self.init_array('jobs_j', 'destinations')
-        self.init_array('trips_ij', 'origins, destinations', 0)
+        self.init_array('trips_ij', ['origins', 'destinations'], 0)
 
         self.init_array('zonenumbers_i', 'origins')
         self.init_object_array('groupnames_g', 'groups')
+        self.init_object_array('zonenames_i', ['origins'])
 
         self.init_array('valid_g', 'groups', 1)
         self.init_array('invalid_g', 'groups', 0)

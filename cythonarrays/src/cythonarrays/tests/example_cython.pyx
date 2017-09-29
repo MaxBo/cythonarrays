@@ -18,7 +18,6 @@ cdef class _Example(ArrayShapes):
     Cython CDefClass for Example model
     with coordinates groups and zones
     """
-
     @cython.initializedcheck(False)
     cpdef char calc_model(self) except -1:
         """
@@ -81,4 +80,5 @@ cdef class _Example(ArrayShapes):
             array with the weights for each zone
         """
         return self._calc_p_destination(g)
+
 

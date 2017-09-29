@@ -11,6 +11,8 @@ import pytest
 import xarray as xr
 
 from cythonarrays.tests.example_python import Example
+import pyximport; pyximport.install()
+from .example_cython import (_Example)
 
 
 @pytest.fixture(scope='class')
@@ -72,6 +74,7 @@ def tempfile_h5():
 
 class Test01_ExampleCDefClass:
     """Test the Example CDefClass"""
+
     def test_01_test_init_array(self, persons_gi):
         """Test the Example CDefClass creation"""
         groups, zones = persons_gi.shape
@@ -157,6 +160,7 @@ jobs_j: shape target: [3], actual: (2,)
         # another dimension is added
         assert b.ndim == 2
         assert b.shape == (1, 3)
+        print(example.not_initialized_ij)
 
         # change value in cython-memoryview
         example._not_initialized_ij[0, 1] = 99
@@ -198,6 +202,30 @@ jobs_j: shape target: [3], actual: (2,)
         np.testing.assert_array_equal(example.not_initialized_ij, target)
         # as this is a view on the input-data, it will be changed there, too
         np.testing.assert_array_equal(f[0, 1, 1], 88)
+
+        # use more dimensions than required
+        # reset the array first
+        del example.not_initialized_ij
+        print(example.not_initialized_ij)
+        c = np.array([[[2, 3, 4]]], dtype='i4')
+        example.not_initialized_ij = c
+        b = example.not_initialized_ij
+        # one dimension can be taken away
+        assert b.ndim == 2
+        assert b.shape == (1, 3)
+        print(example.not_initialized_ij)
+
+        # use the correct number of dimensions
+        # reset the array first
+        del example.not_initialized_ij
+        print(example.not_initialized_ij)
+        d = np.array([[2, 3, 4]], dtype='i4')
+        example.not_initialized_ij = d
+        b = example.not_initialized_ij
+        # one dimension can be taken away
+        assert b.ndim == 2
+        assert b.shape == (1, 3)
+        print(example.not_initialized_ij)
 
     def test_04_test_dtype(self, persons_gi):
         """Test the dimensions"""
@@ -298,9 +326,85 @@ jobs_j: shape target: [3], actual: (2,)
         example.valid_g = np.zeros((example.groups), dtype=bool)
         example.invalid_g = np.ones((example.groups), dtype=bool)
         np.testing.assert_array_equal(example.valid_g.astype(bool),
-                                          ~example.invalid_g.astype(bool))
+                                      ~example.invalid_g.astype(bool))
         print(example.valid_g)
         print(example.invalid_g)
+
+    def test_30_test_init_array(self, persons_gi):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=7, origins=5)
+
+        example.init_array('param_g', 7)
+        assert example.param_g.shape == (7, )
+
+    def test_32_test_not_init_array(self):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=7, origins=5,
+                          init_arrays=False, threading=False)
+        with pytest.raises(AttributeError):
+            print(example.not_initialized_ij)
+
+    def test_32_test_not_init_array(self):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=7, origins=5,
+                          init_arrays=False, threading=False)
+        with pytest.raises(AttributeError):
+            print(example.not_initialized_ij)
+
+    def test_33_del_property(self):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=7, origins=5)
+        print(example.km_ij)
+        # remove the shape
+        example.dtypes['km_ij'].shape = None
+
+        # reset to default (not defined)
+        example.reset_array('km_ij')
+        np.testing.assert_array_equal(example.km_ij, np.NAN)
+
+        # reset to default (new value defined)
+        example.dtypes['km_ij'].default = 11
+        example.reset_array('km_ij')
+        np.testing.assert_array_equal(example.km_ij, 11)
+
+        # delete values
+        del example.km_ij
+        np.testing.assert_array_equal(example.km_ij.shape, (0, 0))
+
+
+        # set new values
+        new_array = np.arange(10).reshape(2, 5)
+        example.set_array('km_ij', value=new_array, shape=(2, 5))
+        np.testing.assert_array_equal(example.km_ij, new_array)
+
+
+    def test_34_save_ds(self, tempfile_h5):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=7, origins=5, )
+        example.save_dataset_to_netcdf(tempfile_h5)
+
+
+class Test04_Test_Instatiation:
+    """Test the instatiation of the class"""
+    def test041_test_instatiation(self):
+        """not subclassing shoud rais a NotImplementedError"""
+        with pytest.raises(NotImplementedError):
+            example = _Example()
+
+    def test042_test_nan(self, persons_gi):
+        """Test nan"""
+        groups, zones = persons_gi.shape
+        example = Example(groups, zones)
+
+        assert example.isnan_py(np.NAN)
+        assert not example.isnan_py(np.NINF)
+        assert not example.isnan_py(np.Inf)
+        assert not example.isnan_py(0)
+        assert not example.isnan_py(1)
+        assert not example.isnan_py(-1)
+
+
+
 
 
 if __name__ == '__main__':
