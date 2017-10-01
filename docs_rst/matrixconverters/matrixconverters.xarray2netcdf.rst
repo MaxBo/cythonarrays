@@ -1,5 +1,5 @@
-matrixconverters.xarray2netcdf module
-=====================================
+matrixconverters\.xarray2netcdf module
+======================================
 
 .. automodule:: matrixconverters.xarray2netcdf
     :members:

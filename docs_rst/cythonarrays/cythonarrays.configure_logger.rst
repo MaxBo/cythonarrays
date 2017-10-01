@@ -1,5 +1,5 @@
-cythonarrays.configure_logger module
-====================================
+cythonarrays\.configure\_logger module
+======================================
 
 .. automodule:: cythonarrays.configure_logger
     :members:

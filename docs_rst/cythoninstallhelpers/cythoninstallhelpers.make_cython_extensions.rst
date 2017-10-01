@@ -1,5 +1,5 @@
-cythoninstallhelpers.make_cython_extensions module
-==================================================
+cythoninstallhelpers\.make\_cython\_extensions module
+=====================================================
 
 .. automodule:: cythoninstallhelpers.make_cython_extensions
     :members:
