@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/MaxBo/cythonarrays.svg?branch=master)](https://travis-ci.org/MaxBo/cythonarrays)
 [![Build status](https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true)](https://ci.appveyor.com/project/MaxBo/cythonarrays)
 [![codecov](https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg)](https://codecov.io/gh/MaxBo/cythonarrays)
+[![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
+
 
 # cythonarrays
 Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.
