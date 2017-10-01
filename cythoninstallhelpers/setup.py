@@ -45,6 +45,8 @@ setup(
     data_files=[],
     install_requires=[
         #'setuptools',
+        'numpy',
+        'cython',
         ],
 )
 
