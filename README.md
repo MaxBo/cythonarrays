@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/MaxBo/cythonarrays.svg?branch=master)](https://travis-ci.org/MaxBo/cythonarrays)
 [![Build status](https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true)](https://ci.appveyor.com/project/MaxBo/cythonarrays)
 [![codecov](https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg)](https://codecov.io/gh/MaxBo/cythonarrays)
-[![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
-
 
 # cythonarrays
 Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.
@@ -12,10 +10,18 @@ Python Packages to facilitate cython cdef-classes that expose memoryviews as num
 It consists of three packages:
 
 **cythoninstallhelpers**:
+[![PyPI version](https://badge.fury.io/py/cythoninstallhelpers.svg)](https://badge.fury.io/py/cythoninstallhelpers)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/cythoninstallhelpers/badges/version.svg)](https://anaconda.org/maxbo/cythoninstallhelpers)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/cythoninstallhelpers/badges/installer/conda.svg)](https://conda.anaconda.org/maxbo)
+
 a package that provides functions that are used in the setup.py of cythonarrays
 therefore, it has to be installed first
 
 **cythonarrays**:
+[![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/cythonarrays/badges/version.svg)](https://anaconda.org/maxbo/cythonarrays)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/cythonarrays/badges/installer/conda.svg)](https://conda.anaconda.org/maxbo)
+
 provides a Base-Class for cython CDef-Classes, that allow to define arrays
 as attributes which can be used in cython code as fast memoryviews and at the same time
 be accessed from python as numpy-arrays
@@ -23,7 +29,12 @@ In addition, the dimensions and shapes of data assigned to the arrays is checked
 If you try to set data with wrong dimensions or shapes, an error is thrown.
 Data is automatically converted to the right dtype.
 
+
 **matrixconverters**:
+[![PyPI version](https://badge.fury.io/py/matrixconverters.svg)](https://badge.fury.io/py/matrixconverters)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/matrixconverters/badges/version.svg)](https://anaconda.org/maxbo/matrixconverters)
+[![Anaconda-Server Badge](https://anaconda.org/maxbo/matrixconverters/badges/installer/conda.svg)](https://conda.anaconda.org/maxbo)
+
 tools to read and write matrices in the format or PTV VISUM
 
 [Documentation](https://maxbo.github.io/cythonarrays/)
