@@ -21,7 +21,7 @@ requirements:
     - python
     - setuptools
     - numpy
-    - cython >= 0.27.1
+    - cython
 
 about:
   home: https://maxbo.github.io/cythonarrays

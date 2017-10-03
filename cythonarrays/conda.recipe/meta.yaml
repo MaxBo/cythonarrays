@@ -16,7 +16,7 @@ requirements:
   build:
     - python
     - setuptools
-    - cython >= 0.27.1
+    - cython
     - numpy
     - xarray
     - cythoninstallhelpers
