@@ -16,6 +16,8 @@ requirements:
   build:
     - python
     - setuptools
+    - numpy
+    - cython
 
   run:
     - python
