@@ -138,7 +138,7 @@ after_test:
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
 
-  # recompile with linetrace if coverage of pyx files should be uploaded
+  # recompile with linetrace if coverage of pyx files should be uploaded - not for production
   - cmd: IF %UPLOAD_COV%==true ( python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL )
 
   - cmd: cd ..
@@ -148,23 +148,35 @@ after_test:
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
 
+  # install codecoverage tools
+  - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov )
+    # codecov > 2.0.5 has problems finding the coverage.xml, so use the older version
+  - cmd: IF %UPLOAD_COV%==true ( pip install codecov==2.0.5 )
+
   # code coverage: install packages editable
   - cmd: cd cythoninstallhelpers
   #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
   # otherwise, the easy-install.pth is not found somehow and the pip failes
   - cmd: python setup.py develop
-  - cmd: cd ..
-  - cmd: pip install -e cythoninstallhelpers
-  - cmd: pip install -e cythonarrays
-  - cmd: pip install -e matrixconverters
+  - cmd: pip install -e .
+  - cmd: IF %UPLOAD_COV%==true ( py.test --cov=src --pyargs cythoninstallhelpers )
 
-  - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov )
-  # codecov > 2.0.5 has problems finding the coverage.xml, so use the older version
-  - cmd: IF %UPLOAD_COV%==true ( pip install codecov==2.0.5 )
-  - cmd: IF %UPLOAD_COV%==true ( py.test --cov=cythonarrays\src --cov=matrixconverters\src --cov-report xml --pyargs cythonarrays matrixconverters )
+  - cmd: cd ..\cythonarrays
+  - cmd: pip install -e .
+  - cmd: IF %UPLOAD_COV%==true ( py.test --cov=src --pyargs cythonarrays )
+
+  - cmd: cd ..\matrixconverters
+  - cmd: pip install -e .
+  - cmd: IF %UPLOAD_COV%==true ( py.test --cov=src --pyargs matrixconverters )
+
+  # combine the results from the packages
+  - cmd: cd ..
+  - cmd: IF %UPLOAD_COV%==true ( coverage combine cythoninstallhelpers\.coverage cythonarrays\.coverage matrixconverters\.coverage )
+  - cmd: IF %UPLOAD_COV%==true ( coverage xml )
+
+  # upload the results to codecov.io
   - cmd: IF %UPLOAD_COV%==true ( codecov -X gcov -f "coverage.xml" )
-  #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 artifacts:
   # bdist_wheel puts your built wheel in the dist directory
