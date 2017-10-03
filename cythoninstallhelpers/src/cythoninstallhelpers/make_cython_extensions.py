@@ -10,7 +10,7 @@ from .build_config import (extra_compile_args,
                           make_ext,)
 
 
-def make_extensions(ext_modnames, further_args={}):
+def make_extensions(ext_modnames, further_args={}, source_dir='src'):
     """
     add sources to the ext_modules specified in the input list
 
@@ -19,6 +19,8 @@ def make_extensions(ext_modnames, further_args={}):
     ext_modnames : list of str
         the extension modules to create
     further_args : dict with further arguments for extension module
+    source_dir : str, optional (default='src')
+        the source directory relative to the setup.py file
 
     Returns
     -------
@@ -30,7 +32,7 @@ def make_extensions(ext_modnames, further_args={}):
     suffix = '.pyx'
     for modname in ext_modnames:
         mn = modname.split('.')
-        pyxfilename = os.path.join('src', *mn) + suffix
+        pyxfilename = os.path.join(source_dir, *mn) + suffix
         sources = [pyxfilename]
         further_arg = further_args.get(modname, {})
         if further_arg:
@@ -38,7 +40,7 @@ def make_extensions(ext_modnames, further_args={}):
             ms = mn[:-1]
             full_more_sources = []
             for source in more_sources:
-                full_source = ['src'] + ms + [source]
+                full_source = [source_dir] + ms + [source]
                 full_more_sources.append(os.sep.join(full_source))
             sources.extend(full_more_sources)
         extension = make_ext(modname, sources, **further_arg)

@@ -14,11 +14,11 @@ else:
 def make_ext(modname, sources, **kwargs):
     if not isinstance(sources, list):
         sources = [sources]
-    return Extension(modname,
-    sources=sources,
-    extra_compile_args=extra_compile_args,
-    extra_link_args=extra_link_args,
-    include_dirs=[np.get_include()],
-    #define_macros=[('CYTHON_TRACE', '1')],
-    **kwargs
-    )
+    extension = Extension(modname,
+                          sources=sources,
+                          extra_compile_args=extra_compile_args,
+                          extra_link_args=extra_link_args,
+                          include_dirs=[np.get_include()],
+                          **kwargs,
+                          )
+    return extension

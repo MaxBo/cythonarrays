@@ -18,7 +18,7 @@ def get_version(package_name: str,
         verstrline = open(version_path, "rt").read()
     except IOError:
         raise IOError('Version file {} not found'.format(version_path))
-    VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+    VSRE = r"^[_]{0,2}version[_]{0,2}\s*=\s*['\"]([^'\"]*)['\"]"
     mo = re.search(VSRE, verstrline, re.M)
     if mo:
         verstr = mo.group(1)
