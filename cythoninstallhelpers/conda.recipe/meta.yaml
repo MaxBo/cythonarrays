@@ -24,6 +24,12 @@ requirements:
     - setuptools
     - numpy
     - cython
+test:
+  requires:
+    - pytest
+    - pytest-runner
+  commands:
+    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythoninstallhelpers.xml --pyargs cythoninstallhelpers
 
 about:
   home: https://maxbo.github.io/cythonarrays

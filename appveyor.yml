@@ -101,9 +101,9 @@ test_script:
 
 after_test:
 
-  - ps: $package1 = "cythonarrays"
+  - ps: $package1 = "cythoninstallhelpers"
   - ps: ([xml]$finalXml) = Get-Content (Resolve-Path $env:TMPDIR\junit_$package1.xml)
-  - ps: $other_packages = "matrixconverters"
+  - ps: $other_packages = "cythonarrays", "matrixconverters"
 
   - ps: >-
       foreach ($package in $other_packages) {
