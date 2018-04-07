@@ -371,12 +371,10 @@ jobs_j: shape target: [3], actual: (2,)
         del example.km_ij
         np.testing.assert_array_equal(example.km_ij.shape, (0, 0))
 
-
         # set new values
         new_array = np.arange(10).reshape(2, 5)
         example.set_array('km_ij', value=new_array, shape=(2, 5))
         np.testing.assert_array_equal(example.km_ij, new_array)
-
 
     def test_34_save_ds(self, tempfile_h5):
         """Test the Example CDefClass creation"""
@@ -384,9 +382,10 @@ jobs_j: shape target: [3], actual: (2,)
         example.save_dataset_to_netcdf(tempfile_h5)
 
 
-class Test04_Test_Instatiation:
-    """Test the instatiation of the class"""
-    def test041_test_instatiation(self):
+class Test04_Test_Instantiation:
+    """Test the instantiation of the class"""
+    
+    def test041_test_instantiation(self):
         """not subclassing shoud rais a NotImplementedError"""
         with pytest.raises(NotImplementedError):
             example = _Example()
@@ -402,9 +401,6 @@ class Test04_Test_Instatiation:
         assert not example.isnan_py(0)
         assert not example.isnan_py(1)
         assert not example.isnan_py(-1)
-
-
-
 
 
 if __name__ == '__main__':

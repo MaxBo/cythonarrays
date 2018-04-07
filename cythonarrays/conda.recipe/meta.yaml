@@ -27,9 +27,11 @@ requirements:
     - setuptools
     - numpy
     - xarray
+    - netcdf4
     - cythoninstallhelpers
     - pytest
     - pytest-runner
+    
 test:
   requires:
     - pytest
