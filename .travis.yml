@@ -26,9 +26,8 @@ env:
     # Travis-remote-shell
     - secure: J7OQyUjKPOfo1PDK5/s5QDgbV9mN8js3jhKBtg7M4R+mXarThEacAE8Rov4rzKxPABLwMaoEAPvVggPXgESG7RbN+gsOA7ZCv8vFubvWrX9o/bp9ahK9iAvXuumwW2D5MN9ehMLY2rhZcLNYeip6DuvehrguLp2XDFgmjXL6rDCYJz+7XlbuqcjCwjj/d+4bel9wvrijQtRBzUn3qgJY2kDgmX3PUz7L3cWGPl9WmZ00amtCDbU3Gku5KsqKIP4MFIEFB9eH6ep+DQdzgLTtOzPzr0rP3P+ek0UQKePtcYXqbv5gjBnZAREVhmD7Aby2aN9HTXD9SQs1er5ySrmla3xEaRkQ3uWbxKHzHYlFFuNxZRukWLIbfBXLPTbM37fF6IJvNz2v64YDFRijUsOpMZbrksPgA9UYymf6SJ9EX/5LRiVPiSjIVeReaIgWG7SSrXCE+f+muzeOdQqCl1qRezKuEQFGDchsU4XPNWB+7h8c+CfXEPSjobrvROwN/qtw3uCyxiuNGeVtK3EktsbJLafDt45ZNn91KD7y85Md5tOSUwVGgJm3XSkeyq4FbPURTp4+R7+Gp1nS0uusiSrPLUR6QV0x0juliY+imGVCKIlJXg175sBMAU8K5VpQhMxmhYRa6Zp1uAT4v+UY/GDrVgDa57sOF2MurWWhjLuS6HI=
 
-
 before_install:
-  - eval "$(curl -sL https://raw.github.com/fniephaus/travis-remote-shell/master/run.sh)"
+  - eval "$(curl -sL https://raw.github.com/sysgears/travis-remote-shell/master/run.sh)"
 
 install:
   - sudo apt-get update
@@ -58,13 +57,13 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
   - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
+  - export CONDA_BLD_PATH=$TMPDIR
   - conda install -y sphinx numpydoc
   - pip install --user travis-sphinx
   - conda install pytest-cov
 
 script:
   # Your test script goes here
-  - conda config --set CONDA_BLD_PATH $TMPDIR
   - conda info -a
   - conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
   - conda install -y --use-local cythoninstallhelpers
