@@ -1,5 +1,5 @@
-cythoninstallhelpers\.build\_config module
-==========================================
+cythoninstallhelpers.build\_config module
+=========================================
 
 .. automodule:: cythoninstallhelpers.build_config
     :members:

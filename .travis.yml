@@ -80,7 +80,7 @@ script:
       sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
       sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
       sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters;
-      travis-sphinx --source docs_rst --nowarn build;
+      travis-sphinx build --source docs_rst --nowarn;
     fi
 
 after_success:

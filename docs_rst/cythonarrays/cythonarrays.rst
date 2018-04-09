@@ -1,6 +1,13 @@
 cythonarrays package
 ====================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    cythonarrays.tests
+
 Submodules
 ----------
 

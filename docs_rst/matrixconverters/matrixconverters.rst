@@ -1,6 +1,13 @@
 matrixconverters package
 ========================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    matrixconverters.tests
+
 Submodules
 ----------
 

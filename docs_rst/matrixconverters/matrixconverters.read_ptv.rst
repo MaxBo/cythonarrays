@@ -1,5 +1,5 @@
-matrixconverters\.read\_ptv module
-==================================
+matrixconverters.read\_ptv module
+=================================
 
 .. automodule:: matrixconverters.read_ptv
     :members:
