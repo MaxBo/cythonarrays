@@ -15,7 +15,7 @@ environment:
     secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
 
   PYPIPASSWORD:
-    secure: R7Hpmou1Q3ysPCVbkhvdBg==
+    secure: t0I5IJ86LEifXp2H1D4zvQ==
 
   CODECOV_TOKEN:
     secure: mQ6pnaM1xr97Fvf8CKU5XMVftz08EheIwm7kdGnLN7pI/8NYD9VZRJyjDbqcWR44
@@ -27,14 +27,14 @@ environment:
 #      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
 
     - TARGET_ARCH: x64
-      CONDA_NPY: 111
+      CONDA_NPY: 114
       CONDA_PY: 36
       PYTHON_VERSION: 3.6
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
       UPLOAD_COV: true
 
     - TARGET_ARCH: x64
-      CONDA_NPY: 111
+      CONDA_NPY: 114
       CONDA_PY: 35
       PYTHON_VERSION: 3.5
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
