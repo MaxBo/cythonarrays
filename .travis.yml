@@ -55,8 +55,8 @@ install:
   - conda config --add channels MaxBo
 
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
-  - export CONDA_BLD_PATH=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
-  #- export CONDA_BLD_PATH=$TMPDIR
+  - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
+  - export CONDA_BLD_PATH=$TMPDIR
   - conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
   - conda install -y --use-local -n root cythoninstallhelpers
   
