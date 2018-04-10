@@ -11,18 +11,24 @@ matrix:
           env:
             - TRAVIS_PYTHON_VERSION=3.5
             - CONDA_PY=35
-            - CONDA_NPY=111
+            - CONDA_NPY=114
         - python: 3.6
           env:
             - TRAVIS_PYTHON_VERSION=3.6
             - CONDA_PY=36
-            - CONDA_NPY=111
+            - CONDA_NPY=114
             - CREATE_DOCS=1
 
 env:
   global:
-    - secure: wCwWAKo8LJJtMHEaIOQ3P908VQ6EKnIQrDSd/bSmu8npc4x7Mxqmans40z75D3NR2TuTdCA9xXmqdQG96RKqOQlDzho8w4vg0VQUHKgJ9Qsqu+u5K1jm/PyrQYXSQIKNSGU+iEunwWTJiUhV8bVpjfK7QJtBwImZW6HayN8Qt9UAY242nBP3VjsU/RFc2HR1e5yfDA5IGokxuJeDG2xUEOcIvzx2Dv0MwUrLQa7ntb1t6fj0wv6/CuTdX1dQ90OYrT2qqtij07J38W2WWUYmSs1+xc3KgWZ6UukqcJv9wGmW/oiCthAF96ASHYUcOaNWs3VVL6NCfkqY2qpeBON2nH470Lu67cJZ32dXGMFLYiyaBiqE7092NIUX2PGFD5yTXWiLVCp9Kys+0lkDLaD4xy09/Op36xZlktZmzgZEgmz4uGZF3NAGsnOpmlV2KvQi1VIMN6dQ1Mkn4kIgFG+U4swXQv+zUZRZC3ohp15bykEDDAlYr154wonrRWWgA1N9HcPNOHb1rkLp2YYA9uqODYVnT09xFIcECnPo9qyryxZY0zdJX/IZZjH3FIILu0dEtVyDK1ItepkTcdkm5I0zN/VckNRrpaLnalBeJqdRzvfNij3hnVR7qm0zUPqYR7IXuJ58ds/SPs4Qq8OpfAGQcx/ZFAk4kS4/WirWVeQC3wY=
-    - secure: HHM2bkK3hY/4fW2n61ITSS/bT7bOY+rcPZiwAbB14oql2wONi5xoaRPa3Q9eyEpj9uT1LhU1jAyXEXyjSLRCVSMY0TkpdrxtkhpWoD5zaJXJVgyiK2DmJh0kfjCT35PIsGT6IV/H5mPxJBogytzcTvYIa12SZpmH+fvo67TrXGohu83iNjNt46EcvFPECozNTqF7FW17VIm8fBJUJwUPW4l8NQGAxcXi+q8ePTZYijCDmA4wqgi52HSj0bdNtTDsKCa4DfbD+AlS/vZ7rXFhOlGnQXq88K/FhdBObqLeOrOvtPoWZ7cwRFpK1ShUeszZA605qIWgCL7y4bQL3cCqfuLECD60PXaM16iHvXxKtTAVPxZUKKxWY7QRZ9TgntrwqsZH4Vk5ltg5S7mhgS2EgXUh7CXT2hdPNzHYI6GVPxrOdcQrKOx2XmHiHIOdBuGGga212p2i8Apu5g7iujr/BYUDiSdbG/6rd1QlxeHY3UQcYJBkY9B5Qhx3HDK9gOYaZprmmear9VpsxO1V4hHoNaalhqPgbZYipr4CwT3d1EUTxOabovQkWK6t0SOKYR2dwD9X23A8hd3R8fmokicqobFlsLlU9fCb94AQt3I3WVni4es6p4trKUfZTXWAv20i/Rsh+bhAoK5bjzeWfPNzctOCcBdWj3uWwJD0c5QdWSo=
+    - ANACONDA_USERNAME=MaxBo
+    # ANACONDA_TOKEN
+    - secure: kWIJPammSoqLZVSeAaDeG9hEptHX3uXw1nnMepALXvLEd2ZKpyeieym51nJXLK8vZtfgJ5lNI7gUF2dNldj5xdiYNCGZqvIQBU0Nle9DeepRcucOMmsDZPHkODyJ0dRn3WTtJF+owaj+LFd9VbeBDg2vcj5LOIb53kTym0uXefZDT6fnkBG2BUh2Wyp81H9xvMqyM2J8FfPMLdgjOcaP7M6OH0a6BOLoPdUMvoqjmlnd1s7CpFZj+tBImHkI9GaxZRJq5fySQXTXjuEOTqfMMfyk4yGKeZ+svAbhcoiuw6jMdNTwGpOPPV+c35HTEIJ23gNc08FQ5lGNFo05lf5ex4D8Ri7F7JOkRkn58W6vqjWb2mjhLXV+Md9dDU0UkZd78F+28uBJnVqJ2ll3wdDznwQ7i1U9ZH2As90YveIrYJv0gD7kqXu4BBwmXAZAytSQ/NFP2GsNEjIrk6+wtR/H2XVncpvvgLHCtz2pvUxh1Gq0bqbj3AZPewKUKKEJ/Ilct3KHMlkfQNE0j8OE4RrvHwk1bIvnUnWois6vvuouJ2KrTKX4Y+o8VJOFSS5yMCP38YzBH0ID6syWLdDaf7rSOzg6Z+eR1qE0E98Z6XmH+m3mE1n+fyAu9uxMMd8uGkPcDUIRI0W11q+Xf+NYz2ID8lu2fb8j/IKKYDAubQyIGeQ=
+    - TWINE_USERNAME=MaxBo
+    - TWINE_REPOSITORY=pypi
+    - TWINE_REPOSITORY_URL=https://pypi.python.org/pypi/
+    # TWINE_PASSWORD
+    - secure: jAWjWb+WzxQ4ZCwYWTMJ5H9JcbhUDXYp/j1A52AT9T4E2Ta+sBey8gCskZIPPrPs4yxgcghlaap69y7c/LEk5/nxlfqqT8SGn5FSIztV0Wf8eIcPFLI7jKfo5oX1Suwar21T/FahDI/uNmmIZBQejXzL8IfmmJ3ayMqRLxKQPEn1nhZF8bDyVH+O5TefoE4W484dx00IjDGNbDD8EjfIaLMLQkfbMMBOAIiK8lwxFXfaaDuOlrWAof1iAtOiLuPNLVrQ6jLZzKKuOZnM62mjnaLGxmdAYfX7x61qZQIlrjrLfA008O11M5BkddmglPJ51HNzWGQZ34j8Pc/QRd8LrIoufDpTDbDzzkvy7QYZTjoBNAG2hlgfnRd2QSVALr7wpeFugH6vsk6jntCvIMfgLoSslbgC2ZpXIjX96JKhw4W1BE1vXHw5oUBtkKrdNuZksHo5Yvj8vCAnxOwySBr/0aEYFaNWhZrdpVCveBsvMq4O0VeTKyMpxAZa/eCfe0IH/Jwvra/p0mEd6N5xA5o1J+/z7kwF2yJYUNoHUJNNTWkvZdfW0abpRJ4qMaMLVQHh/uooNozflhmv4+j8DT8Yyrep4mnVpafG7O59sgycEi0gxI4xS5kDl6R51SxwF8Nnu1lZquZAYar/auN93YZdRHTEbhtWOvt1y/98+G9z91A=
 
 install:
   - sudo apt-get update
@@ -38,7 +44,7 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-  - conda install conda-build=2.1
+  - conda install conda-build
   - conda install anaconda-client
   # Useful for debugging any issues with conda
   - conda info -a
@@ -52,17 +58,19 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
   - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
-  - conda install -y sphinx numpydoc
+  - export CONDA_BLD_PATH=$TMPDIR
+
+  - conda install -y sphinx numpydoc twine anaconda-client
   - pip install --user travis-sphinx
   - conda install pytest-cov
 
 script:
   # Your test script goes here
   - conda info -a
-  - conda build cythoninstallhelpers/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
+  - conda build cythoninstallhelpers/conda.recipe
   - conda install -y --use-local cythoninstallhelpers
-  - conda build cythonarrays/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
-  - conda build matrixconverters/conda.recipe --user MaxBo --token $ANACONDA_TOKEN
+  - conda build cythonarrays/conda.recipe
+  - conda build matrixconverters/conda.recipe
 
   # build documentation
   - if [ "${CREATE_DOCS}" = "1" ]; then
@@ -77,6 +85,10 @@ after_success:
   - if [ "${CREATE_DOCS}" = "1" ]; then travis-sphinx deploy; fi
 
   - if [ "${TRAVIS_TAG}" ]; then
+      anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2;
+      anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2;
+      anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2;
+
       conda install -y twine;
       cd $TRAVIS_BUILD_DIR/cythoninstallhelpers;
       python setup.py sdist;
@@ -89,5 +101,6 @@ after_success:
       cd $TRAVIS_BUILD_DIR/matrixconverters;
       python setup.py sdist;
       twine upload --skip-existing dist/*;
+
     fi
 
