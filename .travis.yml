@@ -46,6 +46,7 @@ install:
   - conda update -q conda
   - conda install conda-build
   - conda install anaconda-client
+  - conda install cythoninstallhelpers
   # Useful for debugging any issues with conda
   - conda info -a
 
@@ -58,9 +59,9 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
   - export CONDA_BLD_PATH=$TMPDIR
-  - conda build cythoninstallhelpers/conda.recipe --no-anaconda-upload
-  - conda install -y --use-local -n root cythoninstallhelpers
-  
+  - conda build cythoninstallhelpers/conda.recipe
+  - conda install -y --use-local cythoninstallhelpers
+
   - source activate test-environment
   - conda install -y sphinx numpydoc
   - pip install --user travis-sphinx
