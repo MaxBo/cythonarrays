@@ -15,7 +15,7 @@ environment:
     secure: 4qFgECceCojFkzlHVm2wF6Ric9B6Cb/Ks/GwDPbEOXZwBFBxr+9dSX3333aIxprA
 
   TWINE_REPOSITORY: pypi
-  TWINE_REPOSITORY_URL: https://pypi.python.org/pypi/
+  TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
   TWINE_USERNAME: MaxBo
 
   TWINE_PASSWORD:
