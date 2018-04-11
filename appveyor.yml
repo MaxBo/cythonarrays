@@ -12,10 +12,14 @@ environment:
   CMD_IN_ENV: "cmd /E:ON /V:ON /C obvci_appveyor_python_build_env.cmd"
 
   ANACONDA_TOKEN:
-    secure: FRnYhL1Dt42VxtPRqS7jPoV4EVtRkQD6ZUm4F8gzmcu6pFeuJfeMA01EYWfa2ETy
+    secure: 4qFgECceCojFkzlHVm2wF6Ric9B6Cb/Ks/GwDPbEOXZwBFBxr+9dSX3333aIxprA
 
-  PYPIPASSWORD:
-    secure: t0I5IJ86LEifXp2H1D4zvQ==
+  TWINE_REPOSITORY: pypi
+  TWINE_REPOSITORY_URL: https://pypi.python.org/pypi/
+  TWINE_USERNAME: MaxBo
+
+  TWINE_PASSWORD:
+    secure: gP/K3qjmop4350VEPvTfQg==
 
   CODECOV_TOKEN:
     secure: mQ6pnaM1xr97Fvf8CKU5XMVftz08EheIwm7kdGnLN7pI/8NYD9VZRJyjDbqcWR44
@@ -69,6 +73,9 @@ install:
 
     - cmd: set PYTHONUNBUFFERED=1
 
+    # codecoverage
+    #- cmd: choco install codecov
+
     # Ensure defaults and conda-forge channels are present.
     - cmd: conda config --set show_channel_urls true
     - cmd: conda config --remove channels defaults
@@ -83,6 +90,7 @@ install:
     # latest conda-build
     - cmd: conda install -y -n root conda-build=3
 
+    # Create conda test-environment
     - cmd: conda info
     - cmd: conda create -y -n test-environment python=%PYTHON_VERSION%
     - cmd: activate test-environment
@@ -122,12 +130,7 @@ after_test:
   - ps: $wc = New-Object 'System.Net.WebClient'
   - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
 
-  # set pypi credentials
-  - cmd: set HOME=%USERPROFILE%
-  - "echo [pypi] > %USERPROFILE%\\.pypirc"
-  - ps: Add-Content -Value "username = MaxBo" -Path $env:USERPROFILE\.pypirc
-  - ps: Add-Content -Value "password = $env:PYPIPASSWORD" -Path $env:USERPROFILE\.pypirc
-
+  # Upload to Pypi with twine
   - cmd: conda install -y twine
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
