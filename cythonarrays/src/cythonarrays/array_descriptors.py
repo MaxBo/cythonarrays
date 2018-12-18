@@ -56,7 +56,7 @@ class ArrayDescriptor(object):
 
         dim_diff = ndim - arr.ndim
         if dim_diff > 0:
-            return arr.__getitem__([np.newaxis] * dim_diff)
+            return arr.__getitem__((np.newaxis, ) * dim_diff)
         elif dim_diff < 0:
             dim_diff *= -1
             if arr.shape[:dim_diff] == tuple([1] * dim_diff):

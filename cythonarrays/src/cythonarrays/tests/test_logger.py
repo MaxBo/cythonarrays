@@ -42,7 +42,7 @@ class Test01_Logger:
         logger = get_logger(self)
         logger.info('Info in test_02')
         logger.debug('Debug in test_02')
-        logger.warn('Warn in test_02')
+        logger.warning('Warn in test_02')
         logfiles = glob.glob(os.path.join(self.LOG_FOLDER,
                                           '{}*.log'.format(self.scenario)))
         assert logfiles
