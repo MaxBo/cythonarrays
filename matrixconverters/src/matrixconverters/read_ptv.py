@@ -428,7 +428,7 @@ class ReadPTVMatrix(xr.Dataset):
             line = f.readline()
             while line.startswith("*"):
                 line = f.readline()
-            row = np.frombuffer(line, sep=sep, dtype=arr.dtype)
+            row = np.fromstring(line, sep=sep, dtype=arr.dtype)
             pos_to = pos_from + len(row)
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
