@@ -167,7 +167,7 @@ class SavePTV(object):
                     v=ZeitVon,
                     b=ZeitBis))
                 f.write("* Faktor:\n %d \n" % Faktor)
-            df = self.ds.matrix.to_dataframe().ix[:, 0]
+            df = self.ds.matrix.to_dataframe().iloc[:, 0]
             df_larger_0 =  df[df > 0]
             f.write("* Matrixwerte\n")
             df_larger_0.to_csv(f, sep=' ', header=False)

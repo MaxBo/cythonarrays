@@ -225,7 +225,7 @@ class ReadPTVMatrix(xr.Dataset):
         Schlieslich wird für jede Zeile der Matrix zuerst
         die Länge der gepakten Daten dieser Zeile (lenChunk) gelesen
         und dann die Daten mit zlib.decompress entpackt
-        und mit np.fromstring in ein Zeilen-array verwandelt,
+        und mit np.frombuffer in ein Zeilen-array verwandelt,
         Damit wird die Matrix zeilenweise "gefüllt"
         Zwischen den Zeilen befinden sich jeweils 16 byte,
         deren Sinn unklar ist (ggf. eine Prüfsumme?)
@@ -264,7 +264,7 @@ class ReadPTVMatrix(xr.Dataset):
             if compression_type == 'I':
                 self.create_matrix(n_zones, dtype=dtype)
 
-                self.zone_no.data[:] = np.fromstring(
+                self.zone_no.data[:] = np.frombuffer(
                     f.read(n_zones * 4), dtype="i4")
             else:
                 # BK or BL
@@ -276,9 +276,9 @@ class ReadPTVMatrix(xr.Dataset):
                 self.create_zones(n_cols, name='zone_no2', dim=dim)
                 self.create_matrix(n_zones, n_cols=n_cols, dtype=dtype)
 
-                self.zone_no.data[:] = np.fromstring(
+                self.zone_no.data[:] = np.frombuffer(
                     f.read(n_zones * 4), dtype="i4")
-                self.zone_no2.data[:] = np.fromstring(
+                self.zone_no2.data[:] = np.frombuffer(
                     f.read(n_cols * 4), dtype="i4")
 
                 # read zone names for rows
@@ -305,20 +305,20 @@ class ReadPTVMatrix(xr.Dataset):
                 for i in range(n_zones):
                     len_chunk = self.read_i4(f)
                     unpacked = zlib.decompress(f.read(len_chunk))
-                    self.matrix[i] = np.fromstring(unpacked, dtype=dtype)
+                    self.matrix[i] = np.frombuffer(unpacked, dtype=dtype)
                     if compression_type < 'L':
                         # for this format row and colsums are
                         # written at each line
                         rowsums[i] = self.read_f8(f)
                         colsums[i] = self.read_f8(f)
                     #else:
-                        #self.matrix[i] = np.fromstring(f.read(n_cols*8),
+                        #self.matrix[i] = np.frombuffer(f.read(n_cols*8),
                                                        #dtype='f8')
                 if compression_type >= 'L':
                     # for this format the row and colsums are written
                     # as a vector each
-                    rowsums[:] = np.fromstring(f.read(8*n_zones), dtype="f8")
-                    colsums[:] = np.fromstring(f.read(8*n_cols), dtype="f8")
+                    rowsums[:] = np.frombuffer(f.read(8*n_zones), dtype="f8")
+                    colsums[:] = np.frombuffer(f.read(8*n_cols), dtype="f8")
             # all null
             else:
                 self.attrs['diagsum'] = 0
@@ -340,40 +340,40 @@ class ReadPTVMatrix(xr.Dataset):
     @staticmethod
     def read_f4(f):
         """read float from file at current position"""
-        return np.fromstring(f.read(4), dtype="f4")[0]
+        return np.frombuffer(f.read(4), dtype="f4")[0]
 
     @staticmethod
     def read_f8(f):
         """read double from file at current position"""
-        return np.fromstring(f.read(8), dtype="f8")[0]
+        return np.frombuffer(f.read(8), dtype="f8")[0]
 
     @staticmethod
     def read_u1(f):
         """read byte from file at current position"""
-        return np.fromstring(f.read(1), dtype="u1")[0]
+        return np.frombuffer(f.read(1), dtype="u1")[0]
 
     @staticmethod
     def read_i2(f):
         """read short integer from file at current position"""
-        return np.fromstring(f.read(2), dtype="i2")[0]
+        return np.frombuffer(f.read(2), dtype="i2")[0]
 
     @staticmethod
     def read_i4(f):
         """read integer from file at current position"""
-        return np.fromstring(f.read(4), dtype="i4")[0]
+        return np.frombuffer(f.read(4), dtype="i4")[0]
 
     def readPTVMatrixB(self, header=2048):
         """read non-compressed binary format"""
         with self.openfile(mode="rb") as f:
             f.seek(header)
             f.seek(2, 1)
-            Dimensions = np.fromstring(f.read(2), dtype="i2")[0]
-            MatrixZeilen = np.fromstring(f.read(4), dtype="i4")[0]
+            Dimensions = np.frombuffer(f.read(2), dtype="i2")[0]
+            MatrixZeilen = np.frombuffer(f.read(4), dtype="i4")[0]
             f.seek(4, 1)
-            MatrixSpalten = np.fromstring(f.read(4), dtype="i4")[0]
+            MatrixSpalten = np.frombuffer(f.read(4), dtype="i4")[0]
             f.seek(4, 1)
             if Dimensions == 3:
-                MatrixBlock = np.fromstring(f[header + 20:header + 24],
+                MatrixBlock = np.frombuffer(f[header + 20:header + 24],
                                             dtype="i4")[0]
                 f.seek(4, 1)
                 shape = (MatrixBlock, MatrixZeilen, MatrixSpalten)
@@ -383,7 +383,7 @@ class ReadPTVMatrix(xr.Dataset):
             else:
                 msg = 'only 2d or 3d dimensions allowed, found %s dimensions'
                 raise ValueError(msg % Dimensions)
-            data_type = np.fromstring(f.read(2), dtype="i2")
+            data_type = np.frombuffer(f.read(2), dtype="i2")
             if data_type == 3:
                 data_length = 4
                 dtype = '<f4'
@@ -393,22 +393,22 @@ class ReadPTVMatrix(xr.Dataset):
             else:
                 data_length = 8
                 dtype = '<f8'
-            AnzBezeichnerlisten = np.fromstring(f.read(2),
+            AnzBezeichnerlisten = np.frombuffer(f.read(2),
                                                 dtype="i2")
             AnzFelder = MatrixZeilen * MatrixSpalten * MatrixBlock
 
             n_zones = max(MatrixZeilen, MatrixSpalten)
             self.create_zones(n_zones)
-            self.attrs['ZeitVon'] = int(np.fromstring(f.read(4), dtype="f4"))
-            self.attrs['ZeitBis'] = int(np.fromstring(f.read(4), dtype="f4"))
+            self.attrs['ZeitVon'] = int(np.frombuffer(f.read(4), dtype="f4"))
+            self.attrs['ZeitBis'] = int(np.frombuffer(f.read(4), dtype="f4"))
             self.attrs['VMAktKennung'] = int(
-                np.fromstring(f.read(4), dtype="i4"))
-            self.attrs['Faktor'] = int(np.fromstring(f.read(4), dtype="f4"))
+                np.frombuffer(f.read(4), dtype="i4"))
+            self.attrs['Faktor'] = int(np.frombuffer(f.read(4), dtype="f4"))
             if AnzBezeichnerlisten > 0:
-                self.zone_no.data[:] = np.fromstring(
+                self.zone_no.data[:] = np.frombuffer(
                     f.read(4 * n_zones), dtype='i4')
             self.create_matrix(n_zones, dtype=dtype)
-            arr = np.fromstring(f.read(AnzFelder * data_length), dtype=dtype)
+            arr = np.frombuffer(f.read(AnzFelder * data_length), dtype=dtype)
             self.matrix.data[:] = arr.reshape(shape)
 
     def readWert(self, f):
@@ -428,7 +428,7 @@ class ReadPTVMatrix(xr.Dataset):
             line = f.readline()
             while line.startswith("*"):
                 line = f.readline()
-            row = np.fromstring(line, sep=sep, dtype=arr.dtype)
+            row = np.frombuffer(line, sep=sep, dtype=arr.dtype)
             pos_to = pos_from + len(row)
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
