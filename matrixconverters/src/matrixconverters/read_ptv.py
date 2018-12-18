@@ -172,7 +172,7 @@ class ReadPTVMatrix(xr.Dataset):
             name='matrix',)
 
     def create_zones(self, n_zones, name='zone_no', dim = 'zones'):
-        self.coords[name] = xr.DataArray(np.empty((n_zones, ), dtype='i4'),
+        self.coords[name] = xr.DataArray(np.arange(n_zones, dtype='i4'),
                                          dims=(dim,),)
 
     def read_names(self, f, arr):
