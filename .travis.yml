@@ -12,7 +12,7 @@ matrix:
           env:
             - TRAVIS_PYTHON_VERSION=3.5
             - CONDA_PY=35
-            - CONDA_NPY=116
+            - CONDA_NPY=115
         - python: 3.6
           env:
             - TRAVIS_PYTHON_VERSION=3.6
