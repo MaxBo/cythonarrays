@@ -27,7 +27,8 @@ cythonarrays
 ------------
 this package provides base classes for cdef-Cython-Classes.
 
-**ToDo**
+You create a cyton cdef-class with memoryviews and subclass this class in a python-class.
+The python class converts the memoryviews into numpy arrays. In addition, it wraps the arrays into an `xarray <http://xarray.pydata.org>`_-class. If you set arrays with numpy-arrays, they are validated in terms of shape and dtype. cdef-methods on the cython-class can manipulate the data at c-speed.
 
 
 How to work with Cythonarrays CDef-Classes
