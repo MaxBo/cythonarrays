@@ -44,7 +44,7 @@ environment:
       UPLOAD_COV: true
 
     - TARGET_ARCH: x64
-      CONDA_NPY: 116
+      CONDA_NPY: 115
       CONDA_PY: 35
       PYTHON_VERSION: 3.5
       CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
