@@ -123,10 +123,7 @@ class Test01_ExampleCDefClass:
         message = """
 Arrays are not equal
 jobs_j: shape target: [3], actual: (2,)
-(mismatch 100.0%)
- x: array([2])
- y: array([3])
-        """
+"""
         with pytest.raises(AssertionError,
                            match=message):
             example.jobs_j = arr
@@ -142,7 +139,7 @@ jobs_j: shape target: [3], actual: (2,)
         example = Example(groups, zones)
 
         # try to set shape with the wrong number of dimensions
-        msg = "builtins.ValueError: 1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"
+        msg = "1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"
         with pytest.raises(ValueError,
                            match=msg):
             example.init_array('jobs_j', shape='groups, zones')
