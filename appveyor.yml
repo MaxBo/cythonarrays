@@ -1,6 +1,6 @@
-#branches:
-#    only:
-#    - master
+branches:
+    only:
+    - master
 
 skip_branch_with_pr: true
 
@@ -25,10 +25,6 @@ environment:
     secure: mQ6pnaM1xr97Fvf8CKU5XMVftz08EheIwm7kdGnLN7pI/8NYD9VZRJyjDbqcWR44
 
   matrix:
-#    - TARGET_ARCH: x64
-#      CONDA_NPY: 111
-#      CONDA_PY: 27
-#      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
     - TARGET_ARCH: x64
       CONDA_NPY: 116
       CONDA_PY: 37

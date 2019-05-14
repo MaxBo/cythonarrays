@@ -1,7 +1,7 @@
 # safelist
-#branches:
-#  only:
-#  - master
+branches:
+  only:
+  - master
 
 dist: xenial   # required for Python >= 3.7
 language: python
