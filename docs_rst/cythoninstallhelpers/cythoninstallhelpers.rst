@@ -1,6 +1,13 @@
 cythoninstallhelpers package
 ============================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    cythoninstallhelpers.tests
+
 Submodules
 ----------
 

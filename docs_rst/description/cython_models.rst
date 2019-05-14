@@ -17,8 +17,8 @@ cythoninstallhelpers
 this package provides some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
 It includes:
 
-* build_config.py : ensure that numpy and openmp is correctly linked in the cython file by using a .pyxbld-file 
-												 
+* build_config.py : ensure that numpy and openmp is correctly linked in the cython file by using a .pyxbld-file
+
 * make_cython_extensions.py : use make_extensions(list_of_extention_module_names) in the setup.py to define ext_modules
 
 * get_version.py : import the version number from a _version.py file with
@@ -55,7 +55,7 @@ the .pyxbld file will import helpers from cythoninstallhelpers::
                                                  extra_link_args,
                                                  make_ext,)
 
-      
+
 This tells the compiler to use the platform specific openmp-libraries and to include the numpy dirs.
 
 Cython cdef classes
@@ -71,10 +71,10 @@ This can be done in the declaration .pxd file::
       cdef unsigned long i, j
       cdef public float U
       cdef readonly double result
-      
+
       cpdef double calc_result(self, float U)
       cdef calc_p(self, unsigned long i, unsigned long j) nogil
-      
+
 Class attributes defined as **public** are also readable and writable from Python.
 
 Class attributes defined as **readonly** are readable from Python but not writable.
@@ -87,10 +87,10 @@ Methods defined as cpdef are also usable as python classes.
 
 If the method is defined as **nogil**, then they can be used within a parallel calculation at C-speed.
 
-This method does not need the "Global Interpreter Lock" (GIL). So a method can only be **nogil**, 
+This method does not need the "Global Interpreter Lock" (GIL). So a method can only be **nogil**,
 if no python attributes or methods are used within the function and only other **nogil** functions are called.
 
-A cpdef method cannot be **nogil** at the same time. 
+A cpdef method cannot be **nogil** at the same time.
 
 A **nogil** function cannot return nothing, so specify at least a return type like char.
 
@@ -109,6 +109,7 @@ To facilitate this, the Cython module array_shapes.pyx and the Python moduls arr
 Let your Cython class inherit from ArrayShapes.
      from cythonarrays.array_shapes cimport ArrayShapes
      from cythonarrays.array_shapes import ArrayShapes
+
 import the numpy array types::
 
      from cythonarrays.numpy_types cimport *
@@ -119,9 +120,9 @@ specify all arrays that you need in the mymodule_cython.pxd-file with a leading 
       cdef public ARRAY_2D_f _myfloatarr
       cdef public ARRAY_3D_i4 _myintarr
       cdef public ARRAY_1D_d _mydoublevector
-      
+
       cdef public int n_rows, n_blocks, n_cols
-      
+
 
 In the mymodule_cython.pyx-file, add a __cinit__ method::
 
@@ -130,24 +131,24 @@ In the mymodule_cython.pyx-file, add a __cinit__ method::
         """init the file"""
         for cls in self.__class__.__mro__:
             self.search_memview(cls)
- 
+
 the method search_memview(cls) searches all memoryviews in the class and the base class.
 
-  
+
 Create a wrapper Python class in a python module mymodule.py, that inherits from _MyCythonClass and from the Python-Class _ArrayProperties::
 
   import pyximport
   pyximport.install()
   from mymodule_cython import _MyCythonClass
   from cythonarrays.array_properties import _ArrayProperties
-  
+
   class MyClass(_MyCythonClass, _ArrayProperties):
       def __init__(self, n_rows, n_cols, n_blocks, *args, **kwargs):
           super(MyCythonClass, self).__init__(*args, **kwargs)
           self.n_rows = n_rows
           self.n_cols = n_cols
           self.n_blocks = n_blocks
-      
+
 This creates automatically properties for a comfortable access to the array::
 
   >>> myinstance = MyClass(n_rows=4, n_cols=5, n_blocks=6)
@@ -155,12 +156,12 @@ This creates automatically properties for a comfortable access to the array::
 The array can be initialised by::
 
   >>> shape = ('n_blocks', 'n_rows', 'n_cols')
-  >>> myinstance.init_array('myintarr', shape, default=-1) 
+  >>> myinstance.init_array('myintarr', shape, default=-1)
   >>> shape = (6, )
-  >>> myinstance.init_array('mydoublevector', shape) 
-  
+  >>> myinstance.init_array('mydoublevector', shape)
+
   or with some data::
-  
+
   >>> arr = np.random.random((4, 5)).astype('f8')
   >>> shape = ('n_rows', 'n_cols')
   >>> myinstance.set_array('myfloatarr', arr, shape)
@@ -177,7 +178,7 @@ The Data is accessible form Python via::
   >>> intarr[2, 2:4, 1]
   array([-1, -1])
   >>> intarr[0] *= 2
-  
+
 and from within a cython function::
 
   cdef class _MyCythonClass(_ArrayShapes):
@@ -190,11 +191,11 @@ and from within a cython function::
                for col in range(self.n_cols):
                    res += self._myintarr[block, row, col] * self._myfloatarr[row, col]
            self._mydoublevector[block] = res
-           
+
   >>> myinstance.sum_mult_by_block()
   >>> myinstance._mydoublevector
   array([-40., -20., -20., -20., -20., -20.])
-  
+
 
 You can define an Array within a cdef function::
 
@@ -209,12 +210,12 @@ You can define an Array within a cdef function::
                for col in range(self.n_cols):
                    res += self._myintarr[block, row, col] * self._myfloatarr[row, col]
            vec[block] = res
-           
+
 but don't do that in a subfunction, that is called many times, because assigning memory to the variable *vec* a costly operation.
 
 
 Link Cythonarrays-Class to xarray-Dataset
-=================================
+=========================================
 
 You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_ which infers the dimensions, coordinates, and data variables from the cdef-class.
 
@@ -232,7 +233,7 @@ You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_ which 
       param_g             (groups) float64 -0.2 -0.1
       trips_ij            (origins, destinations) float64 29.02 31.86 39.12 ...
       groupnames_g        (groups) object 'Female' 'Male'
-      not_initialized_ij  (dim_0, dim_1) int32 
+      not_initialized_ij  (dim_0, dim_1) int32
       persons_gi          (groups, origins) float64 100.0 0.0 200.0 0.0 250.0 50.0
       zonenumbers_i       (origins) int32 100 200 300
       jobs_j              (destinations) float64 100.0 200.0 300.0
@@ -245,14 +246,8 @@ The Data variables of the xarray-Dataset share the same memory with the attribut
 So when a cdef function modifies a value  in example._trips_ij
 
   >>> self._trips_ij[1, 2] = 99
-  
+
 then the value is changed directly in the xarray-Dataset
 
   >>> print(self.ds.trips_ij.values[1, 2])
   99.0
-
-
-
-
-
-  

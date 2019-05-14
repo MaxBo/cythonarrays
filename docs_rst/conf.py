@@ -70,7 +70,7 @@ release = '1.0.1'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = ['_build',
-                    #r'**\tests',
+                    '**/tests/',
                     '**/config.py']
 
 autodoc_member_order = 'groupwise'
