@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from argparse import ArgumentParser
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -19,12 +18,30 @@ class ReadOFormat(xr.Dataset):
                  cols_zones=None,
                  cols_matrix=None,
                 ):
-        super(ReadOFormat, self).__init__()
+        """
+        Parameters
+        ----------
+        zonefile : str
+            the filepath to the file with zone names
+        matrixfile : str
+            the filepath to the file with the matrix values
+        cols_zones : list-like, optional
+        cols_matrix : list-like, optional
+        """
+        super().__init__()
         self.read_zones_csv(zonefile, cols_zones)
         self.read_matrix_csv(matrixfile, cols_matrix)
 
     def read_matrix_csv(self, filename, cols_matrix):
         """
+        Reads a matrix from a csv-file and stores it in self['matrix']
+
+        Parameters
+        ----------
+        filename : str
+            the filepath of the input file
+        cols_matrix : list-like
+            the columns to use
         """
         target_cols = self._target_cols_matrix
         data_cols = cols_matrix
@@ -37,6 +54,15 @@ class ReadOFormat(xr.Dataset):
 
     def read_zones_csv(self, filename, cols_zones):
         """
+        Reads a matrix from a csv-file and stores it as coordinates
+
+
+        Parameters
+        ----------
+        filename : str
+            the filepath of the input file
+        cols_matrix : list-like
+            the columns to use [column_with_zone_no, column_with_zone_name]
         """
         target_cols = self._target_cols_zones
         data_cols = cols_zones
@@ -54,6 +80,20 @@ class ReadOFormat(xr.Dataset):
                                                      data=renamed_da[col_name])
 
     def read_file_to_da(self, data_cols, filename, target_cols, pkey):
+        """
+        reads a file into a DataArray
+
+        Parameters
+        ----------
+        data_cols : list-like
+        filename : str
+        target_cols : list_like
+        pkey : str
+
+        Returns
+        -------
+        da : xarray.DataArray
+        """
         df = pd.read_csv(filename, usecols=data_cols)
         if not data_cols:
             # take the first columns of the table
@@ -68,19 +108,3 @@ class ReadOFormat(xr.Dataset):
 
         da = df.set_index(pkey).sort_index().to_xarray()
         return da
-
-
-
-if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument('-z', '--zonefile', dest='zonefile', required=True)
-    parser.add_argument('-m', '--matrixfile', dest='matrixfile', required=True)
-    parser.add_argument('--cols_zones', dest='cols_zones', nargs='*')
-    parser.add_argument('--cols_matrix', dest='cols_matrix', nargs='*')
-
-    options = parser.parse_args()
-    ds = ReadOFormat(options.zonefile,
-                     options.matrixfile,
-                     options.cols_zones,
-                     options.cols_matrix)
-    print(ds)

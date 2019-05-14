@@ -191,8 +191,8 @@ def get_logger(instance):
     add the package to the list of loggers,
     and return the logger for the instance
 
-    Parameter
-    ---------
+    Parameters
+    ----------
     instance : object
 
     Returns

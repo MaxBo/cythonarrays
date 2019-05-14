@@ -128,7 +128,7 @@ jobs_j: shape target: [3], actual: (2,)
  y: array([3])
         """
         with pytest.raises(AssertionError,
-                           message=message):
+                           match=message):
             example.jobs_j = arr
 
         # change zones and try again
@@ -144,7 +144,7 @@ jobs_j: shape target: [3], actual: (2,)
         # try to set shape with the wrong number of dimensions
         msg = "builtins.ValueError: 1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"
         with pytest.raises(ValueError,
-                           message=msg):
+                           match=msg):
             example.init_array('jobs_j', shape='groups, zones')
 
         # access a non-initialized array
@@ -183,7 +183,7 @@ jobs_j: shape target: [3], actual: (2,)
                       [[4, 5],
                        [6, 7]]], dtype='i4')
         with pytest.raises(AssertionError,
-                           message="not_initialized_ij: ndim target: 2, actual: 3"):
+                           match="not_initialized_ij: ndim target: 2, actual: 3"):
             example.not_initialized_ij = e
 
         # when the dimensions can be reduced to the target dimensions,
@@ -241,7 +241,7 @@ jobs_j: shape target: [3], actual: (2,)
         assert example.n_threads == 127
 
         with pytest.raises(OverflowError,
-                           message='value too large to convert to char'):
+                           match='value too large to convert to char'):
             example.n_threads = 128
 
         # test if jobs_j is really an array of double precision
@@ -384,7 +384,7 @@ jobs_j: shape target: [3], actual: (2,)
 
 class Test04_Test_Instantiation:
     """Test the instantiation of the class"""
-    
+
     def test041_test_instantiation(self):
         """not subclassing shoud rais a NotImplementedError"""
         with pytest.raises(NotImplementedError):

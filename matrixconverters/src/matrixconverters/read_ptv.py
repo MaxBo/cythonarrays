@@ -1,14 +1,9 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-import sys
-import gzip
-import zlib
-import io
-from argparse import ArgumentParser
-from collections import deque
-import numpy as np
 import xarray as xr
+import io
+import gzip
+import numpy as np
+import zlib
+from collections import deque
 
 
 class ReadPTVMatrix(xr.Dataset):
@@ -16,20 +11,21 @@ class ReadPTVMatrix(xr.Dataset):
     the matrix-type is determined by the header
     reades $M, $V, $O, $E, and the binary types $BI, $BK and $B
     """
+
     def __init__(self, filename, header=2048, zipped=False):
         """
         read a PTV-Matrix and return it as an xarray-dataset
 
         Parameters
         ----------
-        FileName: str
+        filename: str
             path to file on disk
         header: int, optional (default=2048)
             length ot the header of a binary file
         zipped: bool, optional (default=False)
             true, if file is zipped
         """
-        super(ReadPTVMatrix, self).__init__()
+        super().__init__()
         self.attrs['fn'] = filename
         self.attrs['ZeitVon'] = 0
         self.attrs['ZeitBis'] = 0
@@ -37,8 +33,8 @@ class ReadPTVMatrix(xr.Dataset):
         self.attrs['VMAktKennung'] = 0
         self.attrs['AnzBezeichnerlisten'] = 1
 
-        self.set_open_method(filename, zipped)
-        with self.openfile(mode='rb') as f:
+        self._set_open_method(filename, zipped)
+        with self._openfile(mode='rb') as f:
             line = f.readline().strip()
 
             errmsg = 'Matrix type not recognised form Header {}'.format(line)
@@ -75,7 +71,8 @@ class ReadPTVMatrix(xr.Dataset):
         del self.attrs['open']
 
     def readPTVMatrixO(self):
-        with self.openfile(mode="r") as f:
+        """read a file in O-Format"""
+        with self._openfile(mode="r") as f:
             rows = self.read_header(f)
         loc = self.matrix.loc
         for row in rows:
@@ -86,7 +83,8 @@ class ReadPTVMatrix(xr.Dataset):
             loc[fr, to] = value
 
     def readPTVMatrixE(self):
-        with self.openfile(mode="r") as f:
+        """read a file in E-Format"""
+        with self._openfile(mode="r") as f:
             rows = self.read_header(f)
         loc = self.matrix.loc
         for row in rows:
@@ -98,6 +96,17 @@ class ReadPTVMatrix(xr.Dataset):
                 loc[fr, to] = value
 
     def read_header(self, f):
+        """
+        read the header
+
+        Parameters
+        ----------
+        f : file-obj
+
+        Returns
+        -------
+        rows: list
+        """
         line = f.readline()
         MatrixTyp = line.split("$")[-1].split(";")[0]
         if "M" in MatrixTyp:
@@ -113,8 +122,16 @@ class ReadPTVMatrix(xr.Dataset):
         self.read_names_o_format(f, line)
         return rows
 
-    def set_open_method(self, filename, zipped):
-        """set the open-method"""
+    def _set_open_method(self, filename, zipped):
+        """
+        set the file-open-method
+
+        Parameters
+        ----------
+        filename : str
+
+        zipped : bool
+        """
         if filename.endswith(".gzip") or zipped:
             self.attrs['open'] = gzip.open
         elif sys.version_info[0] > 2:
@@ -122,14 +139,28 @@ class ReadPTVMatrix(xr.Dataset):
         else:
             self.attrs['open'] = io.open
 
-    def openfile(self, mode='r', encoding='latin1'):
+    def _openfile(self, mode='r', encoding='latin1'):
+        """
+        open the file with the according open method
+
+        Parameters
+        ----------
+        mode : str, optional(default='r')
+            read, write or append
+        encoding : str, optional(default='latin1')
+
+        Returns
+        -------
+        open file-handler
+        """
         open_method = self.attrs['open']
         if mode.endswith('b'):
             encoding = None
         return open_method(self.attrs['fn'], mode=mode, encoding=encoding)
 
     def readPTVMatrixV(self):
-        with self.openfile() as f:
+        """read a file in V-Format"""
+        with self._openfile() as f:
             line = f.readline()
             MatrixTyp = line.split("$")[-1].split(";")[0]
             if not MatrixTyp.startswith("V"):
@@ -231,7 +262,7 @@ class ReadPTVMatrix(xr.Dataset):
         deren Sinn unklar ist (ggf. eine Prüfsumme?)
         Diese werden ignoriert.
         """
-        with self.openfile(mode="rb") as f:
+        with self._openfile(mode="rb") as f:
             f.seek(0, 0)
             idlength = self.read_i2(f)
             idvalue = f.read(idlength)
@@ -364,7 +395,7 @@ class ReadPTVMatrix(xr.Dataset):
 
     def readPTVMatrixB(self, header=2048):
         """read non-compressed binary format"""
-        with self.openfile(mode="rb") as f:
+        with self._openfile(mode="rb") as f:
             f.seek(header)
             f.seek(2, 1)
             Dimensions = np.frombuffer(f.read(2), dtype="i2")[0]
@@ -455,9 +486,3 @@ class ReadPTVMatrix(xr.Dataset):
             values += map(lambda x: float(x), line.strip().split())
             found = len(values)
         return values
-
-if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument('-f', dest='fn')
-    options = parser.parse_args()
-    ds = ReadPTVMatrix(options.fn)

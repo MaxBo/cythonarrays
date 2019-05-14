@@ -70,7 +70,7 @@ install:
   - conda install -y --use-local cythoninstallhelpers
 
   - source activate test-environment
-  - conda install -y sphinx numpydoc
+  - conda install -y sphinx numpydoc=0.8
   - pip install --user travis-sphinx
   - export PATH=$HOME/.local/bin:$PATH
   - conda install pytest-cov
