@@ -3,6 +3,7 @@
 #  only:
 #  - master
 
+dist: xenial   # required for Python >= 3.7
 language: python
 
 matrix:
@@ -11,18 +12,18 @@ matrix:
           env:
             - TRAVIS_PYTHON_VERSION=3.5
             - CONDA_PY=35
-            - CONDA_NPY=114
+            - CONDA_NPY=115
         - python: 3.6
           env:
             - TRAVIS_PYTHON_VERSION=3.6
             - CONDA_PY=36
-            - CONDA_NPY=114
+            - CONDA_NPY=116
             - CREATE_DOCS=1
         - python: 3.7
           env:
             - TRAVIS_PYTHON_VERSION=3.7
             - CONDA_PY=37
-            - CONDA_NPY=115
+            - CONDA_NPY=116
 
 env:
   global:
@@ -69,7 +70,7 @@ install:
   - conda install -y --use-local cythoninstallhelpers
 
   - source activate test-environment
-  - conda install -y sphinx numpydoc
+  - conda install -y sphinx numpydoc=0.8
   - pip install --user travis-sphinx
   - export PATH=$HOME/.local/bin:$PATH
   - conda install pytest-cov

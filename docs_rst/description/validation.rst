@@ -405,6 +405,7 @@ To facilitate this, the Cython module array_shapes.pyx and the Python moduls arr
 Let your Cython class inherit from ArrayShapes.
      from cythonarrays.array_shapes cimport ArrayShapes
      from cythonarrays.array_shapes import ArrayShapes
+
 import the numpy array types::
 
      from cythonarrays.numpy_types cimport *
@@ -510,7 +511,7 @@ but don't do that in a subfunction, that is called many times, because assigning
 
 
 Link Cythonarrays-Class to xarray-Dataset
-=================================
+=========================================
 
 You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_ which infers the dimensions, coordinates, and data variables from the cdef-class.
 
@@ -546,8 +547,3 @@ then the value is changed directly in the xarray-Dataset
 
   >>> print(self.ds.trips_ij.values[1, 2])
   99.0
-
-
-
-
-
