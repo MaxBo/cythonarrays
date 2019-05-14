@@ -120,12 +120,12 @@ class Test01_ExampleCDefClass:
 
         # try to set values with the wrong shape
         arr = np.ones((groups))
-        message = """
+        pattern = r"""
 Arrays are not equal
-jobs_j: shape target: [3], actual: (2,)
+jobs_j: shape target: \[3\], actual: \(2,\)
 """
         with pytest.raises(AssertionError,
-                           match=message):
+                           match=pattern):
             example.jobs_j = arr
 
         # change zones and try again
@@ -139,9 +139,9 @@ jobs_j: shape target: [3], actual: (2,)
         example = Example(groups, zones)
 
         # try to set shape with the wrong number of dimensions
-        msg = "1 Dimensions required, shape ['groups', 'zones'] has 2 dimensions"
+        pattern = r"1 Dimensions required, shape \[\'groups\', \'zones\'\] has 2 dimensions"
         with pytest.raises(ValueError,
-                           match=msg):
+                           match=pattern):
             example.init_array('jobs_j', shape='groups, zones')
 
         # access a non-initialized array
