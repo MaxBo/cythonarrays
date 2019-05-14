@@ -2,6 +2,7 @@
 branches:
   only:
   - master
+  - /^v[0-9]+\.[0-9]+\.[0-9]+/
 
 dist: xenial   # required for Python >= 3.7
 language: python
