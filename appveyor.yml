@@ -134,6 +134,7 @@ after_test:
 
   # Upload to Pypi with twine
   - cmd: conda install -y twine
+  - cmd: pip install --user -y readme_renderer
   - cmd: cd cythoninstallhelpers
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )

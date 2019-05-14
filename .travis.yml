@@ -102,6 +102,7 @@ after_success:
       anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2;
 
       conda install -y twine;
+      pip install --user -y readme_renderer;
       cd $TRAVIS_BUILD_DIR/cythoninstallhelpers;
       python setup.py sdist bdist_wheel;
       twine upload --skip-existing dist/*;
