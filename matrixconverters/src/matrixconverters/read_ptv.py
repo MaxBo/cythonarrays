@@ -1,9 +1,10 @@
-import xarray as xr
+import sys
 import io
 import gzip
-import numpy as np
 import zlib
 from collections import deque
+import numpy as np
+import xarray as xr
 
 
 class ReadPTVMatrix(xr.Dataset):
