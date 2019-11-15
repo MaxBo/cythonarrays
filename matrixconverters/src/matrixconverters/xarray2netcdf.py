@@ -4,10 +4,10 @@ import xarray as xr
 
 def xr2netcdf(dataset: xr.Dataset,
               filepath: str,
-              mode: str='w',
-              engine: str='netcdf4',
-              compressed:bool=True,
-              complevel:int=2, ):
+              mode: str = 'w',
+              engine: str = 'netcdf4',
+              compressed: bool = True,
+              complevel: int = 2, ):
     """
     save dataset as netcdf-file to filepath using the given compression level
 

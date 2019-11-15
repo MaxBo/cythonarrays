@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
-# Name:        saveArray
-# Purpose:
-#
-# Author:      Max Bohnet
-#
-# Created:     21/09/2011
-# Copyright:   (c) Max Bohnet 2011
 
-
-import gzip
 import zlib
 import numpy as np
 import xarray as xr
@@ -56,7 +47,6 @@ class SavePTV(object):
         utf16_str = unencoded_str.encode('UTF-16LE')
         f.write(utf16_str)
 
-
     def savePTVMatrix(self,
                       file_name,
                       file_type='BK',
@@ -88,7 +78,6 @@ class SavePTV(object):
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
                      'int32': "%d", 'int16': "%d"}
         with open(fn, "w") as f:
-            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
             ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
             ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
             Faktor = getattr(self.ds.attrs, 'Faktor', 1)
@@ -129,14 +118,12 @@ class SavePTV(object):
     def _write_format_o(self, fn, file_type):
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
-        outformat = {'float32': "%0.3f", 'float64': "%0.6f",
-                     'int32': "%d", 'int16': "%d"}
+
         with open(fn, "w") as f:
-            anz_bez_listen = getattr(self.ds.attrs, 'AnzBezeichnerlisten', 1)
-            ZeitVon = getattr(self.ds.attrs, 'ZeitVon', 0)
-            ZeitBis = getattr(self.ds.attrs, 'ZeitBis', 24)
-            Faktor = getattr(self.ds.attrs, 'Faktor', 1)
-            VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
+            ZeitVon = self.ds.attrs.get('ZeitVon', 0)
+            ZeitBis = self.ds.attrs.get('ZeitBis', 24)
+            Faktor = self.ds.attrs.get('Faktor', 1)
+            VMAktKennung = self.ds.attrs.get('VMAktKennung', 0)
             dtype = self.ds.matrix.dtype
             f.write("$%s, %s\n" % (file_type, dtypes[str(dtype)]))
             if "M" in file_type:
@@ -147,10 +134,9 @@ class SavePTV(object):
                     b=ZeitBis))
                 f.write("* Faktor:\n %d \n" % Faktor)
             df = self.ds.matrix.to_dataframe().iloc[:, 0]
-            df_larger_0 =  df[df > 0]
+            df_larger_0 = df[df > 0]
             f.write("* Matrixwerte\n")
             df_larger_0.to_csv(f, sep=' ', header=False)
-
 
             zone_no = self.ds.zone_no.data
             n_zones = self.ds.dims['zone_no']
@@ -185,13 +171,12 @@ class SavePTV(object):
 
             vartype = 5
 
-            datatypes = {'f': 4, 'd': 5, 'l': 3, 'h': 2,}
-            typecodes = {'f': 'f4', 'd': 'f8', 'l': 'i4', 'h': 'i2',}
+            datatypes = {'f': 4, 'd': 5, 'l': 3, 'h': 2, }
+            typecodes = {'f': 'f4', 'd': 'f8', 'l': 'i4', 'h': 'i2', }
             datatype = datatypes.get(m.dtype.char, 5)
             typecode = typecodes.get(m.dtype.char, 'f8')
 
             header_lines = ['']
-            anz_bez_listen = self.ds.attrs.get('AnzBezeichnerlisten', 1)
             ZeitVon = self.ds.attrs.get('ZeitVon', 0)
             ZeitBis = self.ds.attrs.get('ZeitBis', 24)
             Faktor = self.ds.attrs.get('Faktor', 1)
@@ -278,14 +263,11 @@ class SavePTV(object):
         """ exports array in PSV-Format
         """
         m = self.ds.matrix.data
-        zones_da = self.ds.get('zone_no')
         if not m.ndim == 2:
             raise ValueError('matrix has to have 2 dimensions')
         rows, cols = m.shape
-        if zones_da is None:
-            zones_da = zones.zone_no
-        else:
-            zones = range(1, rows + 1)
+        zones = self.ds.get('zone_no1', range(1, rows + 1))
+
         with open(file_name, "w") as f:
             Za = max(rows, cols)
             Zi = min(rows, cols)

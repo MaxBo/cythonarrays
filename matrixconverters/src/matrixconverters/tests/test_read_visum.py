@@ -58,10 +58,12 @@ def matrix_fn_bl_out(folder):
     fn = os.path.join(folder, 'matrix_bl_format.out')
     return fn
 
+
 @pytest.fixture(scope='class')
 def matrix_fn_bl(folder):
     fn = os.path.join(folder, 'matrix_bl_format.mtx')
     return fn
+
 
 @pytest.fixture(scope='class')
 def matrix_fn_o(folder):
@@ -218,4 +220,3 @@ class TestReadPTV:
         np.testing.assert_array_equal(ds.zone_no2, ds2.zone_no2)
         np.testing.assert_array_equal(ds.zone_name, ds2.zone_name)
         np.testing.assert_array_equal(ds.zone_names2, ds2.zone_names2)
-

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
-import gzip
 import zlib
 from collections import deque
 import numpy as np
@@ -41,7 +39,6 @@ class ReadPTVMatrix(xr.Dataset):
             matrix_type = chr(line[1])
             if line.startswith(b"$"):
                 read_methods = {
-                    #'M': self.readPTVMatrixM,
                     'V': self.readPTVMatrixV,
                     'O': self.readPTVMatrixO,
                     'E': self.readPTVMatrixE,
@@ -257,9 +254,8 @@ class ReadPTVMatrix(xr.Dataset):
 
             self.create_zones(n_zones)
 
-            data_types = {2: 'i2', 3: 'i4', 4: 'f4', 5: 'f8',}
+            data_types = {2: 'i2', 3: 'i4', 4: 'f4', 5: 'f8'}
             dtype = data_types.get(data_type, 'f8')
-
 
             if compression_type == 'I':
                 n_cols = n_zones
@@ -312,9 +308,7 @@ class ReadPTVMatrix(xr.Dataset):
                         # written at each line
                         rowsums[i] = self.read_f8(f)
                         colsums[i] = self.read_f8(f)
-                    #else:
-                        #self.matrix[i] = np.frombuffer(f.read(n_cols*8),
-                                                       #dtype='f8')
+
                 if compression_type >= 'L':
                     # for this format the row and colsums are written
                     # as a vector each

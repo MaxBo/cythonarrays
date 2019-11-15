@@ -9,8 +9,7 @@ import pytest
 import os
 import numpy as np
 from matrixconverters.read_csv import ReadOFormat
-from matrixconverters.save_ptv import SavePTV
-from matrixconverters.tests.test_read_visum import folder, matrix_fn
+from matrixconverters.tests.test_read_visum import folder
 
 
 @pytest.fixture(scope='class')
@@ -18,11 +17,11 @@ def fn_zones(folder):
     fn = os.path.join(folder, 'zones.csv')
     return fn
 
+
 @pytest.fixture(scope='class')
 def fn_matrix(folder):
     fn = os.path.join(folder, 'matrix.csv')
     return fn
-
 
 
 class TestReadCSV:
