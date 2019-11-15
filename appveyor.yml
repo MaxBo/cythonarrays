@@ -25,6 +25,16 @@ environment:
     secure: mQ6pnaM1xr97Fvf8CKU5XMVftz08EheIwm7kdGnLN7pI/8NYD9VZRJyjDbqcWR44
 
   matrix:
+
+
+    - TARGET_ARCH: x64
+      CONDA_NPY: 117
+      CONDA_PY: 38
+      PYTHON_VERSION: 3.8
+      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      UPLOAD_COV: false
+
+
     - TARGET_ARCH: x64
       CONDA_NPY: 116
       CONDA_PY: 37
