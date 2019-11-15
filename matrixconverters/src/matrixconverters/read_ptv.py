@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
+
 import sys
-import io
 import gzip
 import zlib
 from collections import deque
@@ -12,8 +13,7 @@ class ReadPTVMatrix(xr.Dataset):
     the matrix-type is determined by the header
     reades $M, $V, $O, $E, and the binary types $BI, $BK and $B
     """
-
-    def __init__(self, filename, header=2048, zipped=False):
+    def __init__(self, filename):
         """
         read a PTV-Matrix and return it as an xarray-dataset
 
@@ -21,10 +21,6 @@ class ReadPTVMatrix(xr.Dataset):
         ----------
         filename: str
             path to file on disk
-        header: int, optional (default=2048)
-            length ot the header of a binary file
-        zipped: bool, optional (default=False)
-            true, if file is zipped
         """
         super().__init__()
         self.attrs['fn'] = filename
@@ -33,21 +29,14 @@ class ReadPTVMatrix(xr.Dataset):
         self.attrs['Faktor'] = 1
         self.attrs['VMAktKennung'] = 0
         self.attrs['AnzBezeichnerlisten'] = 1
+        self.attrs['roundproc'] = 1
 
-        self._set_open_method(filename, zipped)
         with self._openfile(mode='rb') as f:
             line = f.readline().strip()
 
             errmsg = 'Matrix type not recognised form Header {}'.format(line)
 
-        if line.startswith(bytes([3, 0])) and \
-           line.startswith(b'$B', 2) and len(line) >= 4:
-            # binary format
-            if chr(line[4]) in 'IKL':
-                self.readPTVMatrixBKI()
-            else:
-                self.readPTVMatrixB(header=header)
-        elif line.startswith(b'$') and len(line) > 1:
+        if line.startswith(b'$') and len(line) > 1:
             # text format
             matrix_type = chr(line[1])
             if line.startswith(b"$"):
@@ -64,12 +53,9 @@ class ReadPTVMatrix(xr.Dataset):
                 read()
             else:
                 raise ValueError(errmsg)
-
         else:
             # assume it is the binary format
-            self.readPTVMatrixB(header=header)
-
-        del self.attrs['open']
+            self.readPTVMatrixB()
 
     def readPTVMatrixO(self):
         """read a file in O-Format"""
@@ -123,23 +109,6 @@ class ReadPTVMatrix(xr.Dataset):
         self.read_names_o_format(f, line)
         return rows
 
-    def _set_open_method(self, filename, zipped):
-        """
-        set the file-open-method
-
-        Parameters
-        ----------
-        filename : str
-
-        zipped : bool
-        """
-        if filename.endswith(".gzip") or zipped:
-            self.attrs['open'] = gzip.open
-        elif sys.version_info[0] > 2:
-            self.attrs['open'] = open
-        else:
-            self.attrs['open'] = io.open
-
     def _openfile(self, mode='r', encoding='latin1'):
         """
         open the file with the according open method
@@ -154,10 +123,9 @@ class ReadPTVMatrix(xr.Dataset):
         -------
         open file-handler
         """
-        open_method = self.attrs['open']
         if mode.endswith('b'):
             encoding = None
-        return open_method(self.attrs['fn'], mode=mode, encoding=encoding)
+        return open(self.attrs['fn'], mode=mode, encoding=encoding)
 
     def readPTVMatrixV(self):
         """read a file in V-Format"""
@@ -247,7 +215,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.zone_name.loc[zone_no] = name
         self.create_matrix(n_zones)
 
-    def readPTVMatrixBKI(self):
+    def readPTVMatrixB(self):
         """
         Die Länge des Headers stehen in Byte 5/6
         Zuerst wird mit Hilfe dieses offsets die Anzahl der Zellen ausgelesen
@@ -294,6 +262,7 @@ class ReadPTVMatrix(xr.Dataset):
 
 
             if compression_type == 'I':
+                n_cols = n_zones
                 self.create_matrix(n_zones, dtype=dtype)
 
                 self.zone_no.data[:] = np.frombuffer(
@@ -327,7 +296,7 @@ class ReadPTVMatrix(xr.Dataset):
             # all null values=
             allnull = self.read_u1(f)
             if allnull > 1:
-                raise IOError("Flag of allnull doesn't exist.")
+                raise IOError("Flag of allnull not correctly set.")
 
             # read the results
             rowsums = np.empty((n_zones), dtype='f8')
@@ -393,55 +362,6 @@ class ReadPTVMatrix(xr.Dataset):
     def read_i4(f):
         """read integer from file at current position"""
         return np.frombuffer(f.read(4), dtype="i4")[0]
-
-    def readPTVMatrixB(self, header=2048):
-        """read non-compressed binary format"""
-        with self._openfile(mode="rb") as f:
-            f.seek(header)
-            f.seek(2, 1)
-            Dimensions = np.frombuffer(f.read(2), dtype="i2")[0]
-            MatrixZeilen = np.frombuffer(f.read(4), dtype="i4")[0]
-            f.seek(4, 1)
-            MatrixSpalten = np.frombuffer(f.read(4), dtype="i4")[0]
-            f.seek(4, 1)
-            if Dimensions == 3:
-                MatrixBlock = np.frombuffer(f[header + 20:header + 24],
-                                            dtype="i4")[0]
-                f.seek(4, 1)
-                shape = (MatrixBlock, MatrixZeilen, MatrixSpalten)
-            elif Dimensions == 2:
-                MatrixBlock = 1
-                shape = (MatrixZeilen, MatrixSpalten)
-            else:
-                msg = 'only 2d or 3d dimensions allowed, found %s dimensions'
-                raise ValueError(msg % Dimensions)
-            data_type = np.frombuffer(f.read(2), dtype="i2")
-            if data_type == 3:
-                data_length = 4
-                dtype = '<f4'
-            elif data_type == 4:
-                data_length = 8
-                dtype = '<f8'
-            else:
-                data_length = 8
-                dtype = '<f8'
-            AnzBezeichnerlisten = np.frombuffer(f.read(2),
-                                                dtype="i2")
-            AnzFelder = MatrixZeilen * MatrixSpalten * MatrixBlock
-
-            n_zones = max(MatrixZeilen, MatrixSpalten)
-            self.create_zones(n_zones)
-            self.attrs['ZeitVon'] = int(np.frombuffer(f.read(4), dtype="f4"))
-            self.attrs['ZeitBis'] = int(np.frombuffer(f.read(4), dtype="f4"))
-            self.attrs['VMAktKennung'] = int(
-                np.frombuffer(f.read(4), dtype="i4"))
-            self.attrs['Faktor'] = int(np.frombuffer(f.read(4), dtype="f4"))
-            if AnzBezeichnerlisten > 0:
-                self.zone_no.data[:] = np.frombuffer(
-                    f.read(4 * n_zones), dtype='i4')
-            self.create_matrix(n_zones, dtype=dtype)
-            arr = np.frombuffer(f.read(AnzFelder * data_length), dtype=dtype)
-            self.matrix.data[:] = arr.reshape(shape)
 
     def readWert(self, f):
         """read a single value from the file"""

@@ -30,20 +30,26 @@ def matrix_fn_out(folder):
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_b_out(folder):
-    fn = os.path.join(folder, 'matrix_b_format.out')
-    return fn
-
-
-@pytest.fixture(scope='class')
 def matrix_fn_bk_out(folder):
     fn = os.path.join(folder, 'matrix_bk_format.out')
     return fn
 
 
 @pytest.fixture(scope='class')
+def matrix_fn_bi_out(folder):
+    fn = os.path.join(folder, 'matrix_bi_format.out')
+    return fn
+
+
+@pytest.fixture(scope='class')
 def matrix_fn_bk(folder):
     fn = os.path.join(folder, 'matrix_bk_format.mtx')
+    return fn
+
+
+@pytest.fixture(scope='class')
+def matrix_fn_bi(folder):
+    fn = os.path.join(folder, 'matrix_bi_format.mtx')
     return fn
 
 
@@ -109,6 +115,11 @@ class TestReadPTV:
         ds = ReadPTVMatrix(filename=matrix_fn_s)
         self.print_matrix(ds)
 
+    def test_02c_read_bi_format(self, matrix_fn_bi):
+        """Test reading bki-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bi)
+        self.print_matrix(ds)
+
     def print_matrix(self, ds):
         print(ds)
         print('Histogram of travel times')
@@ -131,14 +142,6 @@ class TestReadPTV:
         print(sum_after)
         np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
 
-    def test_03a_depreciated_args(self, matrix_fn_bk, matrix_fn_out):
-        """Test depreciated arguments"""
-        ds = ReadPTVMatrix(filename=matrix_fn_bk)
-        s = SavePTV(ds)
-        s.savePTVMatrix(file_name=matrix_fn_out,
-                        Ftype='VN', )
-
-
     def test_03b_save_vm_format(self, matrix_fn_bk, matrix_fn_out):
         """Test writing vm-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
@@ -150,21 +153,6 @@ class TestReadPTV:
         sum_after = ds2.matrix.data.sum()
         np.testing.assert_almost_equal(sum_before, sum_after, decimal=5)
 
-    def test_04_save_b_format(self, matrix_fn_bk, matrix_fn_b_out):
-        """Test writing uncompressed b-format"""
-        ds = ReadPTVMatrix(filename=matrix_fn_bk)
-        print(np.histogram(ds.matrix.data, bins=range(8)))
-        sum_before = ds.matrix.data.sum()
-        print(sum_before)
-        s = SavePTV(ds)
-        s.savePTVMatrix(file_name=matrix_fn_b_out,
-                        file_type='B', )
-        ds2 = ReadPTVMatrix(filename=matrix_fn_b_out)
-        print(np.histogram(ds2.matrix.data, bins=range(8)))
-        sum_after = ds2.matrix.data.sum()
-        print(sum_after)
-        assert sum_before == sum_after
-
     def test_05_save_bk_format(self, matrix_fn_bk, matrix_fn_bk_out):
         """Test writing bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
@@ -175,6 +163,20 @@ class TestReadPTV:
         s.savePTVMatrix(file_name=matrix_fn_bk_out,
                         file_type='BK', )
         ds2 = ReadPTVMatrix(filename=matrix_fn_bk_out)
+        print(np.histogram(ds2.matrix.data, bins=range(8)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        assert sum_before == sum_after
+
+    def test_05a_save_bi_format(self, matrix_fn_bi, matrix_fn_bi_out):
+        """Test writing bi-format"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bi)
+        print(np.histogram(ds.matrix.data, bins=range(8)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_bi_out, file_type='BI')
+        ds2 = ReadPTVMatrix(filename=matrix_fn_bi_out)
         print(np.histogram(ds2.matrix.data, bins=range(8)))
         sum_after = ds2.matrix.data.sum()
         print(sum_after)
