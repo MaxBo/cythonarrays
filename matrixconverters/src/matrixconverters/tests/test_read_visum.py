@@ -72,6 +72,12 @@ def matrix_fn_o(folder):
 
 
 @pytest.fixture(scope='class')
+def matrix_fn_o_without_names(folder):
+    fn = os.path.join(folder, 'matrix_o_format_without_names.mtx')
+    return fn
+
+
+@pytest.fixture(scope='class')
 def matrix_fn_e(folder):
     fn = os.path.join(folder, 'matrix_e_format.mtx')
     return fn
@@ -101,13 +107,24 @@ class TestReadPTV:
         ds = ReadPTVMatrix(filename=matrix_fn_bk)
         self.print_matrix(ds)
 
-    def test_02a_read_o_format(self, matrix_fn_o, matrix_fn_or):
+    def test_02a_read_o_format(self,
+                               matrix_fn_o,
+                               matrix_fn_or,
+                               matrix_fn_o_without_names):
         """Test reading bk-format"""
+        zone_no = [100, 200, 300, 400]
         ds = ReadPTVMatrix(filename=matrix_fn_o)
         self.print_matrix(ds)
+        np.testing.assert_equal(ds.zone_no.data, zone_no)
 
         ds = ReadPTVMatrix(filename=matrix_fn_or)
         self.print_matrix(ds)
+        np.testing.assert_equal(ds.zone_no.data, zone_no)
+
+        ds = ReadPTVMatrix(filename=matrix_fn_o_without_names)
+        self.print_matrix(ds)
+        np.testing.assert_equal(ds.zone_no.data, zone_no)
+
 
     def test_02b_read_e_s_format(self, matrix_fn_e, matrix_fn_s):
         """Test reading bk-format"""

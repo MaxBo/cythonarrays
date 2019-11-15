@@ -103,7 +103,7 @@ class ReadPTVMatrix(xr.Dataset):
             self.attrs['Faktor'] = Faktor
 
         rows, line = self.read_values_in_o_format_to_list(f)
-        self.read_names_o_format(f, line)
+        self.read_names_o_format(f, line, rows)
         return rows
 
     def _openfile(self, mode='r', encoding='latin1'):
@@ -188,7 +188,7 @@ class ReadPTVMatrix(xr.Dataset):
                     arr.loc[zone_no] = name
                     line = f.readline().strip()
 
-    def read_names_o_format(self, f, line):
+    def read_names_o_format(self, f, line, rows):
         """Read the zone names"""
         names = deque()
         while line.startswith("*") or line == "\n":
@@ -203,13 +203,24 @@ class ReadPTVMatrix(xr.Dataset):
                     name = l[1].strip('"')
                     names.append((zone_no, name))
                     line = f.readline().strip()
-        n_zones = len(names)
-        self.create_zones(n_zones)
-        for i, (zone_no, name) in enumerate(names):
-            self.zone_no.data[i] = zone_no
-        self.create_zone_names(n_zones)
-        for i, (zone_no, name) in enumerate(names):
-            self.zone_name.loc[zone_no] = name
+        if names:
+            n_zones = len(names)
+            self.create_zones(n_zones)
+            for i, (zone_no, name) in enumerate(names):
+                self.zone_no.data[i] = zone_no
+            self.create_zone_names(n_zones)
+            for i, (zone_no, name) in enumerate(names):
+                self.zone_name.loc[zone_no] = name
+        else:
+            # get zone_no from unique zones in the data
+            zones = []
+            for row in rows:
+                r = row.split()
+                zones.extend(r[:2])
+            zone_no = np.unique(np.array(zones, dtype=int))
+            n_zones = len(zone_no)
+            self.create_zones(n_zones)
+            self.zone_no[:] = zone_no
         self.create_matrix(n_zones)
 
     def readPTVMatrixB(self):
@@ -271,12 +282,12 @@ class ReadPTVMatrix(xr.Dataset):
                 else:
                     dim = 'zones'
                 self.create_zones(n_cols, name='zone_no2', dim=dim)
-                self.create_matrix(n_zones, n_cols=n_cols, dtype=dtype)
 
                 self.zone_no.data[:] = np.frombuffer(
                     f.read(n_zones * 4), dtype="i4")
                 self.zone_no2.data[:] = np.frombuffer(
                     f.read(n_cols * 4), dtype="i4")
+                self.create_matrix(n_zones, n_cols=n_cols, dtype=dtype)
 
                 # read zone names for rows
                 self.create_zone_names(n_zones)
