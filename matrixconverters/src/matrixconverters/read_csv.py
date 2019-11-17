@@ -4,6 +4,7 @@
 import numpy as np
 import pandas as pd
 import xarray as xr
+from typing import Iterable
 
 
 class ReadOFormat(xr.Dataset):
@@ -13,11 +14,11 @@ class ReadOFormat(xr.Dataset):
     _target_cols_matrix = ['origins', 'destinations', 'values']
 
     def __init__(self,
-                 zonefile,
-                 matrixfile,
-                 cols_zones=None,
-                 cols_matrix=None,
-                ):
+                 zonefile: str,
+                 matrixfile: str,
+                 cols_zones: Iterable[str] = None,
+                 cols_matrix: Iterable[str] = None
+                 ):
         """
         Parameters
         ----------
@@ -32,7 +33,7 @@ class ReadOFormat(xr.Dataset):
         self.read_zones_csv(zonefile, cols_zones)
         self.read_matrix_csv(matrixfile, cols_matrix)
 
-    def read_matrix_csv(self, filename, cols_matrix):
+    def read_matrix_csv(self, filename: str, cols_matrix: Iterable[str]):
         """
         Reads a matrix from a csv-file and stores it in self['matrix']
 
@@ -52,7 +53,7 @@ class ReadOFormat(xr.Dataset):
         m = self['matrix']
         m.data[np.isnan(m.data)] = 0
 
-    def read_zones_csv(self, filename, cols_zones):
+    def read_zones_csv(self, filename: str, cols_zones: Iterable[str]):
         """
         Reads a matrix from a csv-file and stores it as coordinates
 
@@ -79,7 +80,11 @@ class ReadOFormat(xr.Dataset):
             self.coords[name_dim] = xr.IndexVariable(dims=[dim],
                                                      data=renamed_da[col_name])
 
-    def read_file_to_da(self, data_cols, filename, target_cols, pkey):
+    def read_file_to_da(self,
+                        data_cols: Iterable[str],
+                        filename: str,
+                        target_cols: Iterable[str],
+                        pkey: str) -> xr.DataArray:
         """
         reads a file into a DataArray
 

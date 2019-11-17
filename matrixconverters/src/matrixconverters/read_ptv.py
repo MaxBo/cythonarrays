@@ -4,14 +4,17 @@ import zlib
 from collections import deque
 import numpy as np
 import xarray as xr
+from typing import TextIO, BinaryIO, IO, Iterable, Tuple, List
 
 
 class ReadPTVMatrix(xr.Dataset):
     """reads PTV-Matrix from file
     the matrix-type is determined by the header
-    reades $M, $V, $O, $E, and the binary types $BI, $BK and $B
+    reades $V, $O, $E, and the binary types $BI, $BK and $B
     """
-    def __init__(self, filename):
+    __slots__ = ()
+
+    def __init__(self, filename: str):
         """
         read a PTV-Matrix and return it as an xarray-dataset
 
@@ -79,7 +82,7 @@ class ReadPTVMatrix(xr.Dataset):
                 value = float(cols[i + 1])
                 loc[fr, to] = value
 
-    def read_header(self, f):
+    def read_header(self, f: TextIO) -> deque:
         """
         read the header
 
@@ -89,12 +92,12 @@ class ReadPTVMatrix(xr.Dataset):
 
         Returns
         -------
-        rows: list
+        rows: deque
         """
         line = f.readline()
         MatrixTyp = line.split("$")[-1].split(";")[0]
         if "M" in MatrixTyp:
-            self.attrs['VMAktKennung'] = self.readWert(f)
+            self.attrs['VMAktKennung'] = self.read_value(f)
 
         if "N" not in MatrixTyp:
             ZeitVon, ZeitBis, Faktor = self.read_values(f, 3)
@@ -106,7 +109,7 @@ class ReadPTVMatrix(xr.Dataset):
         self.read_names_o_format(f, line, rows)
         return rows
 
-    def _openfile(self, mode='r', encoding='latin1'):
+    def _openfile(self, mode: str = 'r', encoding: str = 'latin1') -> IO:
         """
         open the file with the according open method
 
@@ -133,7 +136,7 @@ class ReadPTVMatrix(xr.Dataset):
                 print("Keine Matrix im V-Format!")
                 raise TypeError
             if "M" in MatrixTyp:
-                self.attrs['VMAktKennung'] = self.readWert(f)
+                self.attrs['VMAktKennung'] = self.read_value(f)
 
             if "N" not in MatrixTyp:
                 ZeitVon, ZeitBis, Faktor = self.read_values(f, 3)
@@ -141,7 +144,7 @@ class ReadPTVMatrix(xr.Dataset):
                 self.attrs['ZeitBis'] = ZeitBis
                 self.attrs['Faktor'] = Faktor
 
-            n_zones = self.readWert(f)
+            n_zones = self.read_value(f)
             self.create_zones(n_zones)
             self.read_values_to_array(f, self.zone_no)
 
@@ -150,7 +153,10 @@ class ReadPTVMatrix(xr.Dataset):
             self.create_zone_names(n_zones)
             self.read_names(f, self.zone_name)
 
-    def create_zone_names(self, n_zones, name='zone_name', dim='zone_no'):
+    def create_zone_names(self,
+                          n_zones: int,
+                          name: str = 'zone_name',
+                          dim: str = 'zone_no'):
         coord = getattr(self, dim).data
         self[name] = xr.DataArray(
             np.empty((n_zones, ), dtype='O'),
@@ -158,7 +164,10 @@ class ReadPTVMatrix(xr.Dataset):
             dims=(dim,),
             name=name,)
 
-    def create_matrix(self, n_zones, n_cols=None, dtype='f8'):
+    def create_matrix(self,
+                      n_zones: int,
+                      n_cols: int = None,
+                      dtype: str = 'f8'):
         n_cols = n_cols or n_zones
         origins = self.zone_no
         destinations = getattr(self, 'zone_no2', origins)
@@ -168,11 +177,14 @@ class ReadPTVMatrix(xr.Dataset):
             dims=('origins', 'destinations'),
             name='matrix',)
 
-    def create_zones(self, n_zones, name='zone_no', dim = 'zones'):
+    def create_zones(self,
+                     n_zones: int,
+                     name: str = 'zone_no',
+                     dim: str = 'zones'):
         self.coords[name] = xr.DataArray(np.arange(n_zones, dtype='i4'),
                                          dims=(dim,),)
 
-    def read_names(self, f, arr):
+    def read_names(self, f: TextIO, arr: xr.DataArray):
         """Read the zone names"""
         line = f.readline()
         while line.startswith("*") or line == "\n":
@@ -182,13 +194,16 @@ class ReadPTVMatrix(xr.Dataset):
 
                 line = f.readline().strip()
                 while line:
-                    l = line.split(' "')
-                    zone_no = int(l[0])
-                    name = l[1].strip('"')
+                    row = line.split(' "')
+                    zone_no = int(row[0])
+                    name = row[1].strip('"')
                     arr.loc[zone_no] = name
                     line = f.readline().strip()
 
-    def read_names_o_format(self, f, line, rows):
+    def read_names_o_format(self,
+                            f: TextIO,
+                            line: str,
+                            rows: Iterable[str]):
         """Read the zone names"""
         names = deque()
         while line.startswith("*") or line == "\n":
@@ -198,9 +213,9 @@ class ReadPTVMatrix(xr.Dataset):
 
                 line = f.readline().strip()
                 while line:
-                    l = line.split(' "')
-                    zone_no = int(l[0])
-                    name = l[1].strip('"')
+                    row = line.split(' "')
+                    zone_no = int(row[0])
+                    name = row[1].strip('"')
                     names.append((zone_no, name))
                     line = f.readline().strip()
         if names:
@@ -225,19 +240,7 @@ class ReadPTVMatrix(xr.Dataset):
 
     def readPTVMatrixB(self):
         """
-        Die Länge des Headers stehen in Byte 5/6
-        Zuerst wird mit Hilfe dieses offsets die Anzahl der Zellen ausgelesen
-        und eine leere Matrix gebildet
-        dann werden Verkehrsmittelkennung gelesen.
-        Dann folgen die Zellennummern
-        Schlieslich wird für jede Zeile der Matrix zuerst
-        die Länge der gepakten Daten dieser Zeile (lenChunk) gelesen
-        und dann die Daten mit zlib.decompress entpackt
-        und mit np.frombuffer in ein Zeilen-array verwandelt,
-        Damit wird die Matrix zeilenweise "gefüllt"
-        Zwischen den Zeilen befinden sich jeweils 16 byte,
-        deren Sinn unklar ist (ggf. eine Prüfsumme?)
-        Diese werden ignoriert.
+        Read a binary PTV Matrix
         """
         with self._openfile(mode="rb") as f:
             f.seek(0, 0)
@@ -338,46 +341,49 @@ class ReadPTVMatrix(xr.Dataset):
         np.testing.assert_allclose(np.diag(self.matrix).sum(),
                                    self.attrs['diagsum'])
 
-    def read_utf16(self, f):
+    def read_utf16(self, f: BinaryIO) -> str:
         """read utf16( encoded string from file at current position"""
         n_chars = self.read_i4(f)
         return f.read(n_chars * 2).decode('utf16')
 
     @staticmethod
-    def read_f4(f):
+    def read_f4(f: BinaryIO) -> float:
         """read float from file at current position"""
         return np.frombuffer(f.read(4), dtype="f4")[0]
 
     @staticmethod
-    def read_f8(f):
+    def read_f8(f: BinaryIO) -> float:
         """read double from file at current position"""
         return np.frombuffer(f.read(8), dtype="f8")[0]
 
     @staticmethod
-    def read_u1(f):
+    def read_u1(f: BinaryIO) -> int:
         """read byte from file at current position"""
         return np.frombuffer(f.read(1), dtype="u1")[0]
 
     @staticmethod
-    def read_i2(f):
+    def read_i2(f: BinaryIO) -> int:
         """read short integer from file at current position"""
         return np.frombuffer(f.read(2), dtype="i2")[0]
 
     @staticmethod
-    def read_i4(f):
+    def read_i4(f: BinaryIO) -> int:
         """read integer from file at current position"""
         return np.frombuffer(f.read(4), dtype="i4")[0]
 
-    def readWert(self, f):
+    def read_value(self, f: TextIO) -> int:
         """read a single value from the file"""
         line = f.readline().strip()
         while not line or line.startswith("*"):
             line = f.readline()
-        Wert = int(line)
-        return Wert
+        value = int(line)
+        return value
 
-    def read_values_to_array(self, f, arr, sep=' '):
-        """read values to a numpy array at pos x"""
+    def read_values_to_array(self,
+                             f: TextIO,
+                             arr: xr.DataArray,
+                             sep: str = ' '):
+        """read values from the file into a DataArray"""
         flat_arr = arr.data.ravel()
         n_total = len(flat_arr)
         pos_from = 0
@@ -390,8 +396,8 @@ class ReadPTVMatrix(xr.Dataset):
             flat_arr[pos_from:pos_to] = row
             pos_from = pos_to
 
-    def read_values_in_o_format_to_list(self, f):
-        """read values to a numpy array at pos x"""
+    def read_values_in_o_format_to_list(self, f: TextIO) -> Tuple[deque, str]:
+        """read values to a list"""
         rows = deque()
         for line in f:
             row = line.strip()
@@ -402,7 +408,7 @@ class ReadPTVMatrix(xr.Dataset):
             rows.append(row)
         return rows, row
 
-    def read_values(self, f, n_values):
+    def read_values(self, f: TextIO, n_values: int) -> List[float]:
         values = []
         found = 0
         while found < n_values:

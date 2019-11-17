@@ -3,6 +3,7 @@
 import zlib
 import numpy as np
 import xarray as xr
+from typing import BinaryIO
 
 
 def write_line(f, text, length):
@@ -16,31 +17,31 @@ class SavePTV(object):
         self.ds = ds
 
     @staticmethod
-    def write_u1(f, val):
+    def write_u1(f: BinaryIO, val: int):
         """write 1-byte number to file"""
         f.write(np.array(val, dtype="u1").tostring())
 
     @staticmethod
-    def write_i2(f, val):
+    def write_i2(f: BinaryIO, val: int):
         """write short number to file"""
         f.write(np.array(val, dtype="i2").tostring())
 
     @staticmethod
-    def write_i4(f, val):
+    def write_i4(f: BinaryIO, val: int):
         """write int number to file"""
         f.write(np.array(val, dtype="i4").tostring())
 
     @staticmethod
-    def write_f4(f, val):
+    def write_f4(f: BinaryIO, val: float):
         """write float to file"""
         f.write(np.array(val, dtype="f4").tostring())
 
     @staticmethod
-    def write_f8(f, val):
+    def write_f8(f: BinaryIO, val: float):
         """write double to file"""
         f.write(np.array(val, dtype="f8").tostring())
 
-    def write_utf16(self, f, val):
+    def write_utf16(self, f: BinaryIO, val: xr.DataArray):
         """write string as utf16 encoded string to file"""
         unencoded_str = val.data.tolist()
         self.write_i4(f, len(unencoded_str))
@@ -48,9 +49,9 @@ class SavePTV(object):
         f.write(utf16_str)
 
     def savePTVMatrix(self,
-                      file_name,
-                      file_type='BK',
-                      version=0.11,
+                      file_name: str,
+                      file_type: str = 'BK',
+                      version: float = 0.11,
                       ):
         """
         save array im PTV-Format
@@ -72,7 +73,7 @@ class SavePTV(object):
         elif file_type.startswith("O"):
             self._write_format_o(file_name, file_type)
 
-    def _write_format_v(self, fn, file_type):
+    def _write_format_v(self, fn: str, file_type: str):
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
@@ -115,7 +116,7 @@ class SavePTV(object):
                 for i in range(n_zones):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
-    def _write_format_o(self, fn, file_type):
+    def _write_format_o(self, fn: str, file_type: str):
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
 
@@ -149,7 +150,7 @@ class SavePTV(object):
                 for i in range(n_zones):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
-    def _write_format_b(self, fn, file_type='K'):
+    def _write_format_b(self, fn: str, file_type: str = 'K'):
         m = self.ds.matrix.data
         with open(fn, "wb") as f:
 
@@ -259,8 +260,12 @@ class SavePTV(object):
                     f.write(rowsums.tostring())
                     f.write(colsums.tostring())
 
-    def savePSVMatrix(self, file_name, ftype="CC", max_width=1000):
-        """ exports array in PSV-Format
+    def savePSVMatrix(self,
+                      file_name: str,
+                      ftype: str = "CC",
+                      max_width: int = 1000):
+        """
+        exports array in PSV-Format
         """
         m = self.ds.matrix.data
         if not m.ndim == 2:

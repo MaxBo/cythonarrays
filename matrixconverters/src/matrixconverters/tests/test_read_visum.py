@@ -125,7 +125,6 @@ class TestReadPTV:
         self.print_matrix(ds)
         np.testing.assert_equal(ds.zone_no.data, zone_no)
 
-
     def test_02b_read_e_s_format(self, matrix_fn_e, matrix_fn_s):
         """Test reading bk-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_e)
@@ -190,6 +189,21 @@ class TestReadPTV:
     def test_05a_save_bi_format(self, matrix_fn_bi, matrix_fn_bi_out):
         """Test writing bi-format"""
         ds = ReadPTVMatrix(filename=matrix_fn_bi)
+        print(np.histogram(ds.matrix.data, bins=range(8)))
+        sum_before = ds.matrix.data.sum()
+        print(sum_before)
+        s = SavePTV(ds)
+        s.savePTVMatrix(file_name=matrix_fn_bi_out, file_type='BI')
+        ds2 = ReadPTVMatrix(filename=matrix_fn_bi_out)
+        print(np.histogram(ds2.matrix.data, bins=range(8)))
+        sum_after = ds2.matrix.data.sum()
+        print(sum_after)
+        assert sum_before == sum_after
+
+    def test_05b_save_bi_format_zero(self, matrix_fn_bi, matrix_fn_bi_out):
+        """Test writing bi-format with zero flag"""
+        ds = ReadPTVMatrix(filename=matrix_fn_bi)
+        ds.matrix.data[:] = 0
         print(np.histogram(ds.matrix.data, bins=range(8)))
         sum_before = ds.matrix.data.sum()
         print(sum_before)
