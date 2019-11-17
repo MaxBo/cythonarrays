@@ -37,10 +37,16 @@ tools to read and write matrices in the format or PTV VISUM
 [Documentation](https://maxbo.github.io/cythonarrays/)
 
 # Installation
+You can use pip to install the packages (and the requirements like numpy).
 
-The easiest way to handle dependencies is to use [conda](https://conda.io/miniconda.html).
+```
+pip install cythoninstallhelpers
+pip install cythonarrays
+pip install matrixconverters
+```
+Another way to handle dependencies is to use [conda](https://conda.io/miniconda.html).
 
-There conda packages for python 3.5 and 3.6 for windown and linux are generated in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
+There conda packages for python 3.5-3.8 for windows and linux are generated in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
 ```
 conda create -n myenv python=3.6
 activate myenv
@@ -50,11 +56,4 @@ conda config --add channels MaxBo
 
 conda install cythonarrays
 conda install matrixconverters
-```
-Without conda, you can use pip to install the packages, if you have the requirements like numpy installed.
-
-```
-pip install cythoninstallhelpers
-pip install cythonarrays
-pip install matrixconverters
 ```
