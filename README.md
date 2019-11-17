@@ -34,6 +34,47 @@ Data is automatically converted to the right dtype.
 
 tools to read and write matrices in the format or PTV VISUM
 
+It implements:
+
+*Reading and writing PTV-Matrices*
+
+It can read and write the following formats:
+* Text-Formats: O-Format, V-Format, S-Format
+* Binary formats: BI-Format, BK-Format, BL-Format
+```
+# read a matrix into a xarray-Dataset
+from matrixconverters import ReadPTVMatrix, SavePTVMatrix
+ds = ReadPTVMatrix(filepath)
+
+# save a xr.Dataset as PTV-Matrix
+import xarray as xr
+da = xr.DataArray(np.arange(9).reshape(3, 3))
+zones = xr.DataArray([100, 200, 300])
+names = xr.DataArray(['A-Town', 'B-Village', 'C-City'])
+ds = xr.Dataset({'matrix': da,
+                 'zone_no': zones,
+                 'zone_name': names,})
+from matrixconverters.save_ptv import SavePTV
+s = SavePTV(ds)
+s.savePTVMatrix(file_name=matrix_fn_out, file_type='BK')
+```
+*Writing PSV-Matrices*
+* Programmsystem Verkehr by Software-Kontor Helmert-Hilke)
+* File-Types CC and CN
+```
+from matrixconverters.save_ptv import SavePTV
+s = SavePTV(ds)
+s.savePSVMatrix(file_name=matrix_fn_out, ftype='CC')
+```
+
+*Export xarray-Dataset as compressed NetCDF-File*
+```
+from matrixconverters.xarray2netcdf import xarray2netcdf
+xarray2netcdf(ds, file_path)
+
+ds_saved = xr.open_dataset(file_path)
+```
+
 [Documentation](https://maxbo.github.io/cythonarrays/)
 
 # Installation
