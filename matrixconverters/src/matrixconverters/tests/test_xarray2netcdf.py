@@ -27,9 +27,12 @@ class TestSaveReadxr2netcdf:
         ds = xr.Dataset({'matrix': da,
                          'zone_no': zones,
                          'zone_name': names,})
+
         # if the filepath containes non-ascii chars, you have to use the
-        # legacy encoding in windows
-        sys._enablelegacywindowsfsencoding()
+        # legacy encoding in windows >= python3.6
+        if sys.platform == 'win32' and sys.version_info >= (3, 6):
+            sys._enablelegacywindowsfsencoding()
+
         xr2netcdf(ds, fp_dataset_with_umlaut)
         ds_saved = xr.open_dataset(fp_dataset_with_umlaut)
         np.testing.assert_array_equal(ds_saved.matrix, da)
