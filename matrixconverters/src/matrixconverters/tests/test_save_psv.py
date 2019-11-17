@@ -36,8 +36,8 @@ def matrix_cn_out(folder):
     return fn
 
 
-class TestReadPSV:
-    """Test reading PSV matrices"""
+class TestSavePSV:
+    """Test saving PSV matrices"""
     def test_01_write_cc(self, matrix_fn, matrix_cc_out):
         """Test writing CC-Format"""
         ds = ReadPTVMatrix(filename=matrix_fn)

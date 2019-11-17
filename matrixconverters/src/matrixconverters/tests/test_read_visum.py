@@ -10,6 +10,7 @@ import os
 import numpy as np
 from matrixconverters.read_ptv import ReadPTVMatrix
 from matrixconverters.save_ptv import SavePTV
+import xarray as xr
 
 
 @pytest.fixture(scope='class')
@@ -251,3 +252,22 @@ class TestReadPTV:
         np.testing.assert_array_equal(ds.zone_no2, ds2.zone_no2)
         np.testing.assert_array_equal(ds.zone_name, ds2.zone_name)
         np.testing.assert_array_equal(ds.zone_names2, ds2.zone_names2)
+
+    def test_08_save_simple_ds(self, matrix_fn_bk_out):
+        da = xr.DataArray(np.arange(9).reshape(3, 3))
+        zones = xr.DataArray([100, 200, 300])
+        names = xr.DataArray(['A-Town', 'B-Village', 'C-City'])
+        ds = xr.Dataset({'matrix': da,
+                         'zone_no': zones,
+                         'zone_name': names,})
+        s = SavePTV(ds)
+        s.savePTVMatrix(matrix_fn_bk_out)
+
+        ds_saved = ReadPTVMatrix(matrix_fn_bk_out)
+        print(ds_saved)
+        np.testing.assert_array_equal(ds_saved.matrix, da)
+        np.testing.assert_array_equal(ds_saved.zone_no, zones)
+        np.testing.assert_array_equal(ds_saved.origins, zones)
+        np.testing.assert_array_equal(ds_saved.destinations, zones)
+        np.testing.assert_array_equal(ds_saved.zone_name, names)
+        np.testing.assert_array_equal(ds_saved.zone_names2, names)

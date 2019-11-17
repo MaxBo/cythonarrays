@@ -17,6 +17,8 @@ def xr2netcdf(dataset: xr.Dataset,
         the xarray-dataset to store
     filepath : str
         the path where the netcdf-file shold be stored
+    mode : str, default='w'
+        write (w) or append (a)
     engine : str (optional, default=netcdf4)
         the engine to use
     compressed : boolen (optional, default=True)

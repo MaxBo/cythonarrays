@@ -12,8 +12,13 @@ def write_line(f, text, length):
 
 class SavePTV(object):
 
-    def __init__(self, ds):
-        """"""
+    def __init__(self, ds: xr.Dataset):
+        """
+        Parameters
+        ----------
+        ds: xarray-Dataset
+            the dataset that should be saved
+        """
         self.ds = ds
 
     @staticmethod
