@@ -10,6 +10,7 @@ from typing import Iterable
 class ReadOFormat(xr.Dataset):
     """reads Matrix from a file
     """
+    __slots__ = ()
     _target_cols_zones = ['zone_no', 'zone_name']
     _target_cols_matrix = ['origins', 'destinations', 'values']
 
