@@ -186,6 +186,12 @@ class TestReadPTV:
         sum_after = ds2.matrix.data.sum()
         print(sum_after)
         assert sum_before == sum_after
+        #  test if it raises Exception, if zone numbers do not match the matrix
+        del ds['zone_name']
+        ds['zone_no'] = xr.IndexVariable(('zone_no', ), ds['zone_no'][:3])
+        with pytest.raises(AssertionError):
+            SavePTV(ds).savePTVMatrix(file_name=matrix_fn_bk_out,
+                        file_type='BK', )
 
     def test_05a_save_bi_format(self, matrix_fn_bi, matrix_fn_bi_out):
         """Test writing bi-format"""

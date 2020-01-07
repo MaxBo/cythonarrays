@@ -222,16 +222,25 @@ class SavePTV(object):
                 self.write_i4(f, n_cols)
             # zone numbers for rows ...
             zone_no = self.ds.zone_no
+            assert len(zone_no) == n_zones,\
+                   'zone_no with length {d} does not match matrix with {n} rows'\
+                .format(d=len(zone_no), n=n_zones)
             f.write(np.array(zone_no.data).astype("i4").tostring())
             # ... and columns (not for $BI)
             if compression_type != 'I':
                 zone_cols = getattr(self.ds, 'zone_no2', zone_no)
+                assert len(zone_cols) == n_cols,\
+                    'zone_cols with length {d} does not match matrix with {n} columns'\
+                    .format(d=len(zone_cols), n=n_cols)
                 f.write(np.array(zone_cols.data).astype("i4").tostring())
 
                 # zone_names (not for $BI):
                 zone_names = getattr(self.ds, 'zone_name', None)
                 if zone_names is None:
-                    zone_names = (xr.DataArray('') for i in range(n_zones))
+                    zone_names = [xr.DataArray('') for i in range(n_zones)]
+                assert len(zone_names) == n_zones,\
+                    'zone_names with length {d} does not match matrix with {n} rows'\
+                    .format(d=len(zone_names), n=n_zones)
                 # for rows
                 for zone_name in zone_names:
                     self.write_utf16(f, zone_name)
@@ -241,7 +250,10 @@ class SavePTV(object):
                     if is_square:
                         zone_names2 = zone_names
                     else:
-                        zone_names2 = (xr.DataArray('') for i in range(n_cols))
+                        zone_names2 = [xr.DataArray('') for i in range(n_cols)]
+                assert len(zone_names2) == n_cols,\
+                    'zone_names2 with length {d} does not match matrix with {n} columns'\
+                    .format(d=len(zone_names2), n=n_cols)
                 for zone_name in zone_names2:
                     self.write_utf16(f, zone_name)
 
