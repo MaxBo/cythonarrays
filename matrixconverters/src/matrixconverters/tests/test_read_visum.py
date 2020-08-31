@@ -245,7 +245,7 @@ class TestReadPTV:
         print(sum_before)
         ds['zone_name'][:] = ['A', 'B', 'C', 'D', 'E']
         ds['zone_names2'][:] = ['ÄÄ', 'ÜÜ', 'Öß€']
-        ds['zone_no2'] *= 100
+        ds = ds.assign_coords(zone_no2=ds['zone_no2'] * 100)
         s = SavePTV(ds)
         s.savePTVMatrix(file_name=matrix_fn_bl_out,
                         file_type='BK', )
