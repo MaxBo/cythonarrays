@@ -31,7 +31,7 @@ environment:
       CONDA_NPY: 117
       CONDA_PY: 38
       PYTHON_VERSION: 3.8
-      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
       UPLOAD_COV: false
 
 
@@ -39,21 +39,21 @@ environment:
       CONDA_NPY: 116
       CONDA_PY: 37
       PYTHON_VERSION: 3.7
-      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
       UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 116
       CONDA_PY: 36
       PYTHON_VERSION: 3.6
-      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
       UPLOAD_COV: true
 
     - TARGET_ARCH: x64
       CONDA_NPY: 115
       CONDA_PY: 35
       PYTHON_VERSION: 3.5
-      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
       UPLOAD_COV: false
 
 
@@ -100,7 +100,7 @@ install:
     - cmd: conda install -n root --quiet --yes obvious-ci
     - cmd: obvci_install_conda_build_tools.py
     # latest conda-build
-    - cmd: conda install -y -n root conda-build=3
+    - cmd: conda install -y -n root conda-build=3 conda-verify
 
     # Create conda test-environment
     - cmd: conda info
