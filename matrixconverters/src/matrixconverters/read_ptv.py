@@ -172,7 +172,7 @@ class ReadPTVMatrix(xr.Dataset):
         origins = self.zone_no
         destinations = getattr(self, 'zone_no2', origins)
         self['matrix'] = xr.DataArray(
-            np.empty((n_zones, n_cols), dtype=dtype),
+            np.zeros((n_zones, n_cols), dtype=dtype),
             coords=(origins, destinations),
             dims=('origins', 'destinations'),
             name='matrix',)
