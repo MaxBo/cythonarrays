@@ -79,6 +79,12 @@ def matrix_fn_o_without_names(folder):
 
 
 @pytest.fixture(scope='class')
+def matrix_fn_o_with_zeros(folder):
+    fn = os.path.join(folder, 'matrix_o_format_with_zeros.mtx')
+    return fn
+
+
+@pytest.fixture(scope='class')
 def matrix_fn_e(folder):
     fn = os.path.join(folder, 'matrix_e_format.mtx')
     return fn
@@ -111,7 +117,8 @@ class TestReadPTV:
     def test_02a_read_o_format(self,
                                matrix_fn_o,
                                matrix_fn_or,
-                               matrix_fn_o_without_names):
+                               matrix_fn_o_without_names,
+                               matrix_fn_o_with_zeros):
         """Test reading bk-format"""
         zone_no = [100, 200, 300, 400]
         ds = ReadPTVMatrix(filename=matrix_fn_o)
@@ -125,6 +132,13 @@ class TestReadPTV:
         ds = ReadPTVMatrix(filename=matrix_fn_o_without_names)
         self.print_matrix(ds)
         np.testing.assert_equal(ds.zone_no.data, zone_no)
+
+        ds = ReadPTVMatrix(filename=matrix_fn_o_with_zeros)
+        self.print_matrix(ds)
+        np.testing.assert_equal(ds.zone_no.data, zone_no)
+        np.testing.assert_equal((ds.matrix.data != 0).sum(), 2,
+                                err_msg='only 2 values should be different to 0')
+
 
     def test_02b_read_e_s_format(self, matrix_fn_e, matrix_fn_s):
         """Test reading bk-format"""
