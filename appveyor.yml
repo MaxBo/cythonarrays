@@ -32,7 +32,7 @@ environment:
       CONDA_PY: 38
       PYTHON_VERSION: 3.8
       CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
-      UPLOAD_COV: false
+      UPLOAD_COV: true
 
 
     - TARGET_ARCH: x64
@@ -47,14 +47,15 @@ environment:
       CONDA_PY: 36
       PYTHON_VERSION: 3.6
       CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
-      UPLOAD_COV: true
-
-    - TARGET_ARCH: x64
-      CONDA_NPY: 115
-      CONDA_PY: 35
-      PYTHON_VERSION: 3.5
-      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
       UPLOAD_COV: false
+
+    # Depreciate python 3.5 because of incompatible netcdf4 version
+    #- TARGET_ARCH: x64
+      #CONDA_NPY: 115
+      #CONDA_PY: 35
+      #PYTHON_VERSION: 3.5
+      #CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
+      #UPLOAD_COV: false
 
 
 # We always use a 64-bit machine, but can build x86 distributions
