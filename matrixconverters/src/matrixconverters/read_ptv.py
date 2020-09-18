@@ -66,7 +66,7 @@ class ReadPTVMatrix(xr.Dataset):
             r = row.split()
             fr = int(r[0])
             to = int(r[1])
-            value = float(r[2])
+            value = self.float_nan(r[2])
             loc[fr, to] = value
 
     def readPTVMatrixE(self):
@@ -372,7 +372,7 @@ class ReadPTVMatrix(xr.Dataset):
         return np.frombuffer(f.read(4), dtype="i4")[0]
 
     def read_value(self, f: TextIO) -> int:
-        """read a single value from the file"""
+        """read a single value from the file as integer"""
         line = f.readline().strip()
         while not line or line.startswith("*"):
             line = f.readline()
@@ -415,6 +415,17 @@ class ReadPTVMatrix(xr.Dataset):
             line = f.readline()
             while line.startswith("*"):
                 line = f.readline()
-            values += map(lambda x: float(x), line.strip().split())
+            values += map(lambda x: self.float_nan(x), line.strip().split())
             found = len(values)
         return values
+
+    @staticmethod
+    def float_nan(x: str) -> float:
+        """convert str to float, handling '-' as 0.0"""
+        try:
+            return float(x)
+        except ValueError as err:
+            if x == '-':
+                return 0.0
+            raise err
+
