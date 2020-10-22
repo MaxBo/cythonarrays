@@ -2,7 +2,7 @@ branches:
   only:
   - master
   - "/^v[0-9]+(\\.[0-9]+)*(\\.[0-9]+)*\\S*/"
-dist: xenial
+dist: bionic
 language: python
 matrix:
   include:
@@ -22,7 +22,7 @@ matrix:
     - CONDA_PY=38
     - CONDA_NPY=117
     - CREATE_DOCS=1
-  - python: 3.9
+  - python: 3.9-dev
     env:
     - TRAVIS_PYTHON_VERSION=3.9
     - CONDA_PY=39
@@ -37,9 +37,8 @@ env:
   - secure: XSywMGCavKPO937o8JWSxlMbuzjUJ9ygpep4ybIaZ6knF2X2uYkT5FAm8VNoRS1/lmEKlaTaorwPHx0KGNcsQMor2gi+qyoJ3ODVranzLhAL3/9pBtWl9B4kbfC0gGitFS8e/X5n0SIuWI3xgjFdkotPnGAeorF+9OhiTQ2Xr4UdURyD5UJUh98SK//wtlXw/gflK7oHDxxumiecPY47wtn1v3vZTL3by27cJr8X8r/J6qmOS3qW2hEG61Rccjj5TSh4EvWWfoDGm7x2vojmPFF6C3yt8e/Y9X4R2W1N1Ni9DEwKA9z37nXtxJRdZG1tIra2PrxgrLNf3v1nMWMMC7gTGLV7Dly+g6+udmEeJbuWLwTrP+HNhlQvTjWVbNhfxsdiyYejTjcVVRUb/b1HuXVQworIoMfiPxFNzUtl9LoRKDq91ZhrfMvCHM9DcSN7YvkX/sgHuPHOTUsjWS3MYBkPHzkjPzYUPfs7tAZnqIMSVUT0npFjZBuTIL/mSmRgO1MRMaLYXvReedEdOh2dKP1y3NxEWiCEIWomEACLTZqjmSDjeoeCPAM8CJZNnhfkRLAE52eTPWZKmzhnk1h8j0IKJlLoE3TasDF6yVu15k2XkpY/szmJ0eS9/m7bsC7bHJ6VG9trDEGJT1NnCXXaR8WBObpvt6+kKrkpzMxAu8E=
 install:
 - sudo apt-get update
-- if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-  -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  -O miniconda.sh; fi
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  -O miniconda.sh
 - bash miniconda.sh -b -p $HOME/miniconda
 - export PATH="$HOME/miniconda/bin:$PATH"
 - hash -r
