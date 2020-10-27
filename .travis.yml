@@ -22,7 +22,7 @@ matrix:
     - CONDA_PY=38
     - CONDA_NPY=117
     - CREATE_DOCS=1
-  - python: 3.9-dev
+  - python: 3.9
     env:
     - TRAVIS_PYTHON_VERSION=3.9
     - CONDA_PY=39
