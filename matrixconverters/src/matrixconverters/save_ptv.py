@@ -24,27 +24,27 @@ class SavePTV(object):
     @staticmethod
     def write_u1(f: BinaryIO, val: int):
         """write 1-byte number to file"""
-        f.write(np.array(val, dtype="u1").tostring())
+        f.write(np.array(val, dtype="u1").tobytes())
 
     @staticmethod
     def write_i2(f: BinaryIO, val: int):
         """write short number to file"""
-        f.write(np.array(val, dtype="i2").tostring())
+        f.write(np.array(val, dtype="i2").tobytes())
 
     @staticmethod
     def write_i4(f: BinaryIO, val: int):
         """write int number to file"""
-        f.write(np.array(val, dtype="i4").tostring())
+        f.write(np.array(val, dtype="i4").tobytes())
 
     @staticmethod
     def write_f4(f: BinaryIO, val: float):
         """write float to file"""
-        f.write(np.array(val, dtype="f4").tostring())
+        f.write(np.array(val, dtype="f4").tobytes())
 
     @staticmethod
     def write_f8(f: BinaryIO, val: float):
         """write double to file"""
-        f.write(np.array(val, dtype="f8").tostring())
+        f.write(np.array(val, dtype="f8").tobytes())
 
     def write_utf16(self, f: BinaryIO, val: xr.DataArray):
         """write string as utf16 encoded string to file"""
@@ -225,14 +225,14 @@ class SavePTV(object):
             assert len(zone_no) == n_zones,\
                    'zone_no with length {d} does not match matrix with {n} rows'\
                 .format(d=len(zone_no), n=n_zones)
-            f.write(np.array(zone_no.data).astype("i4").tostring())
+            f.write(np.array(zone_no.data).astype("i4").tobytes())
             # ... and columns (not for $BI)
             if compression_type != 'I':
                 zone_cols = getattr(self.ds, 'zone_no2', zone_no)
                 assert len(zone_cols) == n_cols,\
                     'zone_cols with length {d} does not match matrix with {n} columns'\
                     .format(d=len(zone_cols), n=n_cols)
-                f.write(np.array(zone_cols.data).astype("i4").tostring())
+                f.write(np.array(zone_cols.data).astype("i4").tobytes())
 
                 # zone_names (not for $BI):
                 zone_names = getattr(self.ds, 'zone_name', None)
@@ -266,7 +266,7 @@ class SavePTV(object):
                 colsums = data.sum(0).astype('f8')
                 for i in range(n_zones):
                     row = data[i]
-                    compressed = zlib.compress(row.tostring())
+                    compressed = zlib.compress(row.tobytes())
                     self.write_i4(f, len(compressed))
                     f.write(compressed)
                     if compression_type != 'L':
@@ -274,8 +274,8 @@ class SavePTV(object):
                         self.write_f8(f, colsums[i])
                 if not is_square:
                     # for $BL-format, the row and colsums are written as vector
-                    f.write(rowsums.tostring())
-                    f.write(colsums.tostring())
+                    f.write(rowsums.tobytes())
+                    f.write(colsums.tobytes())
 
     def savePSVMatrix(self,
                       file_name: str,
