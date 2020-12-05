@@ -10,7 +10,12 @@ from .build_config import (extra_compile_args,
                           make_ext,)
 
 
-def make_extensions(ext_modnames, further_args={}, source_dir='src'):
+def make_extensions(ext_modnames,
+                    further_args={},
+                    source_dir='src',
+                    annotate=True,
+                    linetrace=True,
+                    language_level='3'):
     """
     add sources to the ext_modules specified in the input list
 
@@ -21,6 +26,12 @@ def make_extensions(ext_modnames, further_args={}, source_dir='src'):
     further_args : dict with further arguments for extension module
     source_dir : str, optional (default='src')
         the source directory relative to the setup.py file
+    annotate: bool, optional(default=True)
+        if true, the code is annotated
+    linetrace: bool, optional(default=True)
+        if true, the compiler-directive linetrace is enabled
+    language_level: str, optional(default='3')
+        the compiler-directive for the language_level (2 or 3)
 
     Returns
     -------
@@ -47,7 +58,10 @@ def make_extensions(ext_modnames, further_args={}, source_dir='src'):
         extensions.append(extension)
 
     cython_extensions = cythonize(extensions,
-                                  annotate=True,
-                                  compiler_directives={'linetrace': True,},
+                                  annotate=annotate,
+                                  compiler_directives={
+                                      'linetrace': linetrace,
+                                      'language_level': language_level,
+                                      },
                                   )
     return cython_extensions
