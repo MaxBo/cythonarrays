@@ -25,10 +25,12 @@ cdef class ArrayShapes(object):
     Base Class for a Cython cdef class which helps to handle
     memoryviews better
     """
-    dtypes = {}
-
     def __cinit__(self, *args, **kwargs):
         """init the file"""
+        if not hasattr(self, '__module__'):
+            msg = "don't instantiate cdef class directly, please subclass in python class"
+            raise NotImplementedError(msg)
+        self.dtypes = {}
         for cls in self.__class__.__mro__:
             self._search_memview(cls)
 
@@ -36,12 +38,6 @@ cdef class ArrayShapes(object):
         """
         inits the Array and creates the constands for NAN and NINF
         """
-        # cdef class has to be subclassed in python
-        if not hasattr(self, '__module__'):
-            msg = "don't instantiate cdef class directly, please subclass in python class"
-            raise NotImplementedError(msg)
-
-
         # super class has to be called even if the super class of ArrayShapes
         # is only `object'`
         super(ArrayShapes, self).__init__(*args, **kwargs)

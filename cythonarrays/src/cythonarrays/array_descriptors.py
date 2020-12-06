@@ -63,8 +63,7 @@ class ArrayDescriptor(object):
                 new_shape = arr.shape[dim_diff:]
                 return arr.reshape(new_shape)
             else:
-                msg = 'cannot reshape shape %s to %s dimensions' % (arr.shape,
-                                                                    ndim)
+                msg = f'cannot reshape shape {arr.shape} to {ndim} dimensions'
                 raise ValueError(msg)
         else:
             return arr
@@ -74,9 +73,10 @@ class ArrayDescriptor(object):
         checks if the ndim (and the shape, if specified) match
         and casts the array to the dtype specified
         """
-        msg = '%s: got no np.ndarray , but %s' % (self.name, arr.__class__)
-        assert isinstance(arr, np.ndarray), msg
-        msg = '%s: ndim target: %s, actual: %s' % (self.name, self.ndim, arr.ndim)
+        # cast arr to numpy array
+        if not isinstance(arr, np.ndarray):
+                arr = np.array(arr)
+        msg = f'{self.name}: ndim target: {self.ndim}, actual: {arr.ndim}'
         # if ndim does not match
         try:
             assert self.ndim == arr.ndim, msg
@@ -88,7 +88,7 @@ class ArrayDescriptor(object):
                 raise err
         if self.shape is not None:
             shape = self.get_shape(instance)
-            msg = '%s: shape target: %s, actual: %s' % (self.name, shape, arr.shape)
+            msg = f'{self.name}: shape target: {shape}, actual: {arr.shape}'
             assert_array_equal(arr.shape, shape, msg)
 
         # convert bool array to i1 with view instead of astype
