@@ -44,7 +44,7 @@ class TestSaveReadxr2netcdf:
         np.testing.assert_array_equal(ds_saved.zone_no, ds.zone_no)
         np.testing.assert_array_equal(ds_saved.zone_name, ds.zone_name)
 
-    @pytest.mark.xfail((__hdf5libversion__ < '1.12') and (sys.platform == 'win32'),
+    @pytest.mark.xfail(__hdf5libversion__ < '1.12',
                        reason='Bug in Hdf5 < 1.12 when filepath has non-ascii-characters')
     def test_02_save_ds_with_umlaut(self, ds, fp_dataset_with_umlaut):
         xr2netcdf(ds, fp_dataset_with_umlaut)
