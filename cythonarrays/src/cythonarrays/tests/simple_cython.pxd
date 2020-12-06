@@ -2,12 +2,13 @@
 
 from cythonarrays.numpy_types cimport *
 from cythonarrays.array_shapes cimport ArrayShapes
+from cythonarrays.array_shapes import ArrayShapes
 
 
 cdef class _Simple(ArrayShapes):
     """
     Cython CDefClass for Simple model
-    with coordinates groups, origins, and destinations
+    with coordinates groups and zones
     """
     cdef public long32 groups
     cdef public long32 zones

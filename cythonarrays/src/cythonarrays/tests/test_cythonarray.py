@@ -11,6 +11,7 @@ import pytest
 import xarray as xr
 
 from cythonarrays.tests.example_python import Example
+from cythonarrays.tests.simple_python import Simple
 import pyximport; pyximport.install()
 from .example_cython import (_Example)
 
@@ -104,6 +105,24 @@ class Test01_ExampleCDefClass:
         example.init_array('jobs_j', shape='groups')
         np.testing.assert_array_equal(example.jobs_j,
                                       np.full(groups, 2, dtype='d'))
+
+    def test_01a_test_init_array_with_other_datatypes(self, persons_gi):
+        """Test the Example CDefClass creation"""
+        example = Example(groups=2, origins=3)
+        # test setting with a range
+        example.jobs_j = range(3)
+        np.testing.assert_array_equal(example.jobs_j, np.array([0.0, 1.0, 2.0]))
+        # test setting with a list
+        example.jobs_j = list(range(3))
+        np.testing.assert_array_equal(example.jobs_j, np.array([0.0, 1.0, 2.0]))
+        #  test setting array with a tuple
+        example.jobs_j = tuple(range(3))
+        np.testing.assert_array_equal(example.jobs_j, np.array([0.0, 1.0, 2.0]))
+        #  test setting array with a list of random objects
+        pattern = r"""float\(\) argument must be a string or a number, not .*"""
+        with pytest.raises(TypeError, match=pattern):
+            example.jobs_j = [float, type, int]
+
 
     def test_02_test_shape(self, persons_gi):
         """
@@ -379,13 +398,41 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         example.save_dataset_to_netcdf(tempfile_h5)
 
 
+class Test02_SimpleCDefClass:
+    """Test the Simple CDefClass"""
+    def test_01_simple_class(self):
+        """Test some features of the CDef-Class"""
+        simple = Simple(2, 3, init_arrays=True)
+        np.testing.assert_array_equal(simple.param_g, [-0.1, -0.1])
+        list_persons_gi = [[3, 4, 5], [6, 7, 8]]
+        simple.persons_gi = list_persons_gi
+        np.testing.assert_array_equal(simple.persons_gi, np.array(list_persons_gi))
+
+        # add coordinates to the axis
+        simple.zonenumbers_i = [10, 20, 30]
+        simple.groupnames_g = ['G1', 'G2']
+
+        #  test that access with coordinates work
+        simple.param_g = [-0.1, 0.2]
+        simple.create_ds()
+        print(simple.ds)
+        np.testing.assert_array_equal(simple.ds.param_g.loc['G1'], -0.1)
+        np.testing.assert_array_equal(simple.ds.param_g.loc['G2'], 0.2)
+
+        np.testing.assert_array_equal(simple.ds.persons_gi.loc['G1', 30], 5)
+        np.testing.assert_array_equal(simple.ds.persons_gi.loc['G2', 20], 7)
+
+
 class Test04_Test_Instantiation:
     """Test the instantiation of the class"""
 
     def test041_test_instantiation(self):
-        """not subclassing shoud rais a NotImplementedError"""
-        with pytest.raises(NotImplementedError):
+        """
+        not subclassing shoud raise a NotImplementedError
+        because the dtype is not initialized"""
+        with pytest.raises(NotImplementedError) as e:
             example = _Example()
+        print(e.value)
 
     def test042_test_nan(self, persons_gi):
         """Test nan"""

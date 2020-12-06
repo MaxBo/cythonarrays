@@ -15,26 +15,22 @@ build:
 requirements:
   build:
     - python
-    - setuptools
-    - cython
+    - cythoninstallhelpers
     - numpy>=1.12
     - xarray
-    - cythoninstallhelpers
     - netcdf4
-    - pytest
-    - pytest-runner
+
   run:
     - python
-    - setuptools
+    - cythoninstallhelpers
     - numpy>=1.12
     - xarray
     - netcdf4
-    - cythoninstallhelpers
+    - pytest
 
 test:
   requires:
     - pytest
-    - pytest-runner
   commands:
     - py.test --junitxml={{ environ["TMPDIR"] }}/junit_matrixconverters.xml --pyargs matrixconverters
 

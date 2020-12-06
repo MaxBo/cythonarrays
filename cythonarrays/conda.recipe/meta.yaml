@@ -15,27 +15,26 @@ build:
 requirements:
   build:
     - python
-    - setuptools
+    - setuptools>=41
     - cython
-    - numpy
+    - numpy>=1.12
     - xarray
+    - netcdf4
     - cythoninstallhelpers
-    - pytest
-    - pytest-runner
+
   run:
     - python
-    - setuptools
-    - numpy
+    - setuptools>=41
+    - cython
+    - numpy>=1.12
     - xarray
     - netcdf4
     - cythoninstallhelpers
     - pytest
-    - pytest-runner
-    
+
 test:
   requires:
     - pytest
-    - pytest-runner
   commands:
     - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythonarrays.xml --pyargs cythonarrays
 

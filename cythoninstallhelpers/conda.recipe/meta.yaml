@@ -15,19 +15,20 @@ build:
 requirements:
   build:
     - python
-    - setuptools
-    - numpy
+    - setuptools>=41
+    - numpy>=1.12
     - cython
 
   run:
     - python
-    - setuptools
-    - numpy
-    - cython
+    - setuptools>=41
+    - numpy>=1.12
+    - pytest
+
 test:
   requires:
     - pytest
-    - pytest-runner
+
   commands:
     - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythoninstallhelpers.xml --pyargs cythoninstallhelpers
 
