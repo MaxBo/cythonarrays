@@ -3,7 +3,6 @@
 from typing import Tuple, Union, Iterable
 import numpy as np
 from numpy.testing import assert_array_equal
-import cythonarrays.array_shapes
 
 
 class ArrayDescriptor(object):
@@ -80,7 +79,7 @@ class ArrayDescriptor(object):
     def validate_array(
         self,
         arr: np.ndarray,
-        instance: 'cythonarrays.array_shapes.ArrayShapes'=None) -> np.ndarray:
+        instance=None) -> np.ndarray:
         """
         checks if the ndim (and the shape, if specified) match
         and casts the array to the dtype specified
@@ -89,7 +88,7 @@ class ArrayDescriptor(object):
         ----------
         arr:
             the array to test
-        instance:
+        instance: ArrayShapes
             the CDefClass-instance holding the information on the allowed shapes
 
         Returns
@@ -126,14 +125,14 @@ class ArrayDescriptor(object):
         return arr.astype(self.dtype, copy=False)
 
     def get_shape(self,
-                  instance: 'cythonarrays.array_shapes.ArrayShapes'=None) -> Tuple[int]:
+                  instance=None) -> Tuple[int]:
         """
         get the shape of the array defined by the ArrayDescriptor
         using the information from the ArrayShape-instance
 
         Parameters
         ----------
-        instance:
+        instance: ArrayShapes
             the CDefClass-instance holding the information on the allowed shapes
 
         Returns
@@ -160,11 +159,13 @@ class ArrayDescriptor(object):
 
     @property
     def shape(self) -> Tuple[Union[str, int]]:
-        """
-        Returns
-        -------
-        :
-            the shape of the array described, with numbers or strings
+        """the shape of the array described, with numbers or strings
+
+        Parameters
+        ----------
+        value: Union[int, str, bytes, Tuple[Union[int, str]]]
+            the setter can receive the shape provided as a number, a string
+            (comma separated for several dimensions) or a tuple/list of strings or ints
         """
         return self._shape
 

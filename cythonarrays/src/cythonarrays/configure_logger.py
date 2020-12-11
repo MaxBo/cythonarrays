@@ -4,7 +4,7 @@ import os
 import inspect
 
 
-class SimLogger(object):
+class SimLogger:
     """
     Singleton Class for the logging
     """
@@ -38,19 +38,19 @@ class SimLogger(object):
             self.add_package(package)
 
     def configure(self,
-                  LOG_FOLDER,
-                  scenario,
-                  mode='a'):
+                  LOG_FOLDER: str,
+                  scenario: str,
+                  mode: str='a'):
         """
         configures the file handlers for the logger
 
         Parameters
         ----------
-        LOG_FOLDER : str
+        LOG_FOLDER:
             the path to the log-folder
-        scenario : str
+        scenario:
             the name of the scenario used in the log file
-        mode : str, optional(Default: 'a')
+        mode:
             a: append
             w: recreate logfile
         """
@@ -83,23 +83,32 @@ class SimLogger(object):
             self.create_logger_for_package(package)
 
     def add_console_handler(self):
-        # create console handler with a higher log level
+        """create console handler with a higher log level"""
         self.ch = logging.StreamHandler()
         self.ch.setLevel(logging.INFO)
         self.ch.setFormatter(self.get_info_formatter())
 
-    def get_debug_formatter(self):
+    def get_debug_formatter(self) -> logging.Formatter:
+        """return a formatter with detailed information"""
         formatter = logging.Formatter(
             '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         return formatter
 
-    def get_info_formatter(self):
+    def get_info_formatter(self) -> logging.Formatter:
+        """return a formatter with less detailed information"""
         msg = '%(asctime)s.%(msecs).03d-%(levelname)s->%(message)s'
         formatter_info = logging.Formatter(fmt=msg, datefmt='%H:%M:%S')
         return formatter_info
 
-    def create_logger_for_package(self, package):
-        # create a logger for the package
+    def create_logger_for_package(self, package: str):
+        """
+        create a logger for the package
+
+        Parameters
+        ----------
+        package:
+            the package to create the logger for
+        """
         logger = logging.getLogger(package)
         logger.setLevel(logging.DEBUG)
 
@@ -113,14 +122,20 @@ class SimLogger(object):
             logger.addHandler(self.fh_debug)
 
     @staticmethod
-    def get_caller_name(skip=2):
+    def get_caller_name(skip: int=2) -> str:
         """
         Get a name of a caller in the format module.class.method
 
-        `skip` specifies how many levels of stack to skip while getting caller
-        name. skip=1 means "who calls me", skip=2 "who calls my caller" etc.
+        Parameters
+        ----------
+        skip:
+            specifies how many levels of stack to skip while getting caller
+            name. skip=1 means "who calls me", skip=2 "who calls my caller" etc.
 
-        An empty string is returned if skipped levels exceed stack height
+        Returns
+        -------
+        :
+            the caller. An empty string is returned if skipped levels exceed stack height
         """
         stack = inspect.stack()
         start = 0 + skip
@@ -176,8 +191,15 @@ class SimLogger(object):
         return logger
 
 
-def get_module_logger(module_name):
-    """create Module logger named after the module"""
+def get_module_logger(module_name: str) -> logging.Logger:
+    """
+    create Module logger named after the module
+
+    Parameters
+    ----------
+    module_name:
+        the module name
+    """
     module_logger = logging.getLogger(module_name)
     # Add a NullHandler for the case if no logging is configured by the
     # Application
@@ -185,7 +207,7 @@ def get_module_logger(module_name):
     return module_logger
 
 
-def get_logger(instance):
+def get_logger(instance) -> logging.Logger:
     """
     for the instance, get the package,
     add the package to the list of loggers,
@@ -193,12 +215,13 @@ def get_logger(instance):
 
     Parameters
     ----------
-    instance : object
+    instance:
+        an arbitrary object
 
     Returns
     -------
-    logger : logger-instace
-
+    :
+        logger-instace
     """
     sim_logger = SimLogger()
     if hasattr(instance, '__module__'):

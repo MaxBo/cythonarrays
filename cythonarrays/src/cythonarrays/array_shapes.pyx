@@ -40,7 +40,7 @@ cdef class ArrayShapes(object):
         """
         # super class has to be called even if the super class of ArrayShapes
         # is only `object`
-        super(ArrayShapes, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         # set NAN-Values
         self.NAN_f = np.NAN #np.float32(0) / np.float32(0)
         self.INF_f = np.float32(1) / np.float32(0)
@@ -53,15 +53,20 @@ cdef class ArrayShapes(object):
         # create Class logger
         self.logger = get_logger(self)
 
-    cdef char __isnan(self, np_floating x) nogil:
+    cdef char _isnan(self, np_floating x) nogil:
         """
         check for nan
         """
         return npy_isnan(x)
 
-    def isnan_py(self, np_numeric x):
-        """python wrapper around _isnan()"""
-        return bool(self.__isnan(float(x)))
+    def isnan_py(self, np_numeric x) -> bool:
+        """python wrapper around _isnan()
+
+        Parameters
+        ----------
+        x:
+            the value to test for is_nan"""
+        return bool(self._isnan(float(x)))
 
     @cython.initializedcheck(False)
     cpdef _search_memview(self, cls):
@@ -171,7 +176,7 @@ cdef class ArrayShapes(object):
         arr = np.empty(shape, dtype=np_dtype)
         return arr
 
-    def _change_dtype(self, msg, shape, default):
+    def _change_dtype(self, msg: str, shape, default):
         """
         according to the error message received the dtype is changed
         and a new array returned
