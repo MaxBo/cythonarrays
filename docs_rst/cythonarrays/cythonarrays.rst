@@ -1,17 +1,11 @@
 cythonarrays package
 ====================
 
-Subpackages
------------
-
-.. toctree::
-
-    cythonarrays.tests
-
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    cythonarrays.array_descriptors
    cythonarrays.array_properties
@@ -23,6 +17,6 @@ Module contents
 ---------------
 
 .. automodule:: cythonarrays
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

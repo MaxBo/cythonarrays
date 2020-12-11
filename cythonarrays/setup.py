@@ -38,7 +38,7 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3',
         'Programming Language :: Cython',
 
     ],
@@ -52,19 +52,19 @@ setup(
         ],
 
     extras_require=dict(
-        extra=[],
         docs=[
-            'z3c.recipe.sphinxdoc',
-            'sphinxcontrib-requirements'
+            'sphinx',
+            'sphinxcontrib-napoleon',
+            'sphinx-autodoc-typehints',
+            'm2r2',
         ],
-        test=[]
     ),
+
+    setup_requires=['pytest-runner', ],
     tests_require=['pytest', ],
 
     install_requires=[
         'cythoninstallhelpers',
-        'cython',
-        'numpy',
         'xarray',
     ],
     ext_modules=make_extensions(ext_modnames),

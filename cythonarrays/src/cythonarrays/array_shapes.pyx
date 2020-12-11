@@ -39,7 +39,7 @@ cdef class ArrayShapes(object):
         inits the Array and creates the constands for NAN and NINF
         """
         # super class has to be called even if the super class of ArrayShapes
-        # is only `object'`
+        # is only `object`
         super(ArrayShapes, self).__init__(*args, **kwargs)
         # set NAN-Values
         self.NAN_f = np.NAN #np.float32(0) / np.float32(0)
@@ -53,13 +53,15 @@ cdef class ArrayShapes(object):
         # create Class logger
         self.logger = get_logger(self)
 
-    cdef public char isnan(self, np_floating x) nogil:
-        """check for nan"""
+    cdef char __isnan(self, np_floating x) nogil:
+        """
+        check for nan
+        """
         return npy_isnan(x)
 
     def isnan_py(self, np_numeric x):
-        """python wrapper around isnan()"""
-        return bool(self.isnan(float(x)))
+        """python wrapper around _isnan()"""
+        return bool(self.__isnan(float(x)))
 
     @cython.initializedcheck(False)
     cpdef _search_memview(self, cls):

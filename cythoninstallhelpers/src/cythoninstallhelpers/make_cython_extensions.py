@@ -2,7 +2,9 @@
 
 import os
 import sys
+from typing import List, Dict
 import numpy as np
+from distutils.extension import Extension
 from Cython.Build import cythonize
 
 from .build_config import (extra_compile_args,
@@ -10,32 +12,33 @@ from .build_config import (extra_compile_args,
                           make_ext,)
 
 
-def make_extensions(ext_modnames,
-                    further_args={},
-                    source_dir='src',
-                    annotate=True,
-                    linetrace=True,
-                    language_level='3'):
+def make_extensions(ext_modnames: List[str],
+                    further_args: Dict[str, str]={},
+                    source_dir: str='src',
+                    annotate: bool=True,
+                    linetrace: bool=True,
+                    language_level: str='3') -> List[Extension]:
     """
     add sources to the ext_modules specified in the input list
 
     Parameters
     ----------
-    ext_modnames : list of str
+    ext_modnames :
         the extension modules to create
     further_args : dict with further arguments for extension module
-    source_dir : str, optional (default='src')
+    source_dir :
         the source directory relative to the setup.py file
-    annotate: bool, optional(default=True)
+    annotate:
         if true, the code is annotated
-    linetrace: bool, optional(default=True)
+    linetrace:
         if true, the compiler-directive linetrace is enabled
-    language_level: str, optional(default='3')
+    language_level:
         the compiler-directive for the language_level (2 or 3)
 
     Returns
     -------
-    extensions : list of Extension-instances
+    :
+        list of Extension-instances
     """
     extensions = []
 

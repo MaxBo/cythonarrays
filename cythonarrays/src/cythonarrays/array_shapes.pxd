@@ -13,6 +13,6 @@ cdef class ArrayShapes(object):
     cdef public double INF_d
     cdef public double NINF_d
 
-    cdef public char isnan(self, np_floating x) nogil
+    cdef char __isnan(self, np_floating x) nogil
 
     cpdef _search_memview(self, cls)

@@ -1,17 +1,11 @@
 matrixconverters package
 ========================
 
-Subpackages
------------
-
-.. toctree::
-
-    matrixconverters.tests
-
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    matrixconverters.read_csv
    matrixconverters.read_ptv
@@ -22,6 +16,6 @@ Module contents
 ---------------
 
 .. automodule:: matrixconverters
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

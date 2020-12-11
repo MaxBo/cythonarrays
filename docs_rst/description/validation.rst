@@ -8,9 +8,9 @@ The pxd-file example_cython.pxd imports shortcuts for memoryviews and the base c
 
 Then it defines the cdef-class _Example, that inherits from ArrayShapes.
 
-It will have the coordinates groups, origins, and destinations.
+It will have the coordinates `groups`, `origins`, and `destinations`.
 
-Paralell loops will use n_threads.
+Paralell loops will use `n_threads`.
 
 It defines different memoryviews of 1 and 2 dimensions and dtypes i4 (4-byte integer) und d (double).
 
@@ -20,11 +20,11 @@ In the Python-Class these arrays will be exposed later without the leading under
 
 The suffix *g* and *i* in *_persons_gi* help later to use the right variables (self._persons_gi[g, i] = ...)
 
-The cdef class will define a method *calc_model* which can be called from python and cython that returns -1 if an exeption occurs
+The cdef class will define a method *calc_model* which can be called from python and cython that returns -1 if an exeption occurs.
 
 The cdef class defines two methods *_calc_weight_destination* and *_calc_weight_destination* which can be called only from cython.
 
-Nogil means that these methods can be called in parallel threads where the global intepreter lock (gil) has been released::
+`nogil` means that these methods can be called in parallel threads where the global intepreter lock (gil) has been released::
 
   cdef class _Example(ArrayShapes):
       """
@@ -64,9 +64,10 @@ Nogil means that these methods can be called in parallel threads where the globa
                                          double minutes, double jobs) nogil
       cdef ARRAY_1D_d _calc_p_destination(self, long32 g) nogil
 
-The cython-module example_cython.pyx implements these methods.
+The cython-module `example_cython.pyx` implements these methods.
 
-It uses the __cinit__-method to search for all memoryviews defined in its .pxd-file and expose all of them, which start with a leading underscore, as numpy arrays::
+It uses the `__cinit__`-method to search for all memoryviews defined in its .pxd-file
+and expose all of them, which start with a leading underscore, as numpy arrays::
 
   cdef class _Example(ArrayShapes):
       @cython.initializedcheck(False)
@@ -88,13 +89,16 @@ It uses the __cinit__-method to search for all memoryviews defined in its .pxd-f
 
 Now the cython and cpdef methods are implemented.
 
-In the example, it uses parallel threads to calculate the model for different groups.
+The example uses parallel threads to calculate the model for different groups.
 
-Within the parallel sessions, pure python-methods like a logging function can be called by temporarily using the gil (global interpreter lock).
+Within the parallel sessions, pure python-methods like a logging function
+can be called by temporarily using the gil (global interpreter lock)
+in a block introduced by `with gil:`.
 
-The ArrayShape-class defines a logger which is bound to the cdef-class.
+The `ArrayShape`-class defines a logger which is bound to the cdef-class.
 
-To reset the memoryview to its default values, the self.reset_array('trips_ij') is used.::
+To reset the memoryview to its default values, the method
+`self.reset_array('trips_ij')` can be used.::
 
   import numpy as np
   from cythonarrays.tests.example_python import Example
@@ -333,7 +337,8 @@ How to work with Cythonarrays CDef-Classes
 
 link numpy and openmp sources
 -----------------------------
-In order to use Cython with numpy, the numpy sources have to be linked to the Cython code.
+In order to use Cython with numpy,
+the numpy sources have to be linked to the Cython code.
 
 One way is to use for each Cython module 4 files:
 
@@ -400,9 +405,10 @@ A comfortable way to work with numpy arrays in cdef classes is the following:
 
 * from python the data is accessible as a normal numpy array
 
-To facilitate this, the Cython module array_shapes.pyx and the Python moduls array_types have been written.
+To facilitate this, the cython-module array_shapes.pyx and the python-module array_types have been written.
 
-Let your Cython class inherit from ArrayShapes.
+Let your Cython class inherit from ArrayShapes::
+
      from cythonarrays.array_shapes cimport ArrayShapes
      from cythonarrays.array_shapes import ArrayShapes
 
@@ -420,18 +426,12 @@ specify all arrays that you need in the mymodule_cython.pxd-file with a leading 
       cdef public int n_rows, n_blocks, n_cols
 
 
-In the mymodule_cython.pyx-file, add a __cinit__ method::
-
-  cdef class _MyCythonClass(ArrayShapes):
-    def __cinit__(self, *args, **kwargs):
-        """init the file"""
-        for cls in self.__class__.__mro__:
-            self.search_memview(cls)
-
-the method search_memview(cls) searches all memoryviews in the class and the base class.
+The method `search_memview(cls)`, that is called from the `__cinit__(self)`-method
+of ArrayShapes, searches all memoryviews in the class and the base class.
 
 
-Create a wrapper Python class in a python module mymodule.py, that inherits from _MyCythonClass and from the Python-Class _ArrayProperties::
+Create a wrapper Python class in a python module mymodule.py,
+that inherits from _MyCythonClass and from the Python-Class _ArrayProperties::
 
   import pyximport
   pyximport.install()
@@ -440,7 +440,7 @@ Create a wrapper Python class in a python module mymodule.py, that inherits from
 
   class MyClass(_MyCythonClass, _ArrayProperties):
       def __init__(self, n_rows, n_cols, n_blocks, *args, **kwargs):
-          super(MyCythonClass, self).__init__(*args, **kwargs)
+          super().__init__(*args, **kwargs)
           self.n_rows = n_rows
           self.n_cols = n_cols
           self.n_blocks = n_blocks
@@ -456,7 +456,7 @@ The array can be initialised by::
   >>> shape = (6, )
   >>> myinstance.init_array('mydoublevector', shape)
 
-  or with some data::
+or with some data::
 
   >>> arr = np.random.random((4, 5)).astype('f8')
   >>> shape = ('n_rows', 'n_cols')
@@ -513,7 +513,8 @@ but don't do that in a subfunction, that is called many times, because assigning
 Link Cythonarrays-Class to xarray-Dataset
 =========================================
 
-You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_ which infers the dimensions, coordinates, and data variables from the cdef-class.
+You can create an `xarray-Dataset <http://xarray.pydata.org/en/stable/>`_
+which infers the dimensions, coordinates, and data variables from the cdef-class.
 
   >>> example = Example()
   >>> example.create_ds()

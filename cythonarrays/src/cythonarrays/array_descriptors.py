@@ -1,30 +1,38 @@
 # -*- coding: utf-8 -*-
 
+from typing import Tuple, Union, Iterable
 import numpy as np
 from numpy.testing import assert_array_equal
+import cythonarrays.array_shapes
 
 
 class ArrayDescriptor(object):
     """
     describes an array used as an instance attribute of a cython class
-
-    Parameters
-    ----------
-    name : str
-        the name of the array
-    dtype : str
-        the numpy-dtype of the array for internal storage
-    ndim : int
-        the number of dimensions of the array
-    shape : tuple of str or int
-        the shape of the array
-    dtype_numpy : str
-        the numpy-dtype of the array that should be returned
-    default : number
-        the default value
     """
-    def __init__(self, name, dtype, ndim,
-                 shape=None, dtype_numpy=None, default=None):
+    def __init__(self,
+                 name: str,
+                 dtype: str,
+                 ndim: int,
+                 shape: Tuple[Union[int, str]]=None,
+                 dtype_numpy: str=None,
+                 default=None):
+        """
+        Parameters
+        ----------
+        name :
+            the name of the array
+        dtype : str
+            the numpy-dtype of the array for internal storage
+        ndim : int
+            the number of dimensions of the array
+        shape :
+            the shape of the array
+        dtype_numpy :
+            the numpy-dtype of the array that should be returned
+        default : number
+            the default value
+        """
         self.name = name
         self.dtype = dtype
         self.ndim = ndim
@@ -39,19 +47,20 @@ class ArrayDescriptor(object):
         return txt.format(self)
 
     @staticmethod
-    def to_dim(arr, ndim):
+    def to_dim(arr, ndim: int) -> np.ndarray:
         """
         Casts the array to ndim dimensions
 
         Parameters
         ----------
-        ndim : integer
+        ndim :
             if self.ndim > ndim and the shape of the first axis <> 0:
             raise ValueError
 
         Returns
         -------
-        arr : array of ndim dimensions
+        :
+            array of ndim dimensions
         """
 
         dim_diff = ndim - arr.ndim
@@ -68,10 +77,25 @@ class ArrayDescriptor(object):
         else:
             return arr
 
-    def validate_array(self, arr, instance=None):
+    def validate_array(
+        self,
+        arr: np.ndarray,
+        instance: 'cythonarrays.array_shapes.ArrayShapes'=None) -> np.ndarray:
         """
         checks if the ndim (and the shape, if specified) match
         and casts the array to the dtype specified
+
+        Parameters
+        ----------
+        arr:
+            the array to test
+        instance:
+            the CDefClass-instance holding the information on the allowed shapes
+
+        Returns
+        -------
+        :
+            the validated array casted to the target dimension and dtype
         """
         # cast arr to numpy array
         if not isinstance(arr, np.ndarray):
@@ -101,7 +125,22 @@ class ArrayDescriptor(object):
 
         return arr.astype(self.dtype, copy=False)
 
-    def get_shape(self, instance):
+    def get_shape(self,
+                  instance: 'cythonarrays.array_shapes.ArrayShapes'=None) -> Tuple[int]:
+        """
+        get the shape of the array defined by the ArrayDescriptor
+        using the information from the ArrayShape-instance
+
+        Parameters
+        ----------
+        instance:
+            the CDefClass-instance holding the information on the allowed shapes
+
+        Returns
+        -------
+        :
+            a tuple with the shape
+        """
         shape = []
         for d in range(self.ndim):
             if isinstance(self.shape[d], str):
@@ -112,24 +151,34 @@ class ArrayDescriptor(object):
         return shape
 
     @property
-    def dtype_numpy(self):
+    def dtype_numpy(self) -> str:
+        """return the numpy dtype"""
         if self._dtype_numpy is None:
             return self.dtype
         else:
             return self._dtype_numpy
 
-#     do not modify the dtype later
-#     @dtype_numpy.setter
-#     def dtype_numpy(self, value):
-#         self._dtype_numpy = value
-
     @property
-    def shape(self):
+    def shape(self) -> Tuple[Union[str, int]]:
+        """
+        Returns
+        -------
+        :
+            the shape of the array described, with numbers or strings
+        """
         return self._shape
 
     @shape.setter
-    def shape(self, value):
-        """convert the shape to a tuple"""
+    def shape(self, value: Union[int, str, bytes, Tuple[Union[int, str]]]):
+        """
+        convert the shape to a tuple
+
+        Parameters
+        ----------
+        value:
+            the shape provided as a number, a string
+            (comma separated for several dimensions) or a tuple/list of strings or ints
+        """
         if isinstance(value, (np.int, np.long)):
             value = (value, )
         elif isinstance(value, (str, bytes)):

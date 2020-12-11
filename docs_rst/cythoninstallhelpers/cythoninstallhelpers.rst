@@ -1,17 +1,11 @@
 cythoninstallhelpers package
 ============================
 
-Subpackages
------------
-
-.. toctree::
-
-    cythoninstallhelpers.tests
-
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    cythoninstallhelpers.build_config
    cythoninstallhelpers.get_version
@@ -21,6 +15,6 @@ Module contents
 ---------------
 
 .. automodule:: cythoninstallhelpers
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

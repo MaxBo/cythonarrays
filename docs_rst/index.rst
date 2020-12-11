@@ -2,6 +2,8 @@
 ==========================================
 Cythonarray has been developed to facilitate the use of Cython Cdef-classes with numpy-arrays
 
+.. mdinclude:: ../README.md
+
 This documentation contains
 =================================
 Contents:
@@ -21,9 +23,9 @@ Code Documentation
 .. toctree::
    :maxdepth: 3
 
-	cythoninstallhelpers <cythoninstallhelpers/cythoninstallhelpers>
-	cythonarrays <cythonarrays/cythonarrays>
-	matrixconverters <matrixconverters/matrixconverters>
+	cythoninstallhelpers <cythoninstallhelpers/modules>
+	cythonarrays <cythonarrays/modules>
+	matrixconverters <matrixconverters/modules>
 
 
 Indices and tables

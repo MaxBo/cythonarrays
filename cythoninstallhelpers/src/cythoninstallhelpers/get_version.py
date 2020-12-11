@@ -4,13 +4,20 @@ import os
 def get_version(package_name: str,
                 setupfilepath: str,
                 package_dir:str = 'src',
-                versionfile:str ='_version.py'):
+                versionfile:str ='_version.py') -> str:
     """
     Parse the version number from a version file
 
     Parameters
     ----------
-
+    package_name:
+        the name of the package the version is searched for
+    setupfilepath:
+        the filepath, where the setupfile can be found
+    package_dir:
+        the subdirectory with the source code of the version file
+    versionfile:
+        the filename of the python module with the version number
     """
     folder = os.path.join(os.path.dirname(setupfilepath), package_dir)
     version_path= os.path.join(folder, package_name, versionfile)
