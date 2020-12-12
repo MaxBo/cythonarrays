@@ -10,14 +10,14 @@ import numpy as np
 import pytest
 import xarray as xr
 
-from cythonarrays.tests.example_python import Example
+from cythonarrays.tests.example_python import Example, DestinationChoiceError
 from cythonarrays.tests.simple_python import Simple
 import pyximport; pyximport.install()
 from .example_cython import (_Example)
 
 
 @pytest.fixture(scope='class')
-def km_ij(request):
+def km_ij(request) -> np.ndarray:
     """
     travel times
     """
@@ -28,7 +28,7 @@ def km_ij(request):
 
 
 @pytest.fixture(scope='class')
-def jobs(request):
+def jobs(request) -> np.ndarray:
     """
     jobs
     """
@@ -37,7 +37,7 @@ def jobs(request):
 
 
 @pytest.fixture(scope='class')
-def params_groups(request):
+def params_groups(request) -> np.ndarray:
     """
     different values for saving categories
     """
@@ -45,7 +45,7 @@ def params_groups(request):
 
 
 @pytest.fixture(scope='class')
-def persons_gi(request):
+def persons_gi(request) -> np.ndarray:
     """
     different values for home zone
     """
@@ -55,7 +55,11 @@ def persons_gi(request):
 
 
 @pytest.fixture(scope='class')
-def example(km_ij, jobs, params_groups, persons_gi):
+def example(km_ij: np.ndarray,
+            jobs: np.ndarray,
+            params_groups: np.ndarray,
+            persons_gi: np.ndarray,
+            ) -> Example:
     """
     different values for home zone
     """
@@ -69,14 +73,14 @@ def example(km_ij, jobs, params_groups, persons_gi):
 
 
 @pytest.fixture()
-def tempfile_h5():
+def tempfile_h5() -> str:
     return tempfile.mktemp(suffix='h5')
 
 
 class Test01_ExampleCDefClass:
     """Test the Example CDefClass"""
 
-    def test_01_test_init_array(self, persons_gi):
+    def test_01_test_init_array(self, persons_gi: np.ndarray):
         """Test the Example CDefClass creation"""
         groups, zones = persons_gi.shape
         example = Example(groups, zones)
@@ -106,7 +110,7 @@ class Test01_ExampleCDefClass:
         np.testing.assert_array_equal(example.jobs_j,
                                       np.full(groups, 2, dtype='d'))
 
-    def test_01a_test_init_array_with_other_datatypes(self, persons_gi):
+    def test_01a_test_init_array_with_other_datatypes(self, persons_gi: np.ndarray):
         """Test the Example CDefClass creation"""
         example = Example(groups=2, origins=3)
         # test setting with a range
@@ -124,7 +128,7 @@ class Test01_ExampleCDefClass:
             example.jobs_j = [float, type, int]
 
 
-    def test_02_test_shape(self, persons_gi):
+    def test_02_test_shape(self, persons_gi: np.ndarray):
         """
         Test if the shapes of array are controlled correctly
         """
@@ -152,7 +156,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         # now the array fits to the shape defined
         example.jobs_j = arr
 
-    def test_03_test_dimensions(self, persons_gi):
+    def test_03_test_dimensions(self, persons_gi: np.ndarray):
         """Test the dimensions"""
         groups, zones = persons_gi.shape
         example = Example(groups, zones)
@@ -243,7 +247,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         assert b.shape == (1, 3)
         print(example.not_initialized_ij)
 
-    def test_04_test_dtype(self, persons_gi):
+    def test_04_test_dtype(self, persons_gi: np.ndarray):
         """Test the dimensions"""
         groups, zones = persons_gi.shape
         example = Example(groups, zones)
@@ -281,15 +285,24 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         # the data in not_initialized_ij changes
         assert example.not_initialized_ij[1, 2] == -1
 
-    def test_10_test_model(self, example):
+    def test_10_test_model(self, example: Example):
         """Test the Example CDefClass model"""
-        res = example.calc_model()
+        # backup the jobs
+        jobs_j = example.jobs_j.copy()
+        # with no jobs, the model should fail and raise an exception
+        example.jobs_j[:] = 0
+        with pytest.raises(DestinationChoiceError):
+            failed = example.calc_model()
+        #  with some jobs, the model should work
+        example.jobs_j = jobs_j
+        failed = example.calc_model()
+        assert not failed
         print(example.trips_ij)
         total_trips_target = example.persons_gi.sum()
         total_trips_actual = example.trips_ij.sum()
         np.testing.assert_almost_equal(total_trips_target, total_trips_actual)
 
-    def test_11_dataset(self, example):
+    def test_11_dataset(self, example: Example):
         """Test the creation of an xarrays Dataset linked to the Cythonclass"""
         example.zonenumbers_i = np.array([100, 200, 300])
         example.groupnames_g = np.array(['Female', 'Male'], dtype='O')
@@ -309,10 +322,11 @@ jobs_j: shape target: \[3\], actual: \(2,\)
             assert np.dtype(dtype.dtype) == data_array.dtype,  'dtype not correct'
         print(example.ds)
 
-    def test_20_save_and_read_ds(self, example, tempfile_h5):
+    def test_20_save_and_read_ds(self, example: Example, tempfile_h5: str):
         """Test that saving and re-reading the data works"""
         example.zonenumbers_i = np.array([100, 200, 300])
         example.groupnames_g = np.array(['Female', 'Male'], dtype='O')
+        example.jobs_j = np.array([10, 0, 10])
         example.create_ds()
         example.save_dataset_to_netcdf(tempfile_h5)
 
@@ -334,7 +348,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
 
         print(new_example.ds)
 
-    def test_21_assign_bool(self, example):
+    def test_21_assign_bool(self, example: Example):
         """Test boolean array"""
         # the boolean arrays are initialized with 0 and 1
         np.testing.assert_array_equal(example.valid_g.astype(bool),
@@ -346,7 +360,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         print(example.valid_g)
         print(example.invalid_g)
 
-    def test_30_test_init_array(self, persons_gi):
+    def test_30_test_init_array(self, persons_gi: np.ndarray):
         """Test the Example CDefClass creation"""
         example = Example(groups=7, origins=5)
 
@@ -434,7 +448,7 @@ class Test04_Test_Instantiation:
             example = _Example()
         print(e.value)
 
-    def test042_test_nan(self, persons_gi):
+    def test042_test_nan(self, persons_gi: np.ndarray):
         """Test nan"""
         groups, zones = persons_gi.shape
         example = Example(groups, zones)

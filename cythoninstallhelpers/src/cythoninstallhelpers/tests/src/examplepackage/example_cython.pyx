@@ -14,7 +14,6 @@ cdef class Example:
     """
     Cython CDefClass for Example
     """
-
     def __init__(self, int i, int j, char n_threads, cython.longlong large_value):
         """
         Create the array with dimensions i and j

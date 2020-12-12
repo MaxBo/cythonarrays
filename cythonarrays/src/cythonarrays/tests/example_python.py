@@ -8,7 +8,7 @@ import numpy as np
 
 from cythonarrays.array_properties import _ArrayProperties
 import pyximport; pyximport.install()
-from .example_cython import (_Example)
+from .example_cython import (_Example, DestinationChoiceError)
 
 np.seterr(divide='ignore', invalid='ignore')
 

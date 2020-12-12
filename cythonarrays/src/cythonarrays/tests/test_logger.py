@@ -58,7 +58,3 @@ class Test01_Logger:
         """Test the module logger"""
         module_logger = get_module_logger(self.__module__)
         module_logger.info('Info in Module {}'.format(self.__module__))
-
-
-if __name__ == '__main__':
-    pytest.main()
