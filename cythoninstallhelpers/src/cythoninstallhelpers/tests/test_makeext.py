@@ -4,8 +4,6 @@ Created on Fri Jun 10 21:00:21 2016
 
 @author: MaxBohnet
 """
-from . import wingdbstub
-
 from setuptools.dist import Distribution
 from setuptools.command.build_ext import build_ext
 import importlib.util
