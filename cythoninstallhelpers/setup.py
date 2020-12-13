@@ -39,10 +39,9 @@ setup(
     packages=find_packages('src', exclude=['ez_setup']),
 
     package_dir={'': 'src'},
-    package_data={'': ['*.pxd']},
+    package_data={'': ['*.pxd', '*.pyx', '*.pyxbld'],},
     include_package_data=True,
     zip_safe=False,
-    data_files=[],
     install_requires=[
         'numpy',
         'cython',
