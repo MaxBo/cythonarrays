@@ -6,27 +6,29 @@ dist: bionic
 language: python
 matrix:
   include:
-  - python: 3.6
-    env:
-    - TRAVIS_PYTHON_VERSION=3.6
-    - CONDA_PY=36
-    - CONDA_NPY=116
-  - python: 3.7
-    env:
-    - TRAVIS_PYTHON_VERSION=3.7
-    - CONDA_PY=37
-    - CONDA_NPY=116
-  - python: 3.8
-    env:
-    - TRAVIS_PYTHON_VERSION=3.8
-    - CONDA_PY=38
-    - CONDA_NPY=117
-    - CREATE_DOCS=1
   - python: 3.9
     env:
     - TRAVIS_PYTHON_VERSION=3.9
     - CONDA_PY=39
     - CONDA_NPY=119
+    - CREATE_DOCS=1
+  - python: 3.8
+    env:
+    - TRAVIS_PYTHON_VERSION=3.8
+    - CONDA_PY=38
+    - CONDA_NPY=117
+  - python: 3.7
+    env:
+    - TRAVIS_PYTHON_VERSION=3.7
+    - CONDA_PY=37
+    - CONDA_NPY=116
+  - python: 3.6
+    env:
+    - TRAVIS_PYTHON_VERSION=3.6
+    - CONDA_PY=36
+    - CONDA_NPY=116
+
+
 env:
   global:
   - ANACONDA_USERNAME=MaxBo
@@ -37,8 +39,7 @@ env:
   - secure: XSywMGCavKPO937o8JWSxlMbuzjUJ9ygpep4ybIaZ6knF2X2uYkT5FAm8VNoRS1/lmEKlaTaorwPHx0KGNcsQMor2gi+qyoJ3ODVranzLhAL3/9pBtWl9B4kbfC0gGitFS8e/X5n0SIuWI3xgjFdkotPnGAeorF+9OhiTQ2Xr4UdURyD5UJUh98SK//wtlXw/gflK7oHDxxumiecPY47wtn1v3vZTL3by27cJr8X8r/J6qmOS3qW2hEG61Rccjj5TSh4EvWWfoDGm7x2vojmPFF6C3yt8e/Y9X4R2W1N1Ni9DEwKA9z37nXtxJRdZG1tIra2PrxgrLNf3v1nMWMMC7gTGLV7Dly+g6+udmEeJbuWLwTrP+HNhlQvTjWVbNhfxsdiyYejTjcVVRUb/b1HuXVQworIoMfiPxFNzUtl9LoRKDq91ZhrfMvCHM9DcSN7YvkX/sgHuPHOTUsjWS3MYBkPHzkjPzYUPfs7tAZnqIMSVUT0npFjZBuTIL/mSmRgO1MRMaLYXvReedEdOh2dKP1y3NxEWiCEIWomEACLTZqjmSDjeoeCPAM8CJZNnhfkRLAE52eTPWZKmzhnk1h8j0IKJlLoE3TasDF6yVu15k2XkpY/szmJ0eS9/m7bsC7bHJ6VG9trDEGJT1NnCXXaR8WBObpvt6+kKrkpzMxAu8E=
 install:
 - sudo apt-get update
-- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-  -O miniconda.sh
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 - bash miniconda.sh -b -p $HOME/miniconda
 - export PATH="$HOME/miniconda/bin:$PATH"
 - hash -r
@@ -51,30 +52,46 @@ install:
 - conda config --add channels defaults
 - conda config --add channels conda-forge
 - conda config --add channels MaxBo
-- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
+- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pytest-cov
 - export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
 - export CONDA_BLD_PATH=$TMPDIR
 - conda build cythoninstallhelpers/conda.recipe
 - conda install -y --use-local cythoninstallhelpers
 - source activate test-environment
-- conda install -y sphinx numpydoc=0.8
-- pip install --user travis-sphinx
 - export PATH=$HOME/.local/bin:$PATH
-- conda install pytest-cov
+
 script:
 - conda info -a
 - conda build cythoninstallhelpers/conda.recipe
 - conda install -y --use-local cythoninstallhelpers
 - conda build cythonarrays/conda.recipe
 - conda build matrixconverters/conda.recipe
-- if [ "${CREATE_DOCS}" = "1" ]; then conda install -y --use-local cythonarrays matrixconverters;
-  sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
-  sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
-  sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters;
-  travis-sphinx build --source docs_rst --nowarn; fi
+- if [ "${CREATE_DOCS}" = "1" ]; then
+    conda install -y --use-local cythonarrays matrixconverters;
+    pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx;
+    sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
+    sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
+    sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters;
+    travis-sphinx build --source docs_rst --nowarn;
+  fi
 after_success:
 - if [ "${CREATE_DOCS}" = "1" ]; then travis-sphinx deploy; fi
 - |-
-  if [ "${TRAVIS_TAG}" ]; then anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2; anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2; anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2;
-  conda install -y twine; pip install readme_renderer; cd $TRAVIS_BUILD_DIR/cythoninstallhelpers; python setup.py sdist bdist_wheel; twine upload --skip-existing dist/*; conda install -y cythoninstallhelpers; cd $TRAVIS_BUILD_DIR/cythonarrays; python setup.py sdist bdist_wheel; twine upload --skip-existing dist/*; conda install -y cythonarrays; cd $TRAVIS_BUILD_DIR/matrixconverters; python setup.py sdist bdist_wheel; twine upload --skip-existing dist/*;
+  if [ "${TRAVIS_TAG}" ]; then
+    anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2;
+    anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2;
+    anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2;
+    conda install -y twine;
+    pip install readme_renderer;
+    cd $TRAVIS_BUILD_DIR/cythoninstallhelpers;
+    python setup.py sdist bdist_wheel;
+    twine upload --skip-existing dist/*;
+    conda install -y cythoninstallhelpers;
+    cd $TRAVIS_BUILD_DIR/cythonarrays;
+    python setup.py sdist bdist_wheel;
+    twine upload --skip-existing dist/*;
+    conda install -y cythonarrays;
+    cd $TRAVIS_BUILD_DIR/matrixconverters;
+    python setup.py sdist bdist_wheel;
+    twine upload --skip-existing dist/*;
   fi

@@ -14,103 +14,103 @@ import xarray as xr
 
 
 @pytest.fixture(scope='class')
-def folder():
+def folder() -> str:
     return os.path.dirname(__file__)
 
 
 @pytest.fixture(scope='class')
-def matrix_fn(folder):
+def matrix_fn(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_v_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_out(folder):
+def matrix_fn_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix.out')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bk_out(folder):
+def matrix_fn_bk_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bk_format.out')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bi_out(folder):
+def matrix_fn_bi_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bi_format.out')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bk(folder):
+def matrix_fn_bk(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bk_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bi(folder):
+def matrix_fn_bi(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bi_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bl_out(folder):
+def matrix_fn_bl_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bl_format.out')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_bl(folder):
+def matrix_fn_bl(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_bl_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_o(folder):
+def matrix_fn_o(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_o_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_o_without_names(folder):
+def matrix_fn_o_without_names(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_o_format_without_names.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_o_with_zeros(folder):
+def matrix_fn_o_with_zeros(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_o_format_with_zeros.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_o_with_dashes(folder):
+def matrix_fn_o_with_dashes(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_o_format_with_dashes.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_e(folder):
+def matrix_fn_e(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_e_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_s(folder):
+def matrix_fn_s(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_s_format.mtx')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_fn_or(folder):
+def matrix_fn_or(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_or_format.mtx')
     return fn
 
 
 class TestReadPTV:
     """Test reading PTV matrices"""
-    def test_01_read_v_format(self, matrix_fn):
+    def test_01_read_v_format(self, matrix_fn: str):
         """Test reading v-Format"""
         ds = ReadPTVMatrix(filename=matrix_fn)
         self.print_matrix(ds)

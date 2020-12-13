@@ -14,24 +14,24 @@ from matrixconverters.tests.test_read_visum import folder, matrix_fn
 
 
 @pytest.fixture(scope='class')
-def matrix_cc(folder):
+def matrix_cc(folder: str) -> str:
     fn = os.path.join(folder, 'matrix.cc')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_cc_out(folder):
+def matrix_cc_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_out.cc')
     return fn
 
 
 @pytest.fixture(scope='class')
-def matrix_cn(folder):
+def matrix_cn(folder: str) -> str:
     fn = os.path.join(folder, 'matrix.cn')
     return fn
 
 @pytest.fixture(scope='class')
-def matrix_cn_out(folder):
+def matrix_cn_out(folder: str) -> str:
     fn = os.path.join(folder, 'matrix_out.cn')
     return fn
 

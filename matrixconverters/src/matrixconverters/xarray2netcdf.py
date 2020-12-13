@@ -13,17 +13,17 @@ def xr2netcdf(dataset: xr.Dataset,
 
     Parameters
     ----------
-    dataset : xarray-dataset
+    dataset :
         the xarray-dataset to store
-    filepath : str
+    filepath :
         the path where the netcdf-file shold be stored
-    mode : str, default='w'
+    mode :
         write (w) or append (a)
-    engine : str (optional, default=netcdf4)
-        the engine to use
-    compressed : boolen (optional, default=True)
+    engine :
+        the engine to use (default is netcdf4)
+    compressed :
         if False, the data-variables are not compressed
-    complevel : int (optional, default=2)
+    complevel :
         the compression-level between 1 and 9
         1 is faster, 9 uses a more efficient compression, but is much slower
         2 is in general a good compromise

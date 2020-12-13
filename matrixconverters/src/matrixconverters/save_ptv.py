@@ -6,7 +6,19 @@ import xarray as xr
 from typing import BinaryIO
 
 
-def write_line(f, text, length):
+def write_line(f: BinaryIO, text: str, length: int):
+    """write a line of `text` to the open file and adjust the text to the number
+    of characters given
+
+    Parameters
+    ----------
+    f:
+        an open binary file handler
+    text:
+        the text to write
+    length:
+        the number of characters to pad the text on the left side
+    """
     f.write(text.ljust(length) + b"\r\n")
 
 
@@ -16,38 +28,92 @@ class SavePTV(object):
         """
         Parameters
         ----------
-        ds: xarray-Dataset
+        ds:
             the dataset that should be saved
         """
         self.ds = ds
 
     @staticmethod
     def write_u1(f: BinaryIO, val: int):
-        """write 1-byte number to file"""
+        """
+        write 1-byte integer to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         f.write(np.array(val, dtype="u1").tobytes())
 
     @staticmethod
     def write_i2(f: BinaryIO, val: int):
-        """write short number to file"""
+        """
+        write 2-byte integer to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         f.write(np.array(val, dtype="i2").tobytes())
 
     @staticmethod
     def write_i4(f: BinaryIO, val: int):
-        """write int number to file"""
+        """
+        write 4-byte integer to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         f.write(np.array(val, dtype="i4").tobytes())
 
     @staticmethod
     def write_f4(f: BinaryIO, val: float):
-        """write float to file"""
+        """
+        write 4-byte float to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         f.write(np.array(val, dtype="f4").tobytes())
 
     @staticmethod
     def write_f8(f: BinaryIO, val: float):
-        """write double to file"""
+        """
+        write 8-byte double to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         f.write(np.array(val, dtype="f8").tobytes())
 
     def write_utf16(self, f: BinaryIO, val: xr.DataArray):
-        """write string as utf16 encoded string to file"""
+        """
+        write utf16 encoded value to file
+
+        Parameters
+        ----------
+        f:
+            open binary file-handler
+        val:
+            the value to write
+        """
         unencoded_str = val.data.tolist()
         self.write_i4(f, len(unencoded_str))
         utf16_str = unencoded_str.encode('UTF-16LE')
@@ -63,11 +129,11 @@ class SavePTV(object):
 
         Parameters
         ----------
-        file_name : string
+        file_name :
             output file_name
-        file_type : str
+        file_type :
             Type of PTV-File Format
-        version : str
+        version :
             version number
         """
 
@@ -79,6 +145,15 @@ class SavePTV(object):
             self._write_format_o(file_name, file_type)
 
     def _write_format_v(self, fn: str, file_type: str):
+        """
+        Write a file in V-Format
+
+        Parameters
+        ----------
+        fn:
+            the file to write the data to
+        file_type
+        """
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
         outformat = {'float32': "%0.3f", 'float64': "%0.6f",
@@ -89,17 +164,15 @@ class SavePTV(object):
             Faktor = getattr(self.ds.attrs, 'Faktor', 1)
             VMAktKennung = getattr(self.ds.attrs, 'VMAktKennung', 0)
             dtype = self.ds.matrix.dtype
-            f.write("$%s, %s\n" % (file_type, dtypes[str(dtype)]))
+            f.write(f"${file_type}, {dtypes[str(dtype)]}\n")
             if "M" in file_type:
-                f.write("* Verkehrsmittelkennung:\n %d \n" % VMAktKennung)
+                f.write(f"* Verkehrsmittelkennung:\n {VMAktKennung:d} \n")
             if "N" not in file_type:
-                f.write("* Zeitintervall:\n {v} {b} \n".format(
-                    v=ZeitVon,
-                    b=ZeitBis))
-                f.write("* Faktor:\n %d \n" % Faktor)
+                f.write(f"* Zeitintervall:\n {ZeitVon} {ZeitBis} \n")
+                f.write(f"* Faktor:\n {Faktor:d} \n")
             zone_no = self.ds.zone_no.data
             n_zones = len(zone_no)
-            f.write("* Anzahl Bezirke:\n %d\n" % n_zones)
+            f.write(f"* Anzahl Bezirke:\n {n_zones:d}\n")
             f.write("* Bezirksnummern\n")
             for i in range(0, n_zones, 10):
                 f.write("\t".join(map(lambda x:
@@ -122,6 +195,16 @@ class SavePTV(object):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
     def _write_format_o(self, fn: str, file_type: str):
+        """
+        write self.ds to a file in O-Format
+
+        Parameters
+        ----------
+        fn:
+            the filepath of the file to write
+        file_type:
+            a specification of the file type
+        """
         dtypes = {'float32': "Y4", 'float64': "Y5",
                   'int32': "Y3", 'int16': "Y2"}
 
@@ -156,6 +239,16 @@ class SavePTV(object):
                     f.write(fmt.format(no=zone_no[i], name=zone_name[i]))
 
     def _write_format_b(self, fn: str, file_type: str = 'K'):
+        """
+        write self.ds to a binary matrix format
+
+        Parameters
+        ----------
+        fn:
+            the filepath of the file to write
+        file_type:
+            a specification of the file type
+        """
         m = self.ds.matrix.data
         with open(fn, "wb") as f:
 
@@ -283,6 +376,15 @@ class SavePTV(object):
                       max_width: int = 1000):
         """
         exports array in PSV-Format
+
+        Parameters
+        ----------
+        file_name:
+            the filepath of the file to write
+        ftype:
+            the file-type
+        max_width:
+            the maximum number of columns for the values written
         """
         m = self.ds.matrix.data
         if not m.ndim == 2:
@@ -293,7 +395,7 @@ class SavePTV(object):
         with open(file_name, "w") as f:
             Za = max(rows, cols)
             Zi = min(rows, cols)
-            f.write("%s; Za %s; Zi %s;\n" % (ftype, Za, Zi))
+            f.write(f"{ftype}; Za {Za}; Zi {Zi};\n")
             if ftype == "CC":
                 for i in range(rows):
                     # teste, ob Zeile nicht nur aus Nullen besteht
@@ -301,13 +403,12 @@ class SavePTV(object):
                         # addiere 1, um Zellennummer 0 zu vermeiden
                         row = str(zones[i])
                         for j in range(cols):
-                            if len("%s %s %s" % (row, zones[j],
-                                                 m[i, j])) >= max_width:
+                            if len(f"{row} {zones[j]} {m[i, j]}") >= max_width:
                                 row += "\n"
                                 f.write(row)
                                 row = str(zones[i])
                             if m[i, j] != 0:
-                                row += " %s %s " % (zones[j], m[i, j])
+                                row += f" {zones[j]} {m[i, j]} "
                         row += "\n"
                         f.write(row)
 
@@ -317,7 +418,7 @@ class SavePTV(object):
                     if m[i].any():
                         row = str(zones[i])
                         for j in range(cols):
-                            if len("%s %s" % (row, m[i, j])) >= max_width:
+                            if len(f"{row} {m[i, j]}") >= max_width:
                                 row += "\n"
                                 f.write(row)
                                 row = str(zones[i])
@@ -325,4 +426,4 @@ class SavePTV(object):
                         row += "\n"
                         f.write(row)
             else:
-                raise TypeError("Kann Typ %s nicht schreiben" % ftype)
+                raise TypeError(f"Cannot write Type {ftype} nicht schreiben" % ftype)

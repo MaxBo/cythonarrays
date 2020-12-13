@@ -1,7 +1,0 @@
-cythonarrays.tests.test\_logger module
-======================================
-
-.. automodule:: cythonarrays.tests.test_logger
-    :members:
-    :undoc-members:
-    :show-inheritance:

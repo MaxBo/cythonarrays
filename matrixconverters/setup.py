@@ -49,19 +49,9 @@ setup(
     data_files=[
         ],
 
-    extras_require=dict(
-        extra=[],
-        docs=[
-            'z3c.recipe.sphinxdoc',
-            'sphinxcontrib-requirements'
-        ],
-        test=[]
-    ),
     tests_require=['pytest', ],
 
     install_requires=[
-        'numpy',
-        'pandas',
         'xarray',
         'netCDF4',
         'cythoninstallhelpers',

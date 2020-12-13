@@ -157,7 +157,7 @@ after_test:
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
-  - cmd: conda install -y cythoninstallhelpers
+  - cmd: conda install -y --use-local cythoninstallhelpers
   - cmd: cd cythonarrays
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
@@ -166,7 +166,7 @@ after_test:
   - cmd: IF %UPLOAD_COV%==true ( python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL )
 
   - cmd: cd ..
-  - cmd: conda install -y cythonarrays
+  - cmd: conda install -y --use-local cythonarrays
   - cmd: cd matrixconverters
   - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )

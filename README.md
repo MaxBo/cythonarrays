@@ -9,14 +9,14 @@ Python Packages to facilitate cython cdef-classes that expose memoryviews as num
 
 It consists of three packages:
 
-**cythoninstallhelpers**:
+##cythoninstallhelpers:
 [![PyPI version](https://badge.fury.io/py/cythoninstallhelpers.svg)](https://badge.fury.io/py/cythoninstallhelpers)
 [![Anaconda-Server Badge](https://anaconda.org/maxbo/cythoninstallhelpers/badges/version.svg)](https://anaconda.org/maxbo/cythoninstallhelpers)
 
 a package that provides functions that are used in the setup.py of cythonarrays
 therefore, it has to be installed first
 
-**cythonarrays**:
+##cythonarrays:
 [![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
 [![Anaconda-Server Badge](https://anaconda.org/maxbo/cythonarrays/badges/version.svg)](https://anaconda.org/maxbo/cythonarrays)
 
@@ -28,7 +28,7 @@ If you try to set data with wrong dimensions or shapes, an error is thrown.
 Data is automatically converted to the right dtype.
 
 
-**matrixconverters**:
+##matrixconverters:
 [![PyPI version](https://badge.fury.io/py/matrixconverters.svg)](https://badge.fury.io/py/matrixconverters)
 [![Anaconda-Server Badge](https://anaconda.org/maxbo/matrixconverters/badges/version.svg)](https://anaconda.org/maxbo/matrixconverters)
 
@@ -36,11 +36,12 @@ tools to read and write matrices in the format or PTV VISUM
 
 It implements:
 
-*Reading and writing PTV-Matrices*
+**Reading and writing PTV-Matrices**
 
 It can read and write the following formats:
 * Text-Formats: O-Format, V-Format, S-Format
 * Binary formats: BI-Format, BK-Format, BL-Format
+
 ```
 # read a matrix into a xarray-Dataset
 from matrixconverters import ReadPTVMatrix, SavePTVMatrix
@@ -58,16 +59,19 @@ from matrixconverters.save_ptv import SavePTV
 s = SavePTV(ds)
 s.savePTVMatrix(file_name=matrix_fn_out, file_type='BK')
 ```
-*Writing PSV-Matrices*
+
+**Writing PSV-Matrices**
 * Programmsystem Verkehr by Software-Kontor Helmert-Hilke)
 * File-Types CC and CN
+
 ```
 from matrixconverters.save_ptv import SavePTV
 s = SavePTV(ds)
 s.savePSVMatrix(file_name=matrix_fn_out, ftype='CC')
 ```
 
-*Export xarray-Dataset as compressed NetCDF-File*
+**Export xarray-Dataset as compressed NetCDF-File**
+
 ```
 from matrixconverters.xarray2netcdf import xarray2netcdf
 xarray2netcdf(ds, file_path)
@@ -85,11 +89,14 @@ pip install cythoninstallhelpers
 pip install cythonarrays
 pip install matrixconverters
 ```
+
 Another way to handle dependencies is to use [conda](https://conda.io/miniconda.html).
 
-There conda packages for python 3.5-3.8 for windows and linux are generated in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
+There conda packages for python 3.6-3.9 for windows and linux are generated
+in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
+
 ```
-conda create -n myenv python=3.6
+conda create -n myenv python=3.9
 activate myenv
 
 conda config --add channels conda-forge

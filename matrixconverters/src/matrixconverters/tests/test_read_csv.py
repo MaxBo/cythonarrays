@@ -13,20 +13,20 @@ from matrixconverters.tests.test_read_visum import folder
 
 
 @pytest.fixture(scope='class')
-def fn_zones(folder):
+def fn_zones(folder) -> str:
     fn = os.path.join(folder, 'zones.csv')
     return fn
 
 
 @pytest.fixture(scope='class')
-def fn_matrix(folder):
+def fn_matrix(folder) -> str:
     fn = os.path.join(folder, 'matrix.csv')
     return fn
 
 
 class TestReadCSV:
     """Test reading CSV matrices"""
-    def test_01_read_csv(self, fn_zones, fn_matrix):
+    def test_01_read_csv(self, fn_zones: str, fn_matrix: str):
         """Test reading CSV-Format"""
         ds = ReadOFormat(zonefile=fn_zones,
                          matrixfile=fn_matrix)

@@ -13,6 +13,12 @@ from cythonarrays.array_shapes cimport ArrayShapes
 from libc.math cimport exp
 
 
+class DestinationChoiceError(ValueError):
+    """
+    Destination Choice failed, because for an origin there were no destinations found
+    with a value > 0
+    """
+
 cdef class _Example(ArrayShapes):
     """
     Cython CDefClass for Example model
@@ -60,6 +66,9 @@ cdef class _Example(ArrayShapes):
                 weight = self._calc_weight_destination(param, minutes, jobs)
                 weights_j[j] = weight
                 total_weight += weight
+            if not total_weight:
+                with gil:
+                    raise DestinationChoiceError(g)
             factor = persons / total_weight
             for j in range(self.destinations):
                 self._trips_ij[i, j] += factor * weights_j[j]
@@ -79,6 +88,10 @@ cdef class _Example(ArrayShapes):
         weights : np.array
             array with the weights for each zone
         """
-        return self._calc_p_destination(g)
+        ret = self._calc_p_destination(g)
+        if ret == -1:
+            raise DestinationChoiceError(g)
+        return ret
+
 
 

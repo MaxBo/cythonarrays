@@ -20,7 +20,7 @@ class ReadPTVMatrix(xr.Dataset):
 
         Parameters
         ----------
-        filename: str
+        filename:
             path to file on disk
         """
         super().__init__()
@@ -88,11 +88,13 @@ class ReadPTVMatrix(xr.Dataset):
 
         Parameters
         ----------
-        f : file-obj
+        f:
+            an open file-object
 
         Returns
         -------
-        rows: deque
+        :
+            rows
         """
         line = f.readline()
         MatrixTyp = line.split("$")[-1].split(";")[0]
@@ -115,13 +117,17 @@ class ReadPTVMatrix(xr.Dataset):
 
         Parameters
         ----------
-        mode : str, optional(default='r')
+        mode:
             read, write or append
-        encoding : str, optional(default='latin1')
+        encoding:
+            the encoding (default: Latin-1)
 
         Returns
         -------
-        open file-handler
+        :
+            open file-handler
+
+        :meta public:
         """
         if mode.endswith('b'):
             encoding = None
@@ -157,6 +163,18 @@ class ReadPTVMatrix(xr.Dataset):
                           n_zones: int,
                           name: str = 'zone_name',
                           dim: str = 'zone_no'):
+        """
+        Create the zone names
+
+        Parameters
+        ----------
+        n_zones:
+            the number of zones
+        name:
+            name of the zone_name column
+        dim:
+            the name of the dimension in the DataArray
+        """
         coord = getattr(self, dim).data
         self[name] = xr.DataArray(
             np.empty((n_zones, ), dtype='O'),
@@ -168,6 +186,18 @@ class ReadPTVMatrix(xr.Dataset):
                       n_zones: int,
                       n_cols: int = None,
                       dtype: str = 'f8'):
+        """
+        Create the Matrix
+
+        Parameters
+        ----------
+        n_zones:
+            the number of zones
+        n_cols:
+            the number of columns (take the number of zones, if not specified)
+        dtype:
+            the datatype of the matrx
+        """
         n_cols = n_cols or n_zones
         origins = self.zone_no
         destinations = getattr(self, 'zone_no2', origins)
@@ -181,11 +211,32 @@ class ReadPTVMatrix(xr.Dataset):
                      n_zones: int,
                      name: str = 'zone_no',
                      dim: str = 'zones'):
+        """
+        Create the zones DataArray as coordinates
+
+        Parameters
+        ----------
+        n_zones:
+            number of zones
+        name:
+            the name of the coordinates
+        dim:
+            the dimension of the zone cordinates
+        """
         self.coords[name] = xr.DataArray(np.arange(n_zones, dtype='i4'),
                                          dims=(dim,),)
 
     def read_names(self, f: TextIO, arr: xr.DataArray):
-        """Read the zone names"""
+        """
+        Read the zone names into the given array
+
+        Parameters
+        ----------
+        f:
+            open file-handler
+        arr:
+            the DataArray for the zone names
+        """
         line = f.readline()
         while line.startswith("*") or line == "\n":
             line = f.readline()
@@ -204,7 +255,18 @@ class ReadPTVMatrix(xr.Dataset):
                             f: TextIO,
                             line: str,
                             rows: Iterable[str]):
-        """Read the zone names"""
+        """
+        Read the zone names in an O-Format Matrix
+
+        Parameters
+        ----------
+        f:
+            open file-handler
+        line:
+            the current line
+        rows:
+            the rows of the text block
+        """
         names = deque()
         while line.startswith("*") or line == "\n":
             line = f.readline()
@@ -342,37 +404,121 @@ class ReadPTVMatrix(xr.Dataset):
                                    self.attrs['diagsum'])
 
     def read_utf16(self, f: BinaryIO) -> str:
-        """read utf16( encoded string from file at current position"""
+        """
+        read utf16( encoded string from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as string
+        """
         n_chars = self.read_i4(f)
         return f.read(n_chars * 2).decode('utf16')
 
     @staticmethod
     def read_f4(f: BinaryIO) -> float:
-        """read float from file at current position"""
+        """
+        read 32-bit float from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as float
+        """
         return np.frombuffer(f.read(4), dtype="f4")[0]
 
     @staticmethod
     def read_f8(f: BinaryIO) -> float:
-        """read double from file at current position"""
+        """
+        read 64-bit double from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as double
+        """
         return np.frombuffer(f.read(8), dtype="f8")[0]
 
     @staticmethod
     def read_u1(f: BinaryIO) -> int:
-        """read byte from file at current position"""
+        """
+        read 8-bit char from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as char
+        """
         return np.frombuffer(f.read(1), dtype="u1")[0]
 
     @staticmethod
     def read_i2(f: BinaryIO) -> int:
-        """read short integer from file at current position"""
+        """
+        read 16-bit double from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as shortint
+        """
         return np.frombuffer(f.read(2), dtype="i2")[0]
 
     @staticmethod
     def read_i4(f: BinaryIO) -> int:
-        """read integer from file at current position"""
+        """
+        read 32-bit int from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as int
+        """
         return np.frombuffer(f.read(4), dtype="i4")[0]
 
     def read_value(self, f: TextIO) -> int:
-        """read a single value from the file as integer"""
+        """
+        read integer value from file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as nt
+        """
         line = f.readline().strip()
         while not line or line.startswith("*"):
             line = f.readline()
@@ -383,7 +529,18 @@ class ReadPTVMatrix(xr.Dataset):
                              f: TextIO,
                              arr: xr.DataArray,
                              sep: str = ' '):
-        """read values from the file into a DataArray"""
+        """
+        read values from file at current position into `array`
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+        arr:
+            the array where the data will be written into
+        sep:
+            the separation character
+        """
         flat_arr = arr.data.ravel()
         n_total = len(flat_arr)
         pos_from = 0
@@ -397,7 +554,19 @@ class ReadPTVMatrix(xr.Dataset):
             pos_from = pos_to
 
     def read_values_in_o_format_to_list(self, f: TextIO) -> Tuple[deque, str]:
-        """read values to a list"""
+        """
+        read values from open file in O-Format at current position
+
+        Parameters
+        ----------
+        f:
+            open file handler
+
+        Returns
+        -------
+        :
+            a tuple with the rows read and the current row
+        """
         rows = deque()
         for line in f:
             row = line.strip()
@@ -409,6 +578,19 @@ class ReadPTVMatrix(xr.Dataset):
         return rows, row
 
     def read_values(self, f: TextIO, n_values: int) -> List[float]:
+        """
+        read `n` values from open file at current position
+
+        Parameters
+        ----------
+        f:
+            open binary file handler
+
+        Returns
+        -------
+        :
+            the value read as double
+        """
         values = []
         found = 0
         while found < n_values:
@@ -421,7 +603,19 @@ class ReadPTVMatrix(xr.Dataset):
 
     @staticmethod
     def float_nan(x: str) -> float:
-        """convert str to float, handling '-' as 0.0"""
+        """
+        convert str to float, handling '-' as 0.0
+
+        Parameters
+        ----------
+        x:
+            the value to convert
+
+        Returns
+        -------
+        :
+            the value as float
+        """
         try:
             return float(x)
         except ValueError as err:

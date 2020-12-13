@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from typing import Tuple, Union
 import numpy as np
 import xarray as xr
 from cythonarrays.array_descriptors import ArrayDescriptor
 from cythonarrays.configure_logger import get_logger
 
 
-class _ArrayProperties(object):
-    """Base Class for Cython CDef Class"""
+class _ArrayProperties:
+    """
+    Base Class for Cython CDef Class
+
+    :meta public:
+    """
     _coordinates = {}
 
     def __init__(self, *args, **kwargs):
@@ -20,14 +25,15 @@ class _ArrayProperties(object):
             # create Class logger
             self.logger = get_logger(self)
 
-    def _create_prop(self, descr):
+    def _create_prop(self, descr: ArrayDescriptor):
         """
         Create the property name that reads and writes
         the internal attribute _name
 
         Parameters
         ----------
-        descr : ArrayDescriptor
+        descr:
+            the Array Description
         """
         intern_name = '_%s' % descr.name
 
@@ -45,20 +51,23 @@ class _ArrayProperties(object):
         prop = property(fget, fset, fdel, fdoc)
         return prop
 
-    def init_array(self, name, shape=None, default=None):
+    def init_array(self,
+                   name: str,
+                   shape: Tuple[Union[str, int]]=None,
+                   default: Union[int, float]=None):
         """
         Inits the attribute name with an empty array with the specified shape
         and fill with the default value
 
         Parameters
         ----------
-        name : str
+        name:
             the name of the attribute
-        shape : tuple, optional
+        shape:
             the shape of the dtype. If not given,
             the dtype stored in self.dtypes is used.
             if None, an array of shape [0] * ndim is initialized
-        default : number, optional
+        default:
             the default value. If not given,
             the default value stored in self.dtypes is used.
             if None, an empty array is initialized
@@ -78,18 +87,21 @@ class _ArrayProperties(object):
             arr = np.empty([0] * descr.ndim, dtype=descr.dtype)
         self.set_array(name, arr)
 
-    def set_array(self, name, value, shape=None):
+    def set_array(self,
+                  name: str,
+                  value: Union[int, float, list, np.ndarray],
+                  shape: Tuple[Union[int, str]]=None):
         """
         Sets the attribute name to the value and casts to the correct dtype
         if necessary
 
         Parameters
         ----------
-        name : str
+        name:
             the name of the attribute to set
-        value : Array-like
+        value: Array-like
             the value to assign to the memoryview
-        shape : tuple (optional)
+        shape:
             a tuple of ints or str to validate the shape of the array provided
 
         Examples
@@ -113,13 +125,13 @@ class _ArrayProperties(object):
         arr = descr.validate_array(value, self)
         setattr(self, intern_name, arr)
 
-    def reset_array(self, name):
+    def reset_array(self, name: str):
         """
         Reset array to its default value
 
         Parameters
         ----------
-        name : str
+        name:
             the name of the array
 
         """
@@ -127,13 +139,14 @@ class _ArrayProperties(object):
         default = descr.default
         getattr(self, name).fill(default)
 
-    def check_ndims(self, descr):
+    def check_ndims(self, descr: ArrayDescriptor):
         """
         Check the number of dimensions
 
         Parameters
         ----------
-        descr : ArrayDescriptor
+        descr :
+            the Array Descriptor
         """
         if len(descr.shape) != descr.ndim:
             msg = '{ndim} Dimensions required, shape {s} has {n} dimensions'
@@ -145,7 +158,7 @@ class _ArrayProperties(object):
         for name in self.dtypes:
             self.init_array(name)
 
-    def init_object_array(self, name, shape):
+    def init_object_array(self, name: str, shape: Union[str, Tuple[str, int]]):
         """
         initialize an non-cython array to assure the consistency of data
 
@@ -185,7 +198,7 @@ class _ArrayProperties(object):
 
         Parameters
         ----------
-        filepath : str
+        filepath:
             the filepath to store the data
         """
         if not hasattr(self, 'ds'):
@@ -193,7 +206,7 @@ class _ArrayProperties(object):
         self.ds.to_netcdf(filepath)
 
     @classmethod
-    def from_netcdf(cls, filepath):
+    def from_netcdf(cls, filepath: str) -> '_ArrayProperties':
         """
         Read Data from a netcdf-file and create a new Cdef-Class-instance
 
@@ -203,7 +216,7 @@ class _ArrayProperties(object):
 
         Parameters
         ----------
-        filepath : str
+        filepath:
             the filepath to read the netcdf-data from
         """
         ds = xr.open_dataset(filepath)

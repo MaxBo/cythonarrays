@@ -23,12 +23,14 @@ class ReadOFormat(xr.Dataset):
         """
         Parameters
         ----------
-        zonefile : str
+        zonefile:
             the filepath to the file with zone names
-        matrixfile : str
+        matrixfile:
             the filepath to the file with the matrix values
-        cols_zones : list-like, optional
-        cols_matrix : list-like, optional
+        cols_zones:
+            the column with the zones
+        cols_matrix:
+            the columnsto use [column_with_zone_no, column_with_zone_name]
         """
         super().__init__()
         self.read_zones_csv(zonefile, cols_zones)
@@ -40,9 +42,9 @@ class ReadOFormat(xr.Dataset):
 
         Parameters
         ----------
-        filename : str
+        filename:
             the filepath of the input file
-        cols_matrix : list-like
+        cols_matrix:
             the columns to use
         """
         target_cols = self._target_cols_matrix
@@ -61,9 +63,9 @@ class ReadOFormat(xr.Dataset):
 
         Parameters
         ----------
-        filename : str
+        filename:
             the filepath of the input file
-        cols_matrix : list-like
+        cols_matrix:
             the columns to use [column_with_zone_no, column_with_zone_name]
         """
         target_cols = self._target_cols_zones
@@ -91,14 +93,19 @@ class ReadOFormat(xr.Dataset):
 
         Parameters
         ----------
-        data_cols : list-like
-        filename : str
-        target_cols : list_like
-        pkey : str
+        data_cols:
+            the columns with the data
+        filename:
+            the full filepyth
+        target_cols:
+            the target colum names
+        pkey:
+            the primary key
 
         Returns
         -------
-        da : xarray.DataArray
+        :
+            the DataArray with the results
         """
         df = pd.read_csv(filename, usecols=data_cols)
         if not data_cols:
