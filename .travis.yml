@@ -67,7 +67,7 @@ script:
 - conda build matrixconverters/conda.recipe
 - if [ "${CREATE_DOCS}" = "1" ]; then
     conda install -y --use-local cythonarrays matrixconverters;
-    pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2;
+    pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx;
     sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers;
     sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays;
     sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters;
