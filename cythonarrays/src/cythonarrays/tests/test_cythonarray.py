@@ -374,13 +374,6 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         with pytest.raises(AttributeError):
             print(example.not_initialized_ij)
 
-    def test_32_test_not_init_array(self):
-        """Test the Example CDefClass creation"""
-        example = Example(groups=7, origins=5,
-                          init_arrays=False, threading=False)
-        with pytest.raises(AttributeError):
-            print(example.not_initialized_ij)
-
     def test_33_del_property(self):
         """Test the Example CDefClass creation"""
         example = Example(groups=7, origins=5)

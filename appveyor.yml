@@ -172,10 +172,9 @@ after_test:
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
 
-  # install codecoverage tools
-  - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov )
-    # codecov > 2.0.5 has problems finding the coverage.xml, so use the older version
-  - cmd: IF %UPLOAD_COV%==true ( pip install codecov==2.0.5 )
+  # install code coverage
+  - cmd: IF %UPLOAD_COV%==true ( conda install -y pytest-cov)
+  - cmd: IF %UPLOAD_COV%==true ( pip install codecov)
 
   # code coverage: install packages editable
   - cmd: cd cythoninstallhelpers
@@ -188,6 +187,8 @@ after_test:
 
   - cmd: cd ..\cythonarrays
   - cmd: pip install -e .
+  # create extensions with linetrace (not for production)
+  - cmd: IF %UPLOAD_COV%==true ( python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL )
   - cmd: IF %UPLOAD_COV%==true ( py.test --cov=src --pyargs cythonarrays )
 
   - cmd: cd ..\matrixconverters
