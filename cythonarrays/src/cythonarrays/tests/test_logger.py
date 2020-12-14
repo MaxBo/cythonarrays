@@ -3,7 +3,6 @@
 from cythonarrays.configure_logger import (SimLogger,
                                            get_module_logger,
                                            get_logger)
-import pytest
 import os
 import glob
 from .module_with_logging import function_with_logging
@@ -12,7 +11,7 @@ from .example_python import _Example
 
 class Test01_Logger:
     """Test the the SimLogger"""
-    def test_01_log_something(self, tmpdir):
+    def test_01_log_something(self, tmpdir: str):
         """log something to the logger"""
         print(tmpdir)
         scenario = 'TestScenario_without_Packages'
