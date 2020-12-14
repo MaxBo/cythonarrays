@@ -12,8 +12,7 @@ class SimLogger:
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            cls._instance = super(SimLogger, cls).__new__(
-                                cls, *args, **kwargs)
+            cls._instance = super().__new__(cls, *args, **kwargs)
         return cls._instance
 
     def __init__(self):
@@ -54,7 +53,6 @@ class SimLogger:
             a: append
             w: recreate logfile
         """
-
         iso_date = datetime.date.today().isoformat()
         # define the file where to log
         LOGGING_FILE = os.path.join(LOG_FOLDER,

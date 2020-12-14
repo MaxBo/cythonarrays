@@ -1,50 +1,42 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 10 21:00:21 2016
-
-@author: MaxBohnet
-"""
 
 from cythonarrays.configure_logger import (SimLogger,
                                            get_module_logger,
                                            get_logger)
-import tempfile
-import shutil
+import pytest
 import os
 import glob
+from .module_with_logging import function_with_logging
+from .example_python import _Example
 
 
 class Test01_Logger:
     """Test the the SimLogger"""
-    @classmethod
-    def setup_class(cls):
-        cls.LOG_FOLDER = tempfile.mkdtemp(prefix='Log_')
-        print(cls.LOG_FOLDER)
-        cls.scenario = 'TestScenario'
-        sim_logger = SimLogger()
-        print(sim_logger.packages)
-        sim_logger.add_packages(['cythonarrays',
-                                 'cythoninstallhelpers',
-                                 'numpy'])
-        sim_logger.configure(LOG_FOLDER=cls.LOG_FOLDER,
-                             scenario=cls.scenario)
-        print(sim_logger.packages)
-
-    @classmethod
-    def teardown_class(cls):
-        try:
-            shutil.rmtree(cls.LOG_FOLDER)
-        except PermissionError:
-            pass
-
-    def test_02_log_something(self):
+    def test_01_log_something(self, tmpdir):
         """log something to the logger"""
+        print(tmpdir)
+        scenario = 'TestScenario_without_Packages'
+        sim_logger = SimLogger()
+        sim_logger.configure(LOG_FOLDER=tmpdir, scenario=scenario)
+        print(sim_logger.packages)
+
+        function_with_logging('Log something in function_with_logging without package')
+
         logger = get_logger(self)
-        logger.info('Info in test_02')
-        logger.debug('Debug in test_02')
-        logger.warning('Warn in test_02')
-        logfiles = glob.glob(os.path.join(self.LOG_FOLDER,
-                                          '{}*.log'.format(self.scenario)))
+        logger.info('Info in test_01')
+        logger.debug('Debug in test_01')
+        logger.warning('Warn in test_01')
+
+        logger = get_logger(_Example)
+        logger.warn('Logging for the cython module')
+
+        instance = 'A String'
+        logger = get_logger(instance)
+        logger.info('Logging for an str-instance form builtins without module')
+
+        print(sim_logger.packages)
+
+        logfiles = glob.glob(os.path.join(tmpdir, f'{scenario}*.log'))
         assert logfiles
         print(logfiles)
         for logfile in logfiles:
@@ -52,9 +44,7 @@ class Test01_Logger:
                 for line in f:
                     print(line.strip())
 
-
-
-    def test_03_module_logger(self):
+    def test_03_module_logger(self, tmpdir):
         """Test the module logger"""
         module_logger = get_module_logger(self.__module__)
         module_logger.info('Info in Module {}'.format(self.__module__))
