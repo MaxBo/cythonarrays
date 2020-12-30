@@ -6,6 +6,7 @@ import os
 from collections import defaultdict
 import numpy as np
 
+from cythoninstallhelpers.configure_logger import get_logger
 from cythonarrays.array_properties import _ArrayProperties
 import pyximport; pyximport.install()
 from .example_cython import (_Example, DestinationChoiceError)
@@ -50,6 +51,7 @@ class Example(_Example, _ArrayProperties):
         self.define_arrays()
         if init_arrays:
             self.init_arrays()
+        self.logger = get_logger(self)
 
     def set_n_threads(self, threading=True):
         """Set the number of threads"""

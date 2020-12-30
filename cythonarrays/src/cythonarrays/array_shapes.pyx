@@ -13,8 +13,6 @@ from .numpy_types import typedict
 from .numpy_types cimport np_floating, np_numeric
 from .array_descriptors import ArrayDescriptor
 
-from .configure_logger import get_logger
-
 cimport cython
 cdef extern from "numpy/npy_math.h":
     bint npy_isnan(double x) nogil
@@ -49,9 +47,6 @@ cdef class ArrayShapes(object):
         self.NAN_d = np.NAN #np.float64(0) / np.float64(0)
         self.INF_d = np.float64(1) / np.float64(0)
         self.NINF_d = np.float64(-1) / np.float64(0)
-
-        # create Class logger
-        self.logger = get_logger(self)
 
     cdef char _isnan(self, np_floating x) nogil:
         """

@@ -4,7 +4,6 @@ from typing import Tuple, Union
 import numpy as np
 import xarray as xr
 from cythonarrays.array_descriptors import ArrayDescriptor
-from cythonarrays.configure_logger import get_logger
 
 
 class _ArrayProperties:
@@ -22,8 +21,6 @@ class _ArrayProperties:
         for descr in self.dtypes.values():
             prop = self._create_prop(descr)
             setattr(self.__class__, descr.name, prop)
-            # create Class logger
-            self.logger = get_logger(self)
 
     def _create_prop(self, descr: ArrayDescriptor):
         """

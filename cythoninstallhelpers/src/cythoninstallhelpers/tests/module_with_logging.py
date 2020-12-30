@@ -1,4 +1,4 @@
-from cythonarrays.configure_logger import get_logger
+from cythoninstallhelpers.configure_logger import get_logger
 
 
 def function_with_logging(msg: str):
