@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matrixconverters.save_ptv module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="matrixconverters.xarray2netcdf module" href="matrixconverters.xarray2netcdf.html" />
+    <link rel="prev" title="matrixconverters.read_ptv module" href="matrixconverters.read_ptv.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.xarray2netcdf.html" title="matrixconverters.xarray2netcdf module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_ptv.html" title="matrixconverters.read_ptv module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" accesskey="U">matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.save_ptv module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-matrixconverters.save_ptv">
+<span id="matrixconverters-save-ptv-module"></span><h1>matrixconverters.save_ptv module<a class="headerlink" href="#module-matrixconverters.save_ptv" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="matrixconverters.save_ptv.SavePTV">
+<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.save_ptv.</code><code class="sig-name descname">SavePTV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ds</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – the dataset that should be saved</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.savePSVMatrix">
+<code class="sig-name descname">savePSVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">ftype</span><span class="o">=</span><span class="default_value">'CC'</span></em>, <em class="sig-param"><span class="n">max_width</span><span class="o">=</span><span class="default_value">1000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePSVMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>exports array in PSV-Format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath of the file to write</p></li>
+<li><p><strong>ftype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the file-type</p></li>
+<li><p><strong>max_width</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the maximum number of columns for the values written</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.savePTVMatrix">
+<code class="sig-name descname">savePTVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">file_type</span><span class="o">=</span><span class="default_value">'BK'</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">0.11</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePTVMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>save array im PTV-Format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – output file_name</p></li>
+<li><p><strong>file_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Type of PTV-File Format</p></li>
+<li><p><strong>version</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – version number</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_f4">
+<em class="property">static </em><code class="sig-name descname">write_f4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f4" title="Permalink to this definition">¶</a></dt>
+<dd><p>write 4-byte float to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_f8">
+<em class="property">static </em><code class="sig-name descname">write_f8</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f8" title="Permalink to this definition">¶</a></dt>
+<dd><p>write 8-byte double to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_i2">
+<em class="property">static </em><code class="sig-name descname">write_i2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i2" title="Permalink to this definition">¶</a></dt>
+<dd><p>write 2-byte integer to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_i4">
+<em class="property">static </em><code class="sig-name descname">write_i4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i4" title="Permalink to this definition">¶</a></dt>
+<dd><p>write 4-byte integer to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_u1">
+<em class="property">static </em><code class="sig-name descname">write_u1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_u1" title="Permalink to this definition">¶</a></dt>
+<dd><p>write 1-byte integer to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.save_ptv.SavePTV.write_utf16">
+<code class="sig-name descname">write_utf16</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_utf16" title="Permalink to this definition">¶</a></dt>
+<dd><p>write utf16 encoded value to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file-handler</p></li>
+<li><p><strong>val</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code>) – the value to write</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.save_ptv.write_line">
+<code class="sig-prename descclassname">matrixconverters.save_ptv.</code><code class="sig-name descname">write_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.write_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>write a line of <cite>text</cite> to the open file and adjust the text to the number
+of characters given</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – an open binary file handler</p></li>
+<li><p><strong>text</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the text to write</p></li>
+<li><p><strong>length</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of characters to pad the text on the left side</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matrixconverters.read_ptv.html"
+                        title="previous chapter">matrixconverters.read_ptv module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="matrixconverters.xarray2netcdf.html"
+                        title="next chapter">matrixconverters.xarray2netcdf module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matrixconverters/matrixconverters.save_ptv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.xarray2netcdf.html" title="matrixconverters.xarray2netcdf module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_ptv.html" title="matrixconverters.read_ptv module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.save_ptv module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

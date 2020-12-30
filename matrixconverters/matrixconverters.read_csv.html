@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matrixconverters.read_csv module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="matrixconverters.read_ptv module" href="matrixconverters.read_ptv.html" />
+    <link rel="prev" title="matrixconverters.tests.test_xarray2netcdf module" href="matrixconverters.tests.test_xarray2netcdf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_ptv.html" title="matrixconverters.read_ptv module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_xarray2netcdf.html" title="matrixconverters.tests.test_xarray2netcdf module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" accesskey="U">matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.read_csv module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-matrixconverters.read_csv">
+<span id="matrixconverters-read-csv-module"></span><h1>matrixconverters.read_csv module<a class="headerlink" href="#module-matrixconverters.read_csv" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="matrixconverters.read_csv.ReadOFormat">
+<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.read_csv.</code><code class="sig-name descname">ReadOFormat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zonefile</span></em>, <em class="sig-param"><span class="n">matrixfile</span></em>, <em class="sig-param"><span class="n">cols_zones</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cols_matrix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.ImplementsDatasetReduce</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.DataWithCoords</span></code></p>
+<p>reads Matrix from a file</p>
+<dl class="py method">
+<dt id="matrixconverters.read_csv.ReadOFormat.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zonefile</span></em>, <em class="sig-param"><span class="n">matrixfile</span></em>, <em class="sig-param"><span class="n">cols_zones</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cols_matrix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zonefile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to the file with zone names</p></li>
+<li><p><strong>matrixfile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to the file with the matrix values</p></li>
+<li><p><strong>cols_zones</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – the column with the zones</p></li>
+<li><p><strong>cols_matrix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – the columnsto use [column_with_zone_no, column_with_zone_name]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_csv.ReadOFormat.read_file_to_da">
+<code class="sig-name descname">read_file_to_da</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_cols</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">target_cols</span></em>, <em class="sig-param"><span class="n">pkey</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_file_to_da" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads a file into a DataArray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – the columns with the data</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the full filepyth</p></li>
+<li><p><strong>target_cols</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – the target colum names</p></li>
+<li><p><strong>pkey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the primary key</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the DataArray with the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_csv.ReadOFormat.read_matrix_csv">
+<code class="sig-name descname">read_matrix_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">cols_matrix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_matrix_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a matrix from a csv-file and stores it in self[‘matrix’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath of the input file</p></li>
+<li><p><strong>cols_matrix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – the columns to use</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_csv.ReadOFormat.read_zones_csv">
+<code class="sig-name descname">read_zones_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">cols_zones</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_zones_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a matrix from a csv-file and stores it as coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath of the input file</p></li>
+<li><p><strong>cols_matrix</strong> – the columns to use [column_with_zone_no, column_with_zone_name]</p></li>
+<li><p><strong>cols_zones</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matrixconverters.tests.test_xarray2netcdf.html"
+                        title="previous chapter">matrixconverters.tests.test_xarray2netcdf module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="matrixconverters.read_ptv.html"
+                        title="next chapter">matrixconverters.read_ptv module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matrixconverters/matrixconverters.read_csv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_ptv.html" title="matrixconverters.read_ptv module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_xarray2netcdf.html" title="matrixconverters.tests.test_xarray2netcdf module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.read_csv module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

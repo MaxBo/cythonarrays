@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cythonarrays.array_shapes module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cythonarrays.numpy_types module" href="cythonarrays.numpy_types.html" />
+    <link rel="prev" title="cythonarrays.array_properties module" href="cythonarrays.array_properties.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.numpy_types.html" title="cythonarrays.numpy_types module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" accesskey="U">cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.array_shapes module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-cythonarrays.array_shapes">
+<span id="cythonarrays-array-shapes-module"></span><h1>cythonarrays.array_shapes module<a class="headerlink" href="#module-cythonarrays.array_shapes" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="cythonarrays.array_shapes.ArrayShapes">
+<em class="property">class </em><code class="sig-prename descclassname">cythonarrays.array_shapes.</code><code class="sig-name descname">ArrayShapes</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base Class for a Cython cdef class which helps to handle
+memoryviews better</p>
+<dl class="py method">
+<dt id="cythonarrays.array_shapes.ArrayShapes.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>inits the Array and creates the constands for NAN and NINF</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.INF_d">
+<code class="sig-name descname">INF_d</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘double’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>INF_d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.INF_f">
+<code class="sig-name descname">INF_f</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘float’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>INF_f</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.NAN_d">
+<code class="sig-name descname">NAN_d</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘double’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>NAN_d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.NAN_f">
+<code class="sig-name descname">NAN_f</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘float’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>NAN_f</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.NINF_d">
+<code class="sig-name descname">NINF_d</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘double’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>NINF_d</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.NINF_f">
+<code class="sig-name descname">NINF_f</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘float’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>NINF_f</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="cythonarrays.array_shapes.ArrayShapes.isnan_py">
+<code class="sig-name descname">isnan_py</code><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.isnan_py" title="Permalink to this definition">¶</a></dt>
+<dd><p>python wrapper around _isnan()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – the value to test for is_nan</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cythonarrays.array_properties.html"
+                        title="previous chapter">cythonarrays.array_properties module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cythonarrays.numpy_types.html"
+                        title="next chapter">cythonarrays.numpy_types module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cythonarrays/cythonarrays.array_shapes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.numpy_types.html" title="cythonarrays.numpy_types module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" >cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.array_shapes module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

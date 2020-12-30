@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matrixconverters.tests.test_read_visum module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="matrixconverters.tests.test_save_psv module" href="matrixconverters.tests.test_save_psv.html" />
+    <link rel="prev" title="matrixconverters.tests.test_read_csv module" href="matrixconverters.tests.test_read_csv.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_save_psv.html" title="matrixconverters.tests.test_save_psv module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_read_csv.html" title="matrixconverters.tests.test_read_csv module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="matrixconverters.tests.html" accesskey="U">matrixconverters.tests package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.tests.test_read_visum module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-matrixconverters.tests.test_read_visum">
+<span id="matrixconverters-tests-test-read-visum-module"></span><h1>matrixconverters.tests.test_read_visum module<a class="headerlink" href="#module-matrixconverters.tests.test_read_visum" title="Permalink to this headline">¶</a></h1>
+<p>Created on Fri Jun 10 21:00:21 2016</p>
+<p>&#64;author: MaxBohnet</p>
+<dl class="py class">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV">
+<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">TestReadPTV</code><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Test reading PTV matrices</p>
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.print_matrix">
+<code class="sig-name descname">print_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.print_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_01_read_v_format">
+<code class="sig-name descname">test_01_read_v_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_01_read_v_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test reading v-Format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>matrix_fn</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_02_read_bk_format">
+<code class="sig-name descname">test_02_read_bk_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_02_read_bk_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test reading bk-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_02a_read_o_format">
+<code class="sig-name descname">test_02a_read_o_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_o</span></em>, <em class="sig-param"><span class="n">matrix_fn_or</span></em>, <em class="sig-param"><span class="n">matrix_fn_o_without_names</span></em>, <em class="sig-param"><span class="n">matrix_fn_o_with_zeros</span></em>, <em class="sig-param"><span class="n">matrix_fn_o_with_dashes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_02a_read_o_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test reading bk-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_02b_read_e_s_format">
+<code class="sig-name descname">test_02b_read_e_s_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_e</span></em>, <em class="sig-param"><span class="n">matrix_fn_s</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_02b_read_e_s_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test reading bk-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_02c_read_bi_format">
+<code class="sig-name descname">test_02c_read_bi_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_02c_read_bi_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test reading bki-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_03_save_v_format">
+<code class="sig-name descname">test_03_save_v_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk</span></em>, <em class="sig-param"><span class="n">matrix_fn_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_03_save_v_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing v-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_03b_save_vm_format">
+<code class="sig-name descname">test_03b_save_vm_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk</span></em>, <em class="sig-param"><span class="n">matrix_fn_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_03b_save_vm_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing vm-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_05_save_bk_format">
+<code class="sig-name descname">test_05_save_bk_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk</span></em>, <em class="sig-param"><span class="n">matrix_fn_bk_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_05_save_bk_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing bk-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_05a_save_bi_format">
+<code class="sig-name descname">test_05a_save_bi_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bi</span></em>, <em class="sig-param"><span class="n">matrix_fn_bi_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_05a_save_bi_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing bi-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_05b_save_bi_format_zero">
+<code class="sig-name descname">test_05b_save_bi_format_zero</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bi</span></em>, <em class="sig-param"><span class="n">matrix_fn_bi_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_05b_save_bi_format_zero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing bi-format with zero flag</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_06_save_o_format">
+<code class="sig-name descname">test_06_save_o_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk</span></em>, <em class="sig-param"><span class="n">matrix_fn_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_06_save_o_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing v-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_07_save_bl_format">
+<code class="sig-name descname">test_07_save_bl_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bl</span></em>, <em class="sig-param"><span class="n">matrix_fn_bl_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_07_save_bl_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test writing bk-format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.tests.test_read_visum.TestReadPTV.test_08_save_simple_ds">
+<code class="sig-name descname">test_08_save_simple_ds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">matrix_fn_bk_out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.TestReadPTV.test_08_save_simple_ds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.folder">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">folder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.folder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bi">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bi" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bi_out">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bi_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bi_out" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bk">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bk" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bk_out">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bk_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bk_out" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bl">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bl" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_bl_out">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_bl_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_bl_out" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_e">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_e</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_e" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_o">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_o</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_o" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_o_with_dashes">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_o_with_dashes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_o_with_dashes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_o_with_zeros">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_o_with_zeros</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_o_with_zeros" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_o_without_names">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_o_without_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_o_without_names" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_or">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_or</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_or" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_out">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_out" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="matrixconverters.tests.test_read_visum.matrix_fn_s">
+<code class="sig-prename descclassname">matrixconverters.tests.test_read_visum.</code><code class="sig-name descname">matrix_fn_s</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.tests.test_read_visum.matrix_fn_s" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>folder</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matrixconverters.tests.test_read_csv.html"
+                        title="previous chapter">matrixconverters.tests.test_read_csv module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="matrixconverters.tests.test_save_psv.html"
+                        title="next chapter">matrixconverters.tests.test_save_psv module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matrixconverters/matrixconverters.tests.test_read_visum.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_save_psv.html" title="matrixconverters.tests.test_save_psv module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.tests.test_read_csv.html" title="matrixconverters.tests.test_read_csv module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="matrixconverters.tests.html" >matrixconverters.tests package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.tests.test_read_visum module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

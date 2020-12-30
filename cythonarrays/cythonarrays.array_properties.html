@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cythonarrays.array_properties module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cythonarrays.array_shapes module" href="cythonarrays.array_shapes.html" />
+    <link rel="prev" title="cythonarrays.array_descriptors module" href="cythonarrays.array_descriptors.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_shapes.html" title="cythonarrays.array_shapes module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_descriptors.html" title="cythonarrays.array_descriptors module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" accesskey="U">cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.array_properties module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-cythonarrays.array_properties">
+<span id="cythonarrays-array-properties-module"></span><h1>cythonarrays.array_properties module<a class="headerlink" href="#module-cythonarrays.array_properties" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="cythonarrays.array_properties._ArrayProperties">
+<em class="property">class </em><code class="sig-prename descclassname">cythonarrays.array_properties.</code><code class="sig-name descname">_ArrayProperties</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base Class for Cython CDef Class</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>create properties for all arrays</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.check_ndims">
+<code class="sig-name descname">check_ndims</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">descr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.check_ndims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the number of dimensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>descr</strong> (<a class="reference internal" href="cythonarrays.array_descriptors.html#cythonarrays.array_descriptors.ArrayDescriptor" title="cythonarrays.array_descriptors.ArrayDescriptor"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrayDescriptor</span></code></a>) – the Array Descriptor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.create_ds">
+<code class="sig-name descname">create_ds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.create_ds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create xarray-Dataset that is linked to the arrays</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.from_netcdf">
+<em class="property">classmethod </em><code class="sig-name descname">from_netcdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.from_netcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read Data from a netcdf-file and create a new Cdef-Class-instance</p>
+<p>This works only, if the dimensions of the cythonarrays-class
+are specified in the __init__() of the subclass
+and the argument names match the names of the dimensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to read the netcdf-data from</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#cythonarrays.array_properties._ArrayProperties" title="cythonarrays.array_properties._ArrayProperties"><code class="xref py py-class docutils literal notranslate"><span class="pre">_ArrayProperties</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.init_array">
+<code class="sig-name descname">init_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.init_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inits the attribute name with an empty array with the specified shape
+and fill with the default value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the attribute</p></li>
+<li><p><strong>shape</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]) – the shape of the dtype. If not given,
+the dtype stored in self.dtypes is used.
+if None, an array of shape [0] * ndim is initialized</p></li>
+<li><p><strong>default</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – the default value. If not given,
+the default value stored in self.dtypes is used.
+if None, an empty array is initialized</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.init_arrays">
+<code class="sig-name descname">init_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.init_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize all arrays defined in self.dtypes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.init_object_array">
+<code class="sig-name descname">init_object_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">shape</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.init_object_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialize an non-cython array to assure the consistency of data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – the name of the attribute</p></li>
+<li><p><strong>shape</strong> (<em>tuple</em><em> or </em><em>str</em>) – the shape of the array</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.reset_array">
+<code class="sig-name descname">reset_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.reset_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset array to its default value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.save_dataset_to_netcdf">
+<code class="sig-name descname">save_dataset_to_netcdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filepath</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.save_dataset_to_netcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save Dataset to netcdf-file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to store the data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythonarrays.array_properties._ArrayProperties.set_array">
+<code class="sig-name descname">set_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">shape</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_properties._ArrayProperties.set_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the attribute name to the value and casts to the correct dtype
+if necessary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the attribute to set</p></li>
+<li><p><strong>value</strong> (<em>Array-like</em>) – the value to assign to the memoryview</p></li>
+<li><p><strong>shape</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]) – a tuple of ints or str to validate the shape of the array provided</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;u1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;n_agents&#39;</span><span class="p">,</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">n_agents</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">n_agents</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+<span class="go">Exception...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cythonarrays.array_descriptors.html"
+                        title="previous chapter">cythonarrays.array_descriptors module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cythonarrays.array_shapes.html"
+                        title="next chapter">cythonarrays.array_shapes module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cythonarrays/cythonarrays.array_properties.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_shapes.html" title="cythonarrays.array_shapes module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.array_descriptors.html" title="cythonarrays.array_descriptors module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" >cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.array_properties module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

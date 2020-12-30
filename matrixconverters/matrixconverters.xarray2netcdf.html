@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matrixconverters.xarray2netcdf module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="matrixconverters.save_ptv module" href="matrixconverters.save_ptv.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.save_ptv.html" title="matrixconverters.save_ptv module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" accesskey="U">matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.xarray2netcdf module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-matrixconverters.xarray2netcdf">
+<span id="matrixconverters-xarray2netcdf-module"></span><h1>matrixconverters.xarray2netcdf module<a class="headerlink" href="#module-matrixconverters.xarray2netcdf" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="matrixconverters.xarray2netcdf.xr2netcdf">
+<code class="sig-prename descclassname">matrixconverters.xarray2netcdf.</code><code class="sig-name descname">xr2netcdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em>, <em class="sig-param"><span class="n">filepath</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'w'</span></em>, <em class="sig-param"><span class="n">engine</span><span class="o">=</span><span class="default_value">'netcdf4'</span></em>, <em class="sig-param"><span class="n">compressed</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">complevel</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.xarray2netcdf.xr2netcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>save dataset as netcdf-file to filepath using the given compression level</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – the xarray-dataset to store</p></li>
+<li><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the path where the netcdf-file shold be stored</p></li>
+<li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – write (w) or append (a)</p></li>
+<li><p><strong>engine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the engine to use (default is netcdf4)</p></li>
+<li><p><strong>compressed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – if False, the data-variables are not compressed</p></li>
+<li><p><strong>complevel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the compression-level between 1 and 9
+1 is faster, 9 uses a more efficient compression, but is much slower
+2 is in general a good compromise</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matrixconverters.save_ptv.html"
+                        title="previous chapter">matrixconverters.save_ptv module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matrixconverters/matrixconverters.xarray2netcdf.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.save_ptv.html" title="matrixconverters.save_ptv module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.xarray2netcdf module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>matrixconverters.read_ptv module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="matrixconverters.save_ptv module" href="matrixconverters.save_ptv.html" />
+    <link rel="prev" title="matrixconverters.read_csv module" href="matrixconverters.read_csv.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.save_ptv.html" title="matrixconverters.save_ptv module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_csv.html" title="matrixconverters.read_csv module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" accesskey="U">matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.read_ptv module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-matrixconverters.read_ptv">
+<span id="matrixconverters-read-ptv-module"></span><h1>matrixconverters.read_ptv module<a class="headerlink" href="#module-matrixconverters.read_ptv" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix">
+<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.read_ptv.</code><code class="sig-name descname">ReadPTVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.ImplementsDatasetReduce</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.DataWithCoords</span></code></p>
+<p>reads PTV-Matrix from file
+the matrix-type is determined by the header
+reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a PTV-Matrix and return it as an xarray-dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – path to file on disk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix._openfile">
+<code class="sig-name descname">_openfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'latin1'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix._openfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>open the file with the according open method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – read, write or append</p></li>
+<li><p><strong>encoding</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the encoding (default: Latin-1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">IO</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>open file-handler</p></li>
+<li><p><em>meta public:</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_matrix">
+<code class="sig-name descname">create_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">n_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'f8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the Matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of zones</p></li>
+<li><p><strong>n_cols</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the number of columns (take the number of zones, if not specified)</p></li>
+<li><p><strong>dtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the datatype of the matrx</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names">
+<code class="sig-name descname">create_zone_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'zone_name'</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">'zone_no'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the zone names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of zones</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the zone_name column</p></li>
+<li><p><strong>dim</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the dimension in the DataArray</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_zones">
+<code class="sig-name descname">create_zones</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'zone_no'</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">'zones'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zones" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the zones DataArray as coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of zones</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the coordinates</p></li>
+<li><p><strong>dim</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the dimension of the zone cordinates</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.float_nan">
+<em class="property">static </em><code class="sig-name descname">float_nan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.float_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert str to float, handling ‘-‘ as 0.0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the value to convert</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value as float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB">
+<code class="sig-name descname">readPTVMatrixB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a binary PTV Matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE">
+<code class="sig-name descname">readPTVMatrixE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a file in E-Format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO">
+<code class="sig-name descname">readPTVMatrixO</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a file in O-Format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV">
+<code class="sig-name descname">readPTVMatrixV</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a file in V-Format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_f4">
+<em class="property">static </em><code class="sig-name descname">read_f4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f4" title="Permalink to this definition">¶</a></dt>
+<dd><p>read 32-bit float from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_f8">
+<em class="property">static </em><code class="sig-name descname">read_f8</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f8" title="Permalink to this definition">¶</a></dt>
+<dd><p>read 64-bit double from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_header">
+<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>read the header</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – an open file-object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">deque</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>rows</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_i2">
+<em class="property">static </em><code class="sig-name descname">read_i2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i2" title="Permalink to this definition">¶</a></dt>
+<dd><p>read 16-bit double from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as shortint</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_i4">
+<em class="property">static </em><code class="sig-name descname">read_i4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i4" title="Permalink to this definition">¶</a></dt>
+<dd><p>read 32-bit int from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_names">
+<code class="sig-name descname">read_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the zone names into the given array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file-handler</p></li>
+<li><p><strong>arr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code>) – the DataArray for the zone names</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format">
+<code class="sig-name descname">read_names_o_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">rows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the zone names in an O-Format Matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file-handler</p></li>
+<li><p><strong>line</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the current line</p></li>
+<li><p><strong>rows</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – the rows of the text block</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_u1">
+<em class="property">static </em><code class="sig-name descname">read_u1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_u1" title="Permalink to this definition">¶</a></dt>
+<dd><p>read 8-bit char from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as char</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_utf16">
+<code class="sig-name descname">read_utf16</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_utf16" title="Permalink to this definition">¶</a></dt>
+<dd><p>read utf16( encoded string from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_value">
+<code class="sig-name descname">read_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>read integer value from file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as nt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values">
+<code class="sig-name descname">read_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>read <cite>n</cite> values from open file at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p></li>
+<li><p><strong>n_values</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value read as double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list">
+<code class="sig-name descname">read_values_in_o_format_to_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>read values from open file in O-Format at current position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file handler</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">deque</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a tuple with the rows read and the current row</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array">
+<code class="sig-name descname">read_values_to_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">sep</span><span class="o">=</span><span class="default_value">' '</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>read values from file at current position into <cite>array</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p></li>
+<li><p><strong>arr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code>) – the array where the data will be written into</p></li>
+<li><p><strong>sep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the separation character</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="matrixconverters.read_csv.html"
+                        title="previous chapter">matrixconverters.read_csv module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="matrixconverters.save_ptv.html"
+                        title="next chapter">matrixconverters.save_ptv module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/matrixconverters/matrixconverters.read_ptv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.save_ptv.html" title="matrixconverters.save_ptv module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="matrixconverters.read_csv.html" title="matrixconverters.read_csv module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >matrixconverters</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="matrixconverters.html" >matrixconverters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">matrixconverters.read_ptv module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

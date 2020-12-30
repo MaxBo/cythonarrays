@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cythoninstallhelpers.configure_logger module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cythoninstallhelpers.get_version module" href="cythoninstallhelpers.get_version.html" />
+    <link rel="prev" title="cythoninstallhelpers.build_config module" href="cythoninstallhelpers.build_config.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythoninstallhelpers.get_version.html" title="cythoninstallhelpers.get_version module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cythoninstallhelpers.build_config.html" title="cythoninstallhelpers.build_config module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythoninstallhelpers</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythoninstallhelpers.html" accesskey="U">cythoninstallhelpers package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythoninstallhelpers.configure_logger module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-cythoninstallhelpers.configure_logger">
+<span id="cythoninstallhelpers-configure-logger-module"></span><h1>cythoninstallhelpers.configure_logger module<a class="headerlink" href="#module-cythoninstallhelpers.configure_logger" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger">
+<em class="property">class </em><code class="sig-prename descclassname">cythoninstallhelpers.configure_logger.</code><code class="sig-name descname">SimLogger</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Singleton Class for the logging</p>
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>init the sim-logger</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.add_console_handler">
+<code class="sig-name descname">add_console_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.add_console_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>create console handler with a higher log level</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.add_package">
+<code class="sig-name descname">add_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.add_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>add single package to the list of logged packages</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.add_packages">
+<code class="sig-name descname">add_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.add_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>add list of packages to the list of logged packages</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.configure">
+<code class="sig-name descname">configure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">LOG_FOLDER</span></em>, <em class="sig-param"><span class="n">scenario</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'a'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>configures the file handlers for the logger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LOG_FOLDER</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the path to the log-folder</p></li>
+<li><p><strong>scenario</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the scenario used in the log file</p></li>
+<li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – a: append
+w: recreate logfile</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.create_logger_for_package">
+<code class="sig-name descname">create_logger_for_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.create_logger_for_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a logger for the package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>package</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the package to create the logger for</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a logger for the current package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>instance</strong> (<em>object</em>) – the instance to inspect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.get_caller_name">
+<em class="property">static </em><code class="sig-name descname">get_caller_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">skip</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.get_caller_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a name of a caller in the format module.class.method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>skip</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – specifies how many levels of stack to skip while getting caller
+name. skip=1 means “who calls me”, skip=2 “who calls my caller” etc.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller. An empty string is returned if skipped levels exceed stack height</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.get_debug_formatter">
+<code class="sig-name descname">get_debug_formatter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.get_debug_formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a formatter with detailed information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="cythoninstallhelpers.configure_logger.SimLogger.get_info_formatter">
+<code class="sig-name descname">get_info_formatter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.SimLogger.get_info_formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a formatter with less detailed information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="cythoninstallhelpers.configure_logger.get_logger">
+<code class="sig-prename descclassname">cythoninstallhelpers.configure_logger.</code><code class="sig-name descname">get_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instance</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.get_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>for the instance, get the package,
+add the package to the list of loggers,
+and return the logger for the instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>instance</strong> – an arbitrary object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>logger-instace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="cythoninstallhelpers.configure_logger.get_module_logger">
+<code class="sig-prename descclassname">cythoninstallhelpers.configure_logger.</code><code class="sig-name descname">get_module_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.configure_logger.get_module_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>create Module logger named after the module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the module name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cythoninstallhelpers.build_config.html"
+                        title="previous chapter">cythoninstallhelpers.build_config module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cythoninstallhelpers.get_version.html"
+                        title="next chapter">cythoninstallhelpers.get_version module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cythoninstallhelpers/cythoninstallhelpers.configure_logger.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythoninstallhelpers.get_version.html" title="cythoninstallhelpers.get_version module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cythoninstallhelpers.build_config.html" title="cythoninstallhelpers.build_config module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythoninstallhelpers</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythoninstallhelpers.html" >cythoninstallhelpers package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythoninstallhelpers.configure_logger module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

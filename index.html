@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to the Cythonarrays documentation! &#8212; Cythonarrays</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Purpose of Cythonarrays" href="description/cython_models.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="description/cython_models.html" title="Purpose of Cythonarrays"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Cythonarrays</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the Cythonarrays documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-the-cythonarrays-documentation">
+<h1>Welcome to the Cythonarrays documentation!<a class="headerlink" href="#welcome-to-the-cythonarrays-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Cythonarray has been developed to facilitate the use of Cython Cdef-classes with numpy-arrays</p>
+<a class="reference external image-reference" href="http://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
+<a class="reference external image-reference" href="https://travis-ci.org/MaxBo/cythonarrays"><img alt="Build Status" src="https://travis-ci.org/MaxBo/cythonarrays.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://ci.appveyor.com/project/MaxBo/cythonarrays"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/MaxBo/cythonarrays"><img alt="codecov" src="https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg" /></a>
+</div>
+<div class="section" id="cythonarrays">
+<h1>cythonarrays<a class="headerlink" href="#cythonarrays" title="Permalink to this headline">¶</a></h1>
+<p>Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.</p>
+<p>It consists of three packages:</p>
+<div class="section" id="cythoninstallhelpers">
+<h2>cythoninstallhelpers:<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://badge.fury.io/py/cythoninstallhelpers"><img alt="PyPI version" src="https://badge.fury.io/py/cythoninstallhelpers.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/maxbo/cythoninstallhelpers"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/cythoninstallhelpers/badges/version.svg" /></a>
+<p>a package that provides functions that are used in the setup.py of cythonarrays
+therefore, it has to be installed first</p>
+</div>
+<div class="section" id="id1">
+<h2>cythonarrays:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://badge.fury.io/py/cythonarrays"><img alt="PyPI version" src="https://badge.fury.io/py/cythonarrays.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/maxbo/cythonarrays"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/cythonarrays/badges/version.svg" /></a>
+<p>provides a Base-Class for cython CDef-Classes, that allow to define arrays
+as attributes which can be used in cython code as fast memoryviews and at the same time
+be accessed from python as numpy-arrays
+In addition, the dimensions and shapes of data assigned to the arrays is checked automatically.
+If you try to set data with wrong dimensions or shapes, an error is thrown.
+Data is automatically converted to the right dtype.</p>
+</div>
+<div class="section" id="matrixconverters">
+<h2>matrixconverters:<a class="headerlink" href="#matrixconverters" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://badge.fury.io/py/matrixconverters"><img alt="PyPI version" src="https://badge.fury.io/py/matrixconverters.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/maxbo/matrixconverters"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/matrixconverters/badges/version.svg" /></a>
+<p>tools to read and write matrices in the format or PTV VISUM</p>
+<p>It implements:</p>
+<p><strong>Reading and writing PTV-Matrices</strong></p>
+<p>It can read and write the following formats:</p>
+<ul class="simple">
+<li><p>Text-Formats: O-Format, V-Format, S-Format</p></li>
+<li><p>Binary formats: BI-Format, BK-Format, BL-Format</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># read a matrix into a xarray-Dataset</span>
+<span class="kn">from</span> <span class="nn">matrixconverters</span> <span class="kn">import</span> <span class="n">ReadPTVMatrix</span><span class="p">,</span> <span class="n">SavePTVMatrix</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ReadPTVMatrix</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+<span class="c1"># save a xr.Dataset as PTV-Matrix</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="n">da</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">zones</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">([</span><span class="s1">&#39;A-Town&#39;</span><span class="p">,</span> <span class="s1">&#39;B-Village&#39;</span><span class="p">,</span> <span class="s1">&#39;C-City&#39;</span><span class="p">])</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">({</span><span class="s1">&#39;matrix&#39;</span><span class="p">:</span> <span class="n">da</span><span class="p">,</span>
+                 <span class="s1">&#39;zone_no&#39;</span><span class="p">:</span> <span class="n">zones</span><span class="p">,</span>
+                 <span class="s1">&#39;zone_name&#39;</span><span class="p">:</span> <span class="n">names</span><span class="p">,})</span>
+<span class="kn">from</span> <span class="nn">matrixconverters.save_ptv</span> <span class="kn">import</span> <span class="n">SavePTV</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">SavePTV</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">savePTVMatrix</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">matrix_fn_out</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s1">&#39;BK&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Writing PSV-Matrices</strong></p>
+<ul class="simple">
+<li><p>Programmsystem Verkehr by Software-Kontor Helmert-Hilke)</p></li>
+<li><p>File-Types CC and CN</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matrixconverters.save_ptv</span> <span class="kn">import</span> <span class="n">SavePTV</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">SavePTV</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">savePSVMatrix</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">matrix_fn_out</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;CC&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Export xarray-Dataset as compressed NetCDF-File</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matrixconverters.xarray2netcdf</span> <span class="kn">import</span> <span class="n">xarray2netcdf</span>
+<span class="n">xarray2netcdf</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
+
+<span class="n">ds_saved</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://maxbo.github.io/cythonarrays/">Documentation</a></p>
+</div>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>You can use pip to install the packages (and the requirements like numpy).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cythoninstallhelpers</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">cythonarrays</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">matrixconverters</span>
+</pre></div>
+</div>
+<p>Another way to handle dependencies is to use <a class="reference external" href="https://conda.io/miniconda.html">conda</a>.</p>
+<p>There conda packages for python 3.6-3.9 for windows and linux are generated
+in the channel <em>MaxBo</em> in <a class="reference external" href="https://anaconda.org/MaxBo">Anaconda Cloud</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">myenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.9</span>
+<span class="n">activate</span> <span class="n">myenv</span>
+
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">MaxBo</span>
+
+<span class="n">conda</span> <span class="n">install</span> <span class="n">cythonarrays</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">matrixconverters</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="this-documentation-contains">
+<h1>This documentation contains<a class="headerlink" href="#this-documentation-contains" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<p>Description</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="description/cython_models.html">Purpose of Cythonarrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#cythoninstallhelpers">cythoninstallhelpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#cythonarrays">cythonarrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="description/cython_models.html#how-to-work-with-cythonarrays-cdef-classes">How to work with Cythonarrays CDef-Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#link-numpy-and-openmp-sources">link numpy and openmp sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#cython-cdef-classes">Cython cdef classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#memoryviews-and-numpy-arrays">memoryviews and numpy arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="description/cython_models.html#link-cythonarrays-class-to-xarray-dataset">Link Cythonarrays-Class to xarray-Dataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#xarray-dataset-is-linked-to-cython-class">xarray-Dataset is linked to cython class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="description/validation.html">Validation of Data in cythonarrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="description/validation.html#how-to-work-with-cythonarrays-cdef-classes">How to work with Cythonarrays CDef-Classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="description/validation.html#link-numpy-and-openmp-sources">link numpy and openmp sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description/validation.html#cython-cdef-classes">Cython cdef classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="description/validation.html#memoryviews-and-numpy-arrays">memoryviews and numpy arrays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="description/validation.html#link-cythonarrays-class-to-xarray-dataset">Link Cythonarrays-Class to xarray-Dataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="description/validation.html#xarray-dataset-is-linked-to-cython-class">xarray-Dataset is linked to cython class</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>Code Documentation</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cythoninstallhelpers/modules.html">     cythoninstallhelpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html">cythoninstallhelpers package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#module-cythoninstallhelpers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cythonarrays/modules.html">     cythonarrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cythonarrays/cythonarrays.html">cythonarrays package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cythonarrays/cythonarrays.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cythonarrays/cythonarrays.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cythonarrays/cythonarrays.html#module-cythonarrays">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matrixconverters/modules.html">     matrixconverters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="matrixconverters/matrixconverters.html">matrixconverters package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="matrixconverters/matrixconverters.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matrixconverters/matrixconverters.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="matrixconverters/matrixconverters.html#module-matrixconverters">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to the Cythonarrays documentation!</a></li>
+<li><a class="reference internal" href="#cythonarrays">cythonarrays</a><ul>
+<li><a class="reference internal" href="#cythoninstallhelpers">cythoninstallhelpers:</a></li>
+<li><a class="reference internal" href="#id1">cythonarrays:</a></li>
+<li><a class="reference internal" href="#matrixconverters">matrixconverters:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#this-documentation-contains">This documentation contains</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="description/cython_models.html"
+                        title="next chapter">Purpose of Cythonarrays</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="description/cython_models.html" title="Purpose of Cythonarrays"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Cythonarrays</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to the Cythonarrays documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 30, 2020.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>
