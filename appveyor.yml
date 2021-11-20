@@ -30,40 +30,40 @@ environment:
       CONDA_NPY: 121
       CONDA_PY: 310
       PYTHON_VERSION: 3.10
-      MINICONDA: C:\Miniconda38-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda38-x64
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: true
 
     - TARGET_ARCH: x64
       CONDA_NPY: 119
       CONDA_PY: 39
       PYTHON_VERSION: 3.9
-      MINICONDA: C:\Miniconda38-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda38-x64
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 117
       CONDA_PY: 38
       PYTHON_VERSION: 3.8
-      MINICONDA: C:\Miniconda38-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda38-x64
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 116
       CONDA_PY: 37
       PYTHON_VERSION: 3.7
-      MINICONDA: C:\Miniconda38-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda38-x64
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 116
       CONDA_PY: 36
       PYTHON_VERSION: 3.6
-      MINICONDA: C:\Miniconda38-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda38-x64
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: false
 
     # Depreciate python 3.5 because of incompatible netcdf4 version
