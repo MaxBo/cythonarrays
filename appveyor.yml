@@ -9,7 +9,7 @@ environment:
   # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
   # /E:ON and /V:ON options are not enabled in the batch script interpreter
   # See: http://stackoverflow.com/a/13751649/163740
-  CMD_IN_ENV: "cmd /E:ON /V:ON /C obvci_appveyor_python_build_env.cmd"
+  # CMD_IN_ENV: "cmd /E:ON /V:ON /C obvci_appveyor_python_build_env.cmd"
 
   ANACONDA_TOKEN:
     secure: mhuiPtFbEu6DHu8hvGyoIKAt3TAIKtYSeqg5QPLs4hCxDZ3gUAAP+wIW15wQE3hB
@@ -164,12 +164,12 @@ after_test:
   - cmd: conda install -y twine
   - cmd: pip install readme_renderer
   - cmd: cd cythoninstallhelpers
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: python setup.py bdist_wheel sdist
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
   - cmd: conda install -y --use-local cythoninstallhelpers
   - cmd: cd cythonarrays
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: python setup.py bdist_wheel sdist
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
 
   # recompile with linetrace if coverage of pyx files should be uploaded - not for production
@@ -178,7 +178,7 @@ after_test:
   - cmd: cd ..
   - cmd: conda install -y --use-local cythonarrays
   - cmd: cd matrixconverters
-  - "%CMD_IN_ENV% python setup.py bdist_wheel sdist"
+  - cmd: python setup.py bdist_wheel sdist
   - cmd: IF %APPVEYOR_REPO_TAG%==true ( twine upload --skip-existing dist\* )
   - cmd: cd ..
 
@@ -191,7 +191,7 @@ after_test:
   #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
   # otherwise, the easy-install.pth is not found somehow and the pip failes
-  - cmd: python setup.py develop
+  # - cmd: python setup.py develop
   - cmd: pip install -e .
   - cmd: IF %UPLOAD_COV%==true ( py.test --cov=src --pyargs cythoninstallhelpers )
 
