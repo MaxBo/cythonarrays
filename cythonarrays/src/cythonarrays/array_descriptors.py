@@ -180,7 +180,7 @@ class ArrayDescriptor(object):
             the shape provided as a number, a string
             (comma separated for several dimensions) or a tuple/list of strings or ints
         """
-        if isinstance(value, (np.int, np.long)):
+        if isinstance(value, (int, np.compat.long)):
             value = (value, )
         elif isinstance(value, (str, bytes)):
             splitted = value.split(',')

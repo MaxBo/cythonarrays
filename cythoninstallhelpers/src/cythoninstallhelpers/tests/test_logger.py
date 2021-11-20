@@ -31,7 +31,7 @@ class Test01_Logger:
         logger.warning('Warn in test_01')
 
         logger = get_logger(get_version)
-        logger.warn('Logging for a get_version function')
+        logger.warning('Logging for a get_version function')
 
         instance = 'A String'
         logger = get_logger(instance)
