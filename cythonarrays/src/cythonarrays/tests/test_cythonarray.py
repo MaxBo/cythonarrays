@@ -123,7 +123,7 @@ class Test01_ExampleCDefClass:
         example.jobs_j = tuple(range(3))
         np.testing.assert_array_equal(example.jobs_j, np.array([0.0, 1.0, 2.0]))
         #  test setting array with a list of random objects
-        pattern = r"""float\(\) argument must be a string or a number, not .*"""
+        pattern = r"""float\(\) argument must be a string or a (real )?number, not .*"""
         with pytest.raises(TypeError, match=pattern):
             example.jobs_j = [float, type, int]
 
