@@ -28,6 +28,13 @@ environment:
 
 
     - TARGET_ARCH: x64
+      CONDA_NPY: 121
+      CONDA_PY: 310
+      PYTHON_VERSION: 3.10
+      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
+      UPLOAD_COV: true
+
+    - TARGET_ARCH: x64
       CONDA_NPY: 119
       CONDA_PY: 39
       PYTHON_VERSION: 3.9
@@ -39,8 +46,7 @@ environment:
       CONDA_PY: 38
       PYTHON_VERSION: 3.8
       CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
-      UPLOAD_COV: true
-
+      UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 116
