@@ -32,7 +32,7 @@ test:
   requires:
     - pytest
   commands:
-    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_matrixconverters.xml --pyargs matrixconverters
+    - py.test --pyargs matrixconverters
 
 about:
   home: https://maxbo.github.io/cythonarrays

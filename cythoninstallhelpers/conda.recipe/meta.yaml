@@ -31,7 +31,7 @@ test:
     - pytest
 
   commands:
-    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythoninstallhelpers.xml --pyargs cythoninstallhelpers
+    - py.test --pyargs cythoninstallhelpers
 
 about:
   home: https://maxbo.github.io/cythonarrays

@@ -36,7 +36,7 @@ test:
   requires:
     - pytest
   commands:
-    - py.test --junitxml={{ environ["TMPDIR"] }}/junit_cythonarrays.xml --pyargs cythonarrays
+    - py.test --pyargs cythonarrays
 
 about:
   home: https://maxbo.github.io/cythonarrays
