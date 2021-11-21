@@ -22,26 +22,40 @@ jobs:
       run: |
         conda install conda-build conda-verify anaconda-client
         conda info -a
-    - name: Create test environment for conda ${{ matrix.python-version }}
-      run: |
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
-        cd cythoninstallhelpers
-        pip install -r requirements.txt
-        pip install .
-        cd ..
-        source activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
-    - name: Build and test
+    - name: Build and Test cythoninstallhelpers for Python ${{ matrix.python-version }}
       run: |
         export TMPDIR=${{ env.RUNNER_TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
         conda info -a
         conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        conda install -n test-environment -y --use-local cythoninstallhelpers
-        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+    - name: Upload cythoninstallhelpers
+      env:
+        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
+        ANACONDA_USERNAME: MaxBo
+        TWINE_REPOSITORY: pypi
+        TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+        TWINE_USERNAME: MaxBo
+        TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
+        CONDA_BLD_PATH: ${{ env.RUNNER_TEMP }}
+
+      #if: ${{ github.ref_type == 'TAG' }}
+      run: |
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
+        anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
+        conda install -y twine
+        pip install readme_renderer
+        cd cythoninstallhelpers
+        python setup.py sdist bdist_wheel
+        twine upload --skip-existing dist/*
+        cd ..
+
+
+    - name: Build and test cythonarrays and matrixconverters
+      run: |
+        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
     - name: Create Docs
       if: ${{ matrix.python-version == '3.10' }}
       run: |
@@ -54,7 +68,7 @@ jobs:
         sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters
         travis-sphinx build --source docs_rst --nowarn
         travis-sphinx deploy
-    - name: Upload files
+    - name: Upload files for cythonarrays and matrixconverters
       env:
         ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
         ANACONDA_USERNAME: MaxBo
@@ -64,20 +78,14 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
         CONDA_BLD_PATH: ${{ env.RUNNER_TEMP }}
 
-      if: ${{ github.ref_type == 'TAG' }}
+      #if: ${{ github.ref_type == 'TAG' }}
       run: |
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
-        anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
-        conda install -y twine
-        pip install readme_renderer
-        cd cythoninstallhelpers
-        python setup.py sdist bdist_wheel
-        twine upload --skip-existing dist/*
         conda install -y cythoninstallhelpers
-        cd ../cythonarrays
+        cd cythonarrays
         python setup.py sdist bdist_wheel
         twine upload --skip-existing dist/*
         conda install -y cythonarrays

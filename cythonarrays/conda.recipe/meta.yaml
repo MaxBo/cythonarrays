@@ -30,11 +30,11 @@ requirements:
     - xarray
     - netcdf4
     - cythoninstallhelpers
-    - pytest
+    - pytest-cov
 
 test:
   requires:
-    - pytest
+    - pytest-cov
   commands:
     - py.test --pyargs cythonarrays
 

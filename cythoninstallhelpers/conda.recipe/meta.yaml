@@ -23,12 +23,12 @@ requirements:
     - python
     - setuptools>=41
     - numpy>=1.12
-    - pytest
+    - pytest-cov
     - cython
 
 test:
   requires:
-    - pytest
+    - pytest-cov
 
   commands:
     - py.test --pyargs cythoninstallhelpers
