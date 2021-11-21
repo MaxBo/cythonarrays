@@ -52,3 +52,29 @@ jobs:
         sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters
         travis-sphinx build --source docs_rst --nowarn
         travis-sphinx deploy
+    - name: Upload files
+      env:
+        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
+        ANACONDA_USERNAME: MaxBo
+        TWINE_REPOSITORY: pypi
+        TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+        TWINE_USERNAME: MaxBo
+        TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
+      if: ${{ github.ref_type == 'TAG' }}
+      run: |
+        anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
+        anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
+        anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
+        conda install -y twine
+        pip install readme_renderer
+        cd cythoninstallhelpers
+        python setup.py sdist bdist_wheel
+        twine upload --skip-existing dist/*
+        conda install -y cythoninstallhelpers
+        cd ../cythonarrays
+        python setup.py sdist bdist_wheel
+        twine upload --skip-existing dist/*
+        conda install -y cythonarrays
+        cd ../matrixconverters
+        python setup.py sdist bdist_wheel
+        twine upload --skip-existing dist/*
