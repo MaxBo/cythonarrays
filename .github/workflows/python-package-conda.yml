@@ -53,6 +53,8 @@ jobs:
 
     - name: Build and test cythonarrays and matrixconverters
       run: |
+        export TMPDIR=${{ runner.TEMP }}
+        export CONDA_BLD_PATH=$TMPDIR
         conda install -c maxbo cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
         conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
