@@ -29,17 +29,17 @@ jobs:
         pip install -r requirements.txt
         pip install .
         cd ..
-    - name: Build and test
-      run: |
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
+    - name: Build and test
+      run: |
         export TMPDIR=${{ env.RUNNER_TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
         conda info -a
-        conda build cythoninstallhelpers/conda.recipe
-        conda install -y --use-local cythoninstallhelpers
-        conda build cythonarrays/conda.recipe
-        conda build matrixconverters/conda.recipe
+        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        conda install -n test-environment -y --use-local cythoninstallhelpers
+        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
     - name: Create Docs
