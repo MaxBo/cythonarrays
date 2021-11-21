@@ -25,8 +25,6 @@ jobs:
     - name: Create base environment
       run: |
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
-        export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
-        export CONDA_BLD_PATH=$TMPDIR
         cd cythoninstallhelpers
         pip install -r requirements.txt
         pip install .
@@ -35,6 +33,8 @@ jobs:
         export PATH=$HOME/.local/bin:$PATH
     - name: Build and test
       run: |
+        export TMPDIR=${{ env.RUNNER_TEMP }}
+        export CONDA_BLD_PATH=$TMPDIR
         conda info -a
         conda build cythoninstallhelpers/conda.recipe
         conda install -y --use-local cythoninstallhelpers
