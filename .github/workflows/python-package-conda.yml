@@ -11,18 +11,18 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9, '3.10']
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda for Python ${{ matrix.python-version }}
+    - name: Setup base conda for Python 3.7
       uses: s-weigand/setup-conda@v1
       with:
         update-conda: true
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.7
         conda-channels: MaxBo, conda-forge, defaults
 
     - name: Install dependencies and set channels
       run: |
         conda install conda-build conda-verify anaconda-client
         conda info -a
-    - name: Create base environment
+    - name: Create test environment for conda ${{ matrix.python-version }}
       run: |
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
         cd cythoninstallhelpers

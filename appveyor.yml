@@ -139,27 +139,6 @@ test_script:
 
 after_test:
 
-  - ps: $package1 = "cythoninstallhelpers"
-  - ps: ([xml]$finalXml) = Get-Content (Resolve-Path $env:TMPDIR\junit_$package1.xml)
-  - ps: $other_packages = "cythonarrays", "matrixconverters"
-
-  - ps: >-
-      foreach ($package in $other_packages) {
-
-        ([xml]$File2) = Get-Content (Resolve-Path $env:TMPDIR\junit_$package.xml)
-
-        foreach ($Node in $File2.DocumentElement.ChildNodes) {
-
-          $finalXml.DocumentElement.AppendChild($finalXml.ImportNode($Node, $true))
-
-        }
-
-      }
-
-  - ps: ([xml]$finalXml).Save("$env:TMPDIR\junit_final.xml")
-  - ps: $wc = New-Object 'System.Net.WebClient'
-  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $env:TMPDIR\junit_final.xml))
-
   # Upload to Pypi with twine
   - cmd: conda install -y twine
   - cmd: pip install readme_renderer
