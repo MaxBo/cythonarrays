@@ -80,16 +80,16 @@ jobs:
 
       #if: ${{ github.ref_type == 'TAG' }}
       run: |
-        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
-        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
+        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
+        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
         conda install -y cythoninstallhelpers
         cd cythonarrays
         python setup.py sdist bdist_wheel
+        twine upload --skip-existing dist/*
         cd ../matrixconverters
         python setup.py sdist bdist_wheel
-        source deactivate
+        #source deactivate
         twine upload --skip-existing dist/*
-        cd ../cythonarrays
-        twine upload --skip-existing dist/*
+        #cd ../cythonarrays
