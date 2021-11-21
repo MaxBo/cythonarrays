@@ -22,7 +22,10 @@ jobs:
       run: |
         conda install conda-build conda-verify anaconda-client
         conda info -a
-        conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
+        conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov twine
+        source activate test-environment
+        pip install readme_renderer
+
     - name: Build and Test cythoninstallhelpers for Python ${{ matrix.python-version }}
       run: |
         export TMPDIR=${{ runner.TEMP }}
@@ -44,8 +47,6 @@ jobs:
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
-        conda install -y twine
-        pip install readme_renderer
         cd cythoninstallhelpers
         python setup.py sdist bdist_wheel
         twine upload --skip-existing dist/*
@@ -54,6 +55,7 @@ jobs:
 
     - name: Build and test cythonarrays and matrixconverters
       run: |
+        conda install -c maxbo cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
         conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
     - name: Create Docs
