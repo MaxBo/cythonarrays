@@ -49,7 +49,7 @@ jobs:
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
     - name: Create Docs
-      if: ${{ matrix.python-version == "3.10" }}
+      if: ${{ matrix.python-version == '3.10' }}
       run: |
         conda install -y --use-local cythonarrays matrixconverters
         pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx
