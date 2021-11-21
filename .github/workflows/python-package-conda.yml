@@ -25,7 +25,7 @@ jobs:
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
     - name: Build and Test cythoninstallhelpers for Python ${{ matrix.python-version }}
       run: |
-        export TMPDIR=${{ env.RUNNER_TEMP }}
+        export TMPDIR=${{ runner.TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
         conda info -a
         conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
@@ -37,7 +37,7 @@ jobs:
         TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
         TWINE_USERNAME: MaxBo
         TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
-        CONDA_BLD_PATH: ${{ env.RUNNER_TEMP }}
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
 
       #if: ${{ github.ref_type == 'TAG' }}
       run: |
@@ -76,7 +76,7 @@ jobs:
         TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
         TWINE_USERNAME: MaxBo
         TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
-        CONDA_BLD_PATH: ${{ env.RUNNER_TEMP }}
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
 
       #if: ${{ github.ref_type == 'TAG' }}
       run: |
