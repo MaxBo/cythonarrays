@@ -35,8 +35,9 @@ jobs:
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
         export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
         export CONDA_BLD_PATH=$TMPDIR
-        conda build cythoninstallhelpers/conda.recipe
-        conda install -y --use-local cythoninstallhelpers
+        cd cythoninstallhelpers
+        python -m pip install -r requirements.txt
+        python -m pip install .
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
     - name: Build and test
