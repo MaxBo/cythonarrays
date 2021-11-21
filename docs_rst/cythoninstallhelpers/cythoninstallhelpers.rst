@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    cythoninstallhelpers.build_config
+   cythoninstallhelpers.configure_logger
    cythoninstallhelpers.get_version
    cythoninstallhelpers.make_cython_extensions
 
