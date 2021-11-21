@@ -1,6 +1,6 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://travis-ci.org/MaxBo/cythonarrays.svg?branch=master)](https://travis-ci.org/MaxBo/cythonarrays)
+[![Build Status](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml)
 [![Build status](https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true)](https://ci.appveyor.com/project/MaxBo/cythonarrays)
 [![codecov](https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg)](https://codecov.io/gh/MaxBo/cythonarrays)
 
@@ -97,7 +97,7 @@ in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
 
 ```
 conda create -n myenv python=3.9
-activate myenv
+conda activate myenv
 
 conda config --add channels conda-forge
 conda config --add channels MaxBo
