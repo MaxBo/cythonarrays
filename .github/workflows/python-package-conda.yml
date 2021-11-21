@@ -29,10 +29,10 @@ jobs:
         pip install -r requirements.txt
         pip install .
         cd ..
-        source activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
     - name: Build and test
       run: |
+        source activate test-environment
+        export PATH=$HOME/.local/bin:$PATH
         export TMPDIR=${{ env.RUNNER_TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
         conda info -a
@@ -45,6 +45,8 @@ jobs:
     - name: Create Docs
       if: ${{ matrix.python-version == '3.10' }}
       run: |
+        source activate test-environment
+        export PATH=$HOME/.local/bin:$PATH
         conda install -y --use-local cythonarrays matrixconverters
         pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx
         sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers
@@ -60,8 +62,12 @@ jobs:
         TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
         TWINE_USERNAME: MaxBo
         TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
+        CONDA_BLD_PATH: ${{ env.RUNNER_TEMP }}
+
       if: ${{ github.ref_type == 'TAG' }}
       run: |
+        source activate test-environment
+        export PATH=$HOME/.local/bin:$PATH
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
         anaconda -t $ANACONDA_TOKEN upload --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
