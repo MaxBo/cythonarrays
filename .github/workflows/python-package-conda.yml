@@ -11,33 +11,26 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9, '3.10']
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - name: Setup conda for Python ${{ matrix.python-version }}
+      uses: s-weigand/setup-conda@v1
       with:
+        update-conda: true
         python-version: ${{ matrix.python-version }}
-    - name: Add conda to system path
-      run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
+        conda-channels: MaxBo, conda-forge, defaults
+
     - name: Install dependencies and set channels
       run: |
-        conda config --set always_yes yes --set changeps1 no
-        conda update -q conda
         conda install conda-build conda-verify anaconda-client
         conda info -a
-        conda config --set show_channel_urls true
-        conda config --remove channels defaults
-        conda config --add channels defaults
-        conda config --add channels conda-forge
-        conda config --add channels MaxBo    
     - name: Create base environment
       run: |
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
         export TMPDIR=`dirname $(mktemp -u -t tmp.XXXXXXXXXX)`
         export CONDA_BLD_PATH=$TMPDIR
         cd cythoninstallhelpers
-        python -m pip install -r requirements.txt
-        python -m pip install .
+        pip install -r requirements.txt
+        pip install .
+        cd ..
         source activate test-environment
         export PATH=$HOME/.local/bin:$PATH
     - name: Build and test
