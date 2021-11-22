@@ -4,7 +4,7 @@ Created on Fri Jun 10 21:00:21 2016
 
 @author: MaxBohnet
 """
-
+import sys
 import tempfile
 import numpy as np
 import pytest
@@ -322,6 +322,9 @@ jobs_j: shape target: \[3\], actual: \(2,\)
             assert np.dtype(dtype.dtype) == data_array.dtype,  'dtype not correct'
         print(example.ds)
 
+    @pytest.mark.xfail(
+        sys.version_info < (3, 6),
+        reason='Somehow in the test configuration the netcdf-backend is not found')
     def test_20_save_and_read_ds(self, example: Example, tempfile_h5: str):
         """Test that saving and re-reading the data works"""
         example.zonenumbers_i = np.array([100, 200, 300])
