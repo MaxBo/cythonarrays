@@ -50,7 +50,6 @@ jobs:
         #twine upload --skip-existing dist/*
         #cd ..
 
-
     - name: Build and test cythonarrays and matrixconverters
       run: |
         export TMPDIR=${{ runner.TEMP }}
@@ -58,18 +57,7 @@ jobs:
         conda install -c maxbo cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
         conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-    - name: Create Docs
-      if: ${{ matrix.python-version == '3.10' }}
-      run: |
-        source activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
-        conda install -y --use-local cythonarrays matrixconverters
-        pip install --user sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx
-        sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers
-        sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays
-        sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters
-        travis-sphinx build --source docs_rst --nowarn
-        travis-sphinx deploy
+
     - name: Upload files for cythonarrays and matrixconverters
       env:
         ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
@@ -94,3 +82,16 @@ jobs:
         #python setup.py sdist bdist_wheel
         #twine upload --skip-existing dist/*
         #cd ../cythonarrays
+
+    - name: Create Docs
+      if: ${{ matrix.python-version == '3.10' }}
+      run: |
+        source activate test-environment
+        export PATH=$HOME/.local/bin:$PATH
+        conda install -y cythonarrays matrixconverters
+        python -m pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints m2r2 travis-sphinx
+        sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers
+        sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays
+        sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters
+        travis-sphinx build --source docs_rst --nowarn
+        travis-sphinx deploy
