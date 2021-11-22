@@ -323,7 +323,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
         print(example.ds)
 
     @pytest.mark.xfail(
-        sys.version_info < (3, 6),
+        sys.version_info <= (3, 6),
         reason='Somehow in the test configuration the netcdf-backend is not found')
     def test_20_save_and_read_ds(self, example: Example, tempfile_h5: str):
         """Test that saving and re-reading the data works"""
