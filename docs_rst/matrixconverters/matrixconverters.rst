@@ -1,6 +1,14 @@
 matrixconverters package
 ========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   matrixconverters.tests
+
 Submodules
 ----------
 

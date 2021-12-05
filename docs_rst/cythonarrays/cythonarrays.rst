@@ -1,6 +1,14 @@
 cythonarrays package
 ====================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cythonarrays.tests
+
 Submodules
 ----------
 
@@ -9,6 +17,7 @@ Submodules
 
    cythonarrays.array_descriptors
    cythonarrays.array_properties
+   cythonarrays.array_shapes
    cythonarrays.array_shapes
    cythonarrays.numpy_types
 

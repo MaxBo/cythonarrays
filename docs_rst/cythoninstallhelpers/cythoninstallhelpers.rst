@@ -1,6 +1,14 @@
 cythoninstallhelpers package
 ============================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cythoninstallhelpers.tests
+
 Submodules
 ----------
 
