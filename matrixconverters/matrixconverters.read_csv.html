@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>matrixconverters.read_csv module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -46,31 +47,335 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-matrixconverters.read_csv">
+  <section id="module-matrixconverters.read_csv">
 <span id="matrixconverters-read-csv-module"></span><h1>matrixconverters.read_csv module<a class="headerlink" href="#module-matrixconverters.read_csv" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="matrixconverters.read_csv.ReadOFormat">
-<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.read_csv.</code><code class="sig-name descname">ReadOFormat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zonefile</span></em>, <em class="sig-param"><span class="n">matrixfile</span></em>, <em class="sig-param"><span class="n">cols_zones</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cols_matrix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.ImplementsDatasetReduce</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.DataWithCoords</span></code></p>
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">matrixconverters.read_csv.</span></span><span class="sig-name descname"><span class="pre">ReadOFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zonefile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrixfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_zones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.dataset.Dataset</span></code></p>
 <p>reads Matrix from a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zonefile</strong> (<em>str</em>) – </p></li>
+<li><p><strong>matrixfile</strong> (<em>str</em>) – </p></li>
+<li><p><strong>cols_zones</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>cols_matrix</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
-<dt id="matrixconverters.read_csv.ReadOFormat.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zonefile</span></em>, <em class="sig-param"><span class="n">matrixfile</span></em>, <em class="sig-param"><span class="n">cols_zones</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cols_matrix</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zonefile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrixfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_zones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zonefile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to the file with zone names</p></li>
 <li><p><strong>matrixfile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath to the file with the matrix values</p></li>
-<li><p><strong>cols_zones</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – the column with the zones</p></li>
-<li><p><strong>cols_matrix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – the columnsto use [column_with_zone_no, column_with_zone_name]</p></li>
+<li><p><strong>cols_zones</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – the column with the zones</p></li>
+<li><p><strong>cols_matrix</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – the columnsto use [column_with_zone_no, column_with_zone_name]</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_csv.ReadOFormat.read_file_to_da">
-<code class="sig-name descname">read_file_to_da</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_cols</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">target_cols</span></em>, <em class="sig-param"><span class="n">pkey</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_file_to_da" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.all">
+<span class="sig-name descname"><span class="pre">all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>all</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>all</cite>.  By default <cite>all</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>all</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>all</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.any">
+<span class="sig-name descname"><span class="pre">any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.any" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>any</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>any</cite>.  By default <cite>any</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>any</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>any</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>count</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>count</cite>.  By default <cite>count</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>count</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>count</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.cumprod">
+<span class="sig-name descname"><span class="pre">cumprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.cumprod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply <cite>cumprod</cite> along some dimension of ReadOFormat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumprod</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumprod</cite>. Only one of the ‘dim’
+and ‘axis’ arguments can be supplied.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumprod</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cumvalue</strong> – New ReadOFormat object with <cite>cumprod</cite> applied to its data along the
+indicated dimension.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.cumsum">
+<span class="sig-name descname"><span class="pre">cumsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.cumsum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply <cite>cumsum</cite> along some dimension of ReadOFormat.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumsum</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumsum</cite>. Only one of the ‘dim’
+and ‘axis’ arguments can be supplied.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumsum</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cumvalue</strong> – New ReadOFormat object with <cite>cumsum</cite> applied to its data along the
+indicated dimension.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>max</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>max</cite>.  By default <cite>max</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>max</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>max</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>mean</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>mean</cite>.  By default <cite>mean</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>mean</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>mean</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.median">
+<span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>median</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>median</cite>.  By default <cite>median</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>median</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>median</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>min</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>min</cite>.  By default <cite>min</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>min</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>min</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.prod">
+<span class="sig-name descname"><span class="pre">prod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.prod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>prod</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>prod</cite>.  By default <cite>prod</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>min_count</strong> (<em>int</em><em>, </em><em>default: None</em>) – The required number of valid values to perform the operation. If
+fewer than min_count non-NA values are present the result will be
+NA. Only used if skipna is set to True or defaults to True for the
+array’s dtype. New in version 0.10.8: Added with the default being
+None. Changed in version 0.17.0: if specified on an integer array
+and skipna=True, the result will be a float array.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>prod</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>prod</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.read_file_to_da">
+<span class="sig-name descname"><span class="pre">read_file_to_da</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pkey</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_file_to_da" title="Permalink to this definition">¶</a></dt>
 <dd><p>reads a file into a DataArray</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -91,8 +396,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_csv.ReadOFormat.read_matrix_csv">
-<code class="sig-name descname">read_matrix_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">cols_matrix</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_matrix_csv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.read_matrix_csv">
+<span class="sig-name descname"><span class="pre">read_matrix_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_matrix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_matrix_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a matrix from a csv-file and stores it in self[‘matrix’]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -105,8 +410,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_csv.ReadOFormat.read_zones_csv">
-<code class="sig-name descname">read_zones_csv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">cols_zones</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_zones_csv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.read_zones_csv">
+<span class="sig-name descname"><span class="pre">read_zones_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_zones</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.read_zones_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a matrix from a csv-file and stores it as coordinates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -119,9 +424,105 @@
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>std</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>std</cite>.  By default <cite>std</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>std</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>std</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>sum</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>sum</cite>.  By default <cite>sum</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>min_count</strong> (<em>int</em><em>, </em><em>default: None</em>) – The required number of valid values to perform the operation. If
+fewer than min_count non-NA values are present the result will be
+NA. Only used if skipna is set to True or defaults to True for the
+array’s dtype. New in version 0.10.8: Added with the default being
+None. Changed in version 0.17.0: if specified on an integer array
+and skipna=True, the result will be a float array.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>sum</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>sum</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_csv.ReadOFormat.var">
+<span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_csv.ReadOFormat.var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadOFormat’s data by applying <cite>var</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>var</cite>.  By default <cite>var</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>var</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadOFormat object with <cite>var</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_csv.ReadOFormat" title="matrixconverters.read_csv.ReadOFormat">ReadOFormat</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 
 
             <div class="clearer"></div>
@@ -147,7 +548,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -180,8 +581,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 30, 2020.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+      Last updated on Dec 05, 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

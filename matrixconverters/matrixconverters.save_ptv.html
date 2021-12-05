@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>matrixconverters.save_ptv module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -46,15 +47,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-matrixconverters.save_ptv">
+  <section id="module-matrixconverters.save_ptv">
 <span id="matrixconverters-save-ptv-module"></span><h1>matrixconverters.save_ptv module<a class="headerlink" href="#module-matrixconverters.save_ptv" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="matrixconverters.save_ptv.SavePTV">
-<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.save_ptv.</code><code class="sig-name descname">SavePTV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">matrixconverters.save_ptv.</span></span><span class="sig-name descname"><span class="pre">SavePTV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ds</strong> (<em>xarray.core.dataset.Dataset</em>) – </p>
+</dd>
+</dl>
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>ds</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – the dataset that should be saved</p>
@@ -63,8 +69,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.savePSVMatrix">
-<code class="sig-name descname">savePSVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">ftype</span><span class="o">=</span><span class="default_value">'CC'</span></em>, <em class="sig-param"><span class="n">max_width</span><span class="o">=</span><span class="default_value">1000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePSVMatrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.savePSVMatrix">
+<span class="sig-name descname"><span class="pre">savePSVMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ftype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CC'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePSVMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>exports array in PSV-Format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -78,8 +84,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.savePTVMatrix">
-<code class="sig-name descname">savePTVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file_name</span></em>, <em class="sig-param"><span class="n">file_type</span><span class="o">=</span><span class="default_value">'BK'</span></em>, <em class="sig-param"><span class="n">version</span><span class="o">=</span><span class="default_value">0.11</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePTVMatrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.savePTVMatrix">
+<span class="sig-name descname"><span class="pre">savePTVMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'BK'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.11</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.savePTVMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>save array im PTV-Format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -93,8 +99,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_f4">
-<em class="property">static </em><code class="sig-name descname">write_f4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f4" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_f4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_f4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f4" title="Permalink to this definition">¶</a></dt>
 <dd><p>write 4-byte float to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -107,8 +113,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_f8">
-<em class="property">static </em><code class="sig-name descname">write_f8</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f8" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_f8">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_f8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_f8" title="Permalink to this definition">¶</a></dt>
 <dd><p>write 8-byte double to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -121,8 +127,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_i2">
-<em class="property">static </em><code class="sig-name descname">write_i2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i2" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_i2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_i2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i2" title="Permalink to this definition">¶</a></dt>
 <dd><p>write 2-byte integer to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -135,8 +141,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_i4">
-<em class="property">static </em><code class="sig-name descname">write_i4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i4" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_i4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_i4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_i4" title="Permalink to this definition">¶</a></dt>
 <dd><p>write 4-byte integer to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -149,8 +155,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_u1">
-<em class="property">static </em><code class="sig-name descname">write_u1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_u1" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_u1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write_u1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_u1" title="Permalink to this definition">¶</a></dt>
 <dd><p>write 1-byte integer to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -163,8 +169,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.save_ptv.SavePTV.write_utf16">
-<code class="sig-name descname">write_utf16</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_utf16" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.SavePTV.write_utf16">
+<span class="sig-name descname"><span class="pre">write_utf16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.SavePTV.write_utf16" title="Permalink to this definition">¶</a></dt>
 <dd><p>write utf16 encoded value to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -179,8 +185,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="matrixconverters.save_ptv.write_line">
-<code class="sig-prename descclassname">matrixconverters.save_ptv.</code><code class="sig-name descname">write_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.write_line" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.save_ptv.write_line">
+<span class="sig-prename descclassname"><span class="pre">matrixconverters.save_ptv.</span></span><span class="sig-name descname"><span class="pre">write_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.save_ptv.write_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>write a line of <cite>text</cite> to the open file and adjust the text to the number
 of characters given</p>
 <dl class="field-list simple">
@@ -194,7 +200,7 @@ of characters given</p>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -220,7 +226,7 @@ of characters given</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -253,8 +259,8 @@ of characters given</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 30, 2020.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+      Last updated on Dec 05, 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>matrixconverters.read_ptv module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -46,18 +47,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-matrixconverters.read_ptv">
+  <section id="module-matrixconverters.read_ptv">
 <span id="matrixconverters-read-ptv-module"></span><h1>matrixconverters.read_ptv module<a class="headerlink" href="#module-matrixconverters.read_ptv" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix">
-<em class="property">class </em><code class="sig-prename descclassname">matrixconverters.read_ptv.</code><code class="sig-name descname">ReadPTVMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.ImplementsDatasetReduce</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.common.DataWithCoords</span></code></p>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">matrixconverters.read_ptv.</span></span><span class="sig-name descname"><span class="pre">ReadPTVMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.dataset.Dataset</span></code></p>
 <p>reads PTV-Matrix from file
 the matrix-type is determined by the header
 reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – </p>
+</dd>
+</dl>
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>read a PTV-Matrix and return it as an xarray-dataset</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -67,8 +73,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix._openfile">
-<code class="sig-name descname">_openfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'r'</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'latin1'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix._openfile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix._openfile">
+<span class="sig-name descname"><span class="pre">_openfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'latin1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix._openfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>open the file with the according open method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -91,14 +97,92 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_matrix">
-<code class="sig-name descname">create_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">n_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">'f8'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_matrix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.all">
+<span class="sig-name descname"><span class="pre">all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>all</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>all</cite>.  By default <cite>all</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>all</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>all</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.any">
+<span class="sig-name descname"><span class="pre">any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.any" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>any</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>any</cite>.  By default <cite>any</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>any</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>any</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>count</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>count</cite>.  By default <cite>count</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>count</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>count</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.create_matrix">
+<span class="sig-name descname"><span class="pre">create_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'f8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the Matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of zones</p></li>
-<li><p><strong>n_cols</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the number of columns (take the number of zones, if not specified)</p></li>
+<li><p><strong>n_cols</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – the number of columns (take the number of zones, if not specified)</p></li>
 <li><p><strong>dtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the datatype of the matrx</p></li>
 </ul>
 </dd>
@@ -106,8 +190,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names">
-<code class="sig-name descname">create_zone_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'zone_name'</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">'zone_no'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names">
+<span class="sig-name descname"><span class="pre">create_zone_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_no'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the zone names</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -121,8 +205,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.create_zones">
-<code class="sig-name descname">create_zones</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_zones</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'zone_no'</span></em>, <em class="sig-param"><span class="n">dim</span><span class="o">=</span><span class="default_value">'zones'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zones" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.create_zones">
+<span class="sig-name descname"><span class="pre">create_zones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_no'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zones'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zones" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the zones DataArray as coordinates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -136,9 +220,69 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.float_nan">
-<em class="property">static </em><code class="sig-name descname">float_nan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.float_nan" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert str to float, handling ‘-‘ as 0.0</p>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.cumprod">
+<span class="sig-name descname"><span class="pre">cumprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumprod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply <cite>cumprod</cite> along some dimension of ReadPTVMatrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumprod</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumprod</cite>. Only one of the ‘dim’
+and ‘axis’ arguments can be supplied.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumprod</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cumvalue</strong> – New ReadPTVMatrix object with <cite>cumprod</cite> applied to its data along the
+indicated dimension.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.cumsum">
+<span class="sig-name descname"><span class="pre">cumsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumsum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply <cite>cumsum</cite> along some dimension of ReadPTVMatrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumsum</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumsum</cite>. Only one of the ‘dim’
+and ‘axis’ arguments can be supplied.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumsum</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cumvalue</strong> – New ReadPTVMatrix object with <cite>cumsum</cite> applied to its data along the
+indicated dimension.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.float_nan">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">float_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.float_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert str to float, handling ‘-’ as 0.0</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the value to convert</p>
@@ -153,32 +297,188 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB">
-<code class="sig-name descname">readPTVMatrixB</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>max</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>max</cite>.  By default <cite>max</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>max</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>max</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>mean</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>mean</cite>.  By default <cite>mean</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>mean</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>mean</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.median">
+<span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>median</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>median</cite>.  By default <cite>median</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>median</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>median</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>min</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>min</cite>.  By default <cite>min</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>min</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>min</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.prod">
+<span class="sig-name descname"><span class="pre">prod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.prod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>prod</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>prod</cite>.  By default <cite>prod</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>min_count</strong> (<em>int</em><em>, </em><em>default: None</em>) – The required number of valid values to perform the operation. If
+fewer than min_count non-NA values are present the result will be
+NA. Only used if skipna is set to True or defaults to True for the
+array’s dtype. New in version 0.10.8: Added with the default being
+None. Changed in version 0.17.0: if specified on an integer array
+and skipna=True, the result will be a float array.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>prod</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>prod</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB">
+<span class="sig-name descname"><span class="pre">readPTVMatrixB</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a binary PTV Matrix</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE">
-<code class="sig-name descname">readPTVMatrixE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE">
+<span class="sig-name descname"><span class="pre">readPTVMatrixE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE" title="Permalink to this definition">¶</a></dt>
 <dd><p>read a file in E-Format</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO">
-<code class="sig-name descname">readPTVMatrixO</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO">
+<span class="sig-name descname"><span class="pre">readPTVMatrixO</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO" title="Permalink to this definition">¶</a></dt>
 <dd><p>read a file in O-Format</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV">
-<code class="sig-name descname">readPTVMatrixV</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV">
+<span class="sig-name descname"><span class="pre">readPTVMatrixV</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV" title="Permalink to this definition">¶</a></dt>
 <dd><p>read a file in V-Format</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_f4">
-<em class="property">static </em><code class="sig-name descname">read_f4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f4" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_f4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_f4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f4" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 32-bit float from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -194,8 +494,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_f8">
-<em class="property">static </em><code class="sig-name descname">read_f8</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f8" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_f8">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_f8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f8" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 64-bit double from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -211,8 +511,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_header">
-<code class="sig-name descname">read_header</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_header" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_header">
+<span class="sig-name descname"><span class="pre">read_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>read the header</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,8 +528,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_i2">
-<em class="property">static </em><code class="sig-name descname">read_i2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i2" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_i2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_i2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i2" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 16-bit double from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -245,8 +545,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_i4">
-<em class="property">static </em><code class="sig-name descname">read_i4</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i4" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_i4">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_i4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i4" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 32-bit int from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -262,8 +562,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_names">
-<code class="sig-name descname">read_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">arr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_names">
+<span class="sig-name descname"><span class="pre">read_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the zone names into the given array</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -276,8 +576,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format">
-<code class="sig-name descname">read_names_o_format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">line</span></em>, <em class="sig-param"><span class="n">rows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format">
+<span class="sig-name descname"><span class="pre">read_names_o_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the zone names in an O-Format Matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,8 +591,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_u1">
-<em class="property">static </em><code class="sig-name descname">read_u1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_u1" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_u1">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_u1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_u1" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 8-bit char from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -308,8 +608,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_utf16">
-<code class="sig-name descname">read_utf16</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_utf16" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_utf16">
+<span class="sig-name descname"><span class="pre">read_utf16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_utf16" title="Permalink to this definition">¶</a></dt>
 <dd><p>read utf16( encoded string from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -325,8 +625,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_value">
-<code class="sig-name descname">read_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_value" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_value">
+<span class="sig-name descname"><span class="pre">read_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>read integer value from file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,8 +642,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values">
-<code class="sig-name descname">read_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_values">
+<span class="sig-name descname"><span class="pre">read_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>read <cite>n</cite> values from open file at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -362,8 +662,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list">
-<code class="sig-name descname">read_values_in_o_format_to_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list">
+<span class="sig-name descname"><span class="pre">read_values_in_o_format_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>read values from open file in O-Format at current position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -379,8 +679,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array">
-<code class="sig-name descname">read_values_to_array</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">sep</span><span class="o">=</span><span class="default_value">' '</span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array">
+<span class="sig-name descname"><span class="pre">read_values_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>read values from file at current position into <cite>array</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -393,9 +693,105 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>std</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>std</cite>.  By default <cite>std</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>std</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>std</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.sum">
+<span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>sum</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>sum</cite>.  By default <cite>sum</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>min_count</strong> (<em>int</em><em>, </em><em>default: None</em>) – The required number of valid values to perform the operation. If
+fewer than min_count non-NA values are present the result will be
+NA. Only used if skipna is set to True or defaults to True for the
+array’s dtype. New in version 0.10.8: Added with the default being
+None. Changed in version 0.17.0: if specified on an integer array
+and skipna=True, the result will be a float array.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>sum</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>sum</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.var">
+<span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>var</cite> along some dimension(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>var</cite>.  By default <cite>var</cite> is
+applied over all dimensions.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
+skips missing values for float dtypes; other dtypes either do not
+have a sentinel missing value (int) or skipna=True has not been
+implemented (object, datetime64 or timedelta64).</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
+object to the new one.  If False (default), the new object will be
+returned without attributes.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to the appropriate array
+function for calculating <cite>var</cite> on this object’s data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>var</cite> applied to its data and the
+indicated dimension(s) removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 
 
             <div class="clearer"></div>
@@ -421,7 +817,7 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -454,8 +850,8 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 30, 2020.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+      Last updated on Dec 05, 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>

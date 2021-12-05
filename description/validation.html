@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Validation of Data in cythonarrays &#8212; Cythonarrays</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -44,7 +45,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="validation-of-data-in-cythonarrays">
+  <section id="validation-of-data-in-cythonarrays">
 <h1>Validation of Data in cythonarrays<a class="headerlink" href="#validation-of-data-in-cythonarrays" title="Permalink to this headline">¶</a></h1>
 <p>The pxd-file example_cython.pxd imports shortcuts for memoryviews and the base class ArrayShapes:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
@@ -362,10 +363,10 @@ in a block introduced by <cite>with gil:</cite>.</p>
     <span class="n">pytest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="how-to-work-with-cythonarrays-cdef-classes">
+</section>
+<section id="how-to-work-with-cythonarrays-cdef-classes">
 <h1>How to work with Cythonarrays CDef-Classes<a class="headerlink" href="#how-to-work-with-cythonarrays-cdef-classes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="link-numpy-and-openmp-sources">
+<section id="link-numpy-and-openmp-sources">
 <h2>link numpy and openmp sources<a class="headerlink" href="#link-numpy-and-openmp-sources" title="Permalink to this headline">¶</a></h2>
 <p>In order to use Cython with numpy,
 the numpy sources have to be linked to the Cython code.</p>
@@ -383,8 +384,8 @@ the numpy sources have to be linked to the Cython code.</p>
 </pre></div>
 </div>
 <p>This tells the compiler to use the platform specific openmp-libraries and to include the numpy dirs.</p>
-</div>
-<div class="section" id="cython-cdef-classes">
+</section>
+<section id="cython-cdef-classes">
 <h2>Cython cdef classes<a class="headerlink" href="#cython-cdef-classes" title="Permalink to this headline">¶</a></h2>
 <p>Cython cdef classes are extension types for cython.</p>
 <p>All methods and class attributes, that should be used with C-Speed have to by defined.
@@ -409,8 +410,8 @@ This can be done in the declaration .pxd file:</p>
 if no python attributes or methods are used within the function and only other <strong>nogil</strong> functions are called.</p>
 <p>A cpdef method cannot be <strong>nogil</strong> at the same time.</p>
 <p>A <strong>nogil</strong> function cannot return nothing, so specify at least a return type like char.</p>
-</div>
-<div class="section" id="memoryviews-and-numpy-arrays">
+</section>
+<section id="memoryviews-and-numpy-arrays">
 <h2>memoryviews and numpy arrays<a class="headerlink" href="#memoryviews-and-numpy-arrays" title="Permalink to this headline">¶</a></h2>
 <p>A comfortable way to work with numpy arrays in cdef classes is the following:</p>
 <ul class="simple">
@@ -516,9 +517,9 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <p>but don’t do that in a subfunction, that is called many times, because assigning memory to the variable <em>vec</em> a costly operation.</p>
-</div>
-</div>
-<div class="section" id="link-cythonarrays-class-to-xarray-dataset">
+</section>
+</section>
+<section id="link-cythonarrays-class-to-xarray-dataset">
 <h1>Link Cythonarrays-Class to xarray-Dataset<a class="headerlink" href="#link-cythonarrays-class-to-xarray-dataset" title="Permalink to this headline">¶</a></h1>
 <p>You can create an <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray-Dataset</a>
 which infers the dimensions, coordinates, and data variables from the cdef-class.</p>
@@ -543,7 +544,7 @@ which infers the dimensions, coordinates, and data variables from the cdef-class
 <span class="go">    km_ij               (origins, destinations) float64 1.0 4.0 5.0 2.0 1.0 ...</span>
 </pre></div>
 </div>
-<div class="section" id="xarray-dataset-is-linked-to-cython-class">
+<section id="xarray-dataset-is-linked-to-cython-class">
 <h2>xarray-Dataset is linked to cython class<a class="headerlink" href="#xarray-dataset-is-linked-to-cython-class" title="Permalink to this headline">¶</a></h2>
 <p>The Data variables of the xarray-Dataset share the same memory with the attributes of the cdef-Cython-Class.
 So when a cdef function modifies a value  in example._trips_ij</p>
@@ -555,8 +556,8 @@ So when a cdef function modifies a value  in example._trips_ij</p>
 <span class="go">99.0</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -597,7 +598,7 @@ So when a cdef function modifies a value  in example._trips_ij</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -628,8 +629,8 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 30, 2020.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+      Last updated on Dec 05, 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
     </div>
   </body>
 </html>
