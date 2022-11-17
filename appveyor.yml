@@ -27,12 +27,20 @@ environment:
   matrix:
 
     - TARGET_ARCH: x64
+      CONDA_NPY: 123
+      CONDA_PY: 311
+      PYTHON_VERSION: 3.11
+      MINICONDA: C:\Miniconda37-x64
+      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
+      UPLOAD_COV: true
+
+    - TARGET_ARCH: x64
       CONDA_NPY: 121
       CONDA_PY: 310
       PYTHON_VERSION: 3.10
       MINICONDA: C:\Miniconda37-x64
       CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
-      UPLOAD_COV: true
+      UPLOAD_COV: false
 
     - TARGET_ARCH: x64
       CONDA_NPY: 119
