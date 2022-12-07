@@ -19,6 +19,7 @@ requirements:
     - numpy>=1.12
     - xarray
     - netcdf4
+    - importlib_metadata>=4.13
 
   run:
     - python
@@ -27,6 +28,7 @@ requirements:
     - xarray
     - netcdf4
     - pytest-cov
+    - importlib_metadata>=4.13
 
 test:
   requires:

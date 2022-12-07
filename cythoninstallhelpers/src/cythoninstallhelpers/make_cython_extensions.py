@@ -4,7 +4,7 @@ import os
 import sys
 from typing import List, Dict
 import numpy as np
-from distutils.extension import Extension
+from setuptools import Extension
 from Cython.Build import cythonize
 
 from .build_config import (extra_compile_args,

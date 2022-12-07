@@ -1,7 +1,7 @@
 import sys
 from typing import List
 import numpy as np
-from distutils.extension import Extension
+from setuptools import Extension
 
 
 if sys.platform == 'win32':
