@@ -66,13 +66,14 @@ environment:
       CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
       UPLOAD_COV: false
 
-    - TARGET_ARCH: x64
-      CONDA_NPY: 116
-      CONDA_PY: 36
-      PYTHON_VERSION: 3.6
-      MINICONDA: C:\Miniconda37-x64
-      CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
-      UPLOAD_COV: false
+    # Depreciate python 3.6 because of incompatible bleech version
+    #- TARGET_ARCH: x64
+    #  CONDA_NPY: 116
+    #  CONDA_PY: 36
+    #  PYTHON_VERSION: 3.6
+    #  MINICONDA: C:\Miniconda37-x64
+    #  CONDA_INSTALL_LOCN: C:\\Miniconda37-x64
+    #  UPLOAD_COV: false
 
     # Depreciate python 3.5 because of incompatible netcdf4 version
     #- TARGET_ARCH: x64
