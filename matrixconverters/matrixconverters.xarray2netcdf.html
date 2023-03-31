@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>matrixconverters.xarray2netcdf module &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -44,13 +46,13 @@
           <div class="body" role="main">
             
   <section id="module-matrixconverters.xarray2netcdf">
-<span id="matrixconverters-xarray2netcdf-module"></span><h1>matrixconverters.xarray2netcdf module<a class="headerlink" href="#module-matrixconverters.xarray2netcdf" title="Permalink to this headline">¶</a></h1>
+<span id="matrixconverters-xarray2netcdf-module"></span><h1>matrixconverters.xarray2netcdf module<a class="headerlink" href="#module-matrixconverters.xarray2netcdf" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="matrixconverters.xarray2netcdf.xr2netcdf">
 <span class="sig-prename descclassname"><span class="pre">matrixconverters.xarray2netcdf.</span></span><span class="sig-name descname"><span class="pre">xr2netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'netcdf4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compressed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.xarray2netcdf.xr2netcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>save dataset as netcdf-file to filepath using the given compression level</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dataset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – the xarray-dataset to store</p></li>
 <li><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the path where the netcdf-file shold be stored</p></li>
@@ -74,9 +76,21 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="matrixconverters.save_ptv.html"
-                        title="previous chapter">matrixconverters.save_ptv module</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">matrixconverters.xarray2netcdf module</a><ul>
+<li><a class="reference internal" href="#matrixconverters.xarray2netcdf.xr2netcdf"><code class="docutils literal notranslate"><span class="pre">xr2netcdf()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="matrixconverters.save_ptv.html"
+                          title="previous chapter">matrixconverters.save_ptv module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -93,7 +107,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -118,8 +132,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

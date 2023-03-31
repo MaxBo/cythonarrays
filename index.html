@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Welcome to the Cythonarrays documentation! &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -42,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="welcome-to-the-cythonarrays-documentation">
-<h1>Welcome to the Cythonarrays documentation!<a class="headerlink" href="#welcome-to-the-cythonarrays-documentation" title="Permalink to this headline">¶</a></h1>
+<h1>Welcome to the Cythonarrays documentation!<a class="headerlink" href="#welcome-to-the-cythonarrays-documentation" title="Permalink to this heading">¶</a></h1>
 <p>Cythonarray has been developed to facilitate the use of Cython Cdef-classes with numpy-arrays</p>
 <a class="reference external image-reference" href="http://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
 <a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml"><img alt="Build Status" src="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg" /></a>
@@ -50,18 +52,18 @@
 <a class="reference external image-reference" href="https://codecov.io/gh/MaxBo/cythonarrays"><img alt="codecov" src="https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg" /></a>
 </section>
 <section id="cythonarrays">
-<h1>cythonarrays<a class="headerlink" href="#cythonarrays" title="Permalink to this headline">¶</a></h1>
+<h1>cythonarrays<a class="headerlink" href="#cythonarrays" title="Permalink to this heading">¶</a></h1>
 <p>Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.</p>
 <p>It consists of three packages:</p>
 <section id="cythoninstallhelpers">
-<h2>cythoninstallhelpers:<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this headline">¶</a></h2>
+<h2>cythoninstallhelpers:<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this heading">¶</a></h2>
 <a class="reference external image-reference" href="https://badge.fury.io/py/cythoninstallhelpers"><img alt="PyPI version" src="https://badge.fury.io/py/cythoninstallhelpers.svg" /></a>
 <a class="reference external image-reference" href="https://anaconda.org/maxbo/cythoninstallhelpers"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/cythoninstallhelpers/badges/version.svg" /></a>
 <p>a package that provides functions that are used in the setup.py of cythonarrays
 therefore, it has to be installed first</p>
 </section>
 <section id="id1">
-<h2>cythonarrays:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>cythonarrays:<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <a class="reference external image-reference" href="https://badge.fury.io/py/cythonarrays"><img alt="PyPI version" src="https://badge.fury.io/py/cythonarrays.svg" /></a>
 <a class="reference external image-reference" href="https://anaconda.org/maxbo/cythonarrays"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/cythonarrays/badges/version.svg" /></a>
 <p>provides a Base-Class for cython CDef-Classes, that allow to define arrays
@@ -72,7 +74,7 @@ If you try to set data with wrong dimensions or shapes, an error is thrown.
 Data is automatically converted to the right dtype.</p>
 </section>
 <section id="matrixconverters">
-<h2>matrixconverters:<a class="headerlink" href="#matrixconverters" title="Permalink to this headline">¶</a></h2>
+<h2>matrixconverters:<a class="headerlink" href="#matrixconverters" title="Permalink to this heading">¶</a></h2>
 <a class="reference external image-reference" href="https://badge.fury.io/py/matrixconverters"><img alt="PyPI version" src="https://badge.fury.io/py/matrixconverters.svg" /></a>
 <a class="reference external image-reference" href="https://anaconda.org/maxbo/matrixconverters"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/matrixconverters/badges/version.svg" /></a>
 <p>tools to read and write matrices in the format or PTV VISUM</p>
@@ -121,7 +123,7 @@ Data is automatically converted to the right dtype.</p>
 </section>
 </section>
 <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h1>
 <p>You can use pip to install the packages (and the requirements like numpy).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cythoninstallhelpers</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">cythonarrays</span>
@@ -143,7 +145,7 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
 </div>
 </section>
 <section id="this-documentation-contains">
-<h1>This documentation contains<a class="headerlink" href="#this-documentation-contains" title="Permalink to this headline">¶</a></h1>
+<h1>This documentation contains<a class="headerlink" href="#this-documentation-contains" title="Permalink to this heading">¶</a></h1>
 <p>Contents:</p>
 <p>Description</p>
 <div class="toctree-wrapper compound">
@@ -211,7 +213,7 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
 </div>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -226,8 +228,9 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Welcome to the Cythonarrays documentation!</a></li>
 <li><a class="reference internal" href="#cythonarrays">cythonarrays</a><ul>
 <li><a class="reference internal" href="#cythoninstallhelpers">cythoninstallhelpers:</a></li>
@@ -242,9 +245,12 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
-  <h4>Next topic</h4>
-  <p class="topless"><a href="description/cython_models.html"
-                        title="next chapter">Purpose of Cythonarrays</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="description/cython_models.html"
+                          title="next chapter">Purpose of Cythonarrays</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -261,7 +267,7 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -284,8 +290,8 @@ in the channel <em>MaxBo</em> in <a class="reference external" href="https://ana
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

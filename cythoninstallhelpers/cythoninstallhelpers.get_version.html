@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>cythoninstallhelpers.get_version module &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,13 +50,13 @@
           <div class="body" role="main">
             
   <section id="module-cythoninstallhelpers.get_version">
-<span id="cythoninstallhelpers-get-version-module"></span><h1>cythoninstallhelpers.get_version module<a class="headerlink" href="#module-cythoninstallhelpers.get_version" title="Permalink to this headline">¶</a></h1>
+<span id="cythoninstallhelpers-get-version-module"></span><h1>cythoninstallhelpers.get_version module<a class="headerlink" href="#module-cythoninstallhelpers.get_version" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="cythoninstallhelpers.get_version.get_version">
 <span class="sig-prename descclassname"><span class="pre">cythoninstallhelpers.get_version.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setupfilepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'src'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">versionfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_version.py'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.get_version.get_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the version number from a version file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>package_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the package the version is searched for</p></li>
 <li><p><strong>setupfilepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filepath, where the setupfile can be found</p></li>
@@ -62,7 +64,7 @@
 <li><p><strong>versionfile</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the filename of the python module with the version number</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
@@ -77,12 +79,26 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="cythoninstallhelpers.configure_logger.html"
-                        title="previous chapter">cythoninstallhelpers.configure_logger module</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="cythoninstallhelpers.make_cython_extensions.html"
-                        title="next chapter">cythoninstallhelpers.make_cython_extensions module</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cythoninstallhelpers.get_version module</a><ul>
+<li><a class="reference internal" href="#cythoninstallhelpers.get_version.get_version"><code class="docutils literal notranslate"><span class="pre">get_version()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cythoninstallhelpers.configure_logger.html"
+                          title="previous chapter">cythoninstallhelpers.configure_logger module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cythoninstallhelpers.make_cython_extensions.html"
+                          title="next chapter">cythoninstallhelpers.make_cython_extensions module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -99,7 +115,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -127,8 +143,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

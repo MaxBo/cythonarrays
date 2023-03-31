@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>cythoninstallhelpers &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,7 +48,7 @@
           <div class="body" role="main">
             
   <section id="cythoninstallhelpers">
-<h1>cythoninstallhelpers<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this headline">¶</a></h1>
+<h1>cythoninstallhelpers<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cythoninstallhelpers.html">cythoninstallhelpers package</a><ul>
@@ -60,10 +62,24 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cythoninstallhelpers.html#submodules">Submodules</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.build_config.html">cythoninstallhelpers.build_config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.configure_logger.html">cythoninstallhelpers.configure_logger module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.get_version.html">cythoninstallhelpers.get_version module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.make_cython_extensions.html">cythoninstallhelpers.make_cython_extensions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.build_config.html">cythoninstallhelpers.build_config module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.build_config.html#cythoninstallhelpers.build_config.make_ext"><code class="docutils literal notranslate"><span class="pre">make_ext()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.configure_logger.html">cythoninstallhelpers.configure_logger module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.configure_logger.html#cythoninstallhelpers.configure_logger.SimLogger"><code class="docutils literal notranslate"><span class="pre">SimLogger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.configure_logger.html#cythoninstallhelpers.configure_logger.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.configure_logger.html#cythoninstallhelpers.configure_logger.get_module_logger"><code class="docutils literal notranslate"><span class="pre">get_module_logger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.get_version.html">cythoninstallhelpers.get_version module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.get_version.html#cythoninstallhelpers.get_version.get_version"><code class="docutils literal notranslate"><span class="pre">get_version()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers.make_cython_extensions.html">cythoninstallhelpers.make_cython_extensions module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cythoninstallhelpers.make_cython_extensions.html#cythoninstallhelpers.make_cython_extensions.make_extensions"><code class="docutils literal notranslate"><span class="pre">make_extensions()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cythoninstallhelpers.html#module-cythoninstallhelpers">Module contents</a></li>
@@ -80,12 +96,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../description/validation.html"
-                        title="previous chapter">Validation of Data in cythonarrays</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="cythoninstallhelpers.html"
-                        title="next chapter">cythoninstallhelpers package</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../description/validation.html"
+                          title="previous chapter">Validation of Data in cythonarrays</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cythoninstallhelpers.html"
+                          title="next chapter">cythoninstallhelpers package</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -102,7 +122,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -128,8 +148,8 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

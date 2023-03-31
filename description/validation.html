@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Validation of Data in cythonarrays &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,7 +48,7 @@
           <div class="body" role="main">
             
   <section id="validation-of-data-in-cythonarrays">
-<h1>Validation of Data in cythonarrays<a class="headerlink" href="#validation-of-data-in-cythonarrays" title="Permalink to this headline">¶</a></h1>
+<h1>Validation of Data in cythonarrays<a class="headerlink" href="#validation-of-data-in-cythonarrays" title="Permalink to this heading">¶</a></h1>
 <p>The pxd-file example_cython.pxd imports shortcuts for memoryviews and the base class ArrayShapes:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">cythonarrays.array_shapes</span> <span class="n">cimport</span> <span class="n">ArrayShapes</span>
@@ -63,7 +65,7 @@
 <p>The cdef class defines two methods <em>_calc_weight_destination</em> and <em>_calc_weight_destination</em> which can be called only from cython.</p>
 <p><cite>nogil</cite> means that these methods can be called in parallel threads where the global intepreter lock (gil) has been released:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cython CDefClass for Example model</span>
 <span class="sd">    with coordinates groups, origins, and destinations</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -107,7 +109,7 @@ and expose all of them, which start with a leading underscore, as numpy arrays:<
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
     <span class="nd">@cython</span><span class="o">.</span><span class="n">initializedcheck</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">cpdef</span> <span class="n">char</span> <span class="n">calc_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">except</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calc the daily trips for all groups and zones</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cdef</span> <span class="n">char</span> <span class="n">t</span>
@@ -156,9 +158,9 @@ in a block introduced by <cite>with gil:</cite>.</p>
 </div>
 <p>The following test shows how the code works</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Test01_ExampleCDefClass</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Test the Example CDefClass&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">test_01_test_init_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test the Example CDefClass creation&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass creation&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
 
@@ -185,7 +187,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">jobs_j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">test_02_test_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Test if the shapes of array are controlled correctly</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
@@ -216,7 +218,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">example</span><span class="o">.</span><span class="n">jobs_j</span> <span class="o">=</span> <span class="n">arr</span>
 
     <span class="k">def</span> <span class="nf">test_03_test_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
 
@@ -282,7 +284,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">88</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">test_04_test_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
 
@@ -320,7 +322,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="k">assert</span> <span class="n">example</span><span class="o">.</span><span class="n">not_initialized_ij</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">test_10_test_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test the Example CDefClass model&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass model&quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">calc_model</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">trips_ij</span><span class="p">)</span>
         <span class="n">total_trips_target</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">persons_gi</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -328,14 +330,14 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">total_trips_target</span><span class="p">,</span> <span class="n">total_trips_actual</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">test_11_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test the creation of an xarrays Dataset linked to the Cythonclass&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the creation of an xarrays Dataset linked to the Cythonclass&quot;&quot;&quot;</span>
         <span class="n">example</span><span class="o">.</span><span class="n">zonenumbers_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
         <span class="n">example</span><span class="o">.</span><span class="n">groupnames_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
         <span class="n">example</span><span class="o">.</span><span class="n">create_ds</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">ds</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">test_20_save_and_read_ds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="n">tempfile_h5</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test that saving and re-reading the data works&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that saving and re-reading the data works&quot;&quot;&quot;</span>
         <span class="n">example</span><span class="o">.</span><span class="n">zonenumbers_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
         <span class="n">example</span><span class="o">.</span><span class="n">groupnames_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
         <span class="n">example</span><span class="o">.</span><span class="n">create_ds</span><span class="p">()</span>
@@ -365,9 +367,9 @@ in a block introduced by <cite>with gil:</cite>.</p>
 </div>
 </section>
 <section id="how-to-work-with-cythonarrays-cdef-classes">
-<h1>How to work with Cythonarrays CDef-Classes<a class="headerlink" href="#how-to-work-with-cythonarrays-cdef-classes" title="Permalink to this headline">¶</a></h1>
+<h1>How to work with Cythonarrays CDef-Classes<a class="headerlink" href="#how-to-work-with-cythonarrays-cdef-classes" title="Permalink to this heading">¶</a></h1>
 <section id="link-numpy-and-openmp-sources">
-<h2>link numpy and openmp sources<a class="headerlink" href="#link-numpy-and-openmp-sources" title="Permalink to this headline">¶</a></h2>
+<h2>link numpy and openmp sources<a class="headerlink" href="#link-numpy-and-openmp-sources" title="Permalink to this heading">¶</a></h2>
 <p>In order to use Cython with numpy,
 the numpy sources have to be linked to the Cython code.</p>
 <p>One way is to use for each Cython module 4 files:</p>
@@ -386,12 +388,12 @@ the numpy sources have to be linked to the Cython code.</p>
 <p>This tells the compiler to use the platform specific openmp-libraries and to include the numpy dirs.</p>
 </section>
 <section id="cython-cdef-classes">
-<h2>Cython cdef classes<a class="headerlink" href="#cython-cdef-classes" title="Permalink to this headline">¶</a></h2>
+<h2>Cython cdef classes<a class="headerlink" href="#cython-cdef-classes" title="Permalink to this heading">¶</a></h2>
 <p>Cython cdef classes are extension types for cython.</p>
 <p>All methods and class attributes, that should be used with C-Speed have to by defined.
 This can be done in the declaration .pxd file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">MyCythonClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Cython class&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Cython class&quot;&quot;&quot;</span>
     <span class="n">cdef</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="nb">float</span> <span class="n">U</span>
     <span class="n">cdef</span> <span class="n">readonly</span> <span class="n">double</span> <span class="n">result</span>
@@ -412,7 +414,7 @@ if no python attributes or methods are used within the function and only other <
 <p>A <strong>nogil</strong> function cannot return nothing, so specify at least a return type like char.</p>
 </section>
 <section id="memoryviews-and-numpy-arrays">
-<h2>memoryviews and numpy arrays<a class="headerlink" href="#memoryviews-and-numpy-arrays" title="Permalink to this headline">¶</a></h2>
+<h2>memoryviews and numpy arrays<a class="headerlink" href="#memoryviews-and-numpy-arrays" title="Permalink to this heading">¶</a></h2>
 <p>A comfortable way to work with numpy arrays in cdef classes is the following:</p>
 <ul class="simple">
 <li><p>the cdef class holds an memoryview on the data as an attribute
@@ -520,7 +522,7 @@ The Data is accessible form Python via:</p>
 </section>
 </section>
 <section id="link-cythonarrays-class-to-xarray-dataset">
-<h1>Link Cythonarrays-Class to xarray-Dataset<a class="headerlink" href="#link-cythonarrays-class-to-xarray-dataset" title="Permalink to this headline">¶</a></h1>
+<h1>Link Cythonarrays-Class to xarray-Dataset<a class="headerlink" href="#link-cythonarrays-class-to-xarray-dataset" title="Permalink to this heading">¶</a></h1>
 <p>You can create an <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray-Dataset</a>
 which infers the dimensions, coordinates, and data variables from the cdef-class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
@@ -545,7 +547,7 @@ which infers the dimensions, coordinates, and data variables from the cdef-class
 </pre></div>
 </div>
 <section id="xarray-dataset-is-linked-to-cython-class">
-<h2>xarray-Dataset is linked to cython class<a class="headerlink" href="#xarray-dataset-is-linked-to-cython-class" title="Permalink to this headline">¶</a></h2>
+<h2>xarray-Dataset is linked to cython class<a class="headerlink" href="#xarray-dataset-is-linked-to-cython-class" title="Permalink to this heading">¶</a></h2>
 <p>The Data variables of the xarray-Dataset share the same memory with the attributes of the cdef-Cython-Class.
 So when a cdef function modifies a value  in example._trips_ij</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">_trips_ij</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
@@ -566,8 +568,9 @@ So when a cdef function modifies a value  in example._trips_ij</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Validation of Data in cythonarrays</a></li>
 <li><a class="reference internal" href="#how-to-work-with-cythonarrays-cdef-classes">How to work with Cythonarrays CDef-Classes</a><ul>
 <li><a class="reference internal" href="#link-numpy-and-openmp-sources">link numpy and openmp sources</a></li>
@@ -581,12 +584,17 @@ So when a cdef function modifies a value  in example._trips_ij</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="cython_models.html"
-                        title="previous chapter">Purpose of Cythonarrays</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../cythoninstallhelpers/modules.html"
-                        title="next chapter">cythoninstallhelpers</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cython_models.html"
+                          title="previous chapter">Purpose of Cythonarrays</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../cythoninstallhelpers/modules.html"
+                          title="next chapter">cythoninstallhelpers</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -603,7 +611,7 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -629,8 +637,8 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>

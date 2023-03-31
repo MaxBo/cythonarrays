@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>matrixconverters.read_ptv module &#8212; Cythonarrays</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
@@ -13,7 +13,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,25 +50,20 @@
           <div class="body" role="main">
             
   <section id="module-matrixconverters.read_ptv">
-<span id="matrixconverters-read-ptv-module"></span><h1>matrixconverters.read_ptv module<a class="headerlink" href="#module-matrixconverters.read_ptv" title="Permalink to this headline">¶</a></h1>
+<span id="matrixconverters-read-ptv-module"></span><h1>matrixconverters.read_ptv module<a class="headerlink" href="#module-matrixconverters.read_ptv" title="Permalink to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">matrixconverters.read_ptv.</span></span><span class="sig-name descname"><span class="pre">ReadPTVMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.core.dataset.Dataset</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
 <p>reads PTV-Matrix from file
 the matrix-type is determined by the header
 reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – </p>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="matrixconverters.read_ptv.ReadPTVMatrix.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>read a PTV-Matrix and return it as an xarray-dataset</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – path to file on disk</p>
 </dd>
 </dl>
@@ -77,16 +74,16 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 <span class="sig-name descname"><span class="pre">_openfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'latin1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix._openfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>open the file with the according open method</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – read, write or append</p></li>
 <li><p><strong>encoding</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the encoding (default: Latin-1)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">IO</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p>open file-handler</p></li>
 <li><p><em>meta public:</em></p></li>
@@ -101,9 +98,9 @@ reades $V, $O, $E, and the binary types $BI, $BK and $B</p>
 <span class="sig-name descname"><span class="pre">all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>all</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>all</cite>.  By default <cite>all</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>all</cite>.  By default <cite>all</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
 object to the new one.  If False (default), the new object will be
@@ -112,11 +109,11 @@ returned without attributes.</p></li>
 function for calculating <cite>all</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>all</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -127,9 +124,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.any" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>any</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>any</cite>.  By default <cite>any</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>any</cite>.  By default <cite>any</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
 object to the new one.  If False (default), the new object will be
@@ -138,11 +135,11 @@ returned without attributes.</p></li>
 function for calculating <cite>any</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>any</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -153,9 +150,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>count</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>count</cite>.  By default <cite>count</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>count</cite>.  By default <cite>count</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the attributes (<cite>attrs</cite>) will be copied from the original
 object to the new one.  If False (default), the new object will be
@@ -164,11 +161,11 @@ returned without attributes.</p></li>
 function for calculating <cite>count</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>count</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -179,10 +176,10 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">create_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'f8'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the Matrix</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of zones</p></li>
-<li><p><strong>n_cols</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – the number of columns (take the number of zones, if not specified)</p></li>
+<li><p><strong>n_cols</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – the number of columns (take the number of zones, if not specified)</p></li>
 <li><p><strong>dtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the datatype of the matrx</p></li>
 </ul>
 </dd>
@@ -194,7 +191,7 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">create_zone_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_no'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the zone names</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the number of zones</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the zone_name column</p></li>
@@ -209,7 +206,7 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">create_zones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_zones</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone_no'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zones'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zones" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create the zones DataArray as coordinates</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n_zones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of zones</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the coordinates</p></li>
@@ -224,10 +221,10 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">cumprod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumprod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply <cite>cumprod</cite> along some dimension of ReadPTVMatrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumprod</cite>.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumprod</cite>. Only one of the ‘dim’
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumprod</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence</em><em> of </em><em>int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumprod</cite>. Only one of the ‘dim’
 and ‘axis’ arguments can be supplied.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -239,11 +236,11 @@ returned without attributes.</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumprod</cite>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>cumvalue</strong> – New ReadPTVMatrix object with <cite>cumprod</cite> applied to its data along the
 indicated dimension.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -254,10 +251,10 @@ indicated dimension.</p>
 <span class="sig-name descname"><span class="pre">cumsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumsum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply <cite>cumsum</cite> along some dimension of ReadPTVMatrix.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumsum</cite>.</p></li>
-<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence of int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumsum</cite>. Only one of the ‘dim’
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension over which to apply <cite>cumsum</cite>.</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>sequence</em><em> of </em><em>int</em><em>, </em><em>optional</em>) – Axis over which to apply <cite>cumsum</cite>. Only one of the ‘dim’
 and ‘axis’ arguments can be supplied.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -269,11 +266,11 @@ returned without attributes.</p></li>
 <li><p><strong>**kwargs</strong> (<em>dict</em>) – Additional keyword arguments passed on to <cite>cumsum</cite>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>cumvalue</strong> – New ReadPTVMatrix object with <cite>cumsum</cite> applied to its data along the
 indicated dimension.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -284,13 +281,13 @@ indicated dimension.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">float_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.float_nan" title="Permalink to this definition">¶</a></dt>
 <dd><p>convert str to float, handling ‘-’ as 0.0</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the value to convert</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value as float</p>
 </dd>
 </dl>
@@ -301,9 +298,9 @@ indicated dimension.</p>
 <span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.max" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>max</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>max</cite>.  By default <cite>max</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>max</cite>.  By default <cite>max</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -316,11 +313,11 @@ returned without attributes.</p></li>
 function for calculating <cite>max</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>max</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -331,9 +328,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.mean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>mean</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>mean</cite>.  By default <cite>mean</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>mean</cite>.  By default <cite>mean</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -346,11 +343,11 @@ returned without attributes.</p></li>
 function for calculating <cite>mean</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>mean</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -361,9 +358,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.median" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>median</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>median</cite>.  By default <cite>median</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>median</cite>.  By default <cite>median</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -376,11 +373,11 @@ returned without attributes.</p></li>
 function for calculating <cite>median</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>median</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -391,9 +388,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.min" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>min</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>min</cite>.  By default <cite>min</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>min</cite>.  By default <cite>min</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -406,11 +403,11 @@ returned without attributes.</p></li>
 function for calculating <cite>min</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>min</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -421,9 +418,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">prod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.prod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>prod</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>prod</cite>.  By default <cite>prod</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>prod</cite>.  By default <cite>prod</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -442,11 +439,11 @@ returned without attributes.</p></li>
 function for calculating <cite>prod</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>prod</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -481,13 +478,13 @@ indicated dimension(s) removed.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_f4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f4" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 32-bit float from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as float</p>
 </dd>
 </dl>
@@ -498,13 +495,13 @@ indicated dimension(s) removed.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_f8</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f8" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 64-bit double from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as double</p>
 </dd>
 </dl>
@@ -515,13 +512,13 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>read the header</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – an open file-object</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">deque</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>rows</p>
 </dd>
 </dl>
@@ -532,13 +529,13 @@ indicated dimension(s) removed.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_i2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i2" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 16-bit double from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as shortint</p>
 </dd>
 </dl>
@@ -549,13 +546,13 @@ indicated dimension(s) removed.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_i4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i4" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 32-bit int from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as int</p>
 </dd>
 </dl>
@@ -566,7 +563,7 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the zone names into the given array</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file-handler</p></li>
 <li><p><strong>arr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code>) – the DataArray for the zone names</p></li>
@@ -580,7 +577,7 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_names_o_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read the zone names in an O-Format Matrix</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file-handler</p></li>
 <li><p><strong>line</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the current line</p></li>
@@ -595,13 +592,13 @@ indicated dimension(s) removed.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_u1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_u1" title="Permalink to this definition">¶</a></dt>
 <dd><p>read 8-bit char from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as char</p>
 </dd>
 </dl>
@@ -612,13 +609,13 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_utf16</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_utf16" title="Permalink to this definition">¶</a></dt>
 <dd><p>read utf16( encoded string from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as string</p>
 </dd>
 </dl>
@@ -629,13 +626,13 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>read integer value from file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as nt</p>
 </dd>
 </dl>
@@ -646,16 +643,16 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>read <cite>n</cite> values from open file at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p></li>
 <li><p><strong>n_values</strong> (<em>int</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the value read as double</p>
 </dd>
 </dl>
@@ -666,13 +663,13 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_values_in_o_format_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>read values from open file in O-Format at current position</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open file handler</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">deque</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a tuple with the rows read and the current row</p>
 </dd>
 </dl>
@@ -683,7 +680,7 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">read_values_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>read values from file at current position into <cite>array</cite></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code>) – open binary file handler</p></li>
 <li><p><strong>arr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataArray</span></code>) – the array where the data will be written into</p></li>
@@ -698,9 +695,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.std" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>std</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>std</cite>.  By default <cite>std</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>std</cite>.  By default <cite>std</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -713,11 +710,11 @@ returned without attributes.</p></li>
 function for calculating <cite>std</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>std</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -728,9 +725,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.sum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>sum</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>sum</cite>.  By default <cite>sum</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>sum</cite>.  By default <cite>sum</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -749,11 +746,11 @@ returned without attributes.</p></li>
 function for calculating <cite>sum</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>sum</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -764,9 +761,9 @@ indicated dimension(s) removed.</p>
 <span class="sig-name descname"><span class="pre">var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.read_ptv.ReadPTVMatrix.var" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduce this ReadPTVMatrix’s data by applying <cite>var</cite> along some dimension(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence of str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>var</cite>.  By default <cite>var</cite> is
+<li><p><strong>dim</strong> (<em>str</em><em> or </em><em>sequence</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Dimension(s) over which to apply <cite>var</cite>.  By default <cite>var</cite> is
 applied over all dimensions.</p></li>
 <li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, skip missing values (as marked by NaN). By default, only
 skips missing values for float dtypes; other dtypes either do not
@@ -779,11 +776,11 @@ returned without attributes.</p></li>
 function for calculating <cite>var</cite> on this object’s data.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>reduced</strong> – New ReadPTVMatrix object with <cite>var</cite> applied to its data and the
 indicated dimension(s) removed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix" title="matrixconverters.read_ptv.ReadPTVMatrix">ReadPTVMatrix</a></p>
 </dd>
 </dl>
@@ -800,12 +797,64 @@ indicated dimension(s) removed.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="matrixconverters.read_csv.html"
-                        title="previous chapter">matrixconverters.read_csv module</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="matrixconverters.save_ptv.html"
-                        title="next chapter">matrixconverters.save_ptv module</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">matrixconverters.read_ptv module</a><ul>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix</span></code></a><ul>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.__init__"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix._openfile"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix._openfile()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.all"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.all()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.any"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.any()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.count"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.count()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_matrix"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.create_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zone_names"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.create_zone_names()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.create_zones"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.create_zones()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumprod"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.cumprod()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.cumsum"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.cumsum()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.float_nan"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.float_nan()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.max"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.max()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.mean"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.mean()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.median"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.median()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.min"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.min()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.prod"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.prod()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixB"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.readPTVMatrixB()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixE"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.readPTVMatrixE()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixO"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.readPTVMatrixO()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.readPTVMatrixV"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.readPTVMatrixV()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f4"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_f4()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_f8"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_f8()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_header"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_header()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i2"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_i2()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_i4"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_i4()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_names()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_names_o_format"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_names_o_format()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_u1"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_u1()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_utf16"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_utf16()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_value"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_value()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_values()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_in_o_format_to_list"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_values_in_o_format_to_list()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.read_values_to_array"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.read_values_to_array()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.std"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.std()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.sum"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.sum()</span></code></a></li>
+<li><a class="reference internal" href="#matrixconverters.read_ptv.ReadPTVMatrix.var"><code class="docutils literal notranslate"><span class="pre">ReadPTVMatrix.var()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="matrixconverters.read_csv.html"
+                          title="previous chapter">matrixconverters.read_csv module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="matrixconverters.save_ptv.html"
+                          title="next chapter">matrixconverters.save_ptv module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -822,7 +871,7 @@ indicated dimension(s) removed.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -850,8 +899,8 @@ indicated dimension(s) removed.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 05, 2021.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Last updated on Mar 31, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
