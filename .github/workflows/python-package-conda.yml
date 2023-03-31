@@ -58,7 +58,7 @@ jobs:
     - name: Create Docs
       if: ${{ matrix.python-version == '3.11' }}
       run: |
-        source activate test-environment
+        /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
         conda install -y --use-local cythoninstallhelpers cythonarrays matrixconverters
         python -m pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
