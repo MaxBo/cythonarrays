@@ -19,7 +19,7 @@ requirements:
     - numpy>=1.12
     - xarray
     - netcdf4
-    - hdf5<1.14
+    - hdf5<=1.12.1
 
   run:
     - python
@@ -27,7 +27,7 @@ requirements:
     - numpy>=1.12
     - xarray
     - netcdf4
-    - hdf5<1.14
+    - hdf5<=1.12.1
     - pytest-cov
 
 test:
