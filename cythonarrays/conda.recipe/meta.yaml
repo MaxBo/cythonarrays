@@ -28,7 +28,7 @@ requirements:
     - cython
     - numpy>=1.12
     - xarray
-    - netcdf4
+    - netcdf4<=1.6.2
     - cythoninstallhelpers
     - pytest-cov
 

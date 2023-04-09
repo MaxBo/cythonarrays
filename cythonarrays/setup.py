@@ -5,7 +5,7 @@ Created on Fri Jun 10 20:33:08 2016
 @author: MaxBohnet
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 from cythoninstallhelpers.get_version import get_version
 from cythoninstallhelpers.make_cython_extensions import make_extensions
 
@@ -43,7 +43,7 @@ setup(
 
     ],
     keywords='cython numpy',
-    packages=find_packages('src', exclude=['ez_setup']),
+    packages=find_namespace_packages('src', exclude=['ez_setup']),
     package_dir={'': 'src'},
     package_data={'': ['*.pxd', '*.pyx', '*.pyxbld']},
     include_package_data=True,

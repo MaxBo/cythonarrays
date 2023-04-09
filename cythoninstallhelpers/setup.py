@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 import os
 
 version_dict = dict()
@@ -36,7 +36,7 @@ setup(
     ],
     keywords='cython setuptools',
 
-    packages=find_packages('src', exclude=['ez_setup']),
+    packages=find_namespace_packages('src', exclude=['ez_setup']),
 
     package_dir={'': 'src'},
     package_data={'': ['*.pxd', '*.pyx', '*.pyxbld'],},

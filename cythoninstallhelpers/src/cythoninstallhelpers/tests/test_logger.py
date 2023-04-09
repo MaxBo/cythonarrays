@@ -6,7 +6,7 @@ from cythoninstallhelpers.configure_logger import (SimLogger,
 import os
 import glob
 from .module_with_logging import function_with_logging
-from ..get_version import get_version
+from cythoninstallhelpers.get_version import get_version
 
 class Test01_Logger:
     """Test the the SimLogger"""
