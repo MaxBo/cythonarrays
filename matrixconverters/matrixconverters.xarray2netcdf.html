@@ -49,7 +49,7 @@
 <span id="matrixconverters-xarray2netcdf-module"></span><h1>matrixconverters.xarray2netcdf module<a class="headerlink" href="#module-matrixconverters.xarray2netcdf" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="matrixconverters.xarray2netcdf.xr2netcdf">
-<span class="sig-prename descclassname"><span class="pre">matrixconverters.xarray2netcdf.</span></span><span class="sig-name descname"><span class="pre">xr2netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'netcdf4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compressed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.xarray2netcdf.xr2netcdf" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">matrixconverters.xarray2netcdf.</span></span><span class="sig-name descname"><span class="pre">xr2netcdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'h5netcdf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compressed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#matrixconverters.xarray2netcdf.xr2netcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>save dataset as netcdf-file to filepath using the given compression level</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -57,7 +57,7 @@
 <li><p><strong>dataset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – the xarray-dataset to store</p></li>
 <li><p><strong>filepath</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the path where the netcdf-file shold be stored</p></li>
 <li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – write (w) or append (a)</p></li>
-<li><p><strong>engine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the engine to use (default is netcdf4)</p></li>
+<li><p><strong>engine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the engine to use (default is h5netcdf)</p></li>
 <li><p><strong>compressed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – if False, the data-variables are not compressed</p></li>
 <li><p><strong>complevel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the compression-level between 1 and 9
 1 is faster, 9 uses a more efficient compression, but is much slower
@@ -132,7 +132,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Mar 31, 2023.
+      Last updated on Apr 10, 2023.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
