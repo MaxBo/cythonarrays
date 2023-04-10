@@ -200,7 +200,7 @@ class _ArrayProperties:
         """
         if not hasattr(self, 'ds'):
             self.create_ds()
-        self.ds.to_netcdf(filepath)
+        self.ds.to_netcdf(filepath, engine='h5netcdf')
 
     @classmethod
     def from_netcdf(cls, filepath: str) -> '_ArrayProperties':
@@ -216,7 +216,7 @@ class _ArrayProperties:
         filepath:
             the filepath to read the netcdf-data from
         """
-        ds = xr.open_dataset(filepath)
+        ds = xr.open_dataset(filepath, engine='h5netcdf')
         # create a dictionary with the dimensions
         dimensions = dict()
         cls_init_args = cls.__init__.__code__.co_varnames

@@ -52,7 +52,7 @@ setup(
 
     install_requires=[
         'xarray',
-        'netCDF4',
+        'h5netcdf',
         'cythoninstallhelpers',
     ],
     ext_modules=make_extensions(ext_modnames),

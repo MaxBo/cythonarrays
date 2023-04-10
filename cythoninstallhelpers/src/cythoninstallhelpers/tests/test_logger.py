@@ -15,6 +15,7 @@ class Test01_Logger:
         print(tmpdir)
         scenario = 'TestScenario_without_Packages'
         sim_logger = SimLogger()
+        sim_logger.truncate_packages()
         sim_logger.configure(LOG_FOLDER=tmpdir, scenario=scenario)
 
         # assert that there are no packages registred with the logger
