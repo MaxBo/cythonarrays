@@ -15,8 +15,16 @@ class Test01_Logger:
         print(tmpdir)
         scenario = 'TestScenario_without_Packages'
         sim_logger = SimLogger()
-        sim_logger.truncate_packages()
+
         sim_logger.configure(LOG_FOLDER=tmpdir, scenario=scenario)
+
+        # create a logger for the 'cythoninstallhelpers'-package
+        logger = get_logger(self)
+        # assert that cythonarrays is registred now
+        assert __package__.split('.')[0] in sim_logger.packages
+
+        # truncate loggers
+        sim_logger.truncate_packages()
 
         # assert that there are no packages registred with the logger
         assert not sim_logger.packages

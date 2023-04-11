@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Tuple, Union, Iterable
+from typing import Tuple, Union
 import numpy as np
 from numpy.testing import assert_array_equal
 

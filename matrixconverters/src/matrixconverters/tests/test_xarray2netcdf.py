@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 import pytest
 import numpy as np
