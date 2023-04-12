@@ -19,7 +19,7 @@ requirements:
     - cython
     - numpy>=1.12
     - xarray
-    - netcdf4
+    - h5netcdf
     - cythoninstallhelpers
 
   run:
@@ -28,7 +28,7 @@ requirements:
     - cython
     - numpy>=1.12
     - xarray
-    - netcdf4
+    - h5netcdf
     - cythoninstallhelpers
     - pytest-cov
 

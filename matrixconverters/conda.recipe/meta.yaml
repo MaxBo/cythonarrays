@@ -18,14 +18,14 @@ requirements:
     - cythoninstallhelpers
     - numpy>=1.12
     - xarray
-    - netcdf4
+    - h5netcdf
 
   run:
     - python
     - cythoninstallhelpers
     - numpy>=1.12
     - xarray
-    - netcdf4
+    - h5netcdf
     - pytest-cov
 
 test:

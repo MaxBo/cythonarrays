@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import os
 import pytest
 import numpy as np
 import xarray as xr
 from matrixconverters.xarray2netcdf import xr2netcdf
-from netCDF4 import __hdf5libversion__
+from h5py.version import hdf5_version
 
 
 @pytest.fixture(scope='class')
@@ -45,8 +44,9 @@ class TestSaveReadxr2netcdf:
         np.testing.assert_array_equal(ds_saved.zone_name, ds.zone_name)
 
     @pytest.mark.xfail(
-        __hdf5libversion__ < '1.14',
-        reason='Bug in Hdf5 < 1.14 when filepath has non-ascii-characters')
+        (hdf5_version < '1.18'),
+        reason='''Hdf5 cannot use filepaths with non-ascii-characters
+        - on windows it works locally, but not on appveyor - on linux it failes''')
     def test_02_save_ds_with_umlaut(self, ds: xr.Dataset, fp_dataset_with_umlaut: str):
         xr2netcdf(ds, fp_dataset_with_umlaut)
         ds_saved = xr.open_dataset(fp_dataset_with_umlaut)

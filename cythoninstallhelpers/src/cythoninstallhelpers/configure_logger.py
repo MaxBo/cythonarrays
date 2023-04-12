@@ -188,6 +188,12 @@ class SimLogger:
             logger.addHandler(logging.NullHandler())
         return logger
 
+    def truncate_packages(self):
+        """Delete all loggers for packages"""
+        while self.packages:
+            package_to_remove = self.packages.pop()
+            print(f'remove {package_to_remove}')
+
 
 def get_module_logger(module_name: str) -> logging.Logger:
     """

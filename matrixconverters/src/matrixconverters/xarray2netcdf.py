@@ -5,7 +5,7 @@ import xarray as xr
 def xr2netcdf(dataset: xr.Dataset,
               filepath: str,
               mode: str = 'w',
-              engine: str = 'netcdf4',
+              engine: str = 'h5netcdf',
               compressed: bool = True,
               complevel: int = 2, ):
     """
@@ -20,7 +20,7 @@ def xr2netcdf(dataset: xr.Dataset,
     mode :
         write (w) or append (a)
     engine :
-        the engine to use (default is netcdf4)
+        the engine to use (default is h5netcdf)
     compressed :
         if False, the data-variables are not compressed
     complevel :
