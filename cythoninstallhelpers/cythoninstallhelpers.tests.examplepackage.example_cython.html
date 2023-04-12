@@ -51,89 +51,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-cythoninstallhelpers.tests.examplepackage.example_cython">
-<span id="cythoninstallhelpers-tests-examplepackage-example-cython-module"></span><h1>cythoninstallhelpers.tests.examplepackage.example_cython module<a class="headerlink" href="#module-cythoninstallhelpers.tests.examplepackage.example_cython" title="Permalink to this heading">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythoninstallhelpers.tests.examplepackage.example_cython.</span></span><span class="sig-name descname"><span class="pre">Example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">int</span> <span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int</span> <span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">char</span> <span class="pre">n_threads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long</span> <span class="pre">long</span> <span class="pre">large_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Cython CDefClass for Example</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the array with dimensions i and j</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>i</strong> – number of rows</p></li>
-<li><p><strong>j</strong> – number of columns</p></li>
-<li><p><strong>n_threads</strong> – number of threads</p></li>
-<li><p><strong>large_value</strong> – a large value</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.calc_array">
-<span class="sig-name descname"><span class="pre">calc_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">double</span> <span class="pre">param</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">double</span></span></span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.calc_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calc an array with the given parameter</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>param</strong> – a parameter</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>the result</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.array_ij">
-<span class="sig-name descname"><span class="pre">array_ij</span></span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.array_ij" title="Permalink to this definition">¶</a></dt>
-<dd><p>‘double[:, :]’</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>array_ij</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.large_value">
-<span class="sig-name descname"><span class="pre">large_value</span></span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.large_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>‘long long’</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>large_value</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.n_threads">
-<span class="sig-name descname"><span class="pre">n_threads</span></span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.n_threads" title="Permalink to this definition">¶</a></dt>
-<dd><p>‘char’</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>n_threads</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cythoninstallhelpers.tests.examplepackage.example_cython.Example.rowsums">
-<span class="sig-name descname"><span class="pre">rowsums</span></span><a class="headerlink" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.rowsums" title="Permalink to this definition">¶</a></dt>
-<dd><p>‘double[:]’</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>rowsums</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="cythoninstallhelpers-tests-examplepackage-example-cython-module">
+<h1>cythoninstallhelpers.tests.examplepackage.example_cython module<a class="headerlink" href="#cythoninstallhelpers-tests-examplepackage-example-cython-module" title="Permalink to this heading">¶</a></h1>
 </section>
 
 
@@ -143,24 +62,6 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">cythoninstallhelpers.tests.examplepackage.example_cython module</a><ul>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example"><code class="docutils literal notranslate"><span class="pre">Example</span></code></a><ul>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.__init__"><code class="docutils literal notranslate"><span class="pre">Example.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.calc_array"><code class="docutils literal notranslate"><span class="pre">Example.calc_array()</span></code></a></li>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.array_ij"><code class="docutils literal notranslate"><span class="pre">Example.array_ij</span></code></a></li>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.large_value"><code class="docutils literal notranslate"><span class="pre">Example.large_value</span></code></a></li>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.n_threads"><code class="docutils literal notranslate"><span class="pre">Example.n_threads</span></code></a></li>
-<li><a class="reference internal" href="#cythoninstallhelpers.tests.examplepackage.example_cython.Example.rowsums"><code class="docutils literal notranslate"><span class="pre">Example.rowsums</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="cythoninstallhelpers.tests.examplepackage.html"
