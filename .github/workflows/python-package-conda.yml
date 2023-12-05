@@ -8,7 +8,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9, '3.10', '3.11']
+        python-version: [3.6, 3.7, 3.8, 3.9, '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
     - name: Setup base conda for Python 3.7
@@ -46,7 +46,7 @@ jobs:
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
         anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
-        
+
     - name: Build and test cythonarrays and matrixconverters
       run: |
         export TMPDIR=${{ runner.TEMP }}
@@ -56,7 +56,7 @@ jobs:
         conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
 
     - name: Create Docs
-      if: ${{ matrix.python-version == '3.11' }}
+      if: ${{ matrix.python-version == '3.12' }}
       run: |
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
@@ -68,7 +68,7 @@ jobs:
         sphinx-build docs_rst ../docs
 
     - name: Deploy Docs to gh-pages
-      if: ${{ matrix.python-version == '3.11' }}
+      if: ${{ matrix.python-version == '3.12' }}
       uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
         branch: gh-pages # The branch the action should deploy to.
