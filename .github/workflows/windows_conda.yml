@@ -11,10 +11,11 @@ jobs:
         python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
-    - name: Setup base conda for Python 3.9
+    - name: Setup base conda for Python
       uses: mamba-org/setup-micromamba@v1
       with:
         micromamba-version: 'latest'
+        environment-name: test_environment
         init-shell: >-
           bash
         condarc: |
@@ -25,6 +26,7 @@ jobs:
         create-args: >-
           python=${{ matrix.python-version }}
           numpy
+          pytest-cov
         cache-environment: true
         post-cleanup: 'all'
       env:
@@ -35,9 +37,8 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        mamba install conda-build conda-verify anaconda-client twine readme_renderer
+        mamba install -n root conda-build conda-verify anaconda-client twine readme_renderer
         mamba info -a
-        mamba create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
