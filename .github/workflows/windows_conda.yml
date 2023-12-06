@@ -18,7 +18,6 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
-        python-version: "3.10"
         mamba-version: "*"        
         activate-environment:
         channels: MaxBo, conda-forge, defaults
@@ -36,9 +35,9 @@ jobs:
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
-        mamba build --python 3.10 cythoninstallhelpers/conda.recipe
+        mamba build  cythoninstallhelpers/conda.recipe
         mamba install -n base --use-local cythoninstallhelpers
-        mamba build --python 3.10 cythonarrays/conda.recipe
+        mamba build cythonarrays/conda.recipe
         mamba install -n base --use-local cythonarrays
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
