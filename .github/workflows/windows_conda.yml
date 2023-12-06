@@ -37,15 +37,15 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        micromamba install -n root conda-build conda-verify anaconda-client twine readme_renderer
+        micromamba install -n base conda-build conda-verify
         micromamba info -a
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
         micromamba build --python 3.9 cythoninstallhelpers/conda.recipe
-        micromamba install -n root --use-local cythoninstallhelpers
+        micromamba install -n base --use-local cythoninstallhelpers
         micromamba build --python 3.9 cythonarrays/conda.recipe
-        micromamba install -n root --use-local cythonarrays
+        micromamba install -n base --use-local cythonarrays
 
     - name: build cythoninstallhelpers and cythonarrays for python version
       run: |
