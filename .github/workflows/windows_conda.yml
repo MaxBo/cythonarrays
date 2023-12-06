@@ -37,25 +37,25 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        mamba install -n root conda-build conda-verify anaconda-client twine readme_renderer
-        mamba info -a
+        micromamba install -n root conda-build conda-verify anaconda-client twine readme_renderer
+        micromamba info -a
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
-        mamba build --python 3.9 cythoninstallhelpers/conda.recipe
-        mamba install -n root --use-local cythoninstallhelpers
-        mamba build --python 3.9 cythonarrays/conda.recipe
-        mamba install -n root --use-local cythonarrays
+        micromamba build --python 3.9 cythoninstallhelpers/conda.recipe
+        micromamba install -n root --use-local cythoninstallhelpers
+        micromamba build --python 3.9 cythonarrays/conda.recipe
+        micromamba install -n root --use-local cythonarrays
 
     - name: build cythoninstallhelpers and cythonarrays for python version
       run: |
-        mamba activate test-environment
-        mamba build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install --use-local cythoninstallhelpers
-        mamba build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install --use-local cythonarrays
-        mamba build --python python=${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install --use-local matrixconverters
+        micromamba activate test-environment
+        micromamba build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        micromamba install --use-local cythoninstallhelpers
+        micromamba build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
+        micromamba install --use-local cythonarrays
+        micromamba build --python python=${{ matrix.python-version }} matrixconverters/conda.recipe
+        micromamba install --use-local matrixconverters
 
     - name: Upload package to conda
 
@@ -66,21 +66,21 @@ jobs:
       if: ${{ env.ANACONDA_TOKEN }}
 
       run: |
-        mamba activate test-environment
+        micromamba activate test-environment
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
         
     - name: Build wheel and run tests for cythoninstallhelpers
       run: |
-        mamba activate test-environment
+        micromamba activate test-environment
         cd cythoninstallhelpers
         pip install -y .
         python -m pytest --pyargs cythoninstallhelpers
         cd ..
     - name: Build wheel and run tests for cythonarrays
       run: |
-        mamba activate test-environment
+        micromamba activate test-environment
         cd cythonarrays
         pip install -y .
         python -m pytest --pyargs cythonarrays
@@ -88,7 +88,7 @@ jobs:
         
     - name: Build wheel and run tests for matrixconverters
       run: |
-        mamba activate test-environment
+        micromamba activate test-environment
         cd matrixconverters
         pip install -y .
         python -m pytest --pyargs matrixconverters
@@ -121,7 +121,7 @@ jobs:
     - name: run code coverage
       if: ${{ env.UPLOAD_COV }}
       run: |
-        mamba activate test-environment
+        micromamba activate test-environment
         pip install -y pytest-cov pytest-benchmark
         cd cythoninstallhelpers
         pip install -y -e .
