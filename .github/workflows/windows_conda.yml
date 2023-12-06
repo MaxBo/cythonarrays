@@ -15,7 +15,6 @@ jobs:
       uses: mamba-org/setup-micromamba@v1
       with:
         micromamba-version: 'latest'
-        environment-name: base
         init-shell: >-
           bash
         condarc: |
