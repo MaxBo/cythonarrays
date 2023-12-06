@@ -119,7 +119,7 @@ jobs:
         packages_dir: matrixconverters
 
     - name: run code coverage
-      if: ${{ UPLOAD_COV }}
+      if: ${{ env.UPLOAD_COV }}
       run: |
         mamba activate test-environment
         pip install -y pytest-cov pytest-benchmark
@@ -140,7 +140,7 @@ jobs:
         coverage xml
     
     - name: Upload to Codecov
-      if: ${{ UPLOAD_COV }}
+      if: ${{ env.UPLOAD_COV }}
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
