@@ -38,7 +38,6 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         micromamba install -n base conda-build conda-verify
-        micromamba info -a
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
