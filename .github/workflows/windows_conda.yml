@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Setup tmate session
+      if: ${{ failure() }}
       uses: mxschmitt/action-tmate@v3
       
     - name: Setup base conda for Python
@@ -27,7 +28,6 @@ jobs:
         channels: MaxBo, conda-forge, defaults
         channel-priority: true
         auto-update-conda: true
-        cache-environment: true
       env:
         ACTIONS_STEP_DEBUG: true
         TMPDIR: ${{ runner.TEMP }}
