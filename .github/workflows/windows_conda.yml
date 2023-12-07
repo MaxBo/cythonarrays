@@ -51,7 +51,7 @@ jobs:
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
-        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\archive.dll
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         mamba create -n test-environment python=${{ matrix.python-version }} numpy pytest-cov
         mamba activate test-environment
