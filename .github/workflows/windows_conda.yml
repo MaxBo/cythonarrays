@@ -38,24 +38,28 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         mamba update conda
-        mamba install -n base conda-build conda-verify libarchive
+        conda install -n base conda-build conda-verify libarchive boa
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
+      env:
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\archive.dll
       run: |
-        mamba build  cythoninstallhelpers/conda.recipe
+        conda build  cythoninstallhelpers/conda.recipe
         mamba install -n base --use-local cythoninstallhelpers
-        mamba build cythonarrays/conda.recipe
+        conda build cythonarrays/conda.recipe
         mamba install -n base --use-local cythonarrays
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+      env:
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\archive.dll
       run: |
         mamba create -n test-environment python=${{ matrix.python-version }} numpy pytest-cov
         mamba activate test-environment
-        mamba build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        conda build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
         mamba install --use-local cythoninstallhelpers
-        mamba build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
+        conda build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
         mamba install --use-local cythonarrays
-        mamba build --python python=${{ matrix.python-version }} matrixconverters/conda.recipe
+        conda build --python python=${{ matrix.python-version }} matrixconverters/conda.recipe
         mamba install --use-local matrixconverters
 
     - name: Upload package to conda
