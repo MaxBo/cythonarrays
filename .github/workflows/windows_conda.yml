@@ -29,7 +29,6 @@ jobs:
         activate-environment:
         channels: MaxBo, conda-forge, defaults
         channel-priority: true
-        auto-update-conda: true
       env:
         ACTIONS_STEP_DEBUG: true
         TMPDIR: ${{ runner.TEMP }}
@@ -38,6 +37,7 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
+        mamba update conda
         mamba install -n base conda-build conda-verify libarchive
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
