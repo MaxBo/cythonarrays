@@ -14,18 +14,18 @@ jobs:
         python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup tmate session
       #if: ${{ failure() }}
       uses: mxschmitt/action-tmate@v3
       with:
         detached: true
-      
+
     - name: Setup base conda for Python
       uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-variant: Miniforge3
-        mamba-version: "*"        
+        mamba-version: "*"
         activate-environment:
         channels: MaxBo, conda-forge, defaults
         channel-priority: true
@@ -38,7 +38,7 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        mamba install -n base conda-build conda-verify
+        mamba install -n base conda-build conda-verify libarchive
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       run: |
@@ -71,7 +71,7 @@ jobs:
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
-        
+
     - name: Build wheel and run tests for cythoninstallhelpers
       run: |
         mamba activate test-environment
@@ -86,7 +86,7 @@ jobs:
         pip install -y .
         python -m pytest --pyargs cythonarrays
         cd ..
-        
+
     - name: Build wheel and run tests for matrixconverters
       run: |
         mamba activate test-environment
@@ -94,7 +94,7 @@ jobs:
         pip install -y .
         python -m pytest --pyargs matrixconverters
         cd ..
-        
+
     - name: Publish cythoninstallhelpers to PyPI
       uses: ortega2247/pypi-upload-action@master
       if: startsWith(github.ref, 'refs/tags/')
@@ -139,7 +139,7 @@ jobs:
         cd ..
         coverage combine cythoninstallhelpers\.coverage cythonarrays\.coverage matrixconverters\.coverage
         coverage xml
-    
+
     - name: Upload to Codecov
       if: ${{ env.UPLOAD_COV }}
       uses: codecov/codecov-action@v3
