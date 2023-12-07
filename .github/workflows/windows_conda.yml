@@ -42,7 +42,7 @@ jobs:
 
     - name: build cythoninstallhelpers and cythonarrays for base environment
       env:
-        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\archive.dll
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         conda build  cythoninstallhelpers/conda.recipe
         mamba install -n base --use-local cythoninstallhelpers
