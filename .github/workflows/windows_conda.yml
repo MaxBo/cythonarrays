@@ -47,7 +47,8 @@ jobs:
         conda activate base
         cd cythoninstallhelpers
         pip install .
-        cd ..\cythonarrays
+        cd ..
+        cd cythonarrays
         pip install .
         cd ..
 
@@ -56,9 +57,11 @@ jobs:
         conda activate test-wheels
         cd cythoninstallhelpers
         pip install .
-        cd ..\cythonarrays
+        cd ..
+        cd cythonarrays
         pip install .
-        cd ..\matrixconverters
+        cd ..
+        cd matrixconverters
         pip install -y .
         cd ..
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
