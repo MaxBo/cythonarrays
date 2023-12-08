@@ -62,7 +62,7 @@ jobs:
         pip install .
         cd ..
         cd matrixconverters
-        pip install -y .
+        pip install .
         cd ..
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
 
