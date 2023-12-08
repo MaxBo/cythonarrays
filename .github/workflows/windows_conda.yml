@@ -39,47 +39,35 @@ jobs:
       run: |
         mamba update conda
         conda install -n base conda-build conda-verify libarchive boa
-        mamba create -n test-environment python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
 
     - name: Build wheel for base environment
       run: |
-        mamba activate base
+        conda activate base
         cd cythoninstallhelpers
-        pip install -y .
-        cd ..
-        cd cythonarrays
-        pip install -y .
+        pip install .
+        cd ..\cythonarrays
+        pip install .
         cd ..
 
-    - name: Build wheel and run tests for cythoninstallhelpers
+    - name: Build wheel and run tests for cythoninstallhelpers, cythonarrays, matrixconverters
       run: |
-        mamba activate test-environment
+        conda activate test-wheels
         cd cythoninstallhelpers
+        pip install .
+        cd ..\cythonarrays
+        pip install .
+        cd ..\matrixconverters
         pip install -y .
-        python -m pytest --pyargs cythoninstallhelpers
         cd ..
-
-    - name: Build wheel and run tests for cythonarrays
-      run: |
-        mamba activate test-environment
-        cd cythonarrays
-        pip install -y .
-        python -m pytest --pyargs cythonarrays
-        cd ..
-
-    - name: Build wheel and run tests for matrixconverters
-      run: |
-        mamba activate test-environment
-        cd matrixconverters
-        pip install -y .
-        python -m pytest --pyargs matrixconverters
-        cd ..
+        python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        mamba activate test-environment
+        conda activate test-conda
         conda build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
         mamba install --use-local cythoninstallhelpers
         conda build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
@@ -96,7 +84,7 @@ jobs:
       if: ${{ env.ANACONDA_TOKEN }}
 
       run: |
-        mamba activate test-environment
+        mamba activate test-conda
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
@@ -128,18 +116,18 @@ jobs:
     - name: run code coverage
       if: ${{ env.UPLOAD_COV }}
       run: |
-        mamba activate test-environment
+        mamba activate test-wheels
         cd cythoninstallhelpers
-        pip install -y -e .
+        pip install -e .
         py.test --cov=src --cov-report xml --pyargs cythoninstallhelpers
         cd ..
         cd cythonarrays
-        pip install -y -e .
+        pip install -e .
         python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL
         py.test --cov=src --cov-report xml --pyargs cythonarrays
         cd ..
         cd matrixconverters
-        pip install -y -e .
+        pip install -e .
         py.test --cov=src --cov-report xml --pyargs matrixconverters
         cd ..
         coverage combine cythoninstallhelpers\.coverage cythonarrays\.coverage matrixconverters\.coverage
