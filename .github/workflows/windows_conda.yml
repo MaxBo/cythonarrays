@@ -56,65 +56,18 @@ jobs:
       run: |
         conda activate test-wheels
         cd cythoninstallhelpers
+        pip install -r requirements.txt
         pip install .
         cd ..
         cd cythonarrays
+        pip install -r requirements.txt
         pip install .
         cd ..
         cd matrixconverters
+        pip install -r requirements.txt
         pip install .
         cd ..
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
-
-    - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
-      env:
-        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
-      run: |
-        conda activate test-conda
-        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install --use-local cythoninstallhelpers
-        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install --use-local cythonarrays
-        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install --use-local matrixconverters
-
-    - name: Upload package to conda
-
-      env:
-        CONDA_BLD_PATH: ${{ runner.TEMP }}
-        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
-        ANACONDA_USERNAME: MaxBo
-      if: ${{ env.ANACONDA_TOKEN }}
-
-      run: |
-        mamba activate test-conda
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
-
-    - name: Publish cythoninstallhelpers to PyPI
-      uses: ortega2247/pypi-upload-action@master
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN_CYTHONINSTALLHELPERS }}
-        packages_dir: cythoninstallhelpers
-
-    - name: Publish cythonarrays to PyPI
-      uses: ortega2247/pypi-upload-action@master
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN_CYTHONARRAYS }}
-        packages_dir: cythonarrays
-
-    - name: Publish matrixconverters to PyPI
-      uses: ortega2247/pypi-upload-action@master
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
-        packages_dir: matrixconverters
 
     - name: run code coverage
       if: ${{ env.UPLOAD_COV }}
@@ -144,3 +97,53 @@ jobs:
         files: ./coverage1.xml
         flags: unittests # optional
         fail_ci_if_error: true # optional (default = false)
+
+    - name: Publish cythoninstallhelpers to PyPI
+      uses: ortega2247/pypi-upload-action@master
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN_CYTHONINSTALLHELPERS }}
+        packages_dir: cythoninstallhelpers
+
+    - name: Publish cythonarrays to PyPI
+      uses: ortega2247/pypi-upload-action@master
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN_CYTHONARRAYS }}
+        packages_dir: cythonarrays
+
+    - name: Publish matrixconverters to PyPI
+      uses: ortega2247/pypi-upload-action@master
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
+        packages_dir: matrixconverters
+
+    - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+      env:
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
+      run: |
+        conda activate test-conda
+        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        mamba install --use-local cythoninstallhelpers
+        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        mamba install --use-local cythonarrays
+        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+        mamba install --use-local matrixconverters
+
+    - name: Upload package to conda
+
+      env:
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
+        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
+        ANACONDA_USERNAME: MaxBo
+      if: ${{ env.ANACONDA_TOKEN }}
+
+      run: |
+        mamba activate test-conda
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
