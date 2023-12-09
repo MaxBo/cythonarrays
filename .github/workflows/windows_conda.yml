@@ -11,9 +11,10 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
 
     - name: Setup tmate session
       #if: ${{ failure() }}
@@ -45,28 +46,18 @@ jobs:
     - name: Build wheel for base environment
       run: |
         conda activate base
-        cd cythoninstallhelpers
-        pip install .
-        cd ..
-        cd cythonarrays
-        pip install .
-        cd ..
+        pip install cythoninstallhelpers/.
+        pip install cythonarrays/.
 
     - name: Build wheel and run tests for cythoninstallhelpers, cythonarrays, matrixconverters
       run: |
         conda activate test-wheels
-        cd cythoninstallhelpers
-        pip install -r requirements.txt
-        pip install .
-        cd ..
-        cd cythonarrays
-        pip install -r requirements.txt
-        pip install .
-        cd ..
-        cd matrixconverters
-        pip install -r requirements.txt
-        pip install .
-        cd ..
+        pip install -r cythoninstallhelpers/requirements.txt
+        pip install cythoninstallhelpers/.
+        pip install -r cythonarrays/requirements.txt
+        pip install cythonarrays/.
+        pip install -r matrixconverters/requirements.txt
+        pip install matrixconverters/.
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
 
     - name: run code coverage
@@ -74,7 +65,7 @@ jobs:
       run: |
         mamba activate test-wheels
         cd cythoninstallhelpers
-        pip install -e .
+        pip install -e cythoninstallhelpers/.
         py.test --cov=src --cov-report xml --pyargs cythoninstallhelpers
         cd ..
         cd cythonarrays
