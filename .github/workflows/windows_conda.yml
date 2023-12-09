@@ -71,11 +71,11 @@ jobs:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         conda activate test-conda
-        conda build --python python=${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
         mamba install --use-local cythoninstallhelpers
-        conda build --python python=${{ matrix.python-version }} cythonarrays/conda.recipe
+        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
         mamba install --use-local cythonarrays
-        conda build --python python=${{ matrix.python-version }} matrixconverters/conda.recipe
+        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
         mamba install --use-local matrixconverters
 
     - name: Upload package to conda
