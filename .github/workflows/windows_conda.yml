@@ -33,8 +33,43 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         mamba update conda
-        conda install -n base libarchive boa
-        conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba install -n base libarchive boa
+        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        conda activate test-conda
+
+    - name: Setup tmate session
+      #if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 60
+      with:
+        detached: true
+
+    - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+      env:
+        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
+      run: |
+        conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        mamba install -c local cythoninstallhelpers
+        conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        mamba install -c local cythonarrays
+        conda mambabuild build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+        mamba install -c local matrixconverters
+
+    - name: Upload package to conda
+
+      env:
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
+        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
+        ANACONDA_USERNAME: MaxBo
+      if: ${{ env.ANACONDA_TOKEN }}
+
+      run: |
+        conda activate test-conda
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
+
 
     - name: Build wheel for base environment
       run: |
@@ -106,39 +141,3 @@ jobs:
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
         packages_dir: matrixconverters
 
-    - name: create environment for conda
-      run: |
-        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        conda activate test-conda
-
-    - name: Setup tmate session
-      #if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      timeout-minutes: 60
-      with:
-        detached: true
-
-    - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
-      env:
-        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
-      run: |
-        conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install -c local cythoninstallhelpers
-        conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install -c local cythonarrays
-        conda mambabuild build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install -c local matrixconverters
-
-    - name: Upload package to conda
-
-      env:
-        CONDA_BLD_PATH: ${{ runner.TEMP }}
-        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
-        ANACONDA_USERNAME: MaxBo
-      if: ${{ env.ANACONDA_TOKEN }}
-
-      run: |
-        conda activate test-conda
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
