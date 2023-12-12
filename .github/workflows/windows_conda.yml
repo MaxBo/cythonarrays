@@ -40,8 +40,7 @@ jobs:
       run: |
         mamba update conda
         conda install -n base conda-build conda-verify libarchive boa
-        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
 
     - name: Build wheel for base environment
       run: |
@@ -63,7 +62,7 @@ jobs:
     - name: run code coverage
       if: ${{ env.UPLOAD_COV }}
       run: |
-        mamba activate test-wheels
+        conda activate test-wheels
         cd cythoninstallhelpers
         pip install -e cythoninstallhelpers/.
         py.test --cov=src --cov-report xml --pyargs cythoninstallhelpers
@@ -117,13 +116,14 @@ jobs:
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
+        conda create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         conda activate test-conda
         conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install --use-local cythoninstallhelpers
+        conda install --use-local cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install --use-local cythonarrays
+        conda install --use-local cythonarrays
         conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install --use-local matrixconverters
+        conda install --use-local matrixconverters
 
     - name: Upload package to conda
 
@@ -134,7 +134,7 @@ jobs:
       if: ${{ env.ANACONDA_TOKEN }}
 
       run: |
-        mamba activate test-conda
+        conda activate test-conda
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
