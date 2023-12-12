@@ -14,7 +14,12 @@ jobs:
         python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
-    - uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Download Build Tools for Visual Studio 2022
+      run: Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vs_buildtools.exe -OutFile vs_buildtools.exe
+
+    - name: Run vs_buildtools.exe install
+      run: ./vs_buildtools.exe --quiet --wait --norestart --nocache --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.VC.v143.x86.x64 --add Microsoft.VisualStudio.Component.VC.142 --add Microsoft.VisualStudio.Component.VC.141 --includeRecommended
 
     - name: Setup tmate session
       #if: ${{ failure() }}
