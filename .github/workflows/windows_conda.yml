@@ -16,12 +16,6 @@ jobs:
     - uses: actions/checkout@v2
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
 
-    - name: Setup tmate session
-      #if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      with:
-        detached: true
-
     - name: Setup base conda for Python
       uses: conda-incubator/setup-miniconda@v3
       with:
@@ -112,18 +106,28 @@ jobs:
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
         packages_dir: matrixconverters
 
+    - name: create environment for conda
+      run: |
+        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        conda activate test-conda
+
+    - name: Setup tmate session
+      #if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 60
+      #with:
+        #detached: true
+
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        conda create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        conda activate test-conda
-        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        conda install --use-local cythoninstallhelpers
-        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        conda install --use-local cythonarrays
-        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        conda install --use-local matrixconverters
+        mamba build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        mamba install --use-local cythoninstallhelpers
+        mamba build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        mamba install --use-local cythonarrays
+        mamba build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+        mamba install --use-local matrixconverters
 
     - name: Upload package to conda
 
