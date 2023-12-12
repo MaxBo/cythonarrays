@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         mamba update conda
-        conda install -n base conda-build libarchive boa
+        conda install -n base conda-build conda-verify libarchive boa
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         conda activate test-conda
