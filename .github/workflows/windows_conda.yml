@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         mamba update conda
-        conda install -n base conda-build conda-verify libarchive boa
+        conda install -n base libarchive boa
         conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
 
     - name: Build wheel for base environment
@@ -115,19 +115,19 @@ jobs:
       #if: ${{ failure() }}
       uses: mxschmitt/action-tmate@v3
       timeout-minutes: 60
-      #with:
-        #detached: true
+      with:
+        detached: true
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        mamba build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install --use-local cythoninstallhelpers
-        mamba build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install --use-local cythonarrays
-        mamba build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install --use-local matrixconverters
+        conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        mamba install -c local cythoninstallhelpers
+        conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        mamba install -c local cythonarrays
+        conda mambabuild build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+        mamba install -c local matrixconverters
 
     - name: Upload package to conda
 
