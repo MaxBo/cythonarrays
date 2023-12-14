@@ -38,23 +38,16 @@ jobs:
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         conda activate test-conda
 
-    - name: Setup tmate session
-      #if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      timeout-minutes: 60
-      #with:
-        #detached: true
-
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-        mamba install -c local cythoninstallhelpers
+        mamba install --use-local -n test-conda cythoninstallhelpers
         conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        mamba install -c local cythonarrays
+        mamba install --use-local -n test-conda cythonarrays
         conda mambabuild build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
-        mamba install -c local matrixconverters
+        mamba install --use-local -n test-conda matrixconverters
 
     - name: Upload package to conda
 
@@ -140,4 +133,11 @@ jobs:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
         packages_dir: matrixconverters
+
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 60
+      with:
+        detached: true
 
