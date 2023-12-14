@@ -15,6 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
+    - uses: valeriangalliat/action-sshd-cloudflared@v1
 
     - name: Setup base conda for Python
       uses: conda-incubator/setup-miniconda@v3
@@ -42,7 +43,7 @@ jobs:
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        echo ${{ env.PATH }}
+        echo "${{ env.PATH }}"
         conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
         mamba install --use-local -n test-conda cythoninstallhelpers
         conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
@@ -135,10 +136,10 @@ jobs:
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
         packages_dir: matrixconverters
 
-    - name: Setup tmate session
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      timeout-minutes: 60
-      with:
-        detached: true
+    #- name: Setup tmate session
+      #if: ${{ failure() }}
+      #uses: mxschmitt/action-tmate@v3
+      #timeout-minutes: 60
+      #with:
+        #detached: true
 
