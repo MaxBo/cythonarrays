@@ -42,13 +42,17 @@ jobs:
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        echo "${{ env.PATH }}"
-        conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
+        conda mambabuild --python ${{ matrix.python-version }} --no-test cythoninstallhelpers/conda.recipe
         mamba install --use-local -n test-conda cythoninstallhelpers
-        conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
+        conda mambabuild build --python ${{ matrix.python-version }} --no-test cythonarrays/conda.recipe
         mamba install --use-local -n test-conda cythonarrays
-        conda mambabuild build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
+        conda mambabuild build --python ${{ matrix.python-version }} --no-test matrixconverters/conda.recipe
         mamba install --use-local -n test-conda matrixconverters
+
+    - name: test cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+      run: |
+        conda activate test-conda
+        python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
 
     - name: Upload package to conda
 
