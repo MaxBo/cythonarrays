@@ -42,6 +42,7 @@ jobs:
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
+        echo ${{ env.PATH }}
         conda mambabuild --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
         mamba install --use-local -n test-conda cythoninstallhelpers
         conda mambabuild build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
