@@ -36,7 +36,12 @@ jobs:
         conda install -n base conda-build conda-verify libarchive boa
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        conda activate test-conda
+
+    - name: Build wheel for base environment
+      run: |
+        conda activate base
+        pip install cythoninstallhelpers/.
+        pip install cythonarrays/.
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
@@ -67,13 +72,6 @@ jobs:
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%/win-64/matrixconverters-*.tar.bz2
-
-
-    - name: Build wheel for base environment
-      run: |
-        conda activate base
-        pip install cythoninstallhelpers/.
-        pip install cythonarrays/.
 
     - name: Build wheel and run tests for cythoninstallhelpers, cythonarrays, matrixconverters
       run: |
