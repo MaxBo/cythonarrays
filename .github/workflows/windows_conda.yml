@@ -52,12 +52,10 @@ jobs:
         LIBARCHIVE: C:\Miniconda\Library\bin\archive.dll
       run: |
         (
-        conda mambabuild --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
-        mamba install --use-local -n test-conda cythoninstallhelpers
-        conda mambabuild --python ${{ matrix.python-version }} --no-test cythonarrays\conda.recipe
-        mamba install --use-local -n test-conda cythonarrays
-        conda mambabuild --python ${{ matrix.python-version }} --no-test matrixconverters\conda.recipe
-        mamba install --use-local -n test-conda matrixconverters
+        conda build --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
+        conda build --python ${{ matrix.python-version }} --no-test cythonarrays\conda.recipe
+        conda build --python ${{ matrix.python-version }} --no-test matrixconverters\conda.recipe
+        mamba install --use-local -n test-conda cythoninstallhelpers cythonarrays matrixconverters
         )
 
     - name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
