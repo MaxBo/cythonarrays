@@ -21,7 +21,7 @@ jobs:
       with:
         auto-activate-base: true
         activate-environment: ""
-        miniforge-version: latest
+        mamba-version: "*"
       env:
         ACTIONS_STEP_DEBUG: true
         TMPDIR: ${{ runner.TEMP }}
@@ -31,36 +31,41 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         (
-        conda install -n base "conda>=23.7" conda-build conda-verify
-        conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        conda create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client boa
+        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         )
 
     - name: Build wheel for base environment
       run: |
         (
-        conda activate base
+        mamba activate base
         python -m pip install cythoninstallhelpers\.
         python -m pip install cythonarrays\.
         )
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconverters for python version
       env:
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
+        TMPDIR: ${{ runner.TEMP }}
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         (
-        conda build --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
-        conda install --use-local -n test-conda cythoninstallhelpers
-        conda build --python ${{ matrix.python-version }} --no-test cythonarrays\conda.recipe
-        conda install --use-local -n test-conda cythonarrays
-        conda build --python ${{ matrix.python-version }} --no-test matrixconverters\conda.recipe
-        conda install --use-local -n test-conda matrixconverters
+        conda mambabuild --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
+        mamba install --use-local -n test-conda cythoninstallhelpers
+        conda mambabuild --python ${{ matrix.python-version }} --no-test cythonarrays\conda.recipe
+        mamba install --use-local -n test-conda cythonarrays
+        conda mambabuild --python ${{ matrix.python-version }} --no-test matrixconverters\conda.recipe
+        mamba install --use-local -n test-conda matrixconverters
         )
 
     - name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
+      env:
+        CONDA_BLD_PATH: ${{ runner.TEMP }}
+        TMPDIR: ${{ runner.TEMP }}
       run: |
         (
-        conda activate test-conda
+        mamba activate test-conda
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
         )
 
@@ -74,7 +79,7 @@ jobs:
 
       run: |
         (
-        conda activate test-conda
+        mamba activate test-conda
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\matrixconverters-*.tar.bz2
