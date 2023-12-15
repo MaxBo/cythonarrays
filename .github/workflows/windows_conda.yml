@@ -18,11 +18,11 @@ jobs:
 
     - name: Setup base conda for Python
       uses: conda-incubator/setup-miniconda@v3
-        with:
-          auto-activate-base: true
-          activate-environment: ""
-          miniforge-version: latest
-          auto-update-conda: true
+      with:
+        auto-activate-base: true
+        activate-environment: ""
+        miniforge-version: latest
+        auto-update-conda: true
       env:
         ACTIONS_STEP_DEBUG: true
         TMPDIR: ${{ runner.TEMP }}
