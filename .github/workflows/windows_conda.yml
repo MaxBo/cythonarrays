@@ -32,27 +32,28 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        mamba update conda
+        conda update conda
         conda install -n base conda-build conda-verify libarchive boa
-        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
-        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        conda create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
 
     - name: Build wheel for base environment
       run: |
         conda activate base
-        pip install cythoninstallhelpers/.
-        pip install cythonarrays/.
+        python -m pip install cythoninstallhelpers/.
+        python -m pip install cythonarrays/.
 
     - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
-        conda mambabuild --python ${{ matrix.python-version }} --no-test cythoninstallhelpers/conda.recipe
-        mamba install --use-local -n test-conda cythoninstallhelpers
-        conda mambabuild --python ${{ matrix.python-version }} --no-test cythonarrays/conda.recipe
-        mamba install --use-local -n test-conda cythonarrays
-        conda mambabuild --python ${{ matrix.python-version }} --no-test matrixconverters/conda.recipe
-        mamba install --use-local -n test-conda matrixconverters
+        conda activate base
+        conda build --python ${{ matrix.python-version }} --no-test cythoninstallhelpers/conda.recipe
+        conda install --use-local -n test-conda cythoninstallhelpers
+        conda build --python ${{ matrix.python-version }} --no-test cythonarrays/conda.recipe
+        conda install --use-local -n test-conda cythonarrays
+        conda build --python ${{ matrix.python-version }} --no-test matrixconverters/conda.recipe
+        conda install --use-local -n test-conda matrixconverters
 
     - name: test cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
       run: |
