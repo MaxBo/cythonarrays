@@ -49,20 +49,20 @@ jobs:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
         (
-        conda build --python ${{ matrix.python-version }} cythoninstallhelpers\conda.recipe
+        conda build --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
         conda install --use-local -n test-conda cythoninstallhelpers
-        conda build --python ${{ matrix.python-version }} cythonarrays\conda.recipe
+        conda build --python ${{ matrix.python-version }} --no-test cythonarrays\conda.recipe
         conda install --use-local -n test-conda cythonarrays
-        conda build --python ${{ matrix.python-version }} matrixconverters\conda.recipe
+        conda build --python ${{ matrix.python-version }} --no-test matrixconverters\conda.recipe
         conda install --use-local -n test-conda matrixconverters
         )
 
-    #- name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
-      #run: |
-        #(
-        #conda activate test-conda
-        #python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
-        #)
+    - name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
+      run: |
+        (
+        conda activate test-conda
+        python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
+        )
 
     - name: Upload package to conda
 
