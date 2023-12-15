@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        shell: bash -el {0}
+        shell: cmd
     strategy:
       max-parallel: 5
       matrix:
@@ -17,6 +17,7 @@ jobs:
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
 
     - name: Setup base conda for Python
+      shell: bash -el {0}
       uses: conda-incubator/setup-miniconda@v3
       with:
         auto-activate-base: true
@@ -30,8 +31,7 @@ jobs:
 
     - name: Install dependencies and set channels
       run: |
-        conda install -n base "conda>=23.7"
-        conda install -n base conda-build conda-verify libarchive
+        conda install -n base "conda>=23.7" conda-build conda-verify
         conda create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         conda create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
 
@@ -40,7 +40,7 @@ jobs:
         python -m pip install cythoninstallhelpers/.
         python -m pip install cythonarrays/.
 
-    - name: build cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+    - name: build cythoninstallhelpers, cythonarrays and matrixconverters for python version
       env:
         LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
       run: |
@@ -51,7 +51,7 @@ jobs:
         conda build --python ${{ matrix.python-version }} --no-test matrixconverters/conda.recipe
         conda install --use-local -n test-conda matrixconverters
 
-    - name: test cythoninstallhelpers, cythonarrays and matrixconvertersfor python version
+    - name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
       run: |
         conda activate test-conda
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
