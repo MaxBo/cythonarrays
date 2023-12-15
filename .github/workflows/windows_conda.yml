@@ -52,12 +52,13 @@ jobs:
         conda install --use-local -n test-conda cythonarrays
         conda build --python ${{ matrix.python-version }} matrixconverters\conda.recipe
         conda install --use-local -n test-conda matrixconverters
-      )
+        )
 
     #- name: test cythoninstallhelpers, cythonarrays and matrixconverters for python version
-      #run: |
+      #run: (
         #conda activate test-conda
         #python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
+        #)
 
     - name: Upload package to conda
 
