@@ -22,6 +22,7 @@ jobs:
         auto-activate-base: true
         activate-environment: ""
         mamba-version: "*"
+        channels: conda-forge
       env:
         ACTIONS_STEP_DEBUG: true
         TMPDIR: ${{ runner.TEMP }}
