@@ -79,7 +79,7 @@ jobs:
 
       run: |
         (
-        mamba activate test-conda
+        mamba activate base
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythoninstallhelpers-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythonarrays-*.tar.bz2
         anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\matrixconverters-*.tar.bz2
@@ -104,7 +104,7 @@ jobs:
         (
         conda activate test-wheels
         cd cythoninstallhelpers
-        pip install -e cythoninstallhelpers\.
+        pip install -e .
         py.test --cov=src --cov-report xml --pyargs cythoninstallhelpers
         cd ..
         cd cythonarrays
