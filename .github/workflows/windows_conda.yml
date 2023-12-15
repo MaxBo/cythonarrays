@@ -49,7 +49,7 @@ jobs:
       env:
         CONDA_BLD_PATH: ${{ runner.TEMP }}
         TMPDIR: ${{ runner.TEMP }}
-        LIBARCHIVE: C:\Users\runneradmin\miniconda3\Library\bin\archive.dll
+        LIBARCHIVE: C:\Miniconda\Library\bin\archive.dll
       run: |
         (
         conda mambabuild --python ${{ matrix.python-version }} --no-test cythoninstallhelpers\conda.recipe
