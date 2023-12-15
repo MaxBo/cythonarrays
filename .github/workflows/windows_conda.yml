@@ -21,7 +21,7 @@ jobs:
       with:
         auto-activate-base: true
         activate-environment: ""
-        mamba-version: "*"
+        miniforge-version: latest
         channels: conda-forge
       env:
         ACTIONS_STEP_DEBUG: true
