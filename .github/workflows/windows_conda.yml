@@ -36,6 +36,7 @@ jobs:
 
     - name: Build wheel for base environment
       run: |
+        conda activate base
         python -m pip install cythoninstallhelpers\.
         python -m pip install cythonarrays\.
 
