@@ -1,7 +1,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true)](https://ci.appveyor.com/project/MaxBo/cythonarrays)
+[![Build Status Linux](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml)
+[![Build Status Windows](https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml/badge.svg)](https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml)
 [![codecov](https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg)](https://codecov.io/gh/MaxBo/cythonarrays)
 
 # cythonarrays
@@ -92,11 +92,11 @@ pip install matrixconverters
 
 Another way to handle dependencies is to use [conda](https://conda.io/miniconda.html).
 
-There conda packages for python 3.6-3.9 for windows and linux are generated
+There conda packages for python 3.8-3.12 for windows and linux are generated
 in the channel *MaxBo* in [Anaconda Cloud](https://anaconda.org/MaxBo).
 
 ```
-conda create -n myenv python=3.9
+conda create -n myenv python=3.12
 conda activate myenv
 
 conda config --add channels conda-forge
