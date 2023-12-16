@@ -11,7 +11,12 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
+    env:
+      ACTIONS_STEP_DEBUG: true
+      TMPDIR: ${{ runner.TEMP }}
+      CONDA_BLD_PATH: env.TMPDIR
+      UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
     steps:
     - uses: actions/checkout@v2
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
@@ -23,11 +28,6 @@ jobs:
         activate-environment: ""
         miniforge-version: latest
         channels: conda-forge
-      env:
-        ACTIONS_STEP_DEBUG: true
-        TMPDIR: ${{ runner.TEMP }}
-        CONDA_BLD_PATH: env.TMPDIR
-        UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
 
     - name: Install dependencies and set channels
       run: |
