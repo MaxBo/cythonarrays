@@ -96,6 +96,9 @@ jobs:
         pip install -r matrixconverters\requirements.txt
         pip install matrixconverters\.
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
+        python cythoninstallhelpers\setup.py sdist bdist_wheel
+        python cythonarrays\setup.py sdist bdist_wheel
+        python matrixconverters\setup.py sdist bdist_wheel
         echo "### All tests with pip passed! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
 
