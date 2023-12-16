@@ -47,8 +47,8 @@
 <h1>Welcome to the Cythonarrays documentation!<a class="headerlink" href="#welcome-to-the-cythonarrays-documentation" title="Permalink to this heading">¶</a></h1>
 <p>Cythonarray has been developed to facilitate the use of Cython Cdef-classes with numpy-arrays</p>
 <a class="reference external image-reference" href="http://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
-<a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml"><img alt="Build Status" src="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg" /></a>
-<a class="reference external image-reference" href="https://ci.appveyor.com/project/MaxBo/cythonarrays"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/q0lek1t5tl5lcq29?svg=true" /></a>
+<a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml"><img alt="Build Status Linux" src="https://github.com/MaxBo/cythonarrays/actions/workflows/python-package-conda.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml"><img alt="Build Status Windows" src="https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml/badge.svg" /></a>
 <a class="reference external image-reference" href="https://codecov.io/gh/MaxBo/cythonarrays"><img alt="codecov" src="https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg" /></a>
 </section>
 <section id="cythonarrays">
@@ -131,9 +131,9 @@ Data is automatically converted to the right dtype.</p>
 </pre></div>
 </div>
 <p>Another way to handle dependencies is to use <a class="reference external" href="https://conda.io/miniconda.html">conda</a>.</p>
-<p>There conda packages for python 3.6-3.9 for windows and linux are generated
+<p>There conda packages for python 3.8-3.12 for windows and linux are generated
 in the channel <em>MaxBo</em> in <a class="reference external" href="https://anaconda.org/MaxBo">Anaconda Cloud</a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">myenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.9</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">myenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.12</span>
 <span class="n">conda</span> <span class="n">activate</span> <span class="n">myenv</span>
 
 <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
