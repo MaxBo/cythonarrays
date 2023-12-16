@@ -11,7 +11,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.6', '3.8', '3.9', '3.10', '3.11', '3.12'] #'3.7',
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v2
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
@@ -66,6 +66,7 @@ jobs:
         (
         mamba activate test-conda
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
+        echo "### All tests with conda passed! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
 
     - name: Upload package to conda
@@ -95,12 +96,11 @@ jobs:
         pip install -r matrixconverters\requirements.txt
         pip install matrixconverters\.
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
+        echo "### All tests with pip passed! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
 
     - name: run code coverage
-      env:
-        UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
-      if: ${{ env.UPLOAD_COV }}
+      if: ${{ matrix.python-version == '3.12' }}
       run: |
         (
         conda activate test-wheels
@@ -119,12 +119,11 @@ jobs:
         cd ..
         coverage combine cythoninstallhelpers\.coverage cythonarrays\.coverage matrixconverters\.coverage
         coverage xml
+        echo "### Code Coverage checked! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
 
     - name: Upload to Codecov
-      env:
-        UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
-      if: ${{ env.UPLOAD_COV }}
+      if: ${{ matrix.python-version == '3.12' }}
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
