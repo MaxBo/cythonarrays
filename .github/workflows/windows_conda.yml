@@ -11,9 +11,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
-    env:
-      UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
+        python-version: ['3.6', '3.8', '3.9', '3.10', '3.11', '3.12'] #'3.7',
     steps:
     - uses: actions/checkout@v2
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
@@ -100,6 +98,8 @@ jobs:
         )
 
     - name: run code coverage
+      env:
+        UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
       if: ${{ env.UPLOAD_COV }}
       run: |
         (
@@ -122,6 +122,8 @@ jobs:
         )
 
     - name: Upload to Codecov
+      env:
+        UPLOAD_COV: ${{ matrix.python-version == '3.12' }}
       if: ${{ env.UPLOAD_COV }}
       uses: codecov/codecov-action@v3
       with:
