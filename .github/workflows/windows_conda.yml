@@ -31,7 +31,7 @@ jobs:
       run: |
         (
         mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client boa
-        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
+        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark build
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov pytest-benchmark
         )
 
@@ -96,9 +96,9 @@ jobs:
         pip install -r matrixconverters\requirements.txt
         pip install matrixconverters\.
         python -m pytest --pyargs cythoninstallhelpers cythonarrays matrixconverters
-        python cythoninstallhelpers\setup.py sdist bdist_wheel
-        python cythonarrays\setup.py sdist bdist_wheel
-        python matrixconverters\setup.py sdist bdist_wheel
+        python -m build -n cythoninstallhelpers\.
+        python -m build -n cythonarrays\.
+        python -m build -n matrixconverters\.
         echo "### All tests with pip passed! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
 
