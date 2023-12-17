@@ -135,28 +135,31 @@ jobs:
         fail_ci_if_error: true # optional (default = false)
 
     - name: Publish cythoninstallhelpers to PyPI
-      uses: ortega2247/pypi-upload-action@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_CYTHONINSTALLHELPERS }}
         packages_dir: cythoninstallhelpers\dist
+        skip-existing: true
 
     - name: Publish cythonarrays to PyPI
-      uses: ortega2247/pypi-upload-action@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_CYTHONARRAYS }}
         packages_dir: cythonarrays\dist
+        skip-existing: true
 
     - name: Publish matrixconverters to PyPI
-      uses: ortega2247/pypi-upload-action@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
         packages_dir: matrixconverters\dist
+        skip-existing: true
 
     - name: Setup tmate session
       if: ${{ failure() }}
