@@ -140,7 +140,7 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_CYTHONINSTALLHELPERS }}
-        packages_dir: cythoninstallhelpers
+        packages_dir: cythoninstallhelpers\dist
 
     - name: Publish cythonarrays to PyPI
       uses: ortega2247/pypi-upload-action@master
@@ -148,7 +148,7 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_CYTHONARRAYS }}
-        packages_dir: cythonarrays
+        packages_dir: cythonarrays\dist
 
     - name: Publish matrixconverters to PyPI
       uses: ortega2247/pypi-upload-action@master
@@ -156,7 +156,7 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN_MATRIXCONVERTERS }}
-        packages_dir: matrixconverters
+        packages_dir: matrixconverters\dist
 
     - name: Setup tmate session
       if: ${{ failure() }}
