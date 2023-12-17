@@ -89,8 +89,6 @@ cdef class _Example(ArrayShapes):
             array with the weights for each zone
         """
         ret = self._calc_p_destination(g)
-        if ret == -1:
-            raise DestinationChoiceError(g)
         return ret
 
 
