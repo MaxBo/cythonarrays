@@ -16,7 +16,7 @@ dependencies = [
     "h5netcdf",
 ]
 
-description = "cython cdef-class to facilitate numpy-arrays as attributes"
+description = "package to read and write PTV-Visum Matrix Formats"
 maintainers = [
     { name = "Max Bohnet", email = "bohnet@ggr-planung.de" },
 ]

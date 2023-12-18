@@ -1,5 +1,4 @@
 numpy>=1.12
 cython>=0.27
 xarray>=0.9.6
-cythoninstallhelpers>=1.1.2
 h5netcdf

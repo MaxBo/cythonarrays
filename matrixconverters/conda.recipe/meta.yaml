@@ -1,8 +1,8 @@
-{% set data = load_setup_py_data() %}
+{% set version_str = load_file_regex(load_file='src/matrixconverters/_version.py', regex_pattern='^[_]{0,2}version[_]{0,2}\\s*=\\s*[\'\\"]([^\'\\"]*)[\'\\"]') %}
 
 package:
   name: matrixconverters
-  version: {{ data.get('version') }}
+  version: {{ version_str[1] }}
 
 source:
   path: ../
@@ -15,14 +15,10 @@ build:
 requirements:
   build:
     - python
-    - cythoninstallhelpers
-    - numpy>=1.12
-    - xarray
-    - h5netcdf
+    - setuptools>=61.0
 
   run:
     - python
-    - cythoninstallhelpers
     - numpy>=1.12
     - xarray
     - h5netcdf
