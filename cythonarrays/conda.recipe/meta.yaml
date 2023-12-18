@@ -15,22 +15,17 @@ build:
 requirements:
   build:
     - python
-    - setuptools>=41
+    - setuptools>=61
     - cython
     - numpy>=1.12
-    - xarray
-    - h5netcdf
     - cythoninstallhelpers
 
   run:
     - python
-    - setuptools>=41
     - cython
     - numpy>=1.12
     - xarray
     - h5netcdf
-    - cythoninstallhelpers
-    - pytest-cov
 
 test:
   requires:

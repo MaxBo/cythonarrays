@@ -1,7 +1,6 @@
 [build-system]
 requires = [
     "setuptools >= 61.0",
-    "cythoninstallhelpers >= 1.4",
 
 ]
 build-backend = "setuptools.build_meta"
@@ -12,7 +11,6 @@ name = "matrixconverters"
 dynamic = ["version"]
 
 dependencies = [
-    "cython",
     "numpy",
     "xarray",
     "h5netcdf",

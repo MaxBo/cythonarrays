@@ -15,15 +15,12 @@ build:
 requirements:
   build:
     - python
-    - setuptools>=41
-    - numpy>=1.12
-    - cython
+    - setuptools>=61
 
   run:
     - python
-    - setuptools>=41
+    - setuptools>=61
     - numpy>=1.12
-    - pytest-cov
     - cython
 
 test:
