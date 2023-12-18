@@ -1,20 +1,24 @@
 [build-system]
 requires = [
     "setuptools >= 61.0",
+    "cythoninstallhelpers >= 1.4",
+
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cythoninstallhelpers"
+name = "cythonarrays"
 
 dynamic = ["version"]
 
 dependencies = [
     "cython",
     "numpy",
+    "xarray",
+    "h5netcdf",
 ]
 
-description = "helper for cython installation"
+description = "cython cdef-class to facilitate numpy-arrays as attributes"
 maintainers = [
     { name = "Max Bohnet", email = "bohnet@ggr-planung.de" },
 ]
@@ -39,7 +43,7 @@ classifiers = [
 "Issue Tracker" = "https://github.com/MaxBo/cythonarrays/issues"
 
 [tool.setuptools.dynamic]
-version = {attr = "cythoninstallhelpers.__version__"}
+version = {attr = "cythonarrays.__version__"}
 
 [project.optional-dependencies]
 test = [
@@ -51,3 +55,6 @@ testpaths = [
     "tests",
 ]
 
+[tool.setuptools.package-data]
+cythonarrays = ['*.pxd', '*.pyx', '*.pyxbld']
+'cythonarrays.tests' = ['*.pxd', '*.pyx', '*.pyxbld']

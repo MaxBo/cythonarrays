@@ -6,7 +6,7 @@ from cythoninstallhelpers.configure_logger import (SimLogger,
 import os
 import glob
 from .module_with_logging import function_with_logging
-from cythoninstallhelpers.get_version import get_version
+from cythoninstallhelpers.build_config import make_ext
 
 class Test01_Logger:
     """Test the the SimLogger"""
@@ -39,8 +39,8 @@ class Test01_Logger:
         logger.debug('Debug in test_01')
         logger.warning('Warn in test_01')
 
-        logger = get_logger(get_version)
-        logger.warning('Logging for a get_version function')
+        logger = get_logger(make_ext)
+        logger.warning('Logging for a make_ext function')
 
         instance = 'A String'
         logger = get_logger(instance)
