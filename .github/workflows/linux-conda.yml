@@ -31,16 +31,12 @@ jobs:
         conda install conda-build conda-verify anaconda-client twine readme_renderer
         conda create -q -n test-environment python=${{ matrix.python-version }} numpy pytest-cov build
 
-    - name: Build and test cythonarrays
-      run: |
-        export TMPDIR=${{ runner.TEMP }}
-        export CONDA_BLD_PATH=$TMPDIR
-        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-
     - name: Build wheel and run tests for cythonarrays
       run: |
         (
-        eval "$(conda shell.bash activate test-environment)"
+        conda info --envs
+        $CONDA_EXE shell.bash activate test-environment
+        eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
         pip install -r requirements.txt
@@ -59,6 +55,12 @@ jobs:
         pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
         sphinx-apidoc -f --separate -o docs_rst/cythonarrays src/cythonarrays
         sphinx-build docs_rst ../docs
+
+    - name: Build and test cythonarrays
+      run: |
+        export TMPDIR=${{ runner.TEMP }}
+        export CONDA_BLD_PATH=$TMPDIR
+        conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
 
     - name: Deploy Docs to gh-pages
       if: ${{ matrix.python-version == '3.12' && github.ref == 'refs/heads/master' }}
