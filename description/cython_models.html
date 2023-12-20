@@ -50,16 +50,11 @@
 <p>xarray is a great package to work with a set of arrays with named dimensions.</p>
 <p>The purpose of the cythonarrays package is to make writing cdef-Classes in cython easyer, safer and more convenient by linking to numpy and xarray.</p>
 <p>It consists of the following components:</p>
-<section id="cythoninstallhelpers">
-<h2>cythoninstallhelpers<a class="headerlink" href="#cythoninstallhelpers" title="Link to this heading">¶</a></h2>
-<p>this package provides some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
-It includes:</p>
+<p>The following modules provide some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.</p>
 <ul class="simple">
 <li><p>build_config.py : ensure that numpy and openmp is correctly linked in the cython file by using a .pyxbld-file</p></li>
 <li><p>make_cython_extensions.py : use make_extensions(list_of_extention_module_names) in the setup.py to define ext_modules</p></li>
-<li><p>get_version.py : import the version number from a _version.py file with</p></li>
 </ul>
-</section>
 <section id="cythonarrays">
 <h2>cythonarrays<a class="headerlink" href="#cythonarrays" title="Link to this heading">¶</a></h2>
 <p>this package provides base classes for cdef-Cython-Classes.</p>
@@ -277,7 +272,6 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Purpose of Cythonarrays</a><ul>
-<li><a class="reference internal" href="#cythoninstallhelpers">cythoninstallhelpers</a></li>
 <li><a class="reference internal" href="#cythonarrays">cythonarrays</a></li>
 </ul>
 </li>

@@ -42,6 +42,46 @@
   <section id="welcome-to-the-cythonarrays-documentation">
 <h1>Welcome to the Cythonarrays documentation!<a class="headerlink" href="#welcome-to-the-cythonarrays-documentation" title="Link to this heading">¶</a></h1>
 <p>Cythonarray has been developed to facilitate the use of Cython Cdef-classes with numpy-arrays</p>
+<a class="reference external image-reference" href="http://www.gnu.org/licenses/gpl-3.0"><img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/linux-conda.yml"><img alt="Build Status Linux" src="https://github.com/MaxBo/cythonarrays/actions/workflows/linux-conda.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml"><img alt="Build Status Windows" src="https://github.com/MaxBo/cythonarrays/actions/workflows/windows-conda.yml/badge.svg" /></a>
+<a class="reference external image-reference" href="https://codecov.io/gh/MaxBo/cythonarrays"><img alt="codecov" src="https://codecov.io/gh/MaxBo/cythonarrays/branch/master/graph/badge.svg" /></a>
+</section>
+<section id="cythonarrays">
+<h1>cythonarrays<a class="headerlink" href="#cythonarrays" title="Link to this heading">¶</a></h1>
+<p>Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.</p>
+<p>It consists of three packages:</p>
+<section id="id1">
+<h2>cythonarrays:<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<a class="reference external image-reference" href="https://badge.fury.io/py/cythonarrays"><img alt="PyPI version" src="https://badge.fury.io/py/cythonarrays.svg" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/maxbo/cythonarrays"><img alt="Anaconda-Server Badge" src="https://anaconda.org/maxbo/cythonarrays/badges/version.svg" /></a>
+<p>provides a Base-Class for cython CDef-Classes, that allow to define arrays
+as attributes which can be used in cython code as fast memoryviews and at the same time
+be accessed from python as numpy-arrays
+In addition, the dimensions and shapes of data assigned to the arrays is checked automatically.
+If you try to set data with wrong dimensions or shapes, an error is thrown.
+Data is automatically converted to the right dtype.</p>
+<p><a class="reference external" href="https://maxbo.github.io/cythonarrays/">Documentation</a></p>
+</section>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<p>You can use pip to install the packages (and the requirements like numpy).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">cythonarrays</span>
+</pre></div>
+</div>
+<p>Another way to handle dependencies is to use <a class="reference external" href="https://conda.io/miniconda.html">conda</a>.</p>
+<p>There conda packages for python 3.8-3.12 for windows and linux are generated
+in the channel <em>MaxBo</em> in <a class="reference external" href="https://anaconda.org/MaxBo">Anaconda Cloud</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">myenv</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.12</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">myenv</span>
+
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">MaxBo</span>
+
+<span class="n">conda</span> <span class="n">install</span> <span class="n">cythonarrays</span>
+</pre></div>
+</div>
 </section>
 <section id="this-documentation-contains">
 <h1>This documentation contains<a class="headerlink" href="#this-documentation-contains" title="Link to this heading">¶</a></h1>
@@ -50,7 +90,6 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="description/cython_models.html">Purpose of Cythonarrays</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#cythoninstallhelpers">cythoninstallhelpers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="description/cython_models.html#cythonarrays">cythonarrays</a></li>
 </ul>
 </li>
@@ -81,15 +120,6 @@
 <p>Code Documentation</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="cythoninstallhelpers/modules.html">     cythoninstallhelpers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html">cythoninstallhelpers package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#subpackages">Subpackages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cythoninstallhelpers/cythoninstallhelpers.html#module-contents">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="cythonarrays/modules.html">     cythonarrays</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cythonarrays/cythonarrays.html">cythonarrays package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cythonarrays/cythonarrays.html#subpackages">Subpackages</a></li>
@@ -122,6 +152,11 @@
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Welcome to the Cythonarrays documentation!</a></li>
+<li><a class="reference internal" href="#cythonarrays">cythonarrays</a><ul>
+<li><a class="reference internal" href="#id1">cythonarrays:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#this-documentation-contains">This documentation contains</a><ul>
 </ul>
 </li>

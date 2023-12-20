@@ -11,17 +11,13 @@ The purpose of the cythonarrays package is to make writing cdef-Classes in cytho
 
 It consists of the following components:
 
-cythoninstallhelpers
---------------------
 
-this package provides some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
-It includes:
+The following modules provide some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
 
 * build_config.py : ensure that numpy and openmp is correctly linked in the cython file by using a .pyxbld-file
 
 * make_cython_extensions.py : use make_extensions(list_of_extention_module_names) in the setup.py to define ext_modules
 
-* get_version.py : import the version number from a _version.py file with
 
 cythonarrays
 ------------
