@@ -9,13 +9,6 @@ Python Packages to facilitate cython cdef-classes that expose memoryviews as num
 
 It consists of three packages:
 
-##cythoninstallhelpers:
-[![PyPI version](https://badge.fury.io/py/cythoninstallhelpers.svg)](https://badge.fury.io/py/cythoninstallhelpers)
-[![Anaconda-Server Badge](https://anaconda.org/maxbo/cythoninstallhelpers/badges/version.svg)](https://anaconda.org/maxbo/cythoninstallhelpers)
-
-a package that provides functions that are used in the setup.py of cythonarrays
-therefore, it has to be installed first
-
 ##cythonarrays:
 [![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
 [![Anaconda-Server Badge](https://anaconda.org/maxbo/cythonarrays/badges/version.svg)](https://anaconda.org/maxbo/cythonarrays)
@@ -34,7 +27,6 @@ Data is automatically converted to the right dtype.
 You can use pip to install the packages (and the requirements like numpy).
 
 ```
-pip install cythoninstallhelpers
 pip install cythonarrays
 ```
 
