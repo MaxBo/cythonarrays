@@ -34,7 +34,7 @@ jobs:
     - name: Build wheel and run tests for cythonarrays
       run: |
         (
-        eval "$(conda shell.bash activate test-environment)"
+        eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
         pip install -r requirements.txt
@@ -47,7 +47,7 @@ jobs:
     - name: Create Docs
       if: ${{ matrix.python-version == '3.12' }}
       run: |
-        eval "$(conda shell.bash activate test-environment)"
+        eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
         pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
