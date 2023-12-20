@@ -1,7 +1,7 @@
-matrixconverters.tests.test\_read\_visum module
+cythonarrays.tests.module\_with\_logging module
 ===============================================
 
-.. automodule:: matrixconverters.tests.test_read_visum
+.. automodule:: cythonarrays.tests.module_with_logging
    :members:
    :undoc-members:
    :show-inheritance:

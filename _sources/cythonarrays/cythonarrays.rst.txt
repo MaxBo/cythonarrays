@@ -18,6 +18,9 @@ Submodules
    cythonarrays.array_descriptors
    cythonarrays.array_properties
    cythonarrays.array_shapes
+   cythonarrays.build_config
+   cythonarrays.configure_logger
+   cythonarrays.make_cython_extensions
    cythonarrays.numpy_types
 
 Module contents

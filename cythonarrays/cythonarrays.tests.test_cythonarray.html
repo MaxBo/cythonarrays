@@ -1,25 +1,21 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>cythonarrays.tests.test_cythonarray module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=72d88caf"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cythonarrays.array_descriptors module" href="cythonarrays.array_descriptors.html" />
+    <link rel="next" title="cythonarrays.tests.test_logger module" href="cythonarrays.tests.test_logger.html" />
     <link rel="prev" title="cythonarrays.tests.simple_python module" href="cythonarrays.tests.simple_python.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,7 +28,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.array_descriptors.html" title="cythonarrays.array_descriptors module"
+          <a href="cythonarrays.tests.test_logger.html" title="cythonarrays.tests.test_logger module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="cythonarrays.tests.simple_python.html" title="cythonarrays.tests.simple_python module"
@@ -50,258 +46,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-cythonarrays.tests.test_cythonarray">
-<span id="cythonarrays-tests-test-cythonarray-module"></span><h1>cythonarrays.tests.test_cythonarray module<a class="headerlink" href="#module-cythonarrays.tests.test_cythonarray" title="Permalink to this heading">¶</a></h1>
-<p>Created on Fri Jun 10 21:00:21 2016</p>
-<p>&#64;author: MaxBohnet</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">Test01_ExampleCDefClass</span></span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Test the Example CDefClass</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01_test_init_array">
-<span class="sig-name descname"><span class="pre">test_01_test_init_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01_test_init_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01a_test_init_array_with_other_datatypes">
-<span class="sig-name descname"><span class="pre">test_01a_test_init_array_with_other_datatypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01a_test_init_array_with_other_datatypes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_02_test_shape">
-<span class="sig-name descname"><span class="pre">test_02_test_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_02_test_shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test if the shapes of array are controlled correctly</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_03_test_dimensions">
-<span class="sig-name descname"><span class="pre">test_03_test_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_03_test_dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the dimensions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_04_test_dtype">
-<span class="sig-name descname"><span class="pre">test_04_test_dtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_04_test_dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the dimensions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_10_test_model">
-<span class="sig-name descname"><span class="pre">test_10_test_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_10_test_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass model</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>example</strong> (<a class="reference internal" href="cythonarrays.tests.example_python.html#cythonarrays.tests.example_python.Example" title="cythonarrays.tests.example_python.Example"><em>Example</em></a>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_11_dataset">
-<span class="sig-name descname"><span class="pre">test_11_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_11_dataset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the creation of an xarrays Dataset linked to the Cythonclass</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>example</strong> (<a class="reference internal" href="cythonarrays.tests.example_python.html#cythonarrays.tests.example_python.Example" title="cythonarrays.tests.example_python.Example"><em>Example</em></a>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_20_save_and_read_ds">
-<span class="sig-name descname"><span class="pre">test_20_save_and_read_ds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempfile_h5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_20_save_and_read_ds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test that saving and re-reading the data works</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>example</strong> (<a class="reference internal" href="cythonarrays.tests.example_python.html#cythonarrays.tests.example_python.Example" title="cythonarrays.tests.example_python.Example"><em>Example</em></a>) – </p></li>
-<li><p><strong>tempfile_h5</strong> (<em>str</em>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_21_assign_bool">
-<span class="sig-name descname"><span class="pre">test_21_assign_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_21_assign_bool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test boolean array</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>example</strong> (<a class="reference internal" href="cythonarrays.tests.example_python.html#cythonarrays.tests.example_python.Example" title="cythonarrays.tests.example_python.Example"><em>Example</em></a>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_30_test_init_array">
-<span class="sig-name descname"><span class="pre">test_30_test_init_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_30_test_init_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_32_test_not_init_array">
-<span class="sig-name descname"><span class="pre">test_32_test_not_init_array</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_32_test_not_init_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_33_del_property">
-<span class="sig-name descname"><span class="pre">test_33_del_property</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_33_del_property" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_34_save_ds">
-<span class="sig-name descname"><span class="pre">test_34_save_ds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempfile_h5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_34_save_ds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test the Example CDefClass creation</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">Test02_SimpleCDefClass</span></span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Test the Simple CDefClass</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass.test_01_simple_class">
-<span class="sig-name descname"><span class="pre">test_01_simple_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass.test_01_simple_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test some features of the CDef-Class</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">Test04_Test_Instantiation</span></span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Test the instantiation of the class</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test041_test_instantiation">
-<span class="sig-name descname"><span class="pre">test041_test_instantiation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test041_test_instantiation" title="Permalink to this definition">¶</a></dt>
-<dd><p>not subclassing shoud raise a NotImplementedError
-because the dtype is not initialized</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test042_test_nan">
-<span class="sig-name descname"><span class="pre">test042_test_nan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test042_test_nan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test nan</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.example">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">example</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">km_ij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_groups</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persons_gi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.example" title="Permalink to this definition">¶</a></dt>
-<dd><p>different values for home zone</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="cythonarrays.tests.example_python.html#cythonarrays.tests.example_python.Example" title="cythonarrays.tests.example_python.Example"><code class="xref py py-class docutils literal notranslate"><span class="pre">Example</span></code></a></p>
-</dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>km_ij</strong> (<em>ndarray</em>) – </p></li>
-<li><p><strong>jobs</strong> (<em>ndarray</em>) – </p></li>
-<li><p><strong>params_groups</strong> (<em>ndarray</em>) – </p></li>
-<li><p><strong>persons_gi</strong> (<em>ndarray</em>) – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.jobs">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">jobs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.jobs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.km_ij">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">km_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.km_ij" title="Permalink to this definition">¶</a></dt>
-<dd><p>travel times</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.params_groups">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">params_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.params_groups" title="Permalink to this definition">¶</a></dt>
-<dd><p>different values for saving categories</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.persons_gi">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">persons_gi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.persons_gi" title="Permalink to this definition">¶</a></dt>
-<dd><p>different values for home zone</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cythonarrays.tests.test_cythonarray.tempfile_h5">
-<span class="sig-prename descclassname"><span class="pre">cythonarrays.tests.test_cythonarray.</span></span><span class="sig-name descname"><span class="pre">tempfile_h5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.tests.test_cythonarray.tempfile_h5" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="cythonarrays-tests-test-cythonarray-module">
+<h1>cythonarrays.tests.test_cythonarray module<a class="headerlink" href="#cythonarrays-tests-test-cythonarray-module" title="Link to this heading">¶</a></h1>
 </section>
 
 
@@ -312,54 +58,14 @@ because the dtype is not initialized</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">cythonarrays.tests.test_cythonarray module</a><ul>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass</span></code></a><ul>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01_test_init_array"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_01_test_init_array()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_01a_test_init_array_with_other_datatypes"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_01a_test_init_array_with_other_datatypes()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_02_test_shape"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_02_test_shape()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_03_test_dimensions"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_03_test_dimensions()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_04_test_dtype"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_04_test_dtype()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_10_test_model"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_10_test_model()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_11_dataset"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_11_dataset()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_20_save_and_read_ds"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_20_save_and_read_ds()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_21_assign_bool"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_21_assign_bool()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_30_test_init_array"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_30_test_init_array()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_32_test_not_init_array"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_32_test_not_init_array()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_33_del_property"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_33_del_property()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test01_ExampleCDefClass.test_34_save_ds"><code class="docutils literal notranslate"><span class="pre">Test01_ExampleCDefClass.test_34_save_ds()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass"><code class="docutils literal notranslate"><span class="pre">Test02_SimpleCDefClass</span></code></a><ul>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test02_SimpleCDefClass.test_01_simple_class"><code class="docutils literal notranslate"><span class="pre">Test02_SimpleCDefClass.test_01_simple_class()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation"><code class="docutils literal notranslate"><span class="pre">Test04_Test_Instantiation</span></code></a><ul>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test041_test_instantiation"><code class="docutils literal notranslate"><span class="pre">Test04_Test_Instantiation.test041_test_instantiation()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.Test04_Test_Instantiation.test042_test_nan"><code class="docutils literal notranslate"><span class="pre">Test04_Test_Instantiation.test042_test_nan()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.example"><code class="docutils literal notranslate"><span class="pre">example()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.jobs"><code class="docutils literal notranslate"><span class="pre">jobs()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.km_ij"><code class="docutils literal notranslate"><span class="pre">km_ij()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.params_groups"><code class="docutils literal notranslate"><span class="pre">params_groups()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.persons_gi"><code class="docutils literal notranslate"><span class="pre">persons_gi()</span></code></a></li>
-<li><a class="reference internal" href="#cythonarrays.tests.test_cythonarray.tempfile_h5"><code class="docutils literal notranslate"><span class="pre">tempfile_h5()</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="cythonarrays.tests.simple_python.html"
                           title="previous chapter">cythonarrays.tests.simple_python module</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="cythonarrays.array_descriptors.html"
-                          title="next chapter">cythonarrays.array_descriptors module</a></p>
+    <p class="topless"><a href="cythonarrays.tests.test_logger.html"
+                          title="next chapter">cythonarrays.tests.test_logger module</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -392,7 +98,7 @@ because the dtype is not initialized</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.array_descriptors.html" title="cythonarrays.array_descriptors module"
+          <a href="cythonarrays.tests.test_logger.html" title="cythonarrays.tests.test_logger module"
              >next</a> |</li>
         <li class="right" >
           <a href="cythonarrays.tests.simple_python.html" title="cythonarrays.tests.simple_python module"
@@ -405,9 +111,9 @@ because the dtype is not initialized</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 17, 2023.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 20, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

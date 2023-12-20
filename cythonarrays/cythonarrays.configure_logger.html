@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>cythonarrays.configure_logger module &#8212; Cythonarrays</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
+    
+    <script src="../_static/documentation_options.js?v=72d88caf"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="cythonarrays.make_cython_extensions module" href="cythonarrays.make_cython_extensions.html" />
+    <link rel="prev" title="cythonarrays.build_config module" href="cythonarrays.build_config.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.make_cython_extensions.html" title="cythonarrays.make_cython_extensions module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.build_config.html" title="cythonarrays.build_config module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" accesskey="U">cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.configure_logger module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-cythonarrays.configure_logger">
+<span id="cythonarrays-configure-logger-module"></span><h1>cythonarrays.configure_logger module<a class="headerlink" href="#module-cythonarrays.configure_logger" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.configure_logger.</span></span><span class="sig-name descname"><span class="pre">SimLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Singleton Class for the logging</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>init the sim-logger</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.add_console_handler">
+<span class="sig-name descname"><span class="pre">add_console_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.add_console_handler" title="Link to this definition">¶</a></dt>
+<dd><p>create console handler with a higher log level</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.add_package">
+<span class="sig-name descname"><span class="pre">add_package</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.add_package" title="Link to this definition">¶</a></dt>
+<dd><p>add single package to the list of logged packages</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.add_packages">
+<span class="sig-name descname"><span class="pre">add_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packages</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.add_packages" title="Link to this definition">¶</a></dt>
+<dd><p>add list of packages to the list of logged packages</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.configure">
+<span class="sig-name descname"><span class="pre">configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LOG_FOLDER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'a'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.configure" title="Link to this definition">¶</a></dt>
+<dd><p>configures the file handlers for the logger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LOG_FOLDER</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the path to the log-folder</p></li>
+<li><p><strong>scenario</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the name of the scenario used in the log file</p></li>
+<li><p><strong>mode</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – a: append
+w: recreate logfile</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.create_logger_for_package">
+<span class="sig-name descname"><span class="pre">create_logger_for_package</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.create_logger_for_package" title="Link to this definition">¶</a></dt>
+<dd><p>create a logger for the package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the package to create the logger for</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.get" title="Link to this definition">¶</a></dt>
+<dd><p>returns a logger for the current package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance</strong> (<em>object</em>) – the instance to inspect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.get_caller_name">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_caller_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.get_caller_name" title="Link to this definition">¶</a></dt>
+<dd><p>Get a name of a caller in the format module.class.method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>skip</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – specifies how many levels of stack to skip while getting caller
+name. skip=1 means “who calls me”, skip=2 “who calls my caller” etc.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the caller. An empty string is returned if skipped levels exceed stack height</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.get_debug_formatter">
+<span class="sig-name descname"><span class="pre">get_debug_formatter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.get_debug_formatter" title="Link to this definition">¶</a></dt>
+<dd><p>return a formatter with detailed information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.get_info_formatter">
+<span class="sig-name descname"><span class="pre">get_info_formatter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.get_info_formatter" title="Link to this definition">¶</a></dt>
+<dd><p>return a formatter with less detailed information</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.SimLogger.truncate_packages">
+<span class="sig-name descname"><span class="pre">truncate_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.SimLogger.truncate_packages" title="Link to this definition">¶</a></dt>
+<dd><p>Delete all loggers for packages</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.get_logger">
+<span class="sig-prename descclassname"><span class="pre">cythonarrays.configure_logger.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.get_logger" title="Link to this definition">¶</a></dt>
+<dd><p>for the instance, get the package,
+add the package to the list of loggers,
+and return the logger for the instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance</strong> – an arbitrary object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logger-instace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cythonarrays.configure_logger.get_module_logger">
+<span class="sig-prename descclassname"><span class="pre">cythonarrays.configure_logger.</span></span><span class="sig-name descname"><span class="pre">get_module_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.configure_logger.get_module_logger" title="Link to this definition">¶</a></dt>
+<dd><p>create Module logger named after the module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the module name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">cythonarrays.configure_logger module</a><ul>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger"><code class="docutils literal notranslate"><span class="pre">SimLogger</span></code></a><ul>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.__init__"><code class="docutils literal notranslate"><span class="pre">SimLogger.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.add_console_handler"><code class="docutils literal notranslate"><span class="pre">SimLogger.add_console_handler()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.add_package"><code class="docutils literal notranslate"><span class="pre">SimLogger.add_package()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.add_packages"><code class="docutils literal notranslate"><span class="pre">SimLogger.add_packages()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.configure"><code class="docutils literal notranslate"><span class="pre">SimLogger.configure()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.create_logger_for_package"><code class="docutils literal notranslate"><span class="pre">SimLogger.create_logger_for_package()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.get"><code class="docutils literal notranslate"><span class="pre">SimLogger.get()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.get_caller_name"><code class="docutils literal notranslate"><span class="pre">SimLogger.get_caller_name()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.get_debug_formatter"><code class="docutils literal notranslate"><span class="pre">SimLogger.get_debug_formatter()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.get_info_formatter"><code class="docutils literal notranslate"><span class="pre">SimLogger.get_info_formatter()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.SimLogger.truncate_packages"><code class="docutils literal notranslate"><span class="pre">SimLogger.truncate_packages()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.configure_logger.get_module_logger"><code class="docutils literal notranslate"><span class="pre">get_module_logger()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cythonarrays.build_config.html"
+                          title="previous chapter">cythonarrays.build_config module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cythonarrays.make_cython_extensions.html"
+                          title="next chapter">cythonarrays.make_cython_extensions module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cythonarrays/cythonarrays.configure_logger.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.make_cython_extensions.html" title="cythonarrays.make_cython_extensions module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cythonarrays.build_config.html" title="cythonarrays.build_config module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="cythonarrays.html" >cythonarrays package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">cythonarrays.configure_logger module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 20, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

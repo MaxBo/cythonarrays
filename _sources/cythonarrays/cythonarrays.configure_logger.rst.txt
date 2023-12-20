@@ -1,7 +1,7 @@
-matrixconverters.xarray2netcdf module
+cythonarrays.configure\_logger module
 =====================================
 
-.. automodule:: matrixconverters.xarray2netcdf
+.. automodule:: cythonarrays.configure_logger
    :members:
    :undoc-members:
    :show-inheritance:

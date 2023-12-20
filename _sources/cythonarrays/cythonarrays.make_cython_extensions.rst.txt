@@ -1,0 +1,7 @@
+cythonarrays.make\_cython\_extensions module
+============================================
+
+.. automodule:: cythonarrays.make_cython_extensions
+   :members:
+   :undoc-members:
+   :show-inheritance:

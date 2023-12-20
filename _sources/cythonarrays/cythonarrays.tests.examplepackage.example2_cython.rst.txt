@@ -1,0 +1,7 @@
+cythonarrays.tests.examplepackage.example2\_cython module
+=========================================================
+
+.. automodule:: cythonarrays.tests.examplepackage.example2_cython
+   :members:
+   :undoc-members:
+   :show-inheritance:

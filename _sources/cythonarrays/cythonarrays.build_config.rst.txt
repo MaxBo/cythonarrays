@@ -1,7 +1,7 @@
-matrixconverters.read\_csv module
+cythonarrays.build\_config module
 =================================
 
-.. automodule:: matrixconverters.read_csv
+.. automodule:: cythonarrays.build_config
    :members:
    :undoc-members:
    :show-inheritance:

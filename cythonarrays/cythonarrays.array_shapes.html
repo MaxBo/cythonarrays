@@ -1,25 +1,21 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>cythonarrays.array_shapes module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=72d88caf"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cythonarrays.numpy_types module" href="cythonarrays.numpy_types.html" />
+    <link rel="next" title="cythonarrays.build_config module" href="cythonarrays.build_config.html" />
     <link rel="prev" title="cythonarrays.array_properties module" href="cythonarrays.array_properties.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,7 +28,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.numpy_types.html" title="cythonarrays.numpy_types module"
+          <a href="cythonarrays.build_config.html" title="cythonarrays.build_config module"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
@@ -50,22 +46,22 @@
           <div class="body" role="main">
             
   <section id="module-cythonarrays.array_shapes">
-<span id="cythonarrays-array-shapes-module"></span><h1>cythonarrays.array_shapes module<a class="headerlink" href="#module-cythonarrays.array_shapes" title="Permalink to this heading">¶</a></h1>
+<span id="cythonarrays-array-shapes-module"></span><h1>cythonarrays.array_shapes module<a class="headerlink" href="#module-cythonarrays.array_shapes" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.array_shapes.</span></span><span class="sig-name descname"><span class="pre">ArrayShapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.array_shapes.</span></span><span class="sig-name descname"><span class="pre">ArrayShapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base Class for a Cython cdef class which helps to handle
 memoryviews better</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>inits the Array and creates the constands for NAN and NINF</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.INF_d">
-<span class="sig-name descname"><span class="pre">INF_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_d" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">INF_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_d" title="Link to this definition">¶</a></dt>
 <dd><p>‘double’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -76,7 +72,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.INF_f">
-<span class="sig-name descname"><span class="pre">INF_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_f" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">INF_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.INF_f" title="Link to this definition">¶</a></dt>
 <dd><p>‘float’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -87,7 +83,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.NAN_d">
-<span class="sig-name descname"><span class="pre">NAN_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_d" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NAN_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_d" title="Link to this definition">¶</a></dt>
 <dd><p>‘double’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -98,7 +94,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.NAN_f">
-<span class="sig-name descname"><span class="pre">NAN_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_f" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NAN_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NAN_f" title="Link to this definition">¶</a></dt>
 <dd><p>‘float’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -109,7 +105,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.NINF_d">
-<span class="sig-name descname"><span class="pre">NINF_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_d" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NINF_d</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_d" title="Link to this definition">¶</a></dt>
 <dd><p>‘double’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -120,7 +116,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.NINF_f">
-<span class="sig-name descname"><span class="pre">NINF_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_f" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NINF_f</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.NINF_f" title="Link to this definition">¶</a></dt>
 <dd><p>‘float’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
@@ -131,7 +127,7 @@ memoryviews better</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cythonarrays.array_shapes.ArrayShapes.isnan_py">
-<span class="sig-name descname"><span class="pre">isnan_py</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.isnan_py" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">isnan_py</span></span><a class="headerlink" href="#cythonarrays.array_shapes.ArrayShapes.isnan_py" title="Link to this definition">¶</a></dt>
 <dd><p>python wrapper around _isnan()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -141,6 +137,16 @@ memoryviews better</p>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cythonarrays.array_shapes.__reduce_cython__">
+<span class="sig-prename descclassname"><span class="pre">cythonarrays.array_shapes.</span></span><span class="sig-name descname"><span class="pre">__reduce_cython__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.__reduce_cython__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cythonarrays.array_shapes.__setstate_cython__">
+<span class="sig-prename descclassname"><span class="pre">cythonarrays.array_shapes.</span></span><span class="sig-name descname"><span class="pre">__setstate_cython__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__pyx_state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_shapes.__setstate_cython__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </section>
 
@@ -166,6 +172,8 @@ memoryviews better</p>
 <li><a class="reference internal" href="#cythonarrays.array_shapes.ArrayShapes.isnan_py"><code class="docutils literal notranslate"><span class="pre">ArrayShapes.isnan_py</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#cythonarrays.array_shapes.__reduce_cython__"><code class="docutils literal notranslate"><span class="pre">__reduce_cython__()</span></code></a></li>
+<li><a class="reference internal" href="#cythonarrays.array_shapes.__setstate_cython__"><code class="docutils literal notranslate"><span class="pre">__setstate_cython__()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -178,8 +186,8 @@ memoryviews better</p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="cythonarrays.numpy_types.html"
-                          title="next chapter">cythonarrays.numpy_types module</a></p>
+    <p class="topless"><a href="cythonarrays.build_config.html"
+                          title="next chapter">cythonarrays.build_config module</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -212,7 +220,7 @@ memoryviews better</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.numpy_types.html" title="cythonarrays.numpy_types module"
+          <a href="cythonarrays.build_config.html" title="cythonarrays.build_config module"
              >next</a> |</li>
         <li class="right" >
           <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
@@ -224,9 +232,9 @@ memoryviews better</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 17, 2023.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 20, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

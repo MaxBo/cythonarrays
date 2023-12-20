@@ -25,7 +25,6 @@ Code Documentation
 
 	cythoninstallhelpers <cythoninstallhelpers/modules>
 	cythonarrays <cythonarrays/modules>
-	matrixconverters <matrixconverters/modules>
 
 
 Indices and tables

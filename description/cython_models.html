@@ -1,21 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Purpose of Cythonarrays &#8212; Cythonarrays</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=72d88caf"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -48,14 +44,14 @@
           <div class="body" role="main">
             
   <section id="purpose-of-cythonarrays">
-<h1>Purpose of Cythonarrays<a class="headerlink" href="#purpose-of-cythonarrays" title="Permalink to this heading">¶</a></h1>
+<h1>Purpose of Cythonarrays<a class="headerlink" href="#purpose-of-cythonarrays" title="Link to this heading">¶</a></h1>
 <p>Cython is a great tool to write Code at C-Speed.</p>
 <p>Numpy is a great tool to work with arrays.</p>
 <p>xarray is a great package to work with a set of arrays with named dimensions.</p>
 <p>The purpose of the cythonarrays package is to make writing cdef-Classes in cython easyer, safer and more convenient by linking to numpy and xarray.</p>
 <p>It consists of the following components:</p>
 <section id="cythoninstallhelpers">
-<h2>cythoninstallhelpers<a class="headerlink" href="#cythoninstallhelpers" title="Permalink to this heading">¶</a></h2>
+<h2>cythoninstallhelpers<a class="headerlink" href="#cythoninstallhelpers" title="Link to this heading">¶</a></h2>
 <p>this package provides some help for compiling cython classes that use numpy and openmp. Frequently used code can be imported in the setup.py the .pyxbld files.
 It includes:</p>
 <ul class="simple">
@@ -65,16 +61,16 @@ It includes:</p>
 </ul>
 </section>
 <section id="cythonarrays">
-<h2>cythonarrays<a class="headerlink" href="#cythonarrays" title="Permalink to this heading">¶</a></h2>
+<h2>cythonarrays<a class="headerlink" href="#cythonarrays" title="Link to this heading">¶</a></h2>
 <p>this package provides base classes for cdef-Cython-Classes.</p>
 <p>You create a cyton cdef-class with memoryviews and subclass this class in a python-class.
 The python class converts the memoryviews into numpy arrays. In addition, it wraps the arrays into an <a class="reference external" href="http://xarray.pydata.org">xarray</a>-class. If you set arrays with numpy-arrays, they are validated in terms of shape and dtype. cdef-methods on the cython-class can manipulate the data at c-speed.</p>
 </section>
 </section>
 <section id="how-to-work-with-cythonarrays-cdef-classes">
-<h1>How to work with Cythonarrays CDef-Classes<a class="headerlink" href="#how-to-work-with-cythonarrays-cdef-classes" title="Permalink to this heading">¶</a></h1>
+<h1>How to work with Cythonarrays CDef-Classes<a class="headerlink" href="#how-to-work-with-cythonarrays-cdef-classes" title="Link to this heading">¶</a></h1>
 <section id="link-numpy-and-openmp-sources">
-<h2>link numpy and openmp sources<a class="headerlink" href="#link-numpy-and-openmp-sources" title="Permalink to this heading">¶</a></h2>
+<h2>link numpy and openmp sources<a class="headerlink" href="#link-numpy-and-openmp-sources" title="Link to this heading">¶</a></h2>
 <p>In order to use Cython with numpy, the numpy sources have to be linked to the Cython code.</p>
 <p>One way is to use for each Cython module 4 files:</p>
 <ul class="simple">
@@ -92,7 +88,7 @@ The python class converts the memoryviews into numpy arrays. In addition, it wra
 <p>This tells the compiler to use the platform specific openmp-libraries and to include the numpy dirs.</p>
 </section>
 <section id="cython-cdef-classes">
-<h2>Cython cdef classes<a class="headerlink" href="#cython-cdef-classes" title="Permalink to this heading">¶</a></h2>
+<h2>Cython cdef classes<a class="headerlink" href="#cython-cdef-classes" title="Link to this heading">¶</a></h2>
 <p>Cython cdef classes are extension types for cython.</p>
 <p>All methods and class attributes, that should be used with C-Speed have to by defined.
 This can be done in the declaration .pxd file:</p>
@@ -118,7 +114,7 @@ if no python attributes or methods are used within the function and only other <
 <p>A <strong>nogil</strong> function cannot return nothing, so specify at least a return type like char.</p>
 </section>
 <section id="memoryviews-and-numpy-arrays">
-<h2>memoryviews and numpy arrays<a class="headerlink" href="#memoryviews-and-numpy-arrays" title="Permalink to this heading">¶</a></h2>
+<h2>memoryviews and numpy arrays<a class="headerlink" href="#memoryviews-and-numpy-arrays" title="Link to this heading">¶</a></h2>
 <p>A comfortable way to work with numpy arrays in cdef classes is the following:</p>
 <ul class="simple">
 <li><p>the cdef class holds an memoryview on the data as an attribute
@@ -232,7 +228,7 @@ The Data is accessible form Python via:</p>
 </section>
 </section>
 <section id="link-cythonarrays-class-to-xarray-dataset">
-<h1>Link Cythonarrays-Class to xarray-Dataset<a class="headerlink" href="#link-cythonarrays-class-to-xarray-dataset" title="Permalink to this heading">¶</a></h1>
+<h1>Link Cythonarrays-Class to xarray-Dataset<a class="headerlink" href="#link-cythonarrays-class-to-xarray-dataset" title="Link to this heading">¶</a></h1>
 <p>You can create an <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray-Dataset</a> which infers the dimensions, coordinates, and data variables from the cdef-class.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">example</span><span class="o">.</span><span class="n">create_ds</span><span class="p">()</span>
@@ -256,7 +252,7 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <section id="xarray-dataset-is-linked-to-cython-class">
-<h2>xarray-Dataset is linked to cython class<a class="headerlink" href="#xarray-dataset-is-linked-to-cython-class" title="Permalink to this heading">¶</a></h2>
+<h2>xarray-Dataset is linked to cython class<a class="headerlink" href="#xarray-dataset-is-linked-to-cython-class" title="Link to this heading">¶</a></h2>
 <p>The Data variables of the xarray-Dataset share the same memory with the attributes of the cdef-Cython-Class.
 So when a cdef function modifies a value  in example._trips_ij</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">_trips_ij</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
@@ -349,9 +345,9 @@ So when a cdef function modifies a value  in example._trips_ij</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 17, 2023.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 20, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

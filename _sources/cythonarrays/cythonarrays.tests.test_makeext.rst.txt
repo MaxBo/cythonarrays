@@ -1,0 +1,7 @@
+cythonarrays.tests.test\_makeext module
+=======================================
+
+.. automodule:: cythonarrays.tests.test_makeext
+   :members:
+   :undoc-members:
+   :show-inheritance:

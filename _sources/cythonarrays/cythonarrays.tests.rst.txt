@@ -1,6 +1,14 @@
 cythonarrays.tests package
 ==========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cythonarrays.tests.examplepackage
+
 Submodules
 ----------
 
@@ -9,9 +17,12 @@ Submodules
 
    cythonarrays.tests.example_cython
    cythonarrays.tests.example_python
+   cythonarrays.tests.module_with_logging
    cythonarrays.tests.simple_cython
    cythonarrays.tests.simple_python
    cythonarrays.tests.test_cythonarray
+   cythonarrays.tests.test_logger
+   cythonarrays.tests.test_makeext
 
 Module contents
 ---------------

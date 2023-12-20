@@ -1,26 +1,22 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>cythonarrays.array_descriptors module &#8212; Cythonarrays</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/documentation_options.js?v=72d88caf"></script>
+    <script src="../_static/doctools.js?v=d248f5b3"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="cythonarrays.array_properties module" href="cythonarrays.array_properties.html" />
-    <link rel="prev" title="cythonarrays.tests.test_cythonarray module" href="cythonarrays.tests.test_cythonarray.html" /> 
+    <link rel="prev" title="cythonarrays.tests.test_makeext module" href="cythonarrays.tests.test_makeext.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -35,7 +31,7 @@
           <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.tests.test_cythonarray.html" title="cythonarrays.tests.test_cythonarray module"
+          <a href="cythonarrays.tests.test_makeext.html" title="cythonarrays.tests.test_makeext module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
@@ -50,10 +46,10 @@
           <div class="body" role="main">
             
   <section id="module-cythonarrays.array_descriptors">
-<span id="cythonarrays-array-descriptors-module"></span><h1>cythonarrays.array_descriptors module<a class="headerlink" href="#module-cythonarrays.array_descriptors" title="Permalink to this heading">¶</a></h1>
+<span id="cythonarrays-array-descriptors-module"></span><h1>cythonarrays.array_descriptors module<a class="headerlink" href="#module-cythonarrays.array_descriptors" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.array_descriptors.</span></span><span class="sig-name descname"><span class="pre">ArrayDescriptor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_numpy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cythonarrays.array_descriptors.</span></span><span class="sig-name descname"><span class="pre">ArrayDescriptor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_numpy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>describes an array used as an instance attribute of a cython class</p>
 <dl class="field-list simple">
@@ -62,22 +58,22 @@
 <li><p><strong>name</strong> (<em>str</em>) – </p></li>
 <li><p><strong>dtype</strong> (<em>str</em>) – </p></li>
 <li><p><strong>ndim</strong> (<em>int</em>) – </p></li>
-<li><p><strong>shape</strong> (<em>Tuple</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>shape</strong> (<em>Tuple</em><em>[</em><em>int</em><em> | </em><em>str</em><em>]</em>) – </p></li>
 <li><p><strong>dtype_numpy</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_numpy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_numpy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.__init__" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the name of the array</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the name of the array</p></li>
 <li><p><strong>dtype</strong> (<em>str</em>) – the numpy-dtype of the array for internal storage</p></li>
 <li><p><strong>ndim</strong> (<em>int</em>) – the number of dimensions of the array</p></li>
-<li><p><strong>shape</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]) – the shape of the array</p></li>
-<li><p><strong>dtype_numpy</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – the numpy-dtype of the array that should be returned</p></li>
+<li><p><strong>shape</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</span>) – the shape of the array</p></li>
+<li><p><strong>dtype_numpy</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the numpy-dtype of the array that should be returned</p></li>
 <li><p><strong>default</strong> (<em>number</em>) – the default value</p></li>
 </ul>
 </dd>
@@ -86,7 +82,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.get_shape">
-<span class="sig-name descname"><span class="pre">get_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.get_shape" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.get_shape" title="Link to this definition">¶</a></dt>
 <dd><p>get the shape of the array defined by the ArrayDescriptor
 using the information from the ArrayShape-instance</p>
 <dl class="field-list simple">
@@ -94,7 +90,7 @@ using the information from the ArrayShape-instance</p>
 <dd class="field-odd"><p><strong>instance</strong> (<a class="reference internal" href="cythonarrays.array_shapes.html#cythonarrays.array_shapes.ArrayShapes" title="cythonarrays.array_shapes.ArrayShapes"><em>ArrayShapes</em></a>) – the CDefClass-instance holding the information on the allowed shapes</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a tuple with the shape</p>
@@ -104,15 +100,15 @@ using the information from the ArrayShape-instance</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.to_dim">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.to_dim" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.to_dim" title="Link to this definition">¶</a></dt>
 <dd><p>Casts the array to ndim dimensions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ndim</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – if self.ndim &gt; ndim and the shape of the first axis &lt;&gt; 0:
+<dd class="field-odd"><p><strong>ndim</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – if self.ndim &gt; ndim and the shape of the first axis &lt;&gt; 0:
 raise ValueError</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array of ndim dimensions</p>
@@ -122,18 +118,18 @@ raise ValueError</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.validate_array">
-<span class="sig-name descname"><span class="pre">validate_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.validate_array" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">validate_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.validate_array" title="Link to this definition">¶</a></dt>
 <dd><p>checks if the ndim (and the shape, if specified) match
 and casts the array to the dtype specified</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – the array to test</p></li>
+<li><p><strong>arr</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span>) – the array to test</p></li>
 <li><p><strong>instance</strong> (<a class="reference internal" href="cythonarrays.array_shapes.html#cythonarrays.array_shapes.ArrayShapes" title="cythonarrays.array_shapes.ArrayShapes"><em>ArrayShapes</em></a>) – the CDefClass-instance holding the information on the allowed shapes</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the validated array casted to the target dimension and dtype</p>
@@ -143,13 +139,13 @@ and casts the array to the dtype specified</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.dtype_numpy">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype_numpy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.dtype_numpy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype_numpy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.dtype_numpy" title="Link to this definition">¶</a></dt>
 <dd><p>return the numpy dtype</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="cythonarrays.array_descriptors.ArrayDescriptor.shape">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.shape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cythonarrays.array_descriptors.ArrayDescriptor.shape" title="Link to this definition">¶</a></dt>
 <dd><p>the shape of the array described, with numbers or strings</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -190,8 +186,8 @@ and casts the array to the dtype specified</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="cythonarrays.tests.test_cythonarray.html"
-                          title="previous chapter">cythonarrays.tests.test_cythonarray module</a></p>
+    <p class="topless"><a href="cythonarrays.tests.test_makeext.html"
+                          title="previous chapter">cythonarrays.tests.test_makeext module</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -232,7 +228,7 @@ and casts the array to the dtype specified</p>
           <a href="cythonarrays.array_properties.html" title="cythonarrays.array_properties module"
              >next</a> |</li>
         <li class="right" >
-          <a href="cythonarrays.tests.test_cythonarray.html" title="cythonarrays.tests.test_cythonarray module"
+          <a href="cythonarrays.tests.test_makeext.html" title="cythonarrays.tests.test_makeext module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Cythonarrays</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >cythonarrays</a> &#187;</li>
@@ -241,9 +237,9 @@ and casts the array to the dtype specified</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Dec 17, 2023.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright Gertz Gutsche Rümenapp.
+      Last updated on Dec 20, 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>
