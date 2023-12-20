@@ -1,8 +1,8 @@
-{% set data = load_setup_py_data() %}
+{% set version_str = load_file_regex(load_file='src/cythonarrays/_version.py', regex_pattern='^[_]{0,2}version[_]{0,2}\\s*=\\s*[\'\\"]([^\'\\"]*)[\'\\"]') %}
 
 package:
   name: cythonarrays
-  version: {{ data.get('version') }}
+  version: {{ version_str[1] }}
 
 source:
   path: ../
@@ -15,22 +15,16 @@ build:
 requirements:
   build:
     - python
-    - setuptools>=41
+    - setuptools>=61
     - cython
     - numpy>=1.12
-    - xarray
-    - h5netcdf
-    - cythoninstallhelpers
 
   run:
     - python
-    - setuptools>=41
     - cython
     - numpy>=1.12
     - xarray
     - h5netcdf
-    - cythoninstallhelpers
-    - pytest-cov
 
 test:
   requires:

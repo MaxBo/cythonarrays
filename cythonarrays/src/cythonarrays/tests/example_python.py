@@ -6,7 +6,7 @@ import os
 from collections import defaultdict
 import numpy as np
 
-from cythoninstallhelpers.configure_logger import get_logger
+from cythonarrays.configure_logger import get_logger
 from cythonarrays.array_properties import _ArrayProperties
 import pyximport; pyximport.install()
 from .example_cython import (_Example, DestinationChoiceError)

@@ -1,0 +1,61 @@
+[build-system]
+requires = [
+    "setuptools >= 61.0",
+    'numpy',
+    'cython',
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cythonarrays"
+
+dynamic = ["version"]
+
+dependencies = [
+    "cython",
+    "numpy",
+    "xarray",
+    "h5netcdf",
+]
+
+description = "cython cdef-class to facilitate numpy-arrays as attributes"
+maintainers = [
+    { name = "Max Bohnet", email = "bohnet@ggr-planung.de" },
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)",
+    "Programming Language :: Cython",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+"Documentation" = "https://maxbo.github.io/cythonarrays/"
+"Source" = "https://github.com/MaxBo/cythonarrays/"
+"Issue Tracker" = "https://github.com/MaxBo/cythonarrays/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "cythonarrays.__version__"}
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+
+[tool.setuptools.package-data]
+cythonarrays = ['*.pxd', '*.pyx', '*.pyxbld']
+'cythonarrays.tests' = ['*.pxd', '*.pyx', '*.pyxbld']
+'cythonarrays.tests.examplepackage' = ['*.pxd', '*.pyx', '*.pyxbld']
