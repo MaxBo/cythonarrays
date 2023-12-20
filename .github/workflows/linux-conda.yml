@@ -40,8 +40,7 @@ jobs:
     - name: Build wheel and run tests for cythonarrays
       run: |
         (
-        /usr/share/miniconda/bin/conda shell.bash activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
+        $CONDA/bin/activate test-environment
         cd cythonarrays
         pip install -r requirements.txt
         pip install .
@@ -53,8 +52,7 @@ jobs:
     - name: Create Docs
       if: ${{ matrix.python-version == '3.12' }}
       run: |
-        /usr/share/miniconda/bin/conda shell.bash activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
+        $CONDA/bin/activate test-environment
         cd cythonarrays
         pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
         sphinx-apidoc -f --separate -o docs_rst/cythonarrays src/cythonarrays

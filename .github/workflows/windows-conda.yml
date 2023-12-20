@@ -83,7 +83,7 @@ jobs:
       run: |
         (
         mamba activate test-wheels
-        cd matrixconverters
+        cd cythonarrays
         echo "build cythonarrays from folder %CD%"
         pip install -r requirements.txt
         pip install .
