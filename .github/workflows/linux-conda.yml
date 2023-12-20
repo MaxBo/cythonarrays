@@ -1,9 +1,14 @@
-name: Github Actions (Pypi and Conda for Linux)
+name: Build Cythonarrays for Linux
 
 on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
+    tags:
+      - v[0-9].[0-9]+.[0-9]+
 
 jobs:
   build-linux:
@@ -11,14 +16,14 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9, '3.10', '3.11', '3.12']
+        python-version: [3.8, 3.9, '3.10', '3.11', '3.12']
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup base conda for Python 3.7
+    - uses: actions/checkout@v4
+    - name: Setup base conda for Python 3.11
       uses: s-weigand/setup-conda@v1
       with:
         update-conda: true
-        python-version: 3.7
+        python-version: 3.11
         conda-channels: MaxBo, conda-forge, defaults
 
     - name: Install dependencies and set channels
@@ -37,37 +42,30 @@ jobs:
       env:
         ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
         ANACONDA_USERNAME: MaxBo
-        #TWINE_REPOSITORY: pypi
-        #TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-        #TWINE_USERNAME: MaxBo
-        #TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
         CONDA_BLD_PATH: ${{ runner.TEMP }}
 
-      #if: ${{ github.ref_type == 'TAG' }}
       run: |
         conda info --envs
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
         anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
 
-    - name: Build and test cythonarrays and matrixconverters
+    - name: Build and test cythonarrays
       run: |
         export TMPDIR=${{ runner.TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
         conda install -c maxbo cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
-        conda build --python ${{ matrix.python-version }} matrixconverters/conda.recipe
 
     - name: Create Docs
       if: ${{ matrix.python-version == '3.12' }}
       run: |
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
-        conda install -y --use-local cythoninstallhelpers cythonarrays matrixconverters
+        conda install -y --use-local cythoninstallhelpers cythonarrays
         python -m pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
         sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers
         sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays
-        sphinx-apidoc -f --separate -o docs_rst/matrixconverters matrixconverters/src/matrixconverters
         sphinx-build docs_rst ../docs
 
     - name: Deploy Docs to gh-pages
@@ -77,20 +75,13 @@ jobs:
         branch: gh-pages # The branch the action should deploy to.
         folder: ../docs # The folder the action should deploy.
 
-    - name: Upload files for cythonarrays and matrixconverters
+    - name: Upload files for cythonarrays
       env:
         ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
         ANACONDA_USERNAME: MaxBo
-        #TWINE_REPOSITORY: pypi
-        #TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-        #TWINE_USERNAME: MaxBo
-        #TWINE_PASSWORD: ${{ secrets.TWINE_GITHUBACTION_TOKEN }}
         CONDA_BLD_PATH: ${{ runner.TEMP }}
 
-      #if: ${{ github.ref_type == 'TAG' }}
       run: |
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
         anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
-        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/matrixconverters-*.tar.bz2
-

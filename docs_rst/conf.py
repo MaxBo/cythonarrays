@@ -97,9 +97,6 @@ autodoc_member_order = 'groupwise'
 autodoc_default_options = {'members': True,
                            'undoc-members': True,
                            'show-inheritance': True,
-                           #'private-members': True,
-                           #'special-members': True,
-                           #'inherited-members': True,
                            }
 
 autodoc_docstring_signature = True
