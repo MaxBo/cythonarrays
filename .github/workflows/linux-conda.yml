@@ -40,7 +40,8 @@ jobs:
     - name: Build wheel and run tests for cythonarrays
       run: |
         (
-        $CONDA/bin/activate test-environment
+        $CONDA_EXE activate test-environment
+        which python
         cd cythonarrays
         pip install -r requirements.txt
         pip install .
@@ -52,7 +53,8 @@ jobs:
     - name: Create Docs
       if: ${{ matrix.python-version == '3.12' }}
       run: |
-        $CONDA/bin/activate test-environment
+        $CONDA_EXE activate test-environment
+        which python
         cd cythonarrays
         pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
         sphinx-apidoc -f --separate -o docs_rst/cythonarrays src/cythonarrays
