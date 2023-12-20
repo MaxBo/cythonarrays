@@ -9,7 +9,7 @@ from setuptools.command.build_ext import build_ext
 import importlib.util
 import numpy as np
 import os
-from cythoninstallhelpers.make_cython_extensions import make_extensions
+from cythonarrays.make_cython_extensions import make_extensions
 
 
 class TestMakeExtensions:
@@ -19,8 +19,8 @@ class TestMakeExtensions:
         """Test the creation of an extension"""
         source_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
         dest_fn = tmpdir.strpath
-        packagename = 'cythoninstallhelpers.tests.examplepackage'
-        extension_name = f'{packagename}.example_cython'
+        packagename = 'cythonarrays.tests.examplepackage'
+        extension_name = f'{packagename}.example2_cython'
         # make the extension module
         extension_modules = make_extensions([extension_name],
                                             source_dir=source_dir)
@@ -28,7 +28,7 @@ class TestMakeExtensions:
         extension = extension_modules[0]
         assert extension.name == extension_name
         # and the according C-file
-        assert extension.sources[0].split(os.sep)[-1] == 'example_cython.c'
+        assert extension.sources[0].split(os.sep)[-1] == 'example2_cython.c'
 
         # Create a distribution named examplepackage, including the extension modules
         dist = Distribution(dict(ext_modules=extension_modules))#

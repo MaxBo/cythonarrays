@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from cythoninstallhelpers.configure_logger import (SimLogger,
-                                                   get_module_logger,
-                                                   get_logger)
+from cythonarrays.configure_logger import (SimLogger,
+                                           get_module_logger,
+                                           get_logger)
 import os
 import glob
 from .module_with_logging import function_with_logging
-from cythoninstallhelpers.build_config import make_ext
+from cythonarrays.build_config import make_ext
 
 class Test01_Logger:
     """Test the the SimLogger"""
@@ -18,7 +18,7 @@ class Test01_Logger:
 
         sim_logger.configure(LOG_FOLDER=tmpdir, scenario=scenario)
 
-        # create a logger for the 'cythoninstallhelpers'-package
+        # create a logger for the 'cythonarrays'-package
         logger = get_logger(self)
         # assert that cythonarrays is registred now
         assert __package__.split('.')[0] in sim_logger.packages

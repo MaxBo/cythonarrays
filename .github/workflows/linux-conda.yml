@@ -29,32 +29,12 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         conda install conda-build conda-verify anaconda-client twine readme_renderer
-        conda info -a
         conda create -q -n test-environment python=${{ matrix.python-version }} pytest-cov
-
-    - name: Build and Test cythoninstallhelpers for Python ${{ matrix.python-version }}
-      run: |
-        export TMPDIR=${{ runner.TEMP }}
-        export CONDA_BLD_PATH=$TMPDIR
-        conda info -a
-        conda build --python ${{ matrix.python-version }} cythoninstallhelpers/conda.recipe
-    - name: Upload cythoninstallhelpers
-      env:
-        ANACONDA_TOKEN: ${{ secrets.ANACONDA_GITHUBACTION_TOKEN }}
-        ANACONDA_USERNAME: MaxBo
-        CONDA_BLD_PATH: ${{ runner.TEMP }}
-
-      run: |
-        conda info --envs
-        /usr/share/miniconda/bin/conda shell.bash activate test-environment
-        export PATH=$HOME/.local/bin:$PATH
-        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythoninstallhelpers-*.tar.bz2
 
     - name: Build and test cythonarrays
       run: |
         export TMPDIR=${{ runner.TEMP }}
         export CONDA_BLD_PATH=$TMPDIR
-        conda install -c maxbo cythoninstallhelpers
         conda build --python ${{ matrix.python-version }} cythonarrays/conda.recipe
 
     - name: Create Docs
@@ -62,18 +42,18 @@ jobs:
       run: |
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
-        conda install -y --use-local cythoninstallhelpers cythonarrays
-        python -m pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
-        sphinx-apidoc -f --separate -o docs_rst/cythoninstallhelpers cythoninstallhelpers/src/cythoninstallhelpers
-        sphinx-apidoc -f --separate -o docs_rst/cythonarrays cythonarrays/src/cythonarrays
+        cd cythonarrays
+        pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
+        pip install .
+        sphinx-apidoc -f --separate -o docs_rst/cythonarrays src/cythonarrays
         sphinx-build docs_rst ../docs
 
     - name: Deploy Docs to gh-pages
       if: ${{ matrix.python-version == '3.12' }}
-      uses: JamesIves/github-pages-deploy-action@4.1.7
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages # The branch the action should deploy to.
-        folder: ../docs # The folder the action should deploy.
+        folder: docs # The folder the action should deploy.
 
     - name: Upload files for cythonarrays
       env:

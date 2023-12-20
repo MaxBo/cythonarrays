@@ -12,6 +12,7 @@ else:
     extra_compile_args = ['-fopenmp']
     extra_link_args = ['-fopenmp']
 
+
 def make_ext(modname: str, sources: List[str], **kwargs) -> Extension:
     """
     Make Extension for module using the given sources

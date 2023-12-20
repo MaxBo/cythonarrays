@@ -18,7 +18,6 @@ requirements:
     - setuptools>=61
     - cython
     - numpy>=1.12
-    - cythoninstallhelpers
 
   run:
     - python
@@ -26,7 +25,6 @@ requirements:
     - numpy>=1.12
     - xarray
     - h5netcdf
-    - cythoninstallhelpers
 
 test:
   requires:

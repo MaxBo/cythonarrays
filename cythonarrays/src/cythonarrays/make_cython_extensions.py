@@ -3,6 +3,7 @@
 import os
 from typing import List, Dict
 from setuptools import Extension
+import numpy as np
 from Cython.Build import cythonize
 
 from .build_config import make_ext

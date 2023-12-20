@@ -1,8 +1,8 @@
 [build-system]
 requires = [
     "setuptools >= 61.0",
-    "cythoninstallhelpers >= 1.4",
-
+    'numpy',
+    'cython',
 ]
 build-backend = "setuptools.build_meta"
 
@@ -58,3 +58,4 @@ testpaths = [
 [tool.setuptools.package-data]
 cythonarrays = ['*.pxd', '*.pyx', '*.pyxbld']
 'cythonarrays.tests' = ['*.pxd', '*.pyx', '*.pyxbld']
+'cythonarrays.tests.examplepackage' = ['*.pxd', '*.pyx', '*.pyxbld']

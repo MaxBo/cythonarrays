@@ -1,5 +1,10 @@
-from setuptools import setup, find_namespace_packages
-from cythoninstallhelpers.make_cython_extensions import make_extensions
+from pathlib import Path
+import sys
+src = Path(__file__).parent.joinpath('src')
+sys.path.append(str(src))
+
+from setuptools import setup
+from cythonarrays.make_cython_extensions import make_extensions
 
 
 ext_modnames = ['cythonarrays.array_shapes',
@@ -10,6 +15,5 @@ ext_modnames = ['cythonarrays.array_shapes',
 package_name = "cythonarrays"
 
 setup(
-    #name=package_name,
     ext_modules=make_extensions(ext_modnames),
 )
