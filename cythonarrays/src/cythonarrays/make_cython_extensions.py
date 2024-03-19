@@ -47,7 +47,7 @@ def make_extensions(ext_modnames: List[str],
         sources = [pyxfilename]
         further_arg = further_args.get(modname, {})
         if further_arg:
-            more_sources = further_arg.pop('sources')
+            more_sources = further_arg.pop('sources', [])
             ms = mn[:-1]
             full_more_sources = []
             for source in more_sources:
