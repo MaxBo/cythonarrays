@@ -27,6 +27,7 @@
 - change definition of NINF_d etc.
 
 ### Removed
+- support for python 3.8 (does not support numpy 2.0)
 
 
 

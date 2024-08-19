@@ -16,7 +16,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: [3.8, 3.9, '3.10', '3.11', '3.12']
+        python-version: [3.9, '3.10', '3.11', '3.12']
     steps:
     - uses: actions/checkout@v4
     - name: Setup base conda for Python 3.11
@@ -50,7 +50,7 @@ jobs:
         eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
-        pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2
+        pip install sphinx sphinxcontrib-napoleon sphinx-autodoc-typehints 'mistune<2' m2r2 'docutils<0.20' pytest
         sphinx-apidoc -f --separate -o docs_rst/cythonarrays src/cythonarrays
         sphinx-build docs_rst ../docs
 
