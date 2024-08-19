@@ -16,6 +16,10 @@ from .array_descriptors import ArrayDescriptor
 cimport cython
 cdef extern from "numpy/npy_math.h":
     bint npy_isnan(double x) nogil
+    double NPY_INFINITY
+    float NPY_INFINITYF
+    double NPY_NAN
+    float NPY_NANF
 
 
 cdef class ArrayShapes(object):
@@ -34,19 +38,19 @@ cdef class ArrayShapes(object):
 
     def __init__(self, *args, **kwargs):
         """
-        inits the Array and creates the constands for NAN and NINF
+        inits the Array and creates the constants for NAN, INF and NINF
         """
         # super class has to be called even if the super class of ArrayShapes
         # is only `object`
         super().__init__(*args, **kwargs)
-        # set NAN-Values
-        self.NAN_f = np.NAN #np.float32(0) / np.float32(0)
-        self.INF_f = np.float32(1) / np.float32(0)
-        self.NINF_f = np.float32(-1) / np.float32(0)
+        #set NAN-Values
+        self.NAN_f = NPY_NANF
+        self.INF_f = NPY_INFINITYF
+        self.NINF_f = -NPY_INFINITYF
 
-        self.NAN_d = np.NAN #np.float64(0) / np.float64(0)
-        self.INF_d = np.float64(1) / np.float64(0)
-        self.NINF_d = np.float64(-1) / np.float64(0)
+        self.NAN_d = NPY_NAN
+        self.INF_d = NPY_INFINITY
+        self.NINF_d = -NPY_INFINITY
 
     cdef char _isnan(self, np_floating x) nogil:
         """

@@ -386,7 +386,7 @@ jobs_j: shape target: \[3\], actual: \(2,\)
 
         # reset to default (not defined)
         example.reset_array('km_ij')
-        np.testing.assert_array_equal(example.km_ij, np.NAN)
+        np.testing.assert_array_equal(example.km_ij, np.nan)
 
         # reset to default (new value defined)
         example.dtypes['km_ij'].default = 11
@@ -449,9 +449,9 @@ class Test04_Test_Instantiation:
         groups, zones = persons_gi.shape
         example = Example(groups, zones)
 
-        assert example.isnan_py(np.NAN)
-        assert not example.isnan_py(np.NINF)
-        assert not example.isnan_py(np.Inf)
+        assert example.isnan_py(np.nan)
+        assert not example.isnan_py(-np.inf)
+        assert not example.isnan_py(np.inf)
         assert not example.isnan_py(0)
         assert not example.isnan_py(1)
         assert not example.isnan_py(-1)

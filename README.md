@@ -7,6 +7,8 @@
 # cythonarrays
 Python Packages to facilitate cython cdef-classes that expose memoryviews as numpy arrays.
 
+[Changelog](CHANGELOG.md)
+
 ##cythonarrays:
 [![PyPI version](https://badge.fury.io/py/cythonarrays.svg)](https://badge.fury.io/py/cythonarrays)
 [![Anaconda-Server Badge](https://anaconda.org/maxbo/cythonarrays/badges/version.svg)](https://anaconda.org/maxbo/cythonarrays)
