@@ -6,7 +6,6 @@
 
 
 import numpy as np
-cimport numpy as np
 oldsettings = np.seterr(divide='ignore')
 
 from .numpy_types import typedict
@@ -141,8 +140,7 @@ cdef class ArrayShapes(object):
 
             elif msg.startswith('Buffer dtype mismatch'):
                 arr, np_dtype = self._change_dtype(msg, arr.shape, default)
-                #print intern_name, arr.dtype, np_dtype, arr.itemsize
-                #print msg
+
                 try:
                     setattr(self, intern_name, arr)
                 except ValueError as err:
