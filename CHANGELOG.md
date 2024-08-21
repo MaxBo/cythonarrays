@@ -11,6 +11,12 @@
 
 ### Removed
 
+## [1.6.3] - 2024-08-21
+
+### Added
+### Fixed
+### Changed
+- removed unnessesary cimports of numpy
 
 ## [1.6.2] - 2024-08-19
 
@@ -29,6 +35,7 @@
 
 
 
-[unreleased]: https://github.com/MaxBo/cythonarrays/compare/v1.6.2...HEAD
+[unreleased]: https://github.com/MaxBo/cythonarrays/compare/v1.6.3...HEAD
+[1.6.3]: https://github.com/MaxBo/cythonarrays/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/MaxBo/cythonarrays/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/MaxBo/cythonarrays/releases/tag/v1.6.1

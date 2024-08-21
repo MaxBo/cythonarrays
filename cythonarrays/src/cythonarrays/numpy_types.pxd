@@ -27,7 +27,6 @@ Arrays/Memoryviews
 """
 
 cimport cython
-cimport numpy as np
 
 ctypedef cython.int long32
 

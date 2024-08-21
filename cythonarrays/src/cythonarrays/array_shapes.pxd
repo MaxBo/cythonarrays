@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-cimport numpy as np
+
 cimport cython
 
 from .numpy_types cimport np_floating

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 cimport cython
-cimport numpy as np
+
 
 cdef class Example():
     """
