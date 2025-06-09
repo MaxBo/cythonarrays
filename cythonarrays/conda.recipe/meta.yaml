@@ -17,14 +17,12 @@ requirements:
     - python
     - setuptools>=61
     - cython
-    - numpy>=1.12
 
   run:
     - python
     - cython
-    - numpy>=1.12
     - xarray
-    - h5netcdf>=1.6
+    - h5netcdf
 
 test:
   requires:
