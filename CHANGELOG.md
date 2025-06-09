@@ -11,6 +11,13 @@
 
 ### Removed
 
+## [1.6.4] - 2025-06-09
+
+### Added
+- support for python 1.13
+### Fixed
+### Changed
+
 ## [1.6.3] - 2024-08-21
 
 ### Added
@@ -35,7 +42,8 @@
 
 
 
-[unreleased]: https://github.com/MaxBo/cythonarrays/compare/v1.6.3...HEAD
+[unreleased]: https://github.com/MaxBo/cythonarrays/compare/v1.6.4...HEAD
+[1.6.4]: https://github.com/MaxBo/cythonarrays/compare/v1.6.3...v1.6.4
 [1.6.3]: https://github.com/MaxBo/cythonarrays/compare/v1.6.2...v1.6.3
 [1.6.2]: https://github.com/MaxBo/cythonarrays/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/MaxBo/cythonarrays/releases/tag/v1.6.1
