@@ -29,7 +29,7 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         conda install conda-build conda-verify anaconda-client twine readme_renderer
-        conda create -q -n test-environment python=${{ matrix.python-version }} numpy pytest-cov build
+        conda create -q -n test-environment python=${{ matrix.python-version }} numpy pytest-cov
 
     - name: Build wheel and run tests for cythonarrays
       run: |
@@ -37,6 +37,7 @@ jobs:
         eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
+        pip install build
         pip install -r requirements.txt
         pip install .
         python -m pytest --pyargs cythonarrays

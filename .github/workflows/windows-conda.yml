@@ -39,7 +39,7 @@ jobs:
       run: |
         (
         mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
-        mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov build
+        mamba create -n test-wheels python=${{ matrix.python-version }} numpy
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
         )
 
@@ -85,6 +85,7 @@ jobs:
         mamba activate test-wheels
         cd cythonarrays
         echo "build cythonarrays from folder %CD%"
+        pip install pytest-cov build
         pip install -r requirements.txt
         pip install .
         python -m pytest --pyargs cythonarrays
