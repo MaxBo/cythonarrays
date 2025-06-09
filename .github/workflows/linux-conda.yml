@@ -29,7 +29,7 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         conda install conda-build conda-verify anaconda-client twine readme_renderer
-        conda create -q -n test-environment python=${{ matrix.python-version }} numpy pytest-cov
+        conda create -q -n test-environment python=${{ matrix.python-version }}
 
     - name: Build wheel and run tests for cythonarrays
       run: |
@@ -37,7 +37,7 @@ jobs:
         eval "$($CONDA_EXE shell.bash activate test-environment)"
         which python
         cd cythonarrays
-        pip install build
+        pip install build pytest-cov
         pip install -r requirements.txt
         pip install .
         python -m pytest --pyargs cythonarrays
@@ -77,4 +77,4 @@ jobs:
       run: |
         /usr/share/miniconda/bin/conda shell.bash activate test-environment
         export PATH=$HOME/.local/bin:$PATH
-        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.tar.bz2
+        anaconda -t $ANACONDA_TOKEN upload --skip-existing --user $ANACONDA_USERNAME $CONDA_BLD_PATH/linux-64/cythonarrays-*.conda
