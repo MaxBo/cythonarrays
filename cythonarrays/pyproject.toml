@@ -15,7 +15,8 @@ dependencies = [
     "cython",
     "numpy",
     "xarray",
-    "h5netcdf",
+    "h5netcdf>=1.6",
+    "setuptools",
 ]
 
 description = "cython cdef-class to facilitate numpy-arrays as attributes"
