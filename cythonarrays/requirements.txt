@@ -1,4 +1,4 @@
 numpy>=2.0
 cython
 xarray
-h5netcdf
+h5netcdf>=1.6
