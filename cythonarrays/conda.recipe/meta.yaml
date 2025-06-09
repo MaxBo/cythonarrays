@@ -23,7 +23,7 @@ requirements:
     - python
     - cython
     - numpy>=2
-    - xarray
+    - xarray>=2022
     - h5netcdf>=1.6
 
 test:
