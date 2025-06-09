@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script src="../_static/documentation_options.js?v=452006c5"></script>
+    <script src="../_static/documentation_options.js?v=8ea99608"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
@@ -46,8 +46,8 @@
   <section id="validation-of-data-in-cythonarrays">
 <h1>Validation of Data in cythonarrays<a class="headerlink" href="#validation-of-data-in-cythonarrays" title="Link to this heading">¶</a></h1>
 <p>The pxd-file example_cython.pxd imports shortcuts for memoryviews and the base class ArrayShapes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">cythonarrays.array_shapes</span> <span class="n">cimport</span> <span class="n">ArrayShapes</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.array_shapes</span> <span class="n">cimport</span> <span class="n">ArrayShapes</span>
 </pre></div>
 </div>
 <p>Then it defines the cdef-class _Example, that inherits from ArrayShapes.</p>
@@ -60,7 +60,7 @@
 <p>The cdef class will define a method <em>calc_model</em> which can be called from python and cython that returns -1 if an exeption occurs.</p>
 <p>The cdef class defines two methods <em>_calc_weight_destination</em> and <em>_calc_weight_destination</em> which can be called only from cython.</p>
 <p><cite>nogil</cite> means that these methods can be called in parallel threads where the global intepreter lock (gil) has been released:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cython CDefClass for Example model</span>
 <span class="sd">    with coordinates groups, origins, and destinations</span>
@@ -102,7 +102,7 @@
 <p>The cython-module <cite>example_cython.pyx</cite> implements these methods.</p>
 <p>It uses the <cite>__cinit__</cite>-method to search for all memoryviews defined in its .pxd-file
 and expose all of them, which start with a leading underscore, as numpy arrays:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
     <span class="nd">@cython</span><span class="o">.</span><span class="n">initializedcheck</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">cpdef</span> <span class="n">char</span> <span class="n">calc_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">except</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -129,8 +129,8 @@ in a block introduced by <cite>with gil:</cite>.</p>
 <p>The <cite>ArrayShape</cite>-class defines a logger which is bound to the cdef-class.</p>
 <p>To reset the memoryview to its default values, the method
 <cite>self.reset_array(‘trips_ij’)</cite> can be used.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">cythonarrays.tests.example_python</span> <span class="kn">import</span> <span class="n">Example</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.tests.example_python</span><span class="w"> </span><span class="kn">import</span> <span class="n">Example</span>
 
   <span class="n">km_ij</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
                     <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
@@ -153,9 +153,9 @@ in a block introduced by <cite>with gil:</cite>.</p>
 </pre></div>
 </div>
 <p>The following test shows how the code works</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Test01_ExampleCDefClass</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Test01_ExampleCDefClass</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">test_01_test_init_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_01_test_init_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass creation&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
@@ -182,7 +182,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">example</span><span class="o">.</span><span class="n">init_array</span><span class="p">(</span><span class="s1">&#39;jobs_j&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;groups&#39;</span><span class="p">)</span>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">jobs_j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">test_02_test_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_02_test_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Test if the shapes of array are controlled correctly</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -213,7 +213,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="c1"># now the array fits to the shape defined</span>
         <span class="n">example</span><span class="o">.</span><span class="n">jobs_j</span> <span class="o">=</span> <span class="n">arr</span>
 
-    <span class="k">def</span> <span class="nf">test_03_test_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_03_test_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
@@ -279,7 +279,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="c1"># as this is a view on the input-data, it will be changed there, too</span>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">88</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_04_test_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_04_test_dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">persons_gi</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the dimensions&quot;&quot;&quot;</span>
         <span class="n">groups</span><span class="p">,</span> <span class="n">zones</span> <span class="o">=</span> <span class="n">persons_gi</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">example</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
@@ -317,7 +317,7 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="c1"># the data in not_initialized_ij changes</span>
         <span class="k">assert</span> <span class="n">example</span><span class="o">.</span><span class="n">not_initialized_ij</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">test_10_test_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_10_test_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the Example CDefClass model&quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">calc_model</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">trips_ij</span><span class="p">)</span>
@@ -325,14 +325,14 @@ in a block introduced by <cite>with gil:</cite>.</p>
         <span class="n">total_trips_actual</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">trips_ij</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span><span class="n">total_trips_target</span><span class="p">,</span> <span class="n">total_trips_actual</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_11_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_11_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the creation of an xarrays Dataset linked to the Cythonclass&quot;&quot;&quot;</span>
         <span class="n">example</span><span class="o">.</span><span class="n">zonenumbers_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
         <span class="n">example</span><span class="o">.</span><span class="n">groupnames_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
         <span class="n">example</span><span class="o">.</span><span class="n">create_ds</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">ds</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_20_save_and_read_ds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="n">tempfile_h5</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_20_save_and_read_ds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="n">tempfile_h5</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that saving and re-reading the data works&quot;&quot;&quot;</span>
         <span class="n">example</span><span class="o">.</span><span class="n">zonenumbers_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
         <span class="n">example</span><span class="o">.</span><span class="n">groupnames_g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
@@ -376,7 +376,7 @@ the numpy sources have to be linked to the Cython code.</p>
 <li><p>mymodule.py : a python module, that imports the cython code and wraps it to normal python modules</p></li>
 </ul>
 <p>the .pyxbld file will import helpers from cythoninstallhelpers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythoninstallhelpers.build_config</span> <span class="kn">import</span> <span class="p">(</span><span class="n">extra_compile_args</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythoninstallhelpers.build_config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">extra_compile_args</span><span class="p">,</span>
                                                <span class="n">extra_link_args</span><span class="p">,</span>
                                                <span class="n">make_ext</span><span class="p">,)</span>
 </pre></div>
@@ -388,7 +388,7 @@ the numpy sources have to be linked to the Cython code.</p>
 <p>Cython cdef classes are extension types for cython.</p>
 <p>All methods and class attributes, that should be used with C-Speed have to by defined.
 This can be done in the declaration .pxd file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">MyCythonClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">MyCythonClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A Cython class&quot;&quot;&quot;</span>
     <span class="n">cdef</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="nb">float</span> <span class="n">U</span>
@@ -419,16 +419,16 @@ the memoryview can be accessed in C-Speed from within cython functions</p></li>
 </ul>
 <p>To facilitate this, the cython-module array_shapes.pyx and the python-module array_types have been written.</p>
 <p>Let your Cython class inherit from ArrayShapes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.array_shapes</span> <span class="n">cimport</span> <span class="n">ArrayShapes</span>
-<span class="kn">from</span> <span class="nn">cythonarrays.array_shapes</span> <span class="kn">import</span> <span class="n">ArrayShapes</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.array_shapes</span> <span class="n">cimport</span> <span class="n">ArrayShapes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.array_shapes</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayShapes</span>
 </pre></div>
 </div>
 <p>import the numpy array types:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
 </pre></div>
 </div>
 <p>specify all arrays that you need in the mymodule_cython.pxd-file with a leading underscore:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_2D_f</span> <span class="n">_myfloatarr</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_3D_i4</span> <span class="n">_myintarr</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_1D_d</span> <span class="n">_mydoublevector</span>
@@ -440,13 +440,13 @@ the memoryview can be accessed in C-Speed from within cython functions</p></li>
 of ArrayShapes, searches all memoryviews in the class and the base class.</p>
 <p>Create a wrapper Python class in a python module mymodule.py,
 that inherits from _MyCythonClass and from the Python-Class _ArrayProperties:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyximport</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyximport</span>
 <span class="n">pyximport</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
-<span class="kn">from</span> <span class="nn">mymodule_cython</span> <span class="kn">import</span> <span class="n">_MyCythonClass</span>
-<span class="kn">from</span> <span class="nn">cythonarrays.array_properties</span> <span class="kn">import</span> <span class="n">_ArrayProperties</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mymodule_cython</span><span class="w"> </span><span class="kn">import</span> <span class="n">_MyCythonClass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.array_properties</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ArrayProperties</span>
 
-<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">_MyCythonClass</span><span class="p">,</span> <span class="n">_ArrayProperties</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">(</span><span class="n">_MyCythonClass</span><span class="p">,</span> <span class="n">_ArrayProperties</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">=</span> <span class="n">n_rows</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span> <span class="o">=</span> <span class="n">n_cols</span>
@@ -484,7 +484,7 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <p>and from within a cython function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
   <span class="n">cpdef</span> <span class="n">sum_mult_by_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
      <span class="n">cdef</span> <span class="nb">int</span> <span class="n">block</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span>
      <span class="n">cdef</span> <span class="n">double</span> <span class="n">res</span>
@@ -501,7 +501,7 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <p>You can define an Array within a cdef function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
   <span class="n">cpdef</span> <span class="n">sum_mult_by_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
      <span class="n">cdef</span> <span class="nb">int</span> <span class="n">block</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span>
      <span class="n">cdef</span> <span class="n">ARRAY_1D_d</span> <span class="n">vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mydoublevector</span>
@@ -633,7 +633,7 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Aug 21, 2024.
+      Last updated on Jun 09, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>

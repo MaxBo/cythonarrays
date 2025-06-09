@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5b801204" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=bd074a33" />
     
-    <script src="../_static/documentation_options.js?v=452006c5"></script>
+    <script src="../_static/documentation_options.js?v=8ea99608"></script>
     <script src="../_static/doctools.js?v=d248f5b3"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     
@@ -75,7 +75,7 @@ The python class converts the memoryviews into numpy arrays. In addition, it wra
 <li><p>mymodule.py : a python module, that imports the cython code and wraps it to normal python modules</p></li>
 </ul>
 <p>the .pyxbld file will import helpers from cythoninstallhelpers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythoninstallhelpers.build_config</span> <span class="kn">import</span> <span class="p">(</span><span class="n">extra_compile_args</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythoninstallhelpers.build_config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">extra_compile_args</span><span class="p">,</span>
                                                <span class="n">extra_link_args</span><span class="p">,</span>
                                                <span class="n">make_ext</span><span class="p">,)</span>
 </pre></div>
@@ -87,7 +87,7 @@ The python class converts the memoryviews into numpy arrays. In addition, it wra
 <p>Cython cdef classes are extension types for cython.</p>
 <p>All methods and class attributes, that should be used with C-Speed have to by defined.
 This can be done in the declaration .pxd file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">MyCythonClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">MyCythonClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A Cython class&quot;&quot;&quot;</span>
     <span class="n">cdef</span> <span class="n">unsigned</span> <span class="n">long</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="nb">float</span> <span class="n">U</span>
@@ -123,11 +123,11 @@ from cythonarrays.array_shapes import ArrayShapes</p>
 </dd>
 </dl>
 <p>import the numpy array types:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.numpy_types</span> <span class="n">cimport</span> <span class="o">*</span>
 </pre></div>
 </div>
 <p>specify all arrays that you need in the mymodule_cython.pxd-file with a leading underscore:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_Example</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_2D_f</span> <span class="n">_myfloatarr</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_3D_i4</span> <span class="n">_myintarr</span>
     <span class="n">cdef</span> <span class="n">public</span> <span class="n">ARRAY_1D_d</span> <span class="n">_mydoublevector</span>
@@ -136,8 +136,8 @@ from cythonarrays.array_shapes import ArrayShapes</p>
 </pre></div>
 </div>
 <p>In the mymodule_cython.pyx-file, add a __cinit__ method:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">__cinit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">ArrayShapes</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">__cinit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">      </span><span class="sd">&quot;&quot;&quot;init the file&quot;&quot;&quot;</span>
       <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">:</span>
           <span class="bp">self</span><span class="o">.</span><span class="n">search_memview</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
@@ -145,13 +145,13 @@ from cythonarrays.array_shapes import ArrayShapes</p>
 </div>
 <p>the method search_memview(cls) searches all memoryviews in the class and the base class.</p>
 <p>Create a wrapper Python class in a python module mymodule.py, that inherits from _MyCythonClass and from the Python-Class _ArrayProperties:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyximport</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyximport</span>
 <span class="n">pyximport</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
-<span class="kn">from</span> <span class="nn">mymodule_cython</span> <span class="kn">import</span> <span class="n">_MyCythonClass</span>
-<span class="kn">from</span> <span class="nn">cythonarrays.array_properties</span> <span class="kn">import</span> <span class="n">_ArrayProperties</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mymodule_cython</span><span class="w"> </span><span class="kn">import</span> <span class="n">_MyCythonClass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cythonarrays.array_properties</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ArrayProperties</span>
 
-<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">_MyCythonClass</span><span class="p">,</span> <span class="n">_ArrayProperties</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="p">(</span><span class="n">_MyCythonClass</span><span class="p">,</span> <span class="n">_ArrayProperties</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MyCythonClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_rows</span> <span class="o">=</span> <span class="n">n_rows</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_cols</span> <span class="o">=</span> <span class="n">n_cols</span>
@@ -189,7 +189,7 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <p>and from within a cython function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
   <span class="n">cpdef</span> <span class="n">sum_mult_by_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
      <span class="n">cdef</span> <span class="nb">int</span> <span class="n">block</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span>
      <span class="n">cdef</span> <span class="n">double</span> <span class="n">res</span>
@@ -206,7 +206,7 @@ The Data is accessible form Python via:</p>
 </pre></div>
 </div>
 <p>You can define an Array within a cdef function:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span> <span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdef</span> <span class="k">class</span><span class="w"> </span><span class="nc">_MyCythonClass</span><span class="p">(</span><span class="n">_ArrayShapes</span><span class="p">):</span>
   <span class="n">cpdef</span> <span class="n">sum_mult_by_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
      <span class="n">cdef</span> <span class="nb">int</span> <span class="n">block</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span>
      <span class="n">cdef</span> <span class="n">ARRAY_1D_d</span> <span class="n">vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mydoublevector</span>
@@ -340,7 +340,7 @@ So when a cdef function modifies a value  in example._trips_ij</p>
     </div>
     <div class="footer" role="contentinfo">
     &#169; Copyright Gertz Gutsche Rümenapp.
-      Last updated on Aug 21, 2024.
+      Last updated on Jun 09, 2025.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
   </body>
