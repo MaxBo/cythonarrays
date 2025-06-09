@@ -24,7 +24,7 @@ requirements:
     - cython
     - numpy>=2
     - xarray
-    - h5netcdf
+    - h5netcdf>=1.6
 
 test:
   requires:
