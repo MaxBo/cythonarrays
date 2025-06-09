@@ -19,7 +19,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
     steps:
     - uses: actions/checkout@v4
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
@@ -30,7 +30,7 @@ jobs:
         auto-activate-base: true
         activate-environment: ""
         miniforge-version: latest
-        channels: conda-forge
+        channels: conda-forge,defaults
       env:
         TMPDIR: ${{ runner.TEMP }}
         CONDA_BLD_PATH: env.TMPDIR
@@ -38,7 +38,7 @@ jobs:
     - name: Install dependencies and set channels
       run: |
         (
-        mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client boa twine
+        mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy pytest-cov build
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
         )
@@ -76,7 +76,7 @@ jobs:
       run: |
         (
         mamba activate base
-        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythonarrays-*.tar.bz2
+        anaconda -t %ANACONDA_TOKEN% upload --skip-existing --user %ANACONDA_USERNAME% %CONDA_BLD_PATH%\win-64\cythonarrays-*.conda
         )
 
     - name: Build wheel and run tests for cythonarrays
@@ -93,7 +93,7 @@ jobs:
         )
 
     - name: run code coverage
-      if: ${{ matrix.python-version == '3.12' }}
+      if: ${{ matrix.python-version == '3.13' }}
       run: |
         (
         conda activate test-wheels
@@ -106,7 +106,7 @@ jobs:
         )
 
     - name: Upload to Codecov
-      if: ${{ matrix.python-version == '3.12' }}
+      if: ${{ matrix.python-version == '3.13' }}
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
