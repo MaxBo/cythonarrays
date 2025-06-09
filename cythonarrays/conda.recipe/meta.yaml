@@ -20,6 +20,7 @@ requirements:
     - numpy>=2
 
   run:
+    - setuptools>=61
     - python
     - cython
     - numpy>=2
