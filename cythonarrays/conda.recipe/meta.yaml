@@ -30,7 +30,7 @@ test:
   requires:
     - pytest-cov
   commands:
-    - py.test --pyargs cythonarrays
+    - pytest --pyargs cythonarrays
 
 about:
   home: https://maxbo.github.io/cythonarrays

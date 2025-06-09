@@ -101,7 +101,7 @@ jobs:
         cd cythonarrays
         pip install -e .
         python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL
-        py.test --cov=src --cov-report xml --pyargs cythonarrays
+        pytest --cov=src --cov-report xml --pyargs cythonarrays
         coverage xml
         echo "### Code Coverage checked! :rocket:" >> $GITHUB_STEP_SUMMARY
         )
