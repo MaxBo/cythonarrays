@@ -17,10 +17,12 @@ requirements:
     - python
     - setuptools>=61
     - cython
+    - numpy>=2
 
   run:
     - python
     - cython
+    - numpy>=2
     - xarray
     - h5netcdf
 
