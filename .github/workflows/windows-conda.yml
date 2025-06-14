@@ -35,25 +35,26 @@ jobs:
         TMPDIR: ${{ runner.TEMP }}
         CONDA_BLD_PATH: env.TMPDIR
 
-    - name: Create base and conda-Environment
+    - name: install packages into base environment
       run: |
         (
         mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
-        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
         )
 
-    - name: create test-wheels environment for python < 3.13
+    - name: create test environments environment for python < 3.13
       if: ${{ matrix.python-version < '3.13' }}
       run: |
         (
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy
+        mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
         )
 
-    - name: create test-wheels environment for python >= 3.13
+    - name: create test environments for python >= 3.13
       if: ${{ matrix.python-version >= '3.13' }}
       run: |
         (
         mamba create -n test-wheels python-gil python=${{ matrix.python-version }} numpy
+        mamba create -n test-conda python-gil python=${{ matrix.python-version }} numpy pytest-cov
         )
 
     - name: build cythonarrays for python version
