@@ -39,7 +39,7 @@ jobs:
     - name: install packages into base environment
       run: |
         (
-        mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
+        mamba install -n base "conda>=23.7" conda-build anaconda-client rattler-build twine
         )
 
     - name: create test environments environment for python < 3.13
