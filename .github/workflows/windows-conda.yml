@@ -30,7 +30,8 @@ jobs:
         auto-activate-base: true
         activate-environment: ""
         miniforge-version: latest
-        channels: conda-forge,defaults
+        conda-remove-defaults: true
+        channels: conda-forge
       env:
         TMPDIR: ${{ runner.TEMP }}
         CONDA_BLD_PATH: env.TMPDIR
