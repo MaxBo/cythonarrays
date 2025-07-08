@@ -30,7 +30,8 @@ jobs:
         auto-activate-base: true
         activate-environment: ""
         miniforge-version: latest
-        channels: conda-forge,defaults
+        conda-remove-defaults: true
+        channels: conda-forge
       env:
         TMPDIR: ${{ runner.TEMP }}
         CONDA_BLD_PATH: env.TMPDIR
@@ -38,7 +39,7 @@ jobs:
     - name: install packages into base environment
       run: |
         (
-        mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
+        mamba install -n base "conda>=23.7" conda-build anaconda-client rattler-build twine
         )
 
     - name: create test environments environment for python < 3.13
