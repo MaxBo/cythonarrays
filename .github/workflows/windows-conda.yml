@@ -35,12 +35,26 @@ jobs:
         TMPDIR: ${{ runner.TEMP }}
         CONDA_BLD_PATH: env.TMPDIR
 
-    - name: Install dependencies and set channels
+    - name: install packages into base environment
       run: |
         (
         mamba install -n base "conda>=23.7" conda-build conda-verify anaconda-client rattler-build twine
+        )
+
+    - name: create test environments environment for python < 3.13
+      if: ${{ matrix.python-version < '3.13' }}
+      run: |
+        (
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
+        )
+
+    - name: create test environments for python >= 3.13
+      if: ${{ matrix.python-version >= '3.13' }}
+      run: |
+        (
+        mamba create -n test-wheels python-gil python=${{ matrix.python-version }} numpy
+        mamba create -n test-conda python-gil python=${{ matrix.python-version }} numpy pytest-cov
         )
 
     - name: build cythonarrays for python version
@@ -86,6 +100,8 @@ jobs:
         cd cythonarrays
         echo "build cythonarrays from folder %CD%"
         pip install pytest-cov build
+        pip debug --verbose
+        pip install --debug --only-binary h5py h5py
         pip install -r requirements.txt
         pip install .
         python -m pytest --pyargs cythonarrays
@@ -97,7 +113,7 @@ jobs:
       if: ${{ matrix.python-version == '3.13' }}
       run: |
         (
-        conda activate test-wheels
+        mamba activate test-wheels
         cd cythonarrays
         pip install -e .
         python setup.py build_ext --force --inplace --define CYTHON_TRACE_NOGIL
