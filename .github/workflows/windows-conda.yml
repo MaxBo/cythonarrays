@@ -19,7 +19,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
     steps:
     - uses: actions/checkout@v4
     - uses: seanmiddleditch/gha-setup-vsdevenv@master
@@ -42,16 +42,16 @@ jobs:
         mamba install -n base "conda>=23.7" conda-build anaconda-client rattler-build twine
         )
 
-    - name: create test environments environment for python < 3.13
-      if: ${{ matrix.python-version < '3.13' }}
+    - name: create test environments environment for python < 3.14
+      if: ${{ matrix.python-version < '3.14' }}
       run: |
         (
         mamba create -n test-wheels python=${{ matrix.python-version }} numpy
         mamba create -n test-conda python=${{ matrix.python-version }} numpy pytest-cov
         )
 
-    - name: create test environments for python >= 3.13
-      if: ${{ matrix.python-version >= '3.13' }}
+    - name: create test environments for python >= 3.14
+      if: ${{ matrix.python-version >= '3.14' }}
       run: |
         (
         mamba create -n test-wheels python-gil python=${{ matrix.python-version }} numpy
@@ -111,7 +111,7 @@ jobs:
         )
 
     - name: run code coverage
-      if: ${{ matrix.python-version == '3.13' }}
+      if: ${{ matrix.python-version == '3.14' }}
       run: |
         (
         mamba activate test-wheels
@@ -124,7 +124,7 @@ jobs:
         )
 
     - name: Upload to Codecov
-      if: ${{ matrix.python-version == '3.13' }}
+      if: ${{ matrix.python-version == '3.14' }}
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
